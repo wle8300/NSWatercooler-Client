@@ -15,18 +15,12 @@ module.exports = React.createClass({
 		}
 	},
   render: function () {
-		
     return (
 			<div>
-				{/*
-					logged in
-					? display "ALIAS" of previous week's most dominant outfit
-					: register or login button
-				*/}
 				<MUITabs onChange={this.handleTabIdx}
 				  value={this.state.tabIdx}>
-				  <MUITab label="Login" value={0}/>
-				  <MUITab label="Signup" value={1}/>
+				  <MUITab label="Saved" value={0}/>
+				  <MUITab label="Messages" value={1}/>
 				</MUITabs>
 				<SwipeableViews index={this.state.tabIdx}
 				  onChangeIndex={this.handleTabIdx}>
@@ -42,7 +36,7 @@ module.exports = React.createClass({
   },
 	componentWillMount: function () {
 		
-		this.props.changeMarquee('Home')
+		this.props.changeMarquee('Player')
 	},
 	handleTabIdx: function (idx) {
 		this.setState({tabIdx: idx})

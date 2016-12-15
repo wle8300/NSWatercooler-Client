@@ -7,10 +7,13 @@
   },
   "dependencies": {
     "jwt-decode": "^2.1.0",
+    "material-ui": "^0.16.5",
     "pushstate-https-server": "^0.1.1",
     "react": "^15.3.2",
     "react-dom": "^15.3.1",
     "react-router-component": "^0.36.0",
+    "react-swipeable-views": "^0.8.3",
+    "react-tap-event-plugin": "^2.0.1",
     "superagent": "^2.2.0",
     "validator": "^6.0.0"
   },

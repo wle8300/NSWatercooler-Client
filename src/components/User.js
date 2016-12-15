@@ -1,5 +1,5 @@
-var React = require('react')
-var Request = require('superagent')
+import React from 'react'
+import Request from 'superagent'
 
 var env = require('../../env')
 

@@ -1,37 +1,39 @@
-var Main = require('./components/Main')
-var Nav = require('./components/Nav')
-var Footer = require('./components/Footer')
+import Main from './components/Main'
+import Header from './components/Header'
+import Footer from './components/Footer'
 
-var env = require('../env')
+import env from '../env'
 
-var JwtDecode = require('jwt-decode')
-var Request = require('superagent')
-var React = require('react')
+import JwtDecode from 'jwt-decode'
+import Request from 'superagent'
+import React from 'react'
+import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider'
 
 
 module.exports = React.createClass({
 	getInitialState: function () {
 		return {
+			routerRef: null,
 			jwt: null,
-			user: null
+			user: null,
+			marquee: '',
 		}
 	},
   render: function () {
     return (
-			<div className="App" style={styleA()}>
-				<Nav
-					onJwt={this.onJwt}
-					jwt={this.state.jwt}
-					onUser={this.onUser}
-					user={this.state.user}/>
-				<Main
-					jwt={this.state.jwt}
-					user={this.state.user}
-					onJwt={this.onJwt}
-					onUser={this.onUser}/>
-				<Footer/>
-
-			</div>
+			<MuiThemeProvider>
+				<div className="App" style={styleA()}>
+					<Header marquee={this.state.marquee}/>
+					<Main
+						gotRouterRef={this.gotRouterRef}
+						jwt={this.state.jwt}
+						user={this.state.user}
+						onJwt={this.onJwt}
+						onUser={this.onUser}
+						changeMarquee={this.changeMarquee}/>
+					<Footer routerRef={this.state.routerRef}/>
+				</div>
+			</MuiThemeProvider>
     )
   },
 	componentDidMount: function () {
@@ -45,6 +47,14 @@ module.exports = React.createClass({
 
 			this.readUser()
 		}
+	},
+	changeMarquee: function (marquee) {
+		
+		this.setState({marquee: marquee})
+	},
+	gotRouterRef: function (routerRef) {
+
+		this.setState({routerRef: routerRef})
 	},
 	establishSession: function () {
 		
@@ -108,7 +118,6 @@ module.exports = React.createClass({
 function styleA() {
 	return {
 		margin: '0 auto',
-		width: '50%',
 		fontFamily: 'Helvetica'
 	}
 }
