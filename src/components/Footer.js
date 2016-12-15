@@ -20,7 +20,7 @@ module.exports = React.createClass({
 	},
   render: function () {
     return (
-			<MUIPaper style={{position: 'absolute', bottom: 0, width: '100%'}}>
+			<MUIPaper style={{position: 'fixed', bottom: 0, width: '100%'}}>
        <MUIBottomNavigation selectedIndex={this.state.selectedIndex} style={{textAlign: 'center'}}>
          <MUIBottomNavigationItem
 					 icon={<MUIHomeIcon/>}

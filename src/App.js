@@ -16,13 +16,16 @@ module.exports = React.createClass({
 			routerRef: null,
 			jwt: null,
 			user: null,
-			marquee: '',
+			marquee: {
+				message: 'Home',
+				size: 'normal'
+			},
 		}
 	},
   render: function () {
     return (
 			<MuiThemeProvider>
-				<div className="App" style={styleA()}>
+				<div className="App" style={style1()}>
 					<Header marquee={this.state.marquee}/>
 					<Main
 						gotRouterRef={this.gotRouterRef}
@@ -48,9 +51,12 @@ module.exports = React.createClass({
 			this.readUser()
 		}
 	},
-	changeMarquee: function (marquee) {
+	changeMarquee: function (message, size) {
 		
-		this.setState({marquee: marquee})
+		this.setState({marquee: {
+			message: message,
+			size: size
+		}})
 	},
 	gotRouterRef: function (routerRef) {
 
@@ -115,7 +121,7 @@ module.exports = React.createClass({
 	}
 })
 
-function styleA() {
+function style1() {
 	return {
 		margin: '0 auto',
 		fontFamily: 'Helvetica'
