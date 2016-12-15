@@ -1,4 +1,4 @@
-import Router from 'react-router-component'
+// import Router from 'react-router-component'
 import React from 'react'
 import MUIBottomNavigation from 'material-ui/BottomNavigation/BottomNavigation'
 import MUIBottomNavigationItem from 'material-ui/BottomNavigation/BottomNavigationItem'

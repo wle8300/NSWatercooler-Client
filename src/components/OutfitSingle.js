@@ -2,6 +2,9 @@ import env from '../../env'
 
 import React from 'react'
 import Request from 'superagent'
+import MUIList from 'material-ui/List/List'
+import MUIListItem from 'material-ui/List/ListItem'
+import MUIArrowRight from 'material-ui/svg-icons/hardware/keyboard-arrow-right'
 
 
 module.exports = React.createClass({
@@ -18,11 +21,20 @@ module.exports = React.createClass({
 		return (
 			<div>
 				<h1>{this.state.outfit.alias}</h1>
-				{
-					this.state.outfitCharacters
-					.filter((member) => member.online_status === '1000')
-					.map((character) => <p>{character.name.first}</p>)
-				}
+				<MUIList>
+					{
+						this.state.outfitCharacters
+						.filter((character) => character.online_status === '1000')
+						.map((character) => {
+							return (
+								<MUIListItem
+								  key={character.character_id}
+								  primaryText={character.name.first}
+								  rightIcon={<MUIArrowRight/>}/>
+							)
+						})
+					}
+				</MUIList>
 			</div>
 		)
 	},

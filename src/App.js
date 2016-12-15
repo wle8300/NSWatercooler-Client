@@ -41,15 +41,15 @@ module.exports = React.createClass({
   },
 	componentDidMount: function () {
 
-		this.establishSession()
+		// this.establishSession()
 	},
 	componentDidUpdate: function (prevProps, prevState) {
 		
 		//fresh jwt
-		if (this.state.jwt && prevState.jwt !== this.state.jwt) {
-
-			this.readUser()
-		}
+		// if (this.state.jwt && prevState.jwt !== this.state.jwt) {
+		//
+		// 	this.readUser()
+		// }
 	},
 	changeMarquee: function (message, size) {
 		

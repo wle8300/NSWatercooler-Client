@@ -4,9 +4,9 @@ var Location = Router.Location
 var Locations = Router.Locations
 var NotFound = Router.NotFound
 
-var Outfit = require('./Outfit')
-var Home = require('./Home')
-var Player = require('./Player')
+var OutfitRoute = require('./OutfitRoute')
+var HomeRoute = require('./HomeRoute')
+var PlayerRoute = require('./PlayerRoute')
 var Http404 = require('./Http404')
 // var User = require('./User')
 
@@ -23,19 +23,20 @@ module.exports = React.createClass({
 	render: function () {
 		return (
 			<Locations ref={(router) => {this.router = router}}>
-				<Location path="/" handler={Home} changeMarquee={this.props.changeMarquee}/>
+				<Location path="/" handler={HomeRoute} changeMarquee={this.props.changeMarquee}/>
 				<Location
 					routerRef={this.router}
 					path={/\/outfit\/?(.+)?/}
-					handler={Outfit}
+					handler={OutfitRoute}
 					urlPatternOptions={['_Outfit_']}
 					jwt={this.props.jwt}
 					user={this.props.user}
 					changeMarquee={this.props.changeMarquee}/>
 				<Location
 					path={/\/player\/?(.+)?/}
-					handler={Player}
+					handler={PlayerRoute}
 					changeMarquee={this.props.changeMarquee}/>
+				<NotFound handler={Http404}/>
 			</Locations>
 		)
 	},

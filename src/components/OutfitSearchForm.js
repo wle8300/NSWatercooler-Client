@@ -3,12 +3,12 @@ import Request from 'superagent'
 import MUIPaper from 'material-ui/Paper'
 // import MUIDivider from 'material-ui/Divider'
 import MUIArrowRight from 'material-ui/svg-icons/hardware/keyboard-arrow-right'
-import MUIFlatButton from 'material-ui/FlatButton';
+// import MUIFlatButton from 'material-ui/FlatButton';
 import MUIList from 'material-ui/List/List'
 import MUIListItem from 'material-ui/List/ListItem'
 import MUITextField from 'material-ui/TextField'
 import MUIRaisedButton from 'material-ui/RaisedButton'
-import MUISubheader from 'material-ui/Subheader'
+// import MUISubheader from 'material-ui/Subheader'
 
 
 module.exports = React.createClass({
@@ -19,7 +19,6 @@ module.exports = React.createClass({
 		}
 	},
 	render : function () {
-		
 		return (
 			<div className="Outfit-Search-Form" style={{margin: '1rem'}}>
 				<MUIPaper style={{padding: '0 1rem'}}>
@@ -54,7 +53,7 @@ module.exports = React.createClass({
 		
 		e.preventDefault()
 
-		//// this.props.memsh(this.props.routerRef.url, 'outfitsSearchTerm', '')
+		// this.props.memsh(this.props.routerRef.url, 'outfitsSearchTerm', '')
 		Request
 		.get('http://localhost:3001/outfit?search=' +this.state.outfitsSearchTerm+ '&server=genudine')
 		.end((err, response) => this.setState({outfitsSearchResults: response.body}))
