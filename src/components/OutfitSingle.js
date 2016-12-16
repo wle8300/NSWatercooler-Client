@@ -1,5 +1,7 @@
 import env from '../../env'
 
+import Shema from '../../shema'
+
 import React from 'react'
 import Request from 'superagent'
 import MUIList from 'material-ui/List/List'
@@ -13,8 +15,8 @@ module.exports = React.createClass({
 	},
 	getInitialState: function () {
 		return {
-			outfit: {},
-			outfitCharacters: []
+			outfit: Shema('outfit', {}),
+			outfitCharacters: Shema('outfitCharacters', [])
 		}
 	},
 	render: function () {
@@ -39,20 +41,20 @@ module.exports = React.createClass({
 		)
 	},
 	componentDidMount: function () {
-		
-		this.getOutfit(this.props._Outfit_)
-		this.getOutfitOnlineMembers(this.props._Outfit_)
+
+		if (!Object.keys(this.state.outfit).length) this.getOutfit()
+		if (!this.state.outfitCharacters.length) this.getOutfitOnlineMembers()
 	},
-	getOutfit: function (_Outfit_) {
+	getOutfit: function () {
 		
 		Request
-		.get(env.backend+ '/outfit/' +_Outfit_+ '?server=genudine')
-		.end((err, response) => this.setState({outfit: response.body}))
+		.get(env.backend+ '/outfit/' +this.props._Outfit_+ '?server=genudine')
+		.end((err, response) => this.setState({outfit: Shema('outfit', response.body, true)}))
 	},
-	getOutfitOnlineMembers: function (_Outfit_) {
+	getOutfitOnlineMembers: function () {
 
 		Request
-		.get(env.backend+ '/outfit/' +_Outfit_+ '/characters?server=genudine')
-		.end((err, response) => this.setState({outfitCharacters: response.body}))
+		.get(env.backend+ '/outfit/' +this.props._Outfit_+ '/characters?server=genudine')
+		.end((err, response) => this.setState({outfitCharacters: Shema('outfitCharacters', response.body, true)}))
 	}
 })
