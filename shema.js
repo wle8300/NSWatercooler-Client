@@ -7,14 +7,14 @@ under specified namespace
 var env = require('./env')
 var namespace = env.namespace
 
+//initialize global namespace
+if (!window[namespace]) window[namespace] = {}
+
 
 module.exports = function (key, value, shouldOverwrite) {
-	
-	var lookup = key+ ':' +window.location.pathname
+		
+	var lookup = this.constructor.displayName+ ':' +key+ ':' +window.location.pathname
 
-	//initialize global namespace
-	if (!window[namespace]) return window[namespace] = {}
-	
 	//who cares if a value exists!? overwrite and return!
 	if (shouldOverwrite) return window[namespace][lookup] = value
 	

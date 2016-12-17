@@ -1,3 +1,5 @@
+import Shema from '../../shema'
+
 import React from 'react'
 import Request from 'superagent'
 import MUIPaper from 'material-ui/Paper'
@@ -14,8 +16,8 @@ import MUIRaisedButton from 'material-ui/RaisedButton'
 module.exports = React.createClass({
 	getInitialState: function () {
 		return {
-			outfitsSearchTerm: '',
-			outfitsSearchResults: []
+			outfitsSearchTerm: Shema.call(this, 'outfitsSearchTerm', ''),
+			outfitsSearchResults: Shema.call(this, 'outfitsSearchResults', [])
 		}
 	},
 	render : function () {
@@ -24,7 +26,7 @@ module.exports = React.createClass({
 				<MUIPaper style={{padding: '0 1rem'}}>
 					<MUITextField
 						value={this.state.outfitsSearchTerm}
-						onChange={(e) => this.setState({outfitsSearchTerm: e.target.value})}
+						onChange={(e) => this.setState({outfitsSearchTerm: Shema.call(this, 'outfitsSearchTerm', e.target.value, true)})}
 						hintText="Lowercase minimum 3 characters"
 						fullWidth
 						underlineShow={false}/>
@@ -56,6 +58,11 @@ module.exports = React.createClass({
 		// this.props.memsh(this.props.routerRef.url, 'outfitsSearchTerm', '')
 		Request
 		.get('http://localhost:3001/outfit?search=' +this.state.outfitsSearchTerm+ '&server=genudine')
-		.end((err, response) => this.setState({outfitsSearchResults: response.body}))
+		.end((err, response) => {
+			
+			if (err) throw err
+
+			this.setState({outfitsSearchResults: Shema.call(this, 'outfitsSearchResults', response.body, true)})
+		})
 	}
 })

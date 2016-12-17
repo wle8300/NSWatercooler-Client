@@ -1,4 +1,6 @@
-// import Request from 'superagent'
+import SignupForm from './SignupForm'
+import LoginForm from './LoginForm'
+
 import React from 'react'
 import SwipeableViews from 'react-swipeable-views'
 import MUITab from 'material-ui/Tabs/Tab'
@@ -7,6 +9,7 @@ import MUITabs from 'material-ui/Tabs/Tabs'
 
 module.exports = React.createClass({
 	propTypes: {
+		onJwt: React.PropTypes.func.isRequired,
 		changeMarquee: React.PropTypes.func.isRequired
 	},
 	getInitialState: function () {
@@ -30,18 +33,13 @@ module.exports = React.createClass({
 				</MUITabs>
 				<SwipeableViews index={this.state.tabIdx}
 				  onChangeIndex={this.handleTabIdx}>
-				  <div>
-						hey 1
-				  </div>
-				  <div>
-				    hey 2
-				  </div>
+					<LoginForm onJwt={this.props.onJwt}/>
+					<SignupForm onJwt={this.props.onJwt}/>
 				</SwipeableViews>
 			</div>
     )
   },
 	componentWillMount: function () {
-		
 		this.props.changeMarquee('Home')
 	},
 	handleTabIdx: function (idx) {

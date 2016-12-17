@@ -23,13 +23,18 @@ module.exports = React.createClass({
 	render: function () {
 		return (
 			<Locations ref={(router) => {this.router = router}}>
-				<Location path="/" handler={HomeRoute} changeMarquee={this.props.changeMarquee}/>
+				<Location
+					path="/"
+					handler={HomeRoute}
+					onJwt={this.props.onJwt}
+					changeMarquee={this.props.changeMarquee}/>
 				<Location
 					routerRef={this.router}
 					path={/\/outfit\/?(.+)?/}
 					handler={OutfitRoute}
 					urlPatternOptions={['_Outfit_']}
 					jwt={this.props.jwt}
+					onJwt={this.props.onJwt}
 					user={this.props.user}
 					changeMarquee={this.props.changeMarquee}/>
 				<Location

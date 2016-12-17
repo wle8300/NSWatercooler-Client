@@ -10,13 +10,14 @@ import MUIArrowRight from 'material-ui/svg-icons/hardware/keyboard-arrow-right'
 
 
 module.exports = React.createClass({
+	displayName: 'OutfitSingle',
 	propTypes: {
 		_Outfit_: React.PropTypes.string
 	},
 	getInitialState: function () {
 		return {
-			outfit: Shema('outfit', {}),
-			outfitCharacters: Shema('outfitCharacters', [])
+			outfit: Shema.call(this, 'outfit', {}),
+			outfitCharacters: Shema.call(this, 'outfitCharacters', [])
 		}
 	},
 	render: function () {
@@ -49,12 +50,12 @@ module.exports = React.createClass({
 		
 		Request
 		.get(env.backend+ '/outfit/' +this.props._Outfit_+ '?server=genudine')
-		.end((err, response) => this.setState({outfit: Shema('outfit', response.body, true)}))
+		.end((err, response) => this.setState({outfit: Shema.call(this, 'outfit', response.body, true)}))
 	},
 	getOutfitOnlineMembers: function () {
 
 		Request
 		.get(env.backend+ '/outfit/' +this.props._Outfit_+ '/characters?server=genudine')
-		.end((err, response) => this.setState({outfitCharacters: Shema('outfitCharacters', response.body, true)}))
+		.end((err, response) => this.setState({outfitCharacters: Shema.call(this, 'outfitCharacters', response.body, true)}))
 	}
 })
