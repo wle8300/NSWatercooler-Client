@@ -1,4 +1,4 @@
-import OutfitSearchForm from './OutfitSearchForm'
+import OutfitHome from './OutfitHome'
 import OutfitSingle from './OutfitSingle'
 
 import React from 'react'
@@ -19,7 +19,7 @@ module.exports = React.createClass({
 			<div>
 				{
 					!this.props._Outfit_
-					? <OutfitSearchForm routerRef={this.props.routerRef}/>
+					? <OutfitHome routerRef={this.props.routerRef}/>
 					: <OutfitSingle _Outfit_={this.props._Outfit_}/>
 				}
 			</div>

@@ -60,7 +60,7 @@ module.exports = React.createClass({
 			
 			if (err) throw err
 				
-			this.props.onJwt(response.body.jwt)
+			localStorage.Jwt = JSON.stringify(response.body)
 		})
 	}
 })

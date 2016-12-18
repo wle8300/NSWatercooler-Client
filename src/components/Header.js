@@ -9,7 +9,7 @@ module.exports = React.createClass({
 		return (
 			<MUIAppBar
 				zDepth={0}
-				title={this.props.marquee.message}
+				title={<div>{this.props.marquee.message} <small style={{fontSize: '0.75rem', opacity: 0.5}}>GENUDINE</small></div>}
 				style={style1(this.props)}/>
 		)
 	}

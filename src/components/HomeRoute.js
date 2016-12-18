@@ -9,7 +9,6 @@ import MUITabs from 'material-ui/Tabs/Tabs'
 
 module.exports = React.createClass({
 	propTypes: {
-		onJwt: React.PropTypes.func.isRequired,
 		changeMarquee: React.PropTypes.func.isRequired
 	},
 	getInitialState: function () {

@@ -1,4 +1,15 @@
+Get the User >>> DeciferJwtPayload(JSON.parse(localStorage.Jwt).jwt)[id || email || password || etcetera]
+
+whenever you PUT anything on the User object you must then PUT new Jwt and CACHE it
+
 The only global mixin is inject-touch-tap-event
+
+# localStorage Keys
+- jwt. {
+	~[User]~
+	exp: [Date object]
+	iap: [Date object]
+}
 
 ---
 

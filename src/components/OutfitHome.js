@@ -1,5 +1,7 @@
+import env from '../../env'
 import Shema from '../../shema'
 
+import DeciferJwtPayload from 'jwt-decode'
 import React from 'react'
 import Request from 'superagent'
 import MUIPaper from 'material-ui/Paper'
@@ -14,10 +16,15 @@ import MUIRaisedButton from 'material-ui/RaisedButton'
 
 
 module.exports = React.createClass({
+	displayName: 'OutfitHome',
+	propTypes: {
+		routerRef: React.PropTypes.oneOfType([React.PropTypes.element, React.PropTypes.any]),
+	},
 	getInitialState: function () {
 		return {
 			outfitsSearchTerm: Shema.call(this, 'outfitsSearchTerm', ''),
-			outfitsSearchResults: Shema.call(this, 'outfitsSearchResults', [])
+			outfitsSearchResults: Shema.call(this, 'outfitsSearchResults', []),
+			outfitBookmarks: Shema.call(this, 'outfitBookmarks', [])
 		}
 	},
 	render : function () {
@@ -48,8 +55,22 @@ module.exports = React.createClass({
 						})}
 					</MUIList>
 				</MUIPaper>
+				<MUIList>
+					{this.state.outfitBookmarks.map((outfitBookmark) => {
+						return (
+							<MUIListItem
+							  key={outfitBookmark.id}
+							  primaryText={outfitBookmark.outfitAlias}
+							  rightIcon={<MUIArrowRight/>}
+								onTouchTap={() => this.props.routerRef.navigate('/outfit/' +outfitBookmark._Outfit_)}/>
+						)
+					})}
+				</MUIList>
 			</div>
 		)
+	},
+	componentDidMount: function () {
+		if (!this.state.outfitBookmarks.length) this.readOutfitBookmarks()
 	},
 	submitOutfitSearch: function (e) {
 		
@@ -64,5 +85,15 @@ module.exports = React.createClass({
 
 			this.setState({outfitsSearchResults: Shema.call(this, 'outfitsSearchResults', response.body, true)})
 		})
-	}
+	},
+	readOutfitBookmarks: function () {
+
+		Request
+		.get(env.backend+ '/user/' +(DeciferJwtPayload(JSON.parse(localStorage.Jwt).jwt).id)+ '/outfit-bookmarks')
+		.set({Authorization: 'Bearer ' +JSON.parse(localStorage.Jwt).jwt})
+		.end((err, response) => {
+
+			this.setState({outfitBookmarks: Shema.call(this, 'outfitBookmarks', response.body, true)})
+		})
+	},
 })

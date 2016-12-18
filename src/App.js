@@ -4,7 +4,7 @@ import Footer from './components/Footer'
 
 import env from '../env'
 
-import JwtDecode from 'jwt-decode'
+import DeciferJwtPayload from 'jwt-decode'
 import Request from 'superagent'
 import React from 'react'
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider'
@@ -29,10 +29,6 @@ module.exports = React.createClass({
 					<Header marquee={this.state.marquee}/>
 					<Main
 						gotRouterRef={this.gotRouterRef}
-						jwt={this.state.jwt}
-						user={this.state.user}
-						onJwt={this.onJwt}
-						onUser={this.onUser}
 						changeMarquee={this.changeMarquee}/>
 					<Footer routerRef={this.state.routerRef}/>
 				</div>
@@ -41,15 +37,39 @@ module.exports = React.createClass({
   },
 	componentDidMount: function () {
 
-		// this.establishSession()
+		this.establishSession()
 	},
-	componentDidUpdate: function (prevProps, prevState) {
+	componentDidUpdate: function () {
 		
-		//fresh jwt
-		// if (this.state.jwt && prevState.jwt !== this.state.jwt) {
-		//
-		// 	this.readUser()
-		// }
+		if (this.state.refRouter && !localStorage.Jwt && location.pathname !== '/') this.state.refRouter.navigate('/')
+		if (this.state.refRouter && localStorage.Jwt) this.state.refRouter.navigate('/outfit')
+	},
+	establishSession: function () {
+		
+		var expirationMs
+		var expirationDate
+		
+		if (!localStorage.Jwt) return
+	
+		//jwt spec unconventionally defines seconds, not milliseconds for expiration
+		expirationMs = DeciferJwtPayload(JSON.parse(localStorage.Jwt).jwt).exp * 1000
+		expirationDate = new Date(expirationMs)
+		
+		//exp passed?
+		if (expirationDate < new Date()) return localStorage.removeItem('jwt')		
+			
+		Request
+		.put(env.backend+ '/jwt')
+		.send({jwt: JSON.parse(localStorage.Jwt).jwt})
+		.end((err, response) => {
+
+			if (err || !response.body) {
+				return localStorage.removeItem('jwt')
+			}
+
+			//cache renewed jwt
+			localStorage.Jwt = JSON.stringify(response.body)
+		})
 	},
 	changeMarquee: function (message, size) {
 		
@@ -60,64 +80,7 @@ module.exports = React.createClass({
 	},
 	gotRouterRef: function (routerRef) {
 
-		this.setState({routerRef: routerRef})
-	},
-	establishSession: function () {
-		
-		var expirationMs
-		var expirationDate
-		
-		if (!JSON.parse(localStorage.jwt)) return
-	
-		//jwt spec unconventionally defines seconds, not milliseconds for expiration
-		expirationMs = JwtDecode(JSON.parse(localStorage.jwt)).exp * 1000
-		expirationDate = new Date(expirationMs)
-		
-		//exp passed?
-		if (expirationDate < new Date()) {
-
-			localStorage.removeItem('jwt')
-			
-			return this.onJwt(null)
-		}
-		
-		//jwt is fresh. auto-renew it!
-		else {
-			
-			Request
-			.put(env.backend+ '/jwt')
-			.send({jwt: JSON.parse(localStorage.jwt)})
-			.end((err, response) => {
-
-				if (err) throw err
-
-				if (!response.text) return this.onJwt(null)
-
-				return this.onJwt(response.text)
-			})
-		}
-	},
-	readUser: function () {
-
-		Request
-		.get(env.backend+ '/user/' +JwtDecode(this.state.jwt).id)
-		.set({Authorization: 'Bearer ' +this.state.jwt})
-		.end((err, response) => {
-	
-			if (err) throw err
-
-			return this.onUser(response.body)
-		})
-	},
-	onJwt: function (jwt, callback) {
-
-		localStorage.jwt = JSON.stringify(jwt)
-		
-		return this.setState({jwt: jwt}, callback)
-	},
-	onUser: function (user, callback) {
-		
-		return this.setState({user: user}, callback)
+		this.setState({routerRef: routerRef}, () => this.state.routerRef.navigate('/'))
 	}
 })
 

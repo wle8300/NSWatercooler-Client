@@ -13,16 +13,12 @@ var Http404 = require('./Http404')
 
 module.exports = React.createClass({
 	propTypes: {
-		jwt: React.PropTypes.string,
-		user: React.PropTypes.object,
-		onJwt: React.PropTypes.func.isRequired,
-		onUser: React.PropTypes.func.isRequired,
 		changeMarquee: React.PropTypes.func.isRequired
 	},
 	router: null,
 	render: function () {
 		return (
-			<Locations ref={(router) => {this.router = router}}>
+			<Locations ref={(router) => this.router = router}>
 				<Location
 					path="/"
 					handler={HomeRoute}
@@ -33,9 +29,6 @@ module.exports = React.createClass({
 					path={/\/outfit\/?(.+)?/}
 					handler={OutfitRoute}
 					urlPatternOptions={['_Outfit_']}
-					jwt={this.props.jwt}
-					onJwt={this.props.onJwt}
-					user={this.props.user}
 					changeMarquee={this.props.changeMarquee}/>
 				<Location
 					path={/\/player\/?(.+)?/}
@@ -46,8 +39,6 @@ module.exports = React.createClass({
 		)
 	},
 	componentDidMount: function () {
-		
-		this.router.navigate('/')
 		this.props.gotRouterRef(this.router)
 	}
 })

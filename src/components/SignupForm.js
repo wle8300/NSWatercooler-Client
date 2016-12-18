@@ -53,16 +53,25 @@ module.exports = React.createClass({
 		Request
 		.post(env.backend+ '/user')
 		.send({
-			user: {
-				email: this.state.email,
-				password: this.state.password
-			}
+			email: this.state.email,
+			password: this.state.password
 		})
 		.end((err, response) => {
 			
 			if (err) throw err
+			
+			Request
+			.post(env.backend+ '/jwt')
+			.send({
+				email: this.state.email,
+				password: this.state.password
+			})
+			.end((err, response) => {
 				
-			console.log(1, response.body);
+				if (err) throw err
+					
+				localStorage.Jwt = JSON.stringify(response.body)
+			})
 		})
 	}
 })
