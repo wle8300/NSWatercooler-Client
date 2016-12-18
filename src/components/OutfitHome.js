@@ -70,7 +70,8 @@ module.exports = React.createClass({
 		)
 	},
 	componentDidMount: function () {
-		if (!this.state.outfitBookmarks.length) this.readOutfitBookmarks()
+		
+		this.readOutfitBookmarks()
 	},
 	submitOutfitSearch: function (e) {
 		

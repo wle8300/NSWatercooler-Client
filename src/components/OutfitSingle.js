@@ -58,9 +58,9 @@ module.exports = React.createClass({
 	},
 	componentDidMount: function () {
 
-		if (!Object.keys(this.state.outfit).length) this.getOutfit()
-		if (!this.state.outfitCharacters.length) this.getOutfitOnlineMembers()
-		if (!this.state.outfitBookmarks.length) this.readOutfitBookmarks()
+		this.getOutfit()
+		this.getOutfitOnlineMembers()
+		this.readOutfitBookmarks()
 	},
 	getOutfit: function () {
 		
