@@ -1,7 +1,7 @@
 import env from '../../env'
+import utils from '../../utils'
 import Shema from '../../shema'
 
-import DeciferJwtPayload from 'jwt-decode'
 import React from 'react'
 import Request from 'superagent'
 import MUIPaper from 'material-ui/Paper'
@@ -29,8 +29,8 @@ module.exports = React.createClass({
 	},
 	render : function () {
 		return (
-			<div className="Outfit-Search-Form" style={{margin: '1rem'}}>
-				<MUIPaper style={{padding: '0 1rem'}}>
+			<div>
+				<MUIPaper style={{margin: '1rem', padding: '0 1rem'}}>
 					<MUITextField
 						value={this.state.outfitsSearchTerm}
 						onChange={(e) => this.setState({outfitsSearchTerm: Shema.call(this, 'outfitsSearchTerm', e.target.value, true)})}
@@ -77,9 +77,8 @@ module.exports = React.createClass({
 		
 		e.preventDefault()
 
-		// this.props.memsh(this.props.routerRef.url, 'outfitsSearchTerm', '')
 		Request
-		.get('http://localhost:3001/outfit?search=' +this.state.outfitsSearchTerm+ '&server=genudine')
+		.get(env.backend+ '/outfit?server=genudine&search=' +this.state.outfitsSearchTerm)
 		.end((err, response) => {
 			
 			if (err) throw err
@@ -90,8 +89,8 @@ module.exports = React.createClass({
 	readOutfitBookmarks: function () {
 
 		Request
-		.get(env.backend+ '/user/' +(DeciferJwtPayload(JSON.parse(localStorage.Jwt).jwt).id)+ '/outfit-bookmarks')
-		.set({Authorization: 'Bearer ' +JSON.parse(localStorage.Jwt).jwt})
+		.get(env.backend+ '/user/' +utils.jwtPayload.id+ '/outfit-bookmarks')
+		.set({Authorization: 'Bearer ' +utils.jwt})
 		.end((err, response) => {
 
 			this.setState({outfitBookmarks: Shema.call(this, 'outfitBookmarks', response.body, true)})

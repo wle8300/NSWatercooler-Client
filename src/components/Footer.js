@@ -5,7 +5,7 @@ import MUIBottomNavigationItem from 'material-ui/BottomNavigation/BottomNavigati
 import MUIPaper from 'material-ui/Paper'
 import MUIHomeIcon from 'material-ui/svg-icons/action/home'
 import MUIOutfitIcon from 'material-ui/svg-icons/action/group-work'
-import MUIPlayerIcon from 'material-ui/svg-icons/social/person'
+import MUICharacterIcon from 'material-ui/svg-icons/social/person'
 
 
 
@@ -29,8 +29,8 @@ module.exports = React.createClass({
 					 icon={<MUIOutfitIcon/>}
 					 onTouchTap={() => {this.props.routerRef.navigate('/outfit'); this.select(1)}}/>
          <MUIBottomNavigationItem
-					 icon={<MUIPlayerIcon/>}
-					 onTouchTap={() => {this.props.routerRef.navigate('/player'); this.select(2)}}/>
+					 icon={<MUICharacterIcon/>}
+					 onTouchTap={() => {this.props.routerRef.navigate('/character'); this.select(2)}}/>
        </MUIBottomNavigation>
      </MUIPaper>
     )

@@ -1,10 +1,10 @@
+import env from '../env'
+import utils from '../utils'
+
 import Main from './components/Main'
 import Header from './components/Header'
 import Footer from './components/Footer'
 
-import env from '../env'
-
-import DeciferJwtPayload from 'jwt-decode'
 import Request from 'superagent'
 import React from 'react'
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider'
@@ -50,9 +50,9 @@ module.exports = React.createClass({
 		var expirationDate
 		
 		if (!localStorage.Jwt) return
-	
+
 		//jwt spec unconventionally defines seconds, not milliseconds for expiration
-		expirationMs = DeciferJwtPayload(JSON.parse(localStorage.Jwt).jwt).exp * 1000
+		expirationMs = utils.jwtPayload.exp * 1000
 		expirationDate = new Date(expirationMs)
 		
 		//exp passed?
@@ -60,7 +60,7 @@ module.exports = React.createClass({
 			
 		Request
 		.put(env.backend+ '/jwt')
-		.send({jwt: JSON.parse(localStorage.Jwt).jwt})
+		.send({jwt: utils.jwt})
 		.end((err, response) => {
 
 			if (err || !response.body) {

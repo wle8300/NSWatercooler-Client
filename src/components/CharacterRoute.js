@@ -1,5 +1,5 @@
-import OutfitHome from './OutfitHome'
-import OutfitSingle from './OutfitSingle'
+import CharacterHome from './CharacterHome'
+import CharacterSingle from './CharacterSingle'
 
 import React from 'react'
 // import Request from 'superagent'
@@ -7,7 +7,7 @@ import React from 'react'
 
 module.exports = React.createClass({
 	propTypes: {
-		_Outfit_: React.PropTypes.string,
+		_Character_: React.PropTypes.string,
 		routerRef: React.PropTypes.oneOfType([React.PropTypes.element, React.PropTypes.any]),
 		changeMarquee: React.PropTypes.func.isRequired
 	},
@@ -15,15 +15,15 @@ module.exports = React.createClass({
     return (
 			<div>
 				{
-					!this.props._Outfit_
-					? <OutfitHome routerRef={this.props.routerRef}/>
-					: <OutfitSingle _Outfit_={this.props._Outfit_}/>
+					!this.props._Character_
+					? <CharacterHome routerRef={this.props.routerRef}/>
+					: <CharacterSingle _Character_={this.props._Character_}/>
 				}
 			</div>
     )
   },
 	componentWillMount: function () {
 		
-		this.props.changeMarquee('Outfit')
+		this.props.changeMarquee('Character')
 	},
 })

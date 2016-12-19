@@ -6,7 +6,7 @@ var NotFound = Router.NotFound
 
 var OutfitRoute = require('./OutfitRoute')
 var HomeRoute = require('./HomeRoute')
-var PlayerRoute = require('./PlayerRoute')
+var CharacterRoute = require('./CharacterRoute')
 var Http404 = require('./Http404')
 // var User = require('./User')
 
@@ -25,14 +25,15 @@ module.exports = React.createClass({
 					onJwt={this.props.onJwt}
 					changeMarquee={this.props.changeMarquee}/>
 				<Location
-					routerRef={this.router}
 					path={/\/outfit\/?(.+)?/}
 					handler={OutfitRoute}
 					urlPatternOptions={['_Outfit_']}
+					routerRef={this.router}
 					changeMarquee={this.props.changeMarquee}/>
 				<Location
-					path={/\/player\/?(.+)?/}
-					handler={PlayerRoute}
+					path={/\/character\/?(.+)?/}
+					handler={CharacterRoute}
+					routerRef={this.router}
 					changeMarquee={this.props.changeMarquee}/>
 				<NotFound handler={Http404}/>
 			</Locations>

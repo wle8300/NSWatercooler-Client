@@ -1,8 +1,7 @@
 import env from '../../env'
-
+import utils from '../../utils'
 import Shema from '../../shema'
 
-import DeciferJwtPayload from 'jwt-decode'
 import React from 'react'
 import Request from 'superagent'
 import MUICheckbox from 'material-ui/Checkbox';
@@ -19,7 +18,6 @@ module.exports = React.createClass({
 		_Outfit_: React.PropTypes.string
 	},
 	getInitialState: function () {
-		console.log(1);
 		return {
 			outfit: Shema.call(this, 'outfit', {}),
 			outfitCharacters: Shema.call(this, 'outfitCharacters', []),
@@ -27,7 +25,7 @@ module.exports = React.createClass({
 		}
 	},
 	render: function () {
-		console.log(2, this.state.outfitBookmarks);
+
 		const bookmark = this.state.outfitBookmarks.filter((outfitBookmark) => outfitBookmark._Outfit_ === this.state.outfit.outfit_id)[0]
 		
 		return (
@@ -77,8 +75,8 @@ module.exports = React.createClass({
 	readOutfitBookmarks: function () {
 
 		Request
-		.get(env.backend+ '/user/' +(DeciferJwtPayload(JSON.parse(localStorage.Jwt).jwt).id)+ '/outfit-bookmarks')
-		.set({Authorization: 'Bearer ' +JSON.parse(localStorage.Jwt).jwt})
+		.get(env.backend+ '/user/' +utils.jwtPayload.id+ '/outfit-bookmarks')
+		.set({Authorization: 'Bearer ' +utils.jwt})
 		.end((err, response) => this.setState({outfitBookmarks: Shema.call(this, 'outfitBookmarks', response.body, true)}))
 	},
 	toggleOutfitBookmark: function (bookmark, outfit) {
@@ -87,7 +85,7 @@ module.exports = React.createClass({
 
 			Request
 			.post(env.backend+ '/outfit-bookmark')
-			.set({Authorization: 'Bearer ' +JSON.parse(localStorage.Jwt).jwt})
+			.set({Authorization: 'Bearer ' +utils.jwt})
 			.send({
 				_Outfit_: outfit.outfit_id,
 				outfitAlias: outfit.alias
@@ -99,7 +97,7 @@ module.exports = React.createClass({
 
 			Request
 			.delete(env.backend+ '/outfit-bookmark/' +bookmark.id)
-			.set({Authorization: 'Bearer ' +JSON.parse(localStorage.Jwt).jwt})
+			.set({Authorization: 'Bearer ' +utils.jwt})
 			.end((err, response) => this.readOutfitBookmarks())
 		}
 	}
