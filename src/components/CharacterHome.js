@@ -19,8 +19,8 @@ module.exports = React.createClass({
 	},
 	getInitialState: function () {
 		return {
-			characterSearchTerm: '',
-			characterSearchResults: Shema.call(this, 'characterSearchResults', []),
+			charactersSearchTerm: Shema.call(this, 'charactersSearchTerm', ''),
+			charactersSearchResults: Shema.call(this, 'charactersSearchResults', []),
 			characterSubscriptions: Shema.call(this, 'characterSubscriptions', [])
 		}
 	},
@@ -29,19 +29,19 @@ module.exports = React.createClass({
 			<div>
 				<MUIPaper style={{margin: '1rem', padding: '0 1rem'}}>
 					<MUITextField
-						value={this.state.characterSearchTerm}
-						onChange={(e) => this.setState({characterSearchTerm: Shema.call(this, 'characterSearchTerm', e.target.value, true)})}
+						value={this.state.charactersSearchTerm}
+						onChange={(e) => this.setState({charactersSearchTerm: Shema.call(this, 'charactersSearchTerm', e.target.value, true)})}
 						hintText="Lowercase minimum 3 characters"
 						fullWidth
 						underlineShow={false}/>
 					<MUIRaisedButton
 						label="Search"
-						disabled={this.state.characterSearchTerm.length < 3 ? true : false}
+						disabled={this.state.charactersSearchTerm.length < 3 ? true : false}
 						onTouchTap={this.submitCharacterSearch}
 						secondary
 						fullWidth/>
 					<MUIList>
-						{this.state.characterSearchResults.map((character) => {
+						{this.state.charactersSearchResults.map((character) => {
 							return (
 								<MUIListItem
 								  key={character.character_id}
@@ -68,19 +68,19 @@ module.exports = React.createClass({
   },
 	componentDidMount: function () {
 		
-		// this.readCharacterSubscriptions()
+		this.readCharacterSubscriptions()
 	},
 	submitCharacterSearch: function (e) {
 		
 		e.preventDefault()
 
 		Request
-		.get(env.backend+ '/character?server=genudine&search=' +this.state.characterSearchTerm+ '&limit=10')
+		.get(env.backend+ '/character?server=genudine&search=' +this.state.charactersSearchTerm+ '&limit=10')
 		.end((err, response) => {
 			
 			if (err) throw err
 
-			this.setState({characterSearchResults: Shema.call(this, 'characterSearchResults', response.body, true)})
+			this.setState({charactersSearchResults: Shema.call(this, 'charactersSearchResults', response.body, true)})
 		})
 	},
 	readCharacterSubscriptions: function () {

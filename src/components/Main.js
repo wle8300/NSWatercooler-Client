@@ -26,12 +26,13 @@ module.exports = React.createClass({
 					changeMarquee={this.props.changeMarquee}/>
 				<Location
 					path={/\/outfit\/?(.+)?/}
-					handler={OutfitRoute}
 					urlPatternOptions={['_Outfit_']}
+					handler={OutfitRoute}
 					routerRef={this.router}
 					changeMarquee={this.props.changeMarquee}/>
 				<Location
 					path={/\/character\/?(.+)?/}
+					urlPatternOptions={['_Character_']}
 					handler={CharacterRoute}
 					routerRef={this.router}
 					changeMarquee={this.props.changeMarquee}/>

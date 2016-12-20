@@ -17,7 +17,7 @@ module.exports = React.createClass({
 				{
 					!this.props._Outfit_
 					? <OutfitHome routerRef={this.props.routerRef}/>
-					: <OutfitSingle _Outfit_={this.props._Outfit_}/>
+					: <OutfitSingle routerRef={this.props.routerRef} _Outfit_={this.props._Outfit_}/>
 				}
 			</div>
     )

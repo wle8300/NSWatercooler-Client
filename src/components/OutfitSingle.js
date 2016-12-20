@@ -15,7 +15,8 @@ import MUIBookmarkBorderIcon from 'material-ui/svg-icons/action/bookmark-border'
 module.exports = React.createClass({
 	displayName: 'OutfitSingle',
 	propTypes: {
-		_Outfit_: React.PropTypes.string
+		routerRef: React.PropTypes.oneOfType([React.PropTypes.element, React.PropTypes.any]),
+		_Outfit_: React.PropTypes.string.isRequired
 	},
 	getInitialState: function () {
 		return {
@@ -26,7 +27,7 @@ module.exports = React.createClass({
 	},
 	render: function () {
 
-		const bookmark = this.state.outfitBookmarks.filter((outfitBookmark) => outfitBookmark._Outfit_ === this.state.outfit.outfit_id)[0]
+		const bookmark = this.state.outfitBookmarks.filter((outfitBookmark) => outfitBookmark._Outfit_ === this.props._Outfit_)[0]
 		
 		return (
 			<div>
@@ -46,7 +47,8 @@ module.exports = React.createClass({
 								<MUIListItem
 								  key={character.character_id}
 								  primaryText={character.name.first}
-								  rightIcon={<MUIArrowRight/>}/>
+								  rightIcon={<MUIArrowRight/>}
+									onTouchTap={() => this.props.routerRef.navigate('/character/' +character.character_id)}/>
 							)
 						})
 					}
@@ -57,7 +59,7 @@ module.exports = React.createClass({
 	componentDidMount: function () {
 
 		this.getOutfit()
-		this.getOutfitOnlineMembers()
+		this.getOutfitMembers()
 		this.readOutfitBookmarks()
 	},
 	getOutfit: function () {
@@ -66,7 +68,7 @@ module.exports = React.createClass({
 		.get(env.backend+ '/outfit/' +this.props._Outfit_+ '?server=genudine')
 		.end((err, response) => this.setState({outfit: Shema.call(this, 'outfit', response.body, true)}))
 	},
-	getOutfitOnlineMembers: function () {
+	getOutfitMembers: function () {
 
 		Request
 		.get(env.backend+ '/outfit/' +this.props._Outfit_+ '/characters?server=genudine')
