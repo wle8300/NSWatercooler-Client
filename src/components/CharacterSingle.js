@@ -17,10 +17,7 @@ module.exports = React.createClass({
 		_Character_: React.PropTypes.string.isRequired
 	},
 	getInitialState: function () {
-		return {
-			character: Shema.call(this, 'character', {}),
-			characterSubscriptions: Shema.call(this, 'characterSubscriptions', [])
-		}
+		return Shema.call(this, {character: {}, characterSubscriptions: []})
 	},
   render: function () {
 		
@@ -48,14 +45,14 @@ module.exports = React.createClass({
 		
 		Request
 		.get(env.backend+ '/character/' +this.props._Character_+ '?server=genudine')
-		.end((err, response) => this.setState({character: Shema.call(this, 'character', response.body, true)}))
+		.end((err, response) => this.setState(Shema.call(this, {character: response.body}, true)))
 	},
 	readCharacterSubscriptions: function () {
 
 		Request
 		.get(env.backend+ '/user/' +utils.jwtPayload.id+ '/character-subscriptions')
 		.set({Authorization: 'Bearer ' +utils.jwt})
-		.end((err, response) => this.setState({characterSubscriptions: Shema.call(this, 'characterSubscriptions', response.body, true)}))
+		.end((err, response) => this.setState(Shema.call(this, {characterSubscriptions: response.body}, true)))
 	},
 	toggleCharacterSubscription: function (subscription, character) {
 		

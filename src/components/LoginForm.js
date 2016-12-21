@@ -10,10 +10,7 @@ import Request from 'superagent'
 module.exports = React.createClass({
 	displayName: 'LoginForm',
 	getInitialState: function () {
-		return {
-			email: Shema.call(this, 'email', ''),
-			password: Shema.call(this, 'password', '')
-		}
+		return Shema.call(this, {email: '', password: ''})
 	},
 	render: function () {
 		return (
@@ -42,11 +39,11 @@ module.exports = React.createClass({
 	},
 	changeEmail: function (e) {
 		
-		this.setState({email: Shema.call(this, 'email', e.target.value, true)})
+		this.setState(Shema.call(this, {email: e.target.value}, true))
 	},
 	changePassword: function (e) {
 
-		this.setState({password: Shema.call(this, 'password', e.target.value, true)})
+		this.setState(Shema.call(this, {password: e.target.value}, true))
 	},
 	submitLogin: function () {
 		

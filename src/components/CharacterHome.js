@@ -18,11 +18,7 @@ module.exports = React.createClass({
 		routerRef: React.PropTypes.oneOfType([React.PropTypes.element, React.PropTypes.any])
 	},
 	getInitialState: function () {
-		return {
-			charactersSearchTerm: Shema.call(this, 'charactersSearchTerm', ''),
-			charactersSearchResults: Shema.call(this, 'charactersSearchResults', []),
-			characterSubscriptions: Shema.call(this, 'characterSubscriptions', [])
-		}
+		return Shema.call(this, {charactersSearchTerm: '', charactersSearchResults: [], characterSubscriptions: []})
 	},
   render: function () {
     return (
@@ -30,7 +26,7 @@ module.exports = React.createClass({
 				<MUIPaper style={{margin: '1rem', padding: '0 1rem'}}>
 					<MUITextField
 						value={this.state.charactersSearchTerm}
-						onChange={(e) => this.setState({charactersSearchTerm: Shema.call(this, 'charactersSearchTerm', e.target.value, true)})}
+						onChange={(e) => this.setState(Shema.call(this, {charactersSearchTerm: e.target.value}, true))}
 						hintText="Lowercase minimum 3 characters"
 						fullWidth
 						underlineShow={false}/>
@@ -80,7 +76,7 @@ module.exports = React.createClass({
 			
 			if (err) throw err
 
-			this.setState({charactersSearchResults: Shema.call(this, 'charactersSearchResults', response.body, true)})
+			this.setState(Shema.call(this, {charactersSearchResults: response.body}, true))
 		})
 	},
 	readCharacterSubscriptions: function () {
@@ -90,7 +86,7 @@ module.exports = React.createClass({
 		.set({Authorization: 'Bearer ' +utils.jwt})
 		.end((err, response) => {
 
-			this.setState({characterSubscriptions: Shema.call(this, 'characterSubscriptions', response.body, true)})
+			this.setState(Shema.call(this, {characterSubscriptions: response.body}, true))
 		})
 	}
 })

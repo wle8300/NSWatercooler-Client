@@ -19,11 +19,7 @@ module.exports = React.createClass({
 		_Outfit_: React.PropTypes.string.isRequired
 	},
 	getInitialState: function () {
-		return {
-			outfit: Shema.call(this, 'outfit', {}),
-			outfitCharacters: Shema.call(this, 'outfitCharacters', []),
-			outfitBookmarks: Shema.call(this, 'outfitBookmarks', [])
-		}
+		return Shema.call(this, {outfit: {}, outfitCharacters: [], outfitBookmarks: []})
 	},
 	render: function () {
 
@@ -66,20 +62,20 @@ module.exports = React.createClass({
 		
 		Request
 		.get(env.backend+ '/outfit/' +this.props._Outfit_+ '?server=genudine')
-		.end((err, response) => this.setState({outfit: Shema.call(this, 'outfit', response.body, true)}))
+		.end((err, response) => this.setState(Shema.call(this, {outfit: response.body}, true)))
 	},
 	getOutfitMembers: function () {
 
 		Request
 		.get(env.backend+ '/outfit/' +this.props._Outfit_+ '/characters?server=genudine')
-		.end((err, response) => this.setState({outfitCharacters: Shema.call(this, 'outfitCharacters', response.body, true)}))
+		.end((err, response) => this.setState(Shema.call(this, {outfitCharacters: response.body}, true)))
 	},
 	readOutfitBookmarks: function () {
 
 		Request
 		.get(env.backend+ '/user/' +utils.jwtPayload.id+ '/outfit-bookmarks')
 		.set({Authorization: 'Bearer ' +utils.jwt})
-		.end((err, response) => this.setState({outfitBookmarks: Shema.call(this, 'outfitBookmarks', response.body, true)}))
+		.end((err, response) => this.setState(Shema.call(this, {outfitBookmarks: response.body}, true)))
 	},
 	toggleOutfitBookmark: function (bookmark, outfit) {
 		
