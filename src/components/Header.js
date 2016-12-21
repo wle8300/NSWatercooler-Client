@@ -3,13 +3,15 @@ import MUIAppBar from 'material-ui/AppBar';
 
 module.exports = React.createClass({
 	propTypes: {
-		marquee: React.PropTypes.object.isRequired
+		marquee: React.PropTypes.object.isRequired,
+		toggleDrawer: React.PropTypes.func.isRequired
 	},
 	render: function () {
 		return (
 			<MUIAppBar
 				zDepth={0}
 				title={<div>{this.props.marquee.message} <small style={{fontSize: '0.75rem', opacity: 0.5}}>GENUDINE</small></div>}
+				onLeftIconButtonTouchTap={this.props.toggleDrawer}
 				style={style1(this.props)}/>
 		)
 	}

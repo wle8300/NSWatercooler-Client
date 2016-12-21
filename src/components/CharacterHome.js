@@ -53,22 +53,22 @@ module.exports = React.createClass({
 					</MUIList>
 				</MUIPaper>
 				<MUIList>
-					{this.state.characterSubscriptions.map((characterSubscription) => {
-						return (
-							<MUIListItem
-							  key={characterSubscription.id}
-							  primaryText={characterSubscription.characterName}
-							  rightIcon={<MUIArrowRight/>}
-								onTouchTap={() => this.props.routerRef.navigate('/character/' +characterSubscription._Character_)}/>
-						)
-					})}
 				</MUIList>
 			</div>
     )
+		// {this.state.characterSubscriptions.map((characterSubscription) => {
+		// 	return (
+		// 		<MUIListItem
+		// 		  key={characterSubscription.id}
+		// 		  primaryText={characterSubscription.characterName}
+		// 		  rightIcon={<MUIArrowRight/>}
+		// 			onTouchTap={() => this.props.routerRef.navigate('/character/' +characterSubscription._Character_)}/>
+		// 	)
+		// })}
   },
 	componentDidMount: function () {
 		
-		this.readCharacterSubscriptions()
+		// this.readCharacterSubscriptions()
 	},
 	submitCharacterSearch: function (e) {
 		

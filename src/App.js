@@ -3,6 +3,7 @@ import utils from '../utils'
 
 import Main from './components/Main'
 import Header from './components/Header'
+import Drawer from './components/Drawer'
 import Footer from './components/Footer'
 
 import Request from 'superagent'
@@ -20,13 +21,20 @@ module.exports = React.createClass({
 				message: 'Home',
 				size: 'normal'
 			},
+			isDrawerOpen: false
 		}
 	},
   render: function () {
     return (
 			<MuiThemeProvider>
 				<div className="App" style={style1()}>
-					<Header marquee={this.state.marquee}/>
+					<Header
+						marquee={this.state.marquee}
+						toggleDrawer={this.toggleDrawer}/>
+					<Drawer
+						isDrawerOpen={this.state.isDrawerOpen}
+						toggleDrawer={this.toggleDrawer}
+						routerRef={this.state.routerRef}/>
 					<Main
 						gotRouterRef={this.gotRouterRef}
 						changeMarquee={this.changeMarquee}/>
@@ -77,6 +85,10 @@ module.exports = React.createClass({
 			message: message,
 			size: size
 		}})
+	},
+	toggleDrawer: function () {
+		
+		this.setState({isDrawerOpen: !this.state.isDrawerOpen})
 	},
 	gotRouterRef: function (routerRef) {
 

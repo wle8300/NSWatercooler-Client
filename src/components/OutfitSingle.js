@@ -41,7 +41,7 @@ module.exports = React.createClass({
 				<MUIList>
 					{
 						this.state.outfitCharacters
-						.filter((character) => character.online_status === '1000')
+						.filter((character) => character.online_status !== '0')
 						.map((character) => {
 							return (
 								<MUIListItem
