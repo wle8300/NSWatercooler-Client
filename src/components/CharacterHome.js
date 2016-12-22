@@ -2,6 +2,8 @@ import env from '../../env'
 import utils from '../../utils'
 import Shema from '../../shema'
 
+import OnlineStatus from './OnlineStatus'
+
 import React from 'react'
 import Request from 'superagent'
 import VisibilitySensor from 'react-visibility-sensor'
@@ -60,7 +62,7 @@ module.exports = React.createClass({
 									<MUIListItem
 									  key={characterSubscription.id}
 									  primaryText={characterSubscription.characterName}
-										secondaryText={characterMeta ? (characterMeta.isOnline ? 'Online' : 'Offline') : 'Loading status...'}
+										leftIcon={<OnlineStatus isOnline={characterMeta ? characterMeta.isOnline : false} isLoading={!characterMeta ? true : false}/>}
 									  rightIcon={<MUIArrowRight/>}
 										onTouchTap={() => this.props.routerRef.navigate('/character/' +characterSubscription._Character_)}/>
 								</VisibilitySensor>
