@@ -5,6 +5,8 @@ under specified namespace
 
 Required: React component must define
 a "displayName"
+
+This function is impure because it mutates variables
 */
 
 var env = require('./env')

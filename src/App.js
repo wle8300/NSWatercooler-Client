@@ -21,7 +21,8 @@ module.exports = React.createClass({
 				message: 'Home',
 				size: 'normal'
 			},
-			isDrawerOpen: false
+			isDrawerOpen: false,
+			arePageButtonsVisible: true
 		}
 	},
   render: function () {
@@ -37,8 +38,9 @@ module.exports = React.createClass({
 						routerRef={this.state.routerRef}/>
 					<Main
 						gotRouterRef={this.gotRouterRef}
-						changeMarquee={this.changeMarquee}/>
-					<Footer routerRef={this.state.routerRef}/>
+						changeMarquee={this.changeMarquee}
+						changeFooter={this.changeFooter}/>
+					<Footer routerRef={this.state.routerRef} arePageButtonsVisible={this.state.arePageButtonsVisible}/>
 				</div>
 			</MuiThemeProvider>
     )
@@ -85,6 +87,10 @@ module.exports = React.createClass({
 			message: message,
 			size: size
 		}})
+	},
+	changeFooter: function (isVisible) {
+		
+		this.setState({arePageButtonsVisible: isVisible})
 	},
 	toggleDrawer: function () {
 		

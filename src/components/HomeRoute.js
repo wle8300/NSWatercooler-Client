@@ -3,7 +3,8 @@ import React from 'react'
 
 module.exports = React.createClass({
 	propTypes: {
-		changeMarquee: React.PropTypes.func.isRequired
+		changeMarquee: React.PropTypes.func.isRequired,
+		changeFooter: React.PropTypes.func.isRequired
 	},
   render: function () {
 		
@@ -20,5 +21,6 @@ module.exports = React.createClass({
   },
 	componentWillMount: function () {
 		this.props.changeMarquee('Home')
+		this.props.changeFooter(true)
 	}
 })

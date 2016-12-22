@@ -9,7 +9,8 @@ module.exports = React.createClass({
 	propTypes: {
 		_Character_: React.PropTypes.string,
 		routerRef: React.PropTypes.oneOfType([React.PropTypes.element, React.PropTypes.any]),
-		changeMarquee: React.PropTypes.func.isRequired
+		changeMarquee: React.PropTypes.func.isRequired,
+		changeFooter: React.PropTypes.func.isRequired
 	},
   render: function () {
     return (
@@ -25,5 +26,6 @@ module.exports = React.createClass({
 	componentWillMount: function () {
 		
 		this.props.changeMarquee('Character')
+		this.props.changeFooter(true)
 	},
 })

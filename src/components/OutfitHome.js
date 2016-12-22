@@ -69,10 +69,8 @@ module.exports = React.createClass({
 		
 		this.readOutfitBookmarks()
 	},
-	submitOutfitSearch: function (e) {
+	submitOutfitSearch: function () {
 		
-		e.preventDefault()
-
 		Request
 		.get(env.backend+ '/outfit?server=genudine&search=' +this.state.outfitsSearchTerm)
 		.end((err, response) => {

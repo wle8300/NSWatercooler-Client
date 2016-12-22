@@ -4,12 +4,12 @@ import Shema from '../../shema'
 
 import React from 'react'
 import Request from 'superagent'
-import MUICheckbox from 'material-ui/Checkbox';
+import MUICheckbox from 'material-ui/Checkbox'
 import MUIList from 'material-ui/List/List'
 import MUIListItem from 'material-ui/List/ListItem'
 import MUIArrowRight from 'material-ui/svg-icons/hardware/keyboard-arrow-right'
-import MUIBookmarkIcon from 'material-ui/svg-icons/action/bookmark';
-import MUIBookmarkBorderIcon from 'material-ui/svg-icons/action/bookmark-border';
+import MUIBookmarkIcon from 'material-ui/svg-icons/action/bookmark'
+import MUIBookmarkBorderIcon from 'material-ui/svg-icons/action/bookmark-border'
 
 
 module.exports = React.createClass({

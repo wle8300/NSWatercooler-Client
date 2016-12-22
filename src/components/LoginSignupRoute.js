@@ -9,7 +9,8 @@ import MUITabs from 'material-ui/Tabs/Tabs'
 
 module.exports = React.createClass({
 	propTypes: {
-		changeMarquee: React.PropTypes.func.isRequired
+		changeMarquee: React.PropTypes.func.isRequired,
+		changeFooter: React.PropTypes.func.isRequired
 	},
 	getInitialState: function () {
 		return {
@@ -39,6 +40,7 @@ module.exports = React.createClass({
 	},
 	componentWillMount: function () {
 		this.props.changeMarquee('Login')
+		this.props.changeFooter(false)
 	},
 	handleTabIdx: function (idx) {
 		this.setState({tabIdx: idx})

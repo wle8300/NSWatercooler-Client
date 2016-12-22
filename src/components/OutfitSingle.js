@@ -24,7 +24,7 @@ module.exports = React.createClass({
 	render: function () {
 
 		const bookmark = this.state.outfitBookmarks.filter((outfitBookmark) => outfitBookmark._Outfit_ === this.props._Outfit_)[0]
-		
+
 		return (
 			<div>
 				<h1>{this.state.outfit.alias}</h1>
