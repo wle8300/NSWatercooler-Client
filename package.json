@@ -17,6 +17,7 @@
     "react-router-component": "^0.36.0",
     "react-swipeable-views": "^0.8.3",
     "react-tap-event-plugin": "^2.0.1",
+    "react-visibility-sensor": "^3.6.0",
     "superagent": "^2.2.0",
     "validator": "^6.0.0"
   },

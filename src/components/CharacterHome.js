@@ -4,6 +4,7 @@ import Shema from '../../shema'
 
 import React from 'react'
 import Request from 'superagent'
+import VisibilitySensor from 'react-visibility-sensor'
 import MUIList from 'material-ui/List/List'
 import MUIListItem from 'material-ui/List/ListItem'
 import MUITextField from 'material-ui/TextField'
@@ -18,7 +19,7 @@ module.exports = React.createClass({
 		routerRef: React.PropTypes.oneOfType([React.PropTypes.element, React.PropTypes.any])
 	},
 	getInitialState: function () {
-		return Shema.call(this, {charactersSearchTerm: '', charactersSearchResults: [], characterSubscriptions: []})
+		return Shema.call(this, {charactersSearchTerm: '', charactersSearchResults: [], characterSubscriptions: [], charctersOnlineMeta: []})
 	},
   render: function () {
     return (
@@ -50,13 +51,21 @@ module.exports = React.createClass({
 				</MUIPaper>
 				<MUIList>
 					{
-						this.state.characterSubscriptions.map((characterSubscription) =>
-							<MUIListItem
-							  key={characterSubscription.id}
-							  primaryText={characterSubscription.characterName}
-							  rightIcon={<MUIArrowRight/>}
-								onTouchTap={() => this.props.routerRef.navigate('/character/' +characterSubscription._Character_)}/>
-						)
+						this.state.characterSubscriptions.map((characterSubscription) => {
+							
+							const characterMeta = this.state.charctersOnlineMeta.filter((characterMeta) => characterMeta._Character_ === characterSubscription._Character_)[0]
+							
+							return (
+								<VisibilitySensor key={characterSubscription.id} onChange={this.readCharacterMeta.bind(this, characterSubscription._Character_)}>
+									<MUIListItem
+									  key={characterSubscription.id}
+									  primaryText={characterSubscription.characterName}
+										secondaryText={characterMeta ? (characterMeta.isOnline ? 'Online' : 'Offline') : 'Loading status...'}
+									  rightIcon={<MUIArrowRight/>}
+										onTouchTap={() => this.props.routerRef.navigate('/character/' +characterSubscription._Character_)}/>
+								</VisibilitySensor>
+							)
+						})
 					}
 				</MUIList>
 			</div>
@@ -88,5 +97,16 @@ module.exports = React.createClass({
 
 			this.setState(Shema.call(this, {characterSubscriptions: response.body.slice(0, 10)}, true))
 		})
+	},
+	readCharacterMeta: function (_Character_, isVisible) {
+		
+		const isCharacterMetaLoaded = !!this.state.charctersOnlineMeta.filter((characterMeta) => characterMeta._Character_ === _Character_).length
+
+		if (isVisible && !isCharacterMetaLoaded) {
+
+			Request
+			.get(env.backend+ '/character/' +_Character_+ '?server=genudine')
+			.end((err, response) => this.setState(Shema.call(this, {charctersOnlineMeta: this.state.charctersOnlineMeta.concat({_Character_: _Character_, isOnline: response.body.online_status !== "0" ? true : false})}, true)))
+		}
 	}
 })

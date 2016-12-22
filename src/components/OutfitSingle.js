@@ -19,7 +19,7 @@ module.exports = React.createClass({
 		_Outfit_: React.PropTypes.string.isRequired
 	},
 	getInitialState: function () {
-		return Shema.call(this, {outfit: {}, outfitCharacters: [], outfitBookmarks: []})
+		return Shema.call(this, {outfit: {}, outfitOnlineCharacters: [], outfitBookmarks: []})
 	},
 	render: function () {
 
@@ -36,8 +36,7 @@ module.exports = React.createClass({
 		      label="Bookmark"/>
 				<MUIList>
 					{
-						this.state.outfitCharacters
-						.filter((character) => character.online_status !== '0')
+						this.state.outfitOnlineCharacters
 						.map((character) => {
 							return (
 								<MUIListItem
@@ -67,8 +66,8 @@ module.exports = React.createClass({
 	getOutfitMembers: function () {
 
 		Request
-		.get(env.backend+ '/outfit/' +this.props._Outfit_+ '/characters?server=genudine')
-		.end((err, response) => this.setState(Shema.call(this, {outfitCharacters: response.body}, true)))
+		.get(env.backend+ '/outfit/' +this.props._Outfit_+ '/characters?server=genudine&filterOnline=true')
+		.end((err, response) => this.setState(Shema.call(this, {outfitOnlineCharacters: response.body}, true)))
 	},
 	readOutfitBookmarks: function () {
 
