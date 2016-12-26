@@ -44,11 +44,17 @@ module.exports = React.createClass({
 					{
 						this.state.outfitCharacters
 						.filter((character) => character.online_status !== "0")
+						.sort((characterA, characterB) => {
+						  if (characterA.rank_ordinal > characterB.rank_ordinal) return 1
+						  if (characterA.rank_ordinal < characterB.rank_ordinal) return -1
+						  else return 0
+						})
 						.map((character) => {
 							return (
 								<MUIListItem
 								  key={character.character_id}
 								  primaryText={character.character.name.first}
+									secondaryText={character.rank}
 								  rightIcon={<MUIArrowRight/>}
 									onTouchTap={() => this.props.routerRef.navigate('/character/' +character.character_id)}/>
 							)
