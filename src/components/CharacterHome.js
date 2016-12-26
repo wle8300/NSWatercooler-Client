@@ -5,6 +5,7 @@ import Shema from '../../shema'
 import OnlineStatus from './OnlineStatus'
 
 import React from 'react'
+import InfiniteScroll from 'react-infinite'
 import Request from 'superagent'
 import VisibilitySensor from 'react-visibility-sensor'
 import MUIList from 'material-ui/List/List'
@@ -52,23 +53,25 @@ module.exports = React.createClass({
 					</MUIList>
 				</MUIPaper>
 				<MUIList>
-					{
-						this.state.characterSubscriptions.map((characterSubscription) => {
+					<InfiniteScroll useWindowAsScrollContainer elementHeight={48}>
+						{
+							this.state.characterSubscriptions.map((characterSubscription) => {
 							
-							const characterMeta = this.state.charctersOnlineMeta.filter((characterMeta) => characterMeta._Character_ === characterSubscription._Character_)[0]
+								const characterMeta = this.state.charctersOnlineMeta.filter((characterMeta) => characterMeta._Character_ === characterSubscription._Character_)[0]
 							
-							return (
-								<VisibilitySensor key={characterSubscription.id} onChange={this.readCharacterMeta.bind(this, characterSubscription._Character_)}>
-									<MUIListItem
-									  key={characterSubscription.id}
-									  primaryText={characterSubscription.characterName}
-										leftIcon={<OnlineStatus isOnline={characterMeta ? characterMeta.isOnline : false} isLoading={!characterMeta ? true : false}/>}
-									  rightIcon={<MUIArrowRight/>}
-										onTouchTap={() => this.props.routerRef.navigate('/character/' +characterSubscription._Character_)}/>
-								</VisibilitySensor>
-							)
-						})
-					}
+								return (
+									<VisibilitySensor key={characterSubscription.id} onChange={this.readCharacterMeta.bind(this, characterSubscription._Character_)}>
+										<MUIListItem
+										  key={characterSubscription.id}
+										  primaryText={characterSubscription.characterName}
+											leftIcon={<OnlineStatus isOnline={characterMeta ? characterMeta.isOnline : false} isLoading={!characterMeta ? true : false}/>}
+										  rightIcon={<MUIArrowRight/>}
+											onTouchTap={() => this.props.routerRef.navigate('/character/' +characterSubscription._Character_)}/>
+									</VisibilitySensor>
+								)
+							})
+						}
+					</InfiniteScroll>
 				</MUIList>
 			</div>
     )
@@ -97,7 +100,7 @@ module.exports = React.createClass({
 		.set({Authorization: 'Bearer ' +utils.jwt})
 		.end((err, response) => {
 
-			this.setState(Shema.call(this, {characterSubscriptions: response.body.slice(0, 10)}, true))
+			this.setState(Shema.call(this, {characterSubscriptions: response.body}, true))
 		})
 	},
 	readCharacterMeta: function (_Character_, isVisible) {

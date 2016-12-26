@@ -14,7 +14,7 @@ module.exports = React.createClass({
 function style1(props, state) {
 	return {
 		position: 'absolute',
-		left: '1rem',
+		left: '2rem',
 		width: '1rem',
 		height: '1rem',
 		background: props.isOnline ? 'green' : 'orange',

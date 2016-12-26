@@ -4,7 +4,7 @@ import Shema from '../../shema'
 
 import React from 'react'
 import Request from 'superagent'
-import MUICheckbox from 'material-ui/Checkbox';
+import MUIFAB from 'material-ui/FloatingActionButton';
 import MUIList from 'material-ui/List/List'
 import MUIListItem from 'material-ui/List/ListItem'
 import MUIArrowRight from 'material-ui/svg-icons/hardware/keyboard-arrow-right'
@@ -24,16 +24,13 @@ module.exports = React.createClass({
 	render: function () {
 
 		const bookmark = this.state.outfitBookmarks.filter((outfitBookmark) => outfitBookmark._Outfit_ === this.props._Outfit_)[0]
-
+		
 		return (
 			<div>
 				<h1>{this.state.outfit.alias}</h1>
-		    <MUICheckbox
-					onCheck={this.toggleOutfitBookmark.bind(this, bookmark, this.state.outfit)}
-		      checkedIcon={<MUIBookmarkIcon/>}
-		      uncheckedIcon={<MUIBookmarkBorderIcon/>}
-					checked={bookmark ? true : false}
-		      label="Bookmark"/>
+				<MUIFAB secondary onTouchTap={this.toggleOutfitBookmark.bind(this, bookmark, this.state.outfit)} style={style1()}>
+					{bookmark ? <MUIBookmarkIcon/> : <MUIBookmarkBorderIcon/>}
+				</MUIFAB>
 				<MUIList>
 					{
 						this.state.outfitOnlineCharacters
@@ -54,7 +51,7 @@ module.exports = React.createClass({
 	componentDidMount: function () {
 
 		this.getOutfit()
-		this.getOutfitMembers()
+		this.getOutfitOnlineCharacters()
 		this.readOutfitBookmarks()
 	},
 	getOutfit: function () {
@@ -63,7 +60,7 @@ module.exports = React.createClass({
 		.get(env.backend+ '/outfit/' +this.props._Outfit_+ '?server=genudine')
 		.end((err, response) => this.setState(Shema.call(this, {outfit: response.body}, true)))
 	},
-	getOutfitMembers: function () {
+	getOutfitOnlineCharacters: function () {
 
 		Request
 		.get(env.backend+ '/outfit/' +this.props._Outfit_+ '/characters?server=genudine&filterOnline=true')
@@ -99,3 +96,12 @@ module.exports = React.createClass({
 		}
 	}
 })
+
+function style1() {
+	return {
+		position: 'fixed',
+		zIndex: 1,
+		bottom: '5rem',
+		right: '1rem'
+	}
+}

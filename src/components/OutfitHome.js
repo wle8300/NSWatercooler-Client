@@ -5,6 +5,7 @@ import Shema from '../../shema'
 import React from 'react'
 import Request from 'superagent'
 import VisibilitySensor from 'react-visibility-sensor'
+import MUIAvatar from 'material-ui/Avatar';
 import MUIPaper from 'material-ui/Paper'
 // import MUIDivider from 'material-ui/Divider'
 import MUIArrowRight from 'material-ui/svg-icons/hardware/keyboard-arrow-right'
@@ -22,7 +23,7 @@ module.exports = React.createClass({
 		routerRef: React.PropTypes.oneOfType([React.PropTypes.element, React.PropTypes.any]),
 	},
 	getInitialState: function () {
-		return Shema.call(this, {outfitsSearchTerm: '', outfitsSearchResults: [], outfitBookmarks: [], outfitsOnlineCountMeta: []})
+		return Shema.call(this, {outfitsSearchTerm: '', outfitsSearchResults: [], outfitBookmarks: [], outfits: [], outfitsOnlineCount: []})
 	},
 	render : function () {
 		return (
@@ -55,13 +56,18 @@ module.exports = React.createClass({
 				<MUIList>
 					{this.state.outfitBookmarks.map((outfitBookmark) => {
 						
-						const outfitMeta = this.state.outfitsOnlineCountMeta.filter((outfitMeta) => outfitMeta._Outfit_ === outfitBookmark._Outfit_)[0]
+						const outfit = this.state.outfits.filter((outfit) => outfit.id === outfitBookmark._Outfit_)[0]
+						const outfitOnlineCount = this.state.outfitsOnlineCount.filter((outfitOnlineCount) => outfitOnlineCount._Outfit_ === outfitBookmark._Outfit_)[0]
+						// {
+						//   _Outfit_: [String object],
+						//   onlineCount: [Number object]
+						// }
 						
 						return (
-							<VisibilitySensor key={outfitBookmark.id} onChange={this.readOutfitOnlineMembers.bind(this, outfitBookmark._Outfit_)}>
+							<VisibilitySensor key={outfitBookmark.id} onChange={(isVisible) => {this.readOutfit(outfitBookmark._Outfit_, isVisible); this.readOutfitOnlineMembers(outfitBookmark._Outfit_, isVisible)}}>
 								<MUIListItem
 									primaryText={outfitBookmark.outfitAlias}
-									secondaryText={(outfitMeta ? outfitMeta.onlineCount+ ' members online' : 'Loading online members...')}
+									secondaryText={outfitOnlineCount ? outfitOnlineCount.onlineCount+ ' online' : 'Loading...'}
 								  rightIcon={<MUIArrowRight/>}
 									onTouchTap={() => this.props.routerRef.navigate('/outfit/' +outfitBookmark._Outfit_)}/>
 							</VisibilitySensor>
@@ -96,15 +102,26 @@ module.exports = React.createClass({
 			this.setState(Shema.call(this, {outfitBookmarks: response.body}, true))
 		})
 	},
-	readOutfitOnlineMembers: function (_Outfit_, isVisible) {
-		
-		const isOutfitMetaLoaded = !!this.state.outfitsOnlineCountMeta.filter((outfitMeta) => outfitMeta._Outfit_ === _Outfit_).length
+	readOutfit: function (_Outfit_, isVisible) {
 
-		if (isVisible && !isOutfitMetaLoaded) {
+		const isOutfitLoaded = !!this.state.outfits.filter((outfit) => outfit.outfit_id === _Outfit_).length
+
+		if (isVisible && !isOutfitLoaded) {
+			
+			Request
+			.get(env.backend+ '/outfit/' +_Outfit_+ '?server=genudine')
+			.end((err, response) => this.setState(Shema.call(this, {outfits: this.state.outfits.concat(response.body)}, true)))
+		}
+	},
+	readOutfitOnlineMembers: function (_Outfit_, isVisible) {
+
+		const isOutfitOnlineCountLoaded = !!this.state.outfitsOnlineCount.filter((outfitOnlineCount) => outfitOnlineCount._Outfit_ === _Outfit_).length
+
+		if (isVisible && !isOutfitOnlineCountLoaded) {
 			
 			Request
 			.get(env.backend+ '/outfit/' +_Outfit_+ '/characters?server=genudine&filterOnline=true')
-			.end((err, response) => this.setState(Shema.call(this, {outfitsOnlineCountMeta: this.state.outfitsOnlineCountMeta.concat({_Outfit_: _Outfit_, onlineCount: response.body.length})}, true)))
+			.end((err, response) => this.setState(Shema.call(this, {outfitsOnlineCount: this.state.outfitsOnlineCount.concat({_Outfit_: _Outfit_, onlineCount: response.body.length})}, true)))
 		}
 	}
 })

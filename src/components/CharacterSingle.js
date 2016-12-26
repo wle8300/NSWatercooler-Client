@@ -4,12 +4,13 @@ import Shema from '../../shema'
 
 import React from 'react'
 import Request from 'superagent'
-import MUICheckbox from 'material-ui/Checkbox'
-import MUIList from 'material-ui/List/List'
-import MUIListItem from 'material-ui/List/ListItem'
-import MUIArrowRight from 'material-ui/svg-icons/hardware/keyboard-arrow-right'
-import MUIBookmarkIcon from 'material-ui/svg-icons/action/bookmark'
-import MUIBookmarkBorderIcon from 'material-ui/svg-icons/action/bookmark-border'
+import MUIFAB from 'material-ui/FloatingActionButton';
+// import MUICheckbox from 'material-ui/Checkbox'
+// import MUIList from 'material-ui/List/List'
+// import MUIListItem from 'material-ui/List/ListItem'
+// import MUIArrowRight from 'material-ui/svg-icons/hardware/keyboard-arrow-right'
+import MUIAddIcon from 'material-ui/svg-icons/av/playlist-add-check'
+import MUIAddBorderIcon from 'material-ui/svg-icons/av/playlist-add'
 
 
 module.exports = React.createClass({
@@ -26,12 +27,9 @@ module.exports = React.createClass({
     return (
 			<div>
 				<h1>{this.state.character.name ? this.state.character.name.first : null}</h1>
-		    <MUICheckbox
-					onCheck={this.toggleCharacterSubscription.bind(this, subscription, this.state.character)}
-		      checkedIcon={<MUIBookmarkIcon/>}
-		      uncheckedIcon={<MUIBookmarkBorderIcon/>}
-					checked={subscription ? true : false}
-		      label="Bookmark"/>
+				<MUIFAB secondary onTouchTap={this.toggleCharacterSubscription.bind(this, subscription, this.state.character)} style={style1()}>
+					{subscription ? <MUIAddIcon/> : <MUIAddBorderIcon/>}
+				</MUIFAB>
 				<div>creation, last login, battle_rank.value</div>
 			</div>
     )
@@ -78,3 +76,12 @@ module.exports = React.createClass({
 		}
 	}
 })
+
+function style1() {
+	return {
+		position: 'fixed',
+		zIndex: 1,
+		bottom: '5rem',
+		right: '1rem'
+	}
+}
