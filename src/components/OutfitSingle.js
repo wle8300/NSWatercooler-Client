@@ -8,6 +8,8 @@ import MUIFAB from 'material-ui/FloatingActionButton';
 import MUIList from 'material-ui/List/List'
 import MUIListItem from 'material-ui/List/ListItem'
 import MUIArrowRight from 'material-ui/svg-icons/hardware/keyboard-arrow-right'
+import MUIOutfitCharactersCountIcon from 'material-ui/svg-icons/action/assignment-ind'
+import MUIAverageBRIcon from 'material-ui/svg-icons/places/spa'
 import MUIBookmarkIcon from 'material-ui/svg-icons/action/bookmark';
 import MUIBookmarkBorderIcon from 'material-ui/svg-icons/action/bookmark-border';
 
@@ -31,35 +33,38 @@ module.exports = React.createClass({
 	render: function () {
 
 		const bookmark = this.state.outfitBookmarks.filter((outfitBookmark) => outfitBookmark._Outfit_ === this.props._Outfit_)[0]
+		const onlineCharacters = this.state.outfitCharacters
+			.filter((character) => character.online_status !== "0")
+			.sort((characterA, characterB) => {
+			  if (characterA.rank_ordinal > characterB.rank_ordinal) return 1
+			  if (characterA.rank_ordinal < characterB.rank_ordinal) return -1
+			  else return 0
+			})
+			.map((character) => {
+				return (
+					<MUIListItem
+					  key={character.character_id}
+					  primaryText={character.character.name.first}
+						secondaryText={character.rank}
+					  rightIcon={<MUIArrowRight/>}
+						onTouchTap={() => this.props.routerRef.navigate('/character/' +character.character_id)}/>
+				)
+			})
 
 		return (
 			<div>
 				<h1>{this.state.outfit.alias}</h1>
-				<p>Total Members: {this.state.outfit.member_count}</p>
-				<p>Average BR: {this.state.outfitCharacters.length ? this._calculateAvgBR(this.state.outfitCharacters) : 'Crunching...'}</p>
+				<p><MUIOutfitCharactersCountIcon/> {this.state.outfit.member_count} members</p>
+				<p><MUIAverageBRIcon/> {this.state.outfitCharacters.length ? this._calculateAvgBR(this.state.outfitCharacters)+ ' BattleRank™ AVG' : 'Crunching...'}</p>
 				<MUIFAB secondary onTouchTap={this.toggleOutfitBookmark.bind(this, bookmark, this.state.outfit)} style={style1()}>
 					{bookmark ? <MUIBookmarkIcon/> : <MUIBookmarkBorderIcon/>}
 				</MUIFAB>
 				<MUIList>
-					{
-						this.state.outfitCharacters
-						.filter((character) => character.online_status !== "0")
-						.sort((characterA, characterB) => {
-						  if (characterA.rank_ordinal > characterB.rank_ordinal) return 1
-						  if (characterA.rank_ordinal < characterB.rank_ordinal) return -1
-						  else return 0
-						})
-						.map((character) => {
-							return (
-								<MUIListItem
-								  key={character.character_id}
-								  primaryText={character.character.name.first}
-									secondaryText={character.rank}
-								  rightIcon={<MUIArrowRight/>}
-									onTouchTap={() => this.props.routerRef.navigate('/character/' +character.character_id)}/>
-							)
-						})
-					}
+					<MUIListItem
+						primaryText={'Online (' +onlineCharacters.length+ ')'}
+						initiallyOpen={true}
+	          primaryTogglesNestedList={true}
+						nestedItems={onlineCharacters}/>
 				</MUIList>
 			</div>
 		)
