@@ -5,7 +5,7 @@ import Shema from '../../shema'
 import React from 'react'
 import Request from 'superagent'
 import VisibilitySensor from 'react-visibility-sensor'
-import MUIAvatar from 'material-ui/Avatar';
+// import MUIAvatar from 'material-ui/Avatar';
 import MUIPaper from 'material-ui/Paper'
 // import MUIDivider from 'material-ui/Divider'
 import MUIArrowRight from 'material-ui/svg-icons/hardware/keyboard-arrow-right'
@@ -56,7 +56,7 @@ module.exports = React.createClass({
 				<MUIList>
 					{this.state.outfitBookmarks.map((outfitBookmark) => {
 						
-						const outfit = this.state.outfits.filter((outfit) => outfit.id === outfitBookmark._Outfit_)[0]
+						// const outfit = this.state.outfits.filter((outfit) => outfit.id === outfitBookmark._Outfit_)[0]
 						const outfitOnlineCount = this.state.outfitsOnlineCount.filter((outfitOnlineCount) => outfitOnlineCount._Outfit_ === outfitBookmark._Outfit_)[0]
 						// {
 						//   _Outfit_: [String object],

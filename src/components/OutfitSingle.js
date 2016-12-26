@@ -19,26 +19,36 @@ module.exports = React.createClass({
 		_Outfit_: React.PropTypes.string.isRequired
 	},
 	getInitialState: function () {
-		return Shema.call(this, {outfit: {}, outfitOnlineCharacters: [], outfitBookmarks: []})
+		return Shema.call(this, {outfit: {}, outfitCharacters: [], outfitBookmarks: []})
+	},
+	_calculateAvgBR: function (outfitCharacters) {
+		
+		const total = outfitCharacters.reduce((sum, character) => sum + parseInt(character.character.battle_rank.value, 10), 0)
+		const length = outfitCharacters.length
+
+		return parseInt(total/length, 10)
 	},
 	render: function () {
 
 		const bookmark = this.state.outfitBookmarks.filter((outfitBookmark) => outfitBookmark._Outfit_ === this.props._Outfit_)[0]
-		
+
 		return (
 			<div>
 				<h1>{this.state.outfit.alias}</h1>
+				<p>Total Members: {this.state.outfit.member_count}</p>
+				<p>Average BR: {this.state.outfitCharacters.length ? this._calculateAvgBR(this.state.outfitCharacters) : 'Crunching...'}</p>
 				<MUIFAB secondary onTouchTap={this.toggleOutfitBookmark.bind(this, bookmark, this.state.outfit)} style={style1()}>
 					{bookmark ? <MUIBookmarkIcon/> : <MUIBookmarkBorderIcon/>}
 				</MUIFAB>
 				<MUIList>
 					{
-						this.state.outfitOnlineCharacters
+						this.state.outfitCharacters
+						.filter((character) => character.online_status !== "0")
 						.map((character) => {
 							return (
 								<MUIListItem
 								  key={character.character_id}
-								  primaryText={character.name.first}
+								  primaryText={character.character.name.first}
 								  rightIcon={<MUIArrowRight/>}
 									onTouchTap={() => this.props.routerRef.navigate('/character/' +character.character_id)}/>
 							)
@@ -51,7 +61,7 @@ module.exports = React.createClass({
 	componentDidMount: function () {
 
 		this.getOutfit()
-		this.getOutfitOnlineCharacters()
+		this.getOutfitCharacters()
 		this.readOutfitBookmarks()
 	},
 	getOutfit: function () {
@@ -60,11 +70,11 @@ module.exports = React.createClass({
 		.get(env.backend+ '/outfit/' +this.props._Outfit_+ '?server=genudine')
 		.end((err, response) => this.setState(Shema.call(this, {outfit: response.body}, true)))
 	},
-	getOutfitOnlineCharacters: function () {
+	getOutfitCharacters: function () {
 
 		Request
-		.get(env.backend+ '/outfit/' +this.props._Outfit_+ '/characters?server=genudine&filterOnline=true')
-		.end((err, response) => this.setState(Shema.call(this, {outfitOnlineCharacters: response.body}, true)))
+		.get(env.backend+ '/outfit/' +this.props._Outfit_+ '/characters?server=genudine')
+		.end((err, response) => this.setState(Shema.call(this, {outfitCharacters: response.body}, true)))
 	},
 	readOutfitBookmarks: function () {
 
