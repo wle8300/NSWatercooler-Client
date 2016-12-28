@@ -5,6 +5,7 @@ import Shema from '../../shema'
 import OnlineStatus from './OnlineStatus'
 
 import React from 'react'
+import Moment from 'moment'
 import InfiniteScroll from 'react-infinite'
 import Request from 'superagent'
 import VisibilitySensor from 'react-visibility-sensor'
@@ -22,7 +23,7 @@ module.exports = React.createClass({
 		routerRef: React.PropTypes.oneOfType([React.PropTypes.element, React.PropTypes.any])
 	},
 	getInitialState: function () {
-		return Shema.call(this, {charactersSearchTerm: '', charactersSearchResults: [], characterSubscriptions: [], charctersOnlineMeta: []})
+		return Shema.call(this, {charactersSearchTerm: '', charactersSearchResults: [], characterSubscriptions: [], charcterSubscriptionsOnlineStatus: [], characterSubscriptionsLogins: []})
 	},
   render: function () {
     return (
@@ -57,14 +58,17 @@ module.exports = React.createClass({
 						{
 							this.state.characterSubscriptions.map((characterSubscription) => {
 							
-								const characterMeta = this.state.charctersOnlineMeta.filter((characterMeta) => characterMeta._Character_ === characterSubscription._Character_)[0]
-							
+								const characterOnlineStatus = this.state.charcterSubscriptionsOnlineStatus.filter((characterOnlineStatus) => characterOnlineStatus._Character_ === characterSubscription._Character_)[0]
+								const characterLastLogin = this.state.characterSubscriptionsLogins.filter((characterSubscriptionsLogin) => characterSubscriptionsLogin._Character_ === characterSubscription._Character_)[0]
+
+
 								return (
-									<VisibilitySensor key={characterSubscription.id} onChange={this.readCharacterMeta.bind(this, characterSubscription._Character_)}>
+									<VisibilitySensor key={characterSubscription.id} onChange={(isVisible) => {this.readCharacterOnlineStatus(characterSubscription._Character_, isVisible); this.readCharacterLogins(characterSubscription._Character_, isVisible)}}>
 										<MUIListItem
 										  key={characterSubscription.id}
 										  primaryText={characterSubscription.characterName}
-											leftIcon={<OnlineStatus isOnline={characterMeta ? characterMeta.isOnline : false} isLoading={!characterMeta ? true : false}/>}
+											secondaryText={characterLastLogin ? Moment(characterLastLogin.login.time).fromNow() : null}
+											leftIcon={<OnlineStatus isOnline={characterOnlineStatus ? characterOnlineStatus.isOnline : false} isLoading={!characterOnlineStatus ? true : false}/>}
 										  rightIcon={<MUIArrowRight/>}
 											onTouchTap={() => this.props.routerRef.navigate('/character/' +characterSubscription._Character_)}/>
 									</VisibilitySensor>
@@ -103,15 +107,31 @@ module.exports = React.createClass({
 			this.setState(Shema.call(this, {characterSubscriptions: response.body}, true))
 		})
 	},
-	readCharacterMeta: function (_Character_, isVisible) {
+	readCharacterOnlineStatus: function (_Character_, isVisible) {
 		
-		const isCharacterMetaLoaded = !!this.state.charctersOnlineMeta.filter((characterMeta) => characterMeta._Character_ === _Character_).length
+		const alreadyLoaded = !!this.state.charcterSubscriptionsOnlineStatus.filter((characterOnlineStatus) => characterOnlineStatus._Character_ === _Character_).length
 
-		if (isVisible && !isCharacterMetaLoaded) {
+		if (isVisible && !alreadyLoaded) {
 
 			Request
 			.get(env.backend+ '/character/' +_Character_+ '?server=genudine')
-			.end((err, response) => this.setState(Shema.call(this, {charctersOnlineMeta: this.state.charctersOnlineMeta.concat({_Character_: _Character_, isOnline: response.body.online_status !== "0" ? true : false})}, true)))
+			.end((err, response) => this.setState(Shema.call(this, {charcterSubscriptionsOnlineStatus: this.state.charcterSubscriptionsOnlineStatus.concat({_Character_: _Character_, isOnline: response.body.online_status !== "0" ? true : false})}, true)))
+		}
+	},
+	readCharacterLogins: function (_Character_, isVisible) {
+
+		const alreadyLoaded = !!this.state.characterSubscriptionsLogins.filter((characterLogin) => characterLogin._Character_ === _Character_).length
+
+		if (isVisible && !alreadyLoaded) {
+
+			Request
+			.get(env.backend+ '/character/' +_Character_+ '/logins')
+			.end((err, response) => {
+
+				if (!response.body.length) return
+					
+				this.setState(Shema.call(this, {characterSubscriptionsLogins: this.state.characterSubscriptionsLogins.concat({_Character_: _Character_, login: response.body[0]})}, true))
+			})
 		}
 	}
 })

@@ -105,6 +105,6 @@ module.exports = React.createClass({
 function style1() {
 	return {
 		margin: '0 auto',
-		fontFamily: 'Helvetica'
+		// fontFamily: 'Helvetica'
 	}
 }

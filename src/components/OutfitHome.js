@@ -21,6 +21,7 @@ module.exports = React.createClass({
 	displayName: 'OutfitHome',
 	propTypes: {
 		routerRef: React.PropTypes.oneOfType([React.PropTypes.element, React.PropTypes.any]),
+		changeMarquee: React.PropTypes.func.isRequired
 	},
 	getInitialState: function () {
 		return Shema.call(this, {outfitsSearchTerm: '', outfitsSearchResults: [], outfitBookmarks: [], outfits: [], outfitsOnlineCount: []})
@@ -76,6 +77,9 @@ module.exports = React.createClass({
 				</MUIList>
 			</div>
 		)
+	},
+	componentWillMount: function () {
+		this.props.changeMarquee('Outfit')
 	},
 	componentDidMount: function () {
 		
