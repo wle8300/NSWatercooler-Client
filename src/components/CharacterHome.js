@@ -23,7 +23,7 @@ module.exports = React.createClass({
 		routerRef: React.PropTypes.oneOfType([React.PropTypes.element, React.PropTypes.any])
 	},
 	getInitialState: function () {
-		return Shema.call(this, {charactersSearchTerm: '', charactersSearchResults: [], characterSubscriptions: [], charcterSubscriptionsOnlineStatus: [], characterSubscriptionsLogins: []})
+		return Shema.call(this, {charactersSearchTerm: '', charactersSearchResults: [], characterSubscriptions: [], VIZCOLLECTIONCharcterSubscriptionsOnlineStatus: [], VIZCOLLECTIONcharacterSubscriptionsLogins: []})
 	},
   render: function () {
     return (
@@ -58,8 +58,8 @@ module.exports = React.createClass({
 						{
 							this.state.characterSubscriptions.map((characterSubscription) => {
 							
-								const characterOnlineStatus = this.state.charcterSubscriptionsOnlineStatus.filter((characterOnlineStatus) => characterOnlineStatus._Character_ === characterSubscription._Character_)[0]
-								const characterLastLogin = this.state.characterSubscriptionsLogins.filter((characterSubscriptionsLogin) => characterSubscriptionsLogin._Character_ === characterSubscription._Character_)[0]
+								const characterOnlineStatus = this.state.VIZCOLLECTIONCharcterSubscriptionsOnlineStatus.filter((characterOnlineStatus) => characterOnlineStatus._Character_ === characterSubscription._Character_)[0]
+								const characterLastLogin = this.state.VIZCOLLECTIONcharacterSubscriptionsLogins.filter((characterSubscriptionsLogin) => characterSubscriptionsLogin._Character_ === characterSubscription._Character_)[0]
 
 
 								return (
@@ -109,18 +109,18 @@ module.exports = React.createClass({
 	},
 	readCharacterOnlineStatus: function (_Character_, isVisible) {
 		
-		const alreadyLoaded = !!this.state.charcterSubscriptionsOnlineStatus.filter((characterOnlineStatus) => characterOnlineStatus._Character_ === _Character_).length
+		const alreadyLoaded = !!this.state.VIZCOLLECTIONCharcterSubscriptionsOnlineStatus.filter((characterOnlineStatus) => characterOnlineStatus._Character_ === _Character_).length
 
 		if (isVisible && !alreadyLoaded) {
 
 			Request
 			.get(env.backend+ '/character/' +_Character_+ '?server=genudine')
-			.end((err, response) => this.setState(Shema.call(this, {charcterSubscriptionsOnlineStatus: this.state.charcterSubscriptionsOnlineStatus.concat({_Character_: _Character_, isOnline: response.body.online_status !== "0" ? true : false})}, true)))
+			.end((err, response) => this.setState(Shema.call(this, {VIZCOLLECTIONCharcterSubscriptionsOnlineStatus: this.state.VIZCOLLECTIONCharcterSubscriptionsOnlineStatus.concat({_Character_: _Character_, isOnline: response.body.online_status !== "0" ? true : false})}, true)))
 		}
 	},
 	readCharacterLogins: function (_Character_, isVisible) {
 
-		const alreadyLoaded = !!this.state.characterSubscriptionsLogins.filter((characterLogin) => characterLogin._Character_ === _Character_).length
+		const alreadyLoaded = !!this.state.VIZCOLLECTIONcharacterSubscriptionsLogins.filter((characterLogin) => characterLogin._Character_ === _Character_).length
 
 		if (isVisible && !alreadyLoaded) {
 
@@ -130,7 +130,7 @@ module.exports = React.createClass({
 
 				if (!response.body.length) return
 					
-				this.setState(Shema.call(this, {characterSubscriptionsLogins: this.state.characterSubscriptionsLogins.concat({_Character_: _Character_, login: response.body[0]})}, true))
+				this.setState(Shema.call(this, {VIZCOLLECTIONcharacterSubscriptionsLogins: this.state.VIZCOLLECTIONcharacterSubscriptionsLogins.concat({_Character_: _Character_, login: response.body[0]})}, true))
 			})
 		}
 	}
