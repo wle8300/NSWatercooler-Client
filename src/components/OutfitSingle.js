@@ -10,7 +10,6 @@ import React from 'react'
 import Request from 'superagent'
 // import Draggable from 'react-draggable'
 import MUIAvatar from 'material-ui/Avatar'
-// import MUIPaper from 'material-ui/Paper'
 // import MUISubheader from 'material-ui/Subheader'
 import MUIFAB from 'material-ui/FloatingActionButton'
 import MUIList from 'material-ui/List/List'
@@ -81,7 +80,6 @@ module.exports = React.createClass({
 						primaryText={this.state.outfitCharacters.length ? this._calculateAvgBR(this.state.outfitCharacters)+ ' Average BattleRank' : 'Crunching...'}
 						disabled/>
 				</MUIList>
-				<MUIDivider/>
 				<MUIList>
 					<MUIListItem
 						primaryText="Information"
@@ -100,10 +98,12 @@ module.exports = React.createClass({
 								disabled
 								children={[
 									<NestedListHeader>Composition</NestedListHeader>,
-									<MUIChip style={style2()}><MUIAvatar>{outfitLeaders.length}</MUIAvatar>Leaders</MUIChip>,
-									<MUIChip style={style2()}><MUIAvatar>{outfitOfficers.length}</MUIAvatar>Officers</MUIChip>,
-									<MUIChip style={style2()}><MUIAvatar>{outfitMembers.length}</MUIAvatar>Members</MUIChip>,
-									<MUIChip style={style2()}><MUIAvatar>{outfitPrivates.length}</MUIAvatar>Privates</MUIChip>
+									<div style={{display: 'flex', flexWrap: 'wrap'}}>
+										<MUIChip style={style2()}><MUIAvatar>{outfitLeaders.length}</MUIAvatar>Leaders</MUIChip>
+										<MUIChip style={style2()}><MUIAvatar>{outfitOfficers.length}</MUIAvatar>Officers</MUIChip>
+										<MUIChip style={style2()}><MUIAvatar>{outfitMembers.length}</MUIAvatar>Members</MUIChip>
+										<MUIChip style={style2()}><MUIAvatar>{outfitPrivates.length}</MUIAvatar>Privates</MUIChip>
+									</div>
 								]}/>,
 							<MUIListItem 
 								key={Uuid()}
@@ -215,6 +215,6 @@ function style1() {
 
 function style2() {
 	return {
-		margin: '0.25rem 0'
+		margin: '0.25rem'
 	}
 }

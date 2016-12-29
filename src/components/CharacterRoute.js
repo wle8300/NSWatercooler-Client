@@ -17,15 +17,13 @@ module.exports = React.createClass({
 			<div>
 				{
 					!this.props._Character_
-					? <CharacterHome routerRef={this.props.routerRef}/>
-					: <CharacterSingle _Character_={this.props._Character_}/>
+					? <CharacterHome routerRef={this.props.routerRef} changeMarquee={this.props.changeMarquee}/>
+					: <CharacterSingle _Character_={this.props._Character_} changeMarquee={this.props.changeMarquee}/>
 				}
 			</div>
     )
   },
 	componentWillMount: function () {
-		
-		this.props.changeMarquee('Character')
 		this.props.changeFooter(true)
 	},
 })

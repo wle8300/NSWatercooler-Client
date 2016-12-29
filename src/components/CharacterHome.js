@@ -20,7 +20,8 @@ import MUIArrowRight from 'material-ui/svg-icons/hardware/keyboard-arrow-right'
 module.exports = React.createClass({
 	displayName: 'CharacterHome',
 	propTypes: {
-		routerRef: React.PropTypes.oneOfType([React.PropTypes.element, React.PropTypes.any])
+		routerRef: React.PropTypes.oneOfType([React.PropTypes.element, React.PropTypes.any]),
+		changeMarquee: React.PropTypes.func.isRequired
 	},
 	getInitialState: function () {
 		return Shema.call(this, {charactersSearchTerm: '', charactersSearchResults: [], characterSubscriptions: [], VIZCOLLECTIONCharcterSubscriptionsOnlineStatus: [], VIZCOLLECTIONcharacterSubscriptionsLogins: []})
@@ -82,6 +83,7 @@ module.exports = React.createClass({
   },
 	componentDidMount: function () {
 		
+		this.props.changeMarquee('Character')
 		this.readCharacterSubscriptions()
 	},
 	submitCharacterSearch: function (e) {

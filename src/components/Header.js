@@ -11,11 +11,12 @@ module.exports = React.createClass({
 			<MUIAppBar
 				zDepth={0}
 				title={<div>{this.props.marquee.message} <small style={{fontSize: '0.75rem', opacity: 0.5}}>GENUDINE</small></div>}
-				onLeftIconButtonTouchTap={this.props.toggleDrawer}
+				iconStyleLeft={{display: 'none'}}
 				style={style1(this.props)}/>
 		)
 	}
 })
+				// onLeftIconButtonTouchTap={this.props.toggleDrawer}
 
 function style1(props, state) {
 	

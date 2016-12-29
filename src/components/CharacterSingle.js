@@ -4,7 +4,15 @@ import Shema from '../../shema'
 
 import React from 'react'
 import Request from 'superagent'
+import Moment from 'moment'
 import MUIFAB from 'material-ui/FloatingActionButton';
+import MUIChip from 'material-ui/Chip'
+import MUIDivider from 'material-ui/Divider'
+import MUIAvatar from 'material-ui/Avatar'
+import MUIPaper from 'material-ui/Paper'
+import MUIList from 'material-ui/List/List'
+import MUIListItem from 'material-ui/List/ListItem'
+import MUILinearProgress from 'material-ui/LinearProgress';
 // import MUICheckbox from 'material-ui/Checkbox'
 // import MUIList from 'material-ui/List/List'
 // import MUIListItem from 'material-ui/List/ListItem'
@@ -15,35 +23,110 @@ import MUIAddBorderIcon from 'material-ui/svg-icons/av/playlist-add'
 
 module.exports = React.createClass({
 	propTypes: {
-		_Character_: React.PropTypes.string.isRequired
+		_Character_: React.PropTypes.string.isRequired,
+		changeMarquee: React.PropTypes.func.isRequired
 	},
 	getInitialState: function () {
-		return Shema.call(this, {character: {}, characterSubscriptions: []})
+		return Shema.call(this, {character: {}, characterSubscriptions: [], characterLogins: []})
 	},
   render: function () {
 		
 		const subscription = this.state.characterSubscriptions.filter((characterSubscription) => characterSubscription._Character_ === this.props._Character_)[0]
+		const classesPlayTimes = this.state.character.stats ? this.state.character.stats.stat.filter((x) => x.stat_name === 'play_time') : []
+		const totalPlayTime = classesPlayTimes.length ? classesPlayTimes.reduce((sum, classPlayTime) => sum + parseInt(classPlayTime.value_forever, 10), 0) : 0
+
+		console.log(1, classesPlayTimes.filter((x) => x.profile_id === "1"));
 		
     return (
 			<div>
-				<h1>{this.state.character.name ? this.state.character.name.first : null}</h1>
-				<MUIFAB secondary onTouchTap={this.toggleCharacterSubscription.bind(this, subscription, this.state.character)} style={style1()}>
-					{subscription ? <MUIAddIcon/> : <MUIAddBorderIcon/>}
-				</MUIFAB>
-				<div>creation, last login, battle_rank.value</div>
+				<MUIPaper zDepth={0} style={style3(this.props, this.state)}>
+					<span style={style2()}>{this.state.character.battle_rank ? 'BR' +this.state.character.battle_rank.value : null}</span>
+					<MUIFAB secondary onTouchTap={this.toggleCharacterSubscription.bind(this, subscription, this.state.character)} style={style1()}>
+						{subscription ? <MUIAddIcon/> : <MUIAddBorderIcon/>}
+					</MUIFAB>
+					{
+						!this.state.character.outfit_member
+						? null 
+						: (
+						  <MUIPaper zDepth={0} style={{float: 'right', width: '33.33%', textAlign: 'center', background: 'transparent'}}>
+								<span style={{textTransform: 'uppercase'}}>{this.state.character.outfit_member.member_rank}</span>
+								<MUIDivider/>
+								<span style={{fontSize: '0.75rem'}}>[{this.state.character.outfit_member.alias}]</span>
+							</MUIPaper>	
+						)
+					}
+					<MUIChip><MUIAvatar style={{background: this.state.character.online_status === '1000' ? 'green' : 'gray'}}/>{this.state.characterLogins.length ? Moment(this.state.characterLogins[0].time).fromNow() : null}</MUIChip>
+				</MUIPaper>
+				<MUIList>
+					<MUIListItem primaryText="Detail"
+						initiallyOpen={false}
+          	primaryTogglesNestedList={true}
+						nestedItems={[
+							<MUIListItem key={new Date()}>cool</MUIListItem>
+						]}/>
+					<MUIDivider/>
+					<MUIListItem primaryText="Class"
+						initiallyOpen={true}
+          	primaryTogglesNestedList={true}
+						nestedItems={[
+							<MUIListItem
+								key={new Date()}
+								disabled
+								children={[
+									<MUIPaper key={new Date()} zDepth={0}>
+									  <div style={style6()}>
+											<div style={style4()}>Infiltrator</div>
+											<div style={style5()}><MUILinearProgress mode="determinate" value={100 * (classesPlayTimes.length ? classesPlayTimes.filter((x) => x.profile_id === "1")[0].value_forever / totalPlayTime : 0)} style={style7()}/></div>
+										</div>
+									  <div style={style6()}>
+											<div style={style4()}>Light Assault</div>
+											<div style={style5()}><MUILinearProgress mode="determinate" value={100 * (classesPlayTimes.length ? classesPlayTimes.filter((x) => x.profile_id === "3")[0].value_forever / totalPlayTime : 0)} style={style7()}/></div>
+										</div>
+									  <div style={style6()}>
+											<div style={style4()}>Medic</div>
+											<div style={style5()}><MUILinearProgress mode="determinate" value={100 * (classesPlayTimes.length ? classesPlayTimes.filter((x) => x.profile_id === "4")[0].value_forever / totalPlayTime : 0)} style={style7()}/></div>
+										</div>
+									  <div style={style6()}>
+											<div style={style4()}>Engineer</div>
+											<div style={style5()}><MUILinearProgress mode="determinate" value={100 * (classesPlayTimes.length ? classesPlayTimes.filter((x) => x.profile_id === "5")[0].value_forever / totalPlayTime : 0)} style={style7()}/></div>
+										</div>
+									  <div style={style6()}>
+											<div style={style4()}>Heavy</div>
+											<div style={style5()}><MUILinearProgress mode="determinate" value={100 * (classesPlayTimes.length ? classesPlayTimes.filter((x) => x.profile_id === "6")[0].value_forever / totalPlayTime : 0)} style={style7()}/></div>
+										</div>
+									  <div style={style6()}>
+											<div style={style4()}>MAX</div>
+											<div style={style5()}><MUILinearProgress mode="determinate" value={100 * (classesPlayTimes.length ? classesPlayTimes.filter((x) => x.profile_id === "7")[0].value_forever / totalPlayTime : 0)} style={style7()}/></div>
+										</div>
+									</MUIPaper>
+								]}
+							/>
+						]}/>
+				</MUIList>
 			</div>
     )
   },
 	componentDidMount: function () {
 
-		this.getCharacter()
+		this.readCharacter()
+		this.readCharacterLogins()
 		this.readCharacterSubscriptions()
 	},
-	getCharacter: function () {
+	readCharacter: function () {
 		
 		Request
 		.get(env.backend+ '/character/' +this.props._Character_+ '?server=genudine')
-		.end((err, response) => this.setState(Shema.call(this, {character: response.body}, true)))
+		.end((err, response) => {
+			
+			this.props.changeMarquee(response.body.name.first)
+			this.setState(Shema.call(this, {character: response.body}, true))
+		})
+	},
+	readCharacterLogins: function () {
+		
+		Request
+		.get(env.backend+ '/character/' +this.props._Character_+ '/logins')
+		.end((err, response) => this.setState(Shema.call(this, {characterLogins: response.body}, true)))
 	},
 	readCharacterSubscriptions: function () {
 
@@ -83,5 +166,53 @@ function style1() {
 		zIndex: 1,
 		bottom: '5rem',
 		right: '1rem'
+	}
+}
+
+function style2() {
+	return {
+		position: 'absolute',
+    top: '0.25rem',
+    right: '0.5rem',
+    zIndex: 10000,
+    padding: '0.125rem',
+    fontWeight: 'bold',
+    fontSize: '0.75rem',
+    color: '#00bcd4',
+    backgroundColor: 'white',
+    borderRadius: '2px'
+	}
+}
+
+function style3(props, state) {
+	return {
+		margin: '1rem',
+		backgroundImage: Object.keys(state.character).length ? 'url(https://census.daybreakgames.com' + state.character.faction.image_path + ')' : 'none'
+	}
+}
+
+function style4() {
+	return {
+		width: '33.5%',
+		padding: '1rem 0'
+	}
+}
+
+function style5() {
+	return {
+		width: '66.5%'
+	}
+}
+
+function style6() {
+	return {
+		display: 'flex'
+	}
+}
+
+function style7() {
+	return {
+		height: '100%',
+		backgroundColor: 'transparent'
 	}
 }
