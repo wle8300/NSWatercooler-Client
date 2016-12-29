@@ -10,8 +10,6 @@ import MUIChip from 'material-ui/Chip'
 import MUIDivider from 'material-ui/Divider'
 import MUIAvatar from 'material-ui/Avatar'
 import MUIPaper from 'material-ui/Paper'
-import MUIList from 'material-ui/List/List'
-import MUIListItem from 'material-ui/List/ListItem'
 import MUILinearProgress from 'material-ui/LinearProgress';
 // import MUICheckbox from 'material-ui/Checkbox'
 // import MUIList from 'material-ui/List/List'
@@ -32,13 +30,21 @@ module.exports = React.createClass({
   render: function () {
 		
 		const subscription = this.state.characterSubscriptions.filter((characterSubscription) => characterSubscription._Character_ === this.props._Character_)[0]
-		const classesPlayTimes = this.state.character.stats ? this.state.character.stats.stat.filter((x) => x.stat_name === 'play_time') : []
-		const totalPlayTime = classesPlayTimes.length ? classesPlayTimes.reduce((sum, classPlayTime) => sum + parseInt(classPlayTime.value_forever, 10), 0) : 0
-
-		console.log(1, classesPlayTimes.filter((x) => x.profile_id === "1"));
+		const classPlayTimes = this.state.character.stats ? this.state.character.stats.stat.filter((x) => x.stat_name === 'play_time') : []
+		const totalPlayTime = classPlayTimes.length ? classPlayTimes.reduce((sum, classPlayTime) => sum + parseInt(classPlayTime.value_forever, 10), 0) : 0
+		const calcClassPlaytimePercentage = function (infantryClass) {
+			
+			if (infantryClass === 'infiltrator') return classPlayTimes.length ? classPlayTimes.filter((x) => x.profile_id === "1")[0].value_forever / totalPlayTime : 0
+			if (infantryClass === 'light-assualt') return classPlayTimes.length ? classPlayTimes.filter((x) => x.profile_id === "3")[0].value_forever / totalPlayTime : 0
+			if (infantryClass === 'medic') return classPlayTimes.length ? classPlayTimes.filter((x) => x.profile_id === "4")[0].value_forever / totalPlayTime : 0
+			if (infantryClass === 'engineer') return classPlayTimes.length ? classPlayTimes.filter((x) => x.profile_id === "5")[0].value_forever / totalPlayTime : 0
+			if (infantryClass === 'heavy') return classPlayTimes.length ? classPlayTimes.filter((x) => x.profile_id === "6")[0].value_forever / totalPlayTime : 0
+			if (infantryClass === 'MAX') return classPlayTimes.length ? classPlayTimes.filter((x) => x.profile_id === "7")[0].value_forever / totalPlayTime : 0
+		}
+		
 		
     return (
-			<div>
+			<div style={style8(this.props, this.state)}>
 				<MUIPaper zDepth={0} style={style3(this.props, this.state)}>
 					<span style={style2()}>{this.state.character.battle_rank ? 'BR' +this.state.character.battle_rank.value : null}</span>
 					<MUIFAB secondary onTouchTap={this.toggleCharacterSubscription.bind(this, subscription, this.state.character)} style={style1()}>
@@ -57,52 +63,32 @@ module.exports = React.createClass({
 					}
 					<MUIChip><MUIAvatar style={{background: this.state.character.online_status === '1000' ? 'green' : 'gray'}}/>{this.state.characterLogins.length ? Moment(this.state.characterLogins[0].time).fromNow() : null}</MUIChip>
 				</MUIPaper>
-				<MUIList>
-					<MUIListItem primaryText="Detail"
-						initiallyOpen={false}
-          	primaryTogglesNestedList={true}
-						nestedItems={[
-							<MUIListItem key={new Date()}>cool</MUIListItem>
-						]}/>
-					<MUIDivider/>
-					<MUIListItem primaryText="Class"
-						initiallyOpen={true}
-          	primaryTogglesNestedList={true}
-						nestedItems={[
-							<MUIListItem
-								key={new Date()}
-								disabled
-								children={[
-									<MUIPaper key={new Date()} zDepth={0}>
-									  <div style={style6()}>
-											<div style={style4()}>Infiltrator</div>
-											<div style={style5()}><MUILinearProgress mode="determinate" value={100 * (classesPlayTimes.length ? classesPlayTimes.filter((x) => x.profile_id === "1")[0].value_forever / totalPlayTime : 0)} style={style7()}/></div>
-										</div>
-									  <div style={style6()}>
-											<div style={style4()}>Light Assault</div>
-											<div style={style5()}><MUILinearProgress mode="determinate" value={100 * (classesPlayTimes.length ? classesPlayTimes.filter((x) => x.profile_id === "3")[0].value_forever / totalPlayTime : 0)} style={style7()}/></div>
-										</div>
-									  <div style={style6()}>
-											<div style={style4()}>Medic</div>
-											<div style={style5()}><MUILinearProgress mode="determinate" value={100 * (classesPlayTimes.length ? classesPlayTimes.filter((x) => x.profile_id === "4")[0].value_forever / totalPlayTime : 0)} style={style7()}/></div>
-										</div>
-									  <div style={style6()}>
-											<div style={style4()}>Engineer</div>
-											<div style={style5()}><MUILinearProgress mode="determinate" value={100 * (classesPlayTimes.length ? classesPlayTimes.filter((x) => x.profile_id === "5")[0].value_forever / totalPlayTime : 0)} style={style7()}/></div>
-										</div>
-									  <div style={style6()}>
-											<div style={style4()}>Heavy</div>
-											<div style={style5()}><MUILinearProgress mode="determinate" value={100 * (classesPlayTimes.length ? classesPlayTimes.filter((x) => x.profile_id === "6")[0].value_forever / totalPlayTime : 0)} style={style7()}/></div>
-										</div>
-									  <div style={style6()}>
-											<div style={style4()}>MAX</div>
-											<div style={style5()}><MUILinearProgress mode="determinate" value={100 * (classesPlayTimes.length ? classesPlayTimes.filter((x) => x.profile_id === "7")[0].value_forever / totalPlayTime : 0)} style={style7()}/></div>
-										</div>
-									</MUIPaper>
-								]}
-							/>
-						]}/>
-				</MUIList>
+				<MUIPaper key={new Date()} zDepth={0} style={style9()}>
+				  <div style={style6()}>
+						<div style={style4()}>Infiltrator</div>
+						<div style={style5()}><MUILinearProgress mode="determinate" value={100 * (calcClassPlaytimePercentage('infiltrator'))} style={style7()}/></div>
+					</div>
+				  <div style={style6()}>
+						<div style={style4()}>Light Assault</div>
+						<div style={style5()}><MUILinearProgress mode="determinate" value={100 * (calcClassPlaytimePercentage('light-assualt'))} style={style7()}/></div>
+					</div>
+				  <div style={style6()}>
+						<div style={style4()}>Medic</div>
+						<div style={style5()}><MUILinearProgress mode="determinate" value={100 * (calcClassPlaytimePercentage('medic'))} style={style7()}/></div>
+					</div>
+				  <div style={style6()}>
+						<div style={style4()}>Engineer</div>
+						<div style={style5()}><MUILinearProgress mode="determinate" value={100 * (calcClassPlaytimePercentage('engineer'))} style={style7()}/></div>
+					</div>
+				  <div style={style6()}>
+						<div style={style4()}>Heavy</div>
+						<div style={style5()}><MUILinearProgress mode="determinate" value={100 * (calcClassPlaytimePercentage('heavy'))} style={style7()}/></div>
+					</div>
+				  <div style={style6()}>
+						<div style={style4()}>MAX</div>
+						<div style={style5()}><MUILinearProgress mode="determinate" value={100 * (calcClassPlaytimePercentage('MAX'))} style={style7()}/></div>
+					</div>
+				</MUIPaper>
 			</div>
     )
   },
@@ -186,8 +172,8 @@ function style2() {
 
 function style3(props, state) {
 	return {
-		margin: '1rem',
-		backgroundImage: Object.keys(state.character).length ? 'url(https://census.daybreakgames.com' + state.character.faction.image_path + ')' : 'none'
+		margin: '1.5rem',
+		background: 'transparent'
 	}
 }
 
@@ -213,6 +199,24 @@ function style6() {
 function style7() {
 	return {
 		height: '100%',
+		backgroundColor: 'transparent',
+		borderRadius: 0
+	}
+}
+
+function style8(props, state) {
+	return {
+		height: '100%',
+		// backgroundImage: Object.keys(state.character).length ? 'url(https://census.daybreakgames.com' + state.character.faction.image_path + ')' : 'none',
+		// backgroundRepeat: 'no-repeat',
+    // backgroundPosition: '50% 0',
+		// backgroundSize: 'cover'
+	}
+}
+
+function style9() {
+	return {
+		margin: '2.5rem 1.5rem',
 		backgroundColor: 'transparent'
 	}
 }
