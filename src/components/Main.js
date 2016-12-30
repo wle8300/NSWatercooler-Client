@@ -4,7 +4,7 @@ var Location = Router.Location
 var Locations = Router.Locations
 var NotFound = Router.NotFound
 
-var HomeRoute = require('./HomeRoute')
+var WorldRoute = require('./WorldRoute')
 var LoginSignupRoute = require('./LoginSignupRoute')
 var AccountRoute = require('./AccountRoute')
 var OutfitRoute = require('./OutfitRoute')
@@ -24,7 +24,7 @@ module.exports = React.createClass({
 			<Locations ref={(router) => this.router = router}>
 				<Location
 					path="/"
-					handler={HomeRoute}
+					handler={WorldRoute}
 					changeMarquee={this.props.changeMarquee}
 					changeFooter={this.props.changeFooter}/>
 				<Location

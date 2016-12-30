@@ -167,7 +167,8 @@ module.exports = React.createClass({
 		})
 	},
 	handleTabIdx: function (idx) {
-		this.setState({tabIdx: idx})
+
+		this.setState(Shema.call(this, {tabIdx: idx}, true))
 	},
 })
 

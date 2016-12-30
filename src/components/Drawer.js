@@ -1,13 +1,21 @@
+import env from '../../env'
+import Shema from '../../shema'
+
 import React from 'react'
+import Request from 'superagent'
 import MUIDrawer from 'material-ui/Drawer';
 import MUIMenuItem from 'material-ui/MenuItem';
 
 
 module.exports = React.createClass({
+	displayName: 'Drawer',
 	propTypes: {
 		routerRef: React.PropTypes.oneOfType([React.PropTypes.element, React.PropTypes.any]),
 		isDrawerOpen: React.PropTypes.bool.isRequired,
 		toggleDrawer: React.PropTypes.func.isRequired
+	},
+	getInitialState: function () {
+		return Shema.call(this, {facilityTransfers: []})
 	},
 	render: function () {
 		return (
@@ -34,8 +42,35 @@ module.exports = React.createClass({
 					onTouchTap={this.handleLogout}>
 					Logout
 				</MUIMenuItem>
+				{this.DominantOutfit()}
 	    </MUIDrawer>
 		)
+	},
+	componentDidMount: function () {
+
+		this.readFacilityTransfers()
+	},
+	DominantOutfit: function () {
+
+		//impure
+		
+		const transfersByOutfit = this.state.facilityTransfers.filter((facilityTransfer) => facilityTransfer._Outfit_ !== "0")
+		const tally = {}
+
+		transfersByOutfit.forEach(function(facilityTransfer) {
+	    tally[facilityTransfer._Outfit_] = (tally[facilityTransfer._Outfit_] || 0) + 1
+		})
+		
+		return <p>{Object.keys(tally).sort((a,b) => tally[b] - tally[a])[0]}</p>
+	},
+	readFacilityTransfers: function () {
+		
+		Request
+		.get(env.backend+ '/facility-transfer?server=genudine&timeframe=week')
+		.end((err, response) => {
+
+			this.setState(Shema.call(this, {facilityTransfers: response.body}, true))
+		})
 	},
 	goToAccount: function () {
 		
