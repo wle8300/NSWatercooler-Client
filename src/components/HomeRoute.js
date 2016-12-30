@@ -1,6 +1,9 @@
 import env from '../../env'
 import Shema from '../../shema'
 
+import ContinentControl from './ContinentControl'
+
+import _ from 'lodash'
 import React from 'react'
 import Request from 'superagent'
 
@@ -12,9 +15,7 @@ module.exports = React.createClass({
 		changeFooter: React.PropTypes.func.isRequired
 	},
 	getInitialState: function () {
-		return {
-			census: {}
-		}
+		return Shema.call(this, {census: {}})
 	},
   render: function () {
 
@@ -43,12 +44,12 @@ module.exports = React.createClass({
 			return (
 				<div style={{padding: '0 1.5rem 1rem', backgroundColor: '#00bcd4'}}>
 					<div style={{display: 'flex', width: '100%', color: 'white'}}>
-						<div style={Object.assign(style1(), {width: vsPercentage, backgroundColor: 'purple'})}>{vsCount}</div>
-						<div style={Object.assign(style1(), {width: ncPercentage, backgroundColor: 'blue'})}>{ncCount}</div>
-						<div style={Object.assign(style1(), {width: trPercentage, backgroundColor: 'red'})}>{trCount}</div>
+						<div style={_.assign(style1(), {width: vsPercentage, backgroundColor: 'purple'})}>{vsCount}</div>
+						<div style={_.assign(style1(), {width: ncPercentage, backgroundColor: 'blue'})}>{ncCount}</div>
+						<div style={_.assign(style1(), {width: trPercentage, backgroundColor: 'red'})}>{trCount}</div>
 					</div>
 					<div style={{padding: '1rem 0 0', width: '100%', color: 'white', textAlign: 'center', fontSize: '0.9rem'}}>
-						{totalCount+ ' Total Planetmans'}
+						{totalCount+ ' Planetmans'}
 					</div>
 				</div>
 			)
@@ -57,11 +58,7 @@ module.exports = React.createClass({
     return (
 			<div>
 				{PopulationNow}
-			{/*
-					logged in
-					? display "ALIAS" of previous week's most dominant outfit
-					: register or login button
-				*/}
+				<ContinentControl/>
 			</div>
     )
   },
