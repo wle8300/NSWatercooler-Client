@@ -32,7 +32,7 @@ module.exports = React.createClass({
 		const subscription = this.state.characterSubscriptions.filter((characterSubscription) => characterSubscription._Character_ === this.props._Character_)[0]
 		const classPlayTimes = this.state.character.stats ? this.state.character.stats.stat.filter((x) => x.stat_name === 'play_time') : []
 		const totalPlayTime = classPlayTimes.length ? classPlayTimes.reduce((sum, classPlayTime) => sum + parseInt(classPlayTime.value_forever, 10), 0) : 0
-		const calcClassPlaytimePercentage = function (infantryClass) {
+		const calcClassPlaytimePercentage = function (classPlayTimes, infantryClass) {
 			
 			if (infantryClass === 'infiltrator') return classPlayTimes.length ? classPlayTimes.filter((x) => x.profile_id === "1")[0].value_forever / totalPlayTime : 0
 			if (infantryClass === 'light-assualt') return classPlayTimes.length ? classPlayTimes.filter((x) => x.profile_id === "3")[0].value_forever / totalPlayTime : 0
@@ -66,27 +66,27 @@ module.exports = React.createClass({
 				<MUIPaper key={new Date()} zDepth={0} style={style9()}>
 				  <div style={style6()}>
 						<div style={style4()}>Infiltrator</div>
-						<div style={style5()}><MUILinearProgress mode="determinate" value={100 * (calcClassPlaytimePercentage('infiltrator'))} style={style7()}/></div>
+						<div style={style5()}><MUILinearProgress mode={classPlayTimes.length ? 'determinate' : 'indeterminate'} value={100 * (calcClassPlaytimePercentage(classPlayTimes, 'infiltrator'))} style={style7()}/></div>
 					</div>
 				  <div style={style6()}>
 						<div style={style4()}>Light Assault</div>
-						<div style={style5()}><MUILinearProgress mode="determinate" value={100 * (calcClassPlaytimePercentage('light-assualt'))} style={style7()}/></div>
+						<div style={style5()}><MUILinearProgress mode={classPlayTimes.length ? 'determinate' : 'indeterminate'} value={100 * (calcClassPlaytimePercentage(classPlayTimes, 'light-assualt'))} style={style7()}/></div>
 					</div>
 				  <div style={style6()}>
 						<div style={style4()}>Medic</div>
-						<div style={style5()}><MUILinearProgress mode="determinate" value={100 * (calcClassPlaytimePercentage('medic'))} style={style7()}/></div>
+						<div style={style5()}><MUILinearProgress mode={classPlayTimes.length ? 'determinate' : 'indeterminate'} value={100 * (calcClassPlaytimePercentage(classPlayTimes, 'medic'))} style={style7()}/></div>
 					</div>
 				  <div style={style6()}>
 						<div style={style4()}>Engineer</div>
-						<div style={style5()}><MUILinearProgress mode="determinate" value={100 * (calcClassPlaytimePercentage('engineer'))} style={style7()}/></div>
+						<div style={style5()}><MUILinearProgress mode={classPlayTimes.length ? 'determinate' : 'indeterminate'} value={100 * (calcClassPlaytimePercentage(classPlayTimes, 'engineer'))} style={style7()}/></div>
 					</div>
 				  <div style={style6()}>
 						<div style={style4()}>Heavy</div>
-						<div style={style5()}><MUILinearProgress mode="determinate" value={100 * (calcClassPlaytimePercentage('heavy'))} style={style7()}/></div>
+						<div style={style5()}><MUILinearProgress mode={classPlayTimes.length ? 'determinate' : 'indeterminate'} value={100 * (calcClassPlaytimePercentage(classPlayTimes, 'heavy'))} style={style7()}/></div>
 					</div>
 				  <div style={style6()}>
 						<div style={style4()}>MAX</div>
-						<div style={style5()}><MUILinearProgress mode="determinate" value={100 * (calcClassPlaytimePercentage('MAX'))} style={style7()}/></div>
+						<div style={style5()}><MUILinearProgress mode={classPlayTimes.length ? 'determinate' : 'indeterminate'} value={100 * (calcClassPlaytimePercentage(classPlayTimes, 'MAX'))} style={style7()}/></div>
 					</div>
 				</MUIPaper>
 			</div>
@@ -216,7 +216,7 @@ function style8(props, state) {
 
 function style9() {
 	return {
-		margin: '2.5rem 1.5rem',
+		margin: '1.5rem',
 		backgroundColor: 'transparent'
 	}
 }
