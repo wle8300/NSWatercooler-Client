@@ -1,3 +1,9 @@
+/*
+	this component is jacked up.
+
+	can be more cogent.
+*/
+
 import env from '../../env'
 import Shema from '../../shema'
 
@@ -8,7 +14,8 @@ import SwipeableViews from 'react-swipeable-views'
 import MUITab from 'material-ui/Tabs/Tab'
 import MUITabs from 'material-ui/Tabs/Tabs'
 import MUIAlert from 'material-ui/svg-icons/social/notifications'
-
+import MUIUnlocked from 'material-ui/svg-icons/action/lock-open'
+import MUILocked from 'material-ui/svg-icons/action/lock'
 
 module.exports = React.createClass({
 	displayName: 'ContinentControl',
@@ -17,19 +24,19 @@ module.exports = React.createClass({
 	},
 	render: function () {
 		
-		const indarMetadata = this._calculateFactionControl('indar') || {}
-		const hossinMetadata = this._calculateFactionControl('hossin') || {}
-		const amerishMetadata = this._calculateFactionControl('amerish') || {}
-		const esamirMetadata = this._calculateFactionControl('esamir') || {}
+		const indarTerritoryControl = this._calculateFactionControl('indar') || {}
+		const hossinTerritoryControl = this._calculateFactionControl('hossin') || {}
+		const amerishTerritoryControl = this._calculateFactionControl('amerish') || {}
+		const esamirTerritoryControl = this._calculateFactionControl('esamir') || {}
 		
 		return (
 			<div>
 				<MUITabs onChange={this.handleTabIdx}
 				  value={this.state.tabIdx}>
-				  <MUITab label="Indar" icon={this._hasAlert('Indar') ? <MUIAlert/> : null} value={0}/>
-				  <MUITab label="Hossin" icon={this._hasAlert('Hossin') ? <MUIAlert/> : null} value={1}/>
-				  <MUITab label="Amerish" icon={this._hasAlert('Amerish') ? <MUIAlert/> : null} value={2}/>
-				  <MUITab label="Esamir" icon={this._hasAlert('Esamir') ? <MUIAlert/> : null} value={3}/>
+				  <MUITab label="Indar" icon={this._deriveIcon('Indar', this.state.alerts, indarTerritoryControl)} value={0}/>
+				  <MUITab label="Hossin" icon={this._deriveIcon('Hossin', this.state.alerts, hossinTerritoryControl)} value={1}/>
+				  <MUITab label="Amerish" icon={this._deriveIcon('Amerish', this.state.alerts, amerishTerritoryControl)} value={2}/>
+				  <MUITab label="Esamir" icon={this._deriveIcon('Esamir', this.state.alerts, esamirTerritoryControl)} value={3}/>
 				</MUITabs>
 				<SwipeableViews index={this.state.tabIdx}
 				  onChangeIndex={this.handleTabIdx}>
@@ -37,19 +44,19 @@ module.exports = React.createClass({
 						<PieChart slices={[
 							{
 								color: 'gray',
-								value: indarMetadata.none || 0
+								value: indarTerritoryControl.none || 0
 							},
 							{
 								color: 'purple',
-								value: indarMetadata.vs || 0
+								value: indarTerritoryControl.vs || 0
 							},
 							{
 								color: 'blue',
-								value: indarMetadata.nc || 0
+								value: indarTerritoryControl.nc || 0
 							},
 							{
 								color: 'red',
-								value: indarMetadata.tr || 0
+								value: indarTerritoryControl.tr || 0
 							},
 						]}/>
 					</p>
@@ -57,19 +64,19 @@ module.exports = React.createClass({
 						<PieChart slices={[
 							{
 								color: 'gray',
-								value: hossinMetadata.none || 0
+								value: hossinTerritoryControl.none || 0
 							},
 							{
 								color: 'purple',
-								value: hossinMetadata.vs || 0
+								value: hossinTerritoryControl.vs || 0
 							},
 							{
 								color: 'blue',
-								value: hossinMetadata.nc || 0
+								value: hossinTerritoryControl.nc || 0
 							},
 							{
 								color: 'red',
-								value: hossinMetadata.tr || 0
+								value: hossinTerritoryControl.tr || 0
 							},
 						]}/>
 					</p>
@@ -77,19 +84,19 @@ module.exports = React.createClass({
 						<PieChart slices={[
 							{
 								color: 'gray',
-								value: amerishMetadata.none || 0
+								value: amerishTerritoryControl.none || 0
 							},
 							{
 								color: 'purple',
-								value: amerishMetadata.vs || 0
+								value: amerishTerritoryControl.vs || 0
 							},
 							{
 								color: 'blue',
-								value: amerishMetadata.nc || 0
+								value: amerishTerritoryControl.nc || 0
 							},
 							{
 								color: 'red',
-								value: amerishMetadata.tr || 0
+								value: amerishTerritoryControl.tr || 0
 							},
 						]}/>
 					</p>
@@ -97,19 +104,19 @@ module.exports = React.createClass({
 						<PieChart slices={[
 							{
 								color: 'gray',
-								value: esamirMetadata.none || 0
+								value: esamirTerritoryControl.none || 0
 							},
 							{
 								color: 'purple',
-								value: esamirMetadata.vs || 0
+								value: esamirTerritoryControl.vs || 0
 							},
 							{
 								color: 'blue',
-								value: esamirMetadata.nc || 0
+								value: esamirTerritoryControl.nc || 0
 							},
 							{
 								color: 'red',
-								value: esamirMetadata.tr || 0
+								value: esamirTerritoryControl.tr || 0
 							},
 						]}/>
 					</p>
@@ -159,14 +166,31 @@ module.exports = React.createClass({
 				}
 		}
 	},
-	_hasAlert: function (continent) {
+	_deriveIcon: function (continent, alerts, continentTerritoryControl) {
 		
-		if (!this.state.alerts.length) return null
+		if (!alerts.length) return null
 			
-		console.log(1, this.state.alerts[0].continent, continent);
-		if (this.state.alerts[0].isActive && this.state.alerts[0].continent === continent) return true
+		if (alerts[0].isActive && continent === alerts[0].continent) return <MUIAlert/>
+		if (continent !== alerts[0].continent && !this._isLocked(continentTerritoryControl)) return <MUIUnlocked/>
+		if (continent !== alerts[0].continent && this._isLocked(continentTerritoryControl)) return <MUILocked/>
+	},
+	_isLocked: function (continentTerritoryControl) {
+		  
+			/*
+			two or more have
+			zero territory
 			
-		else return false
+			equates to territory
+			being locked
+			*/	
+			
+			const markNone = continentTerritoryControl.none > 0 ? 1 : 0
+			const markVS = continentTerritoryControl.vs > 0 ? 1 : 0
+			const markNC = continentTerritoryControl.nc > 0 ? 1 : 0
+			const markTR = continentTerritoryControl.tr > 0 ? 1 : 0
+			
+			return markNone + markVS + markNC + markTR <= 2 ? true : false
+			
 	},
 	readContinentControlMetadata: function () {
 		
