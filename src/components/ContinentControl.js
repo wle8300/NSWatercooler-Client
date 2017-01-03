@@ -7,12 +7,13 @@ import PieChart from 'react-simple-pie-chart'
 import SwipeableViews from 'react-swipeable-views'
 import MUITab from 'material-ui/Tabs/Tab'
 import MUITabs from 'material-ui/Tabs/Tabs'
+import MUIAlert from 'material-ui/svg-icons/social/notifications'
 
 
 module.exports = React.createClass({
 	displayName: 'ContinentControl',
 	getInitialState: function () {
-		return Shema.call(this, {continentControlMetadata: {}, tabIdx: 0})
+		return Shema.call(this, {continentControlMetadata: {}, alerts: [], tabIdx: 0})
 	},
 	render: function () {
 		
@@ -25,10 +26,10 @@ module.exports = React.createClass({
 			<div>
 				<MUITabs onChange={this.handleTabIdx}
 				  value={this.state.tabIdx}>
-				  <MUITab label="Indar" value={0}/>
-				  <MUITab label="Hossin" value={1}/>
-				  <MUITab label="Amerish" value={2}/>
-				  <MUITab label="Esamir" value={3}/>
+				  <MUITab label="Indar" icon={this._hasAlert('Indar') ? <MUIAlert/> : null} value={0}/>
+				  <MUITab label="Hossin" icon={this._hasAlert('Hossin') ? <MUIAlert/> : null} value={1}/>
+				  <MUITab label="Amerish" icon={this._hasAlert('Amerish') ? <MUIAlert/> : null} value={2}/>
+				  <MUITab label="Esamir" icon={this._hasAlert('Esamir') ? <MUIAlert/> : null} value={3}/>
 				</MUITabs>
 				<SwipeableViews index={this.state.tabIdx}
 				  onChangeIndex={this.handleTabIdx}>
@@ -119,6 +120,7 @@ module.exports = React.createClass({
 	componentDidMount: function () {
 		
 		this.readContinentControlMetadata()
+		this.readAlerts()
 	},
 	_calculateFactionControl: function (continent) {
 	  
@@ -157,14 +159,32 @@ module.exports = React.createClass({
 				}
 		}
 	},
+	_hasAlert: function (continent) {
+		
+		if (!this.state.alerts.length) return null
+			
+		console.log(1, this.state.alerts[0].continent, continent);
+		if (this.state.alerts[0].isActive && this.state.alerts[0].continent === continent) return true
+			
+		else return false
+	},
 	readContinentControlMetadata: function () {
 		
 		Request
 		.get(env.backend+ '/continent-control-metadata?server=genudine&timeframe=now')
 		.end((err, response) => {
-			
 			this.setState(Shema.call(this, {continentControlMetadata: response.body}, true))
 		})
+	},
+	readAlerts: function () {
+		
+		Request
+		.get(env.backend+ '/alert?server=genudine&limit=1')
+		.end((err, response) => {
+			console.log(1, response.body);
+			
+			this.setState(Shema.call(this, {alerts: response.body}, true))
+		})		
 	},
 	handleTabIdx: function (idx) {
 

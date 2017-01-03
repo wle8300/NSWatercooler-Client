@@ -42,7 +42,7 @@ module.exports = React.createClass({
 			}
 			
 			return (
-				<div style={{padding: '0 1.5rem 1rem', backgroundColor: '#00bcd4'}}>
+				<div style={{padding: '0.25rem 1.5rem 1rem', backgroundColor: '#00bcd4'}}>
 					<div style={{display: 'flex', width: '100%', color: 'white'}}>
 						<div style={_.assign(style1(), {width: vsPercentage, backgroundColor: 'purple'})}>{vsCount}</div>
 						<div style={_.assign(style1(), {width: ncPercentage, backgroundColor: 'blue'})}>{ncCount}</div>
