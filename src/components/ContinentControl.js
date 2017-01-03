@@ -171,8 +171,8 @@ module.exports = React.createClass({
 		if (!alerts.length) return null
 			
 		if (alerts[0].isActive && continent === alerts[0].continent) return <MUIAlert/>
-		if (continent !== alerts[0].continent && !this._isLocked(continentTerritoryControl)) return <MUIUnlocked/>
-		if (continent !== alerts[0].continent && this._isLocked(continentTerritoryControl)) return <MUILocked/>
+		if (!this._isLocked(continentTerritoryControl)) return <MUIUnlocked/>
+		if (this._isLocked(continentTerritoryControl)) return <MUILocked/>
 	},
 	_isLocked: function (continentTerritoryControl) {
 		  
