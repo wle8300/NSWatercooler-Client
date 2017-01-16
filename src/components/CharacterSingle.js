@@ -207,13 +207,10 @@ function style7() {
 function style8(props, state) {
 	return {
 		height: '100%',
-		backgroundImage: Object.keys(state.character).length ? 'url("https://census.daybreakgames.com/' +state.character.faction.image_path+ '")' : 'none',
+		backgroundImage: Object.keys(state.character).length ? 'linear-gradient(rgba(255, 255, 255, 1) 0%, rgba(255, 255, 255, 0.8) 0%), url("https://census.daybreakgames.com/' +state.character.faction.image_path+ '")' : 'none',
 		backgroundRepeat: 'no-repeat',
     backgroundPosition: '50% 0',
-		backgroundSize: 'cover',
-		backgroundColor: 'hsla(0,0%,100%,0.9)',
-		//iOS compat: http://caniuse.com/#feat=css-backgroundblendmode
-    backgroundBlendMode: 'overlay'
+		backgroundSize: 'cover'
 	}
 }
 
