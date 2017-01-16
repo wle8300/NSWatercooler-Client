@@ -35,8 +35,10 @@ module.exports = React.createClass({
 					<Drawer
 						isDrawerOpen={this.state.isDrawerOpen}
 						toggleDrawer={this.toggleDrawer}
-						routerRef={this.state.routerRef}/>
+						routerRef={this.state.routerRef}
+						restartSession={this.restartSession}/>
 					<Main
+						routerRef={this.state.routerRef}
 						gotRouterRef={this.gotRouterRef}
 						changeMarquee={this.changeMarquee}
 						changeFooter={this.changeFooter}/>
@@ -61,8 +63,8 @@ module.exports = React.createClass({
 		
 		if (!localStorage.Jwt) return
 
-		//jwt spec unconventionally defines seconds, not milliseconds for expiration
-		expirationMs = utils.jwtPayload.exp * 1000
+		//jwt uses seconds, not milliseconds
+		expirationMs = utils.parseJwtPayload().exp * 1000
 		expirationDate = new Date(expirationMs)
 		
 		//exp passed?
@@ -70,7 +72,7 @@ module.exports = React.createClass({
 			
 		Request
 		.put(env.backend+ '/jwt')
-		.send({jwt: utils.jwt})
+		.send({jwt: utils.parseJwt()})
 		.end((err, response) => {
 
 			if (err || !response.body) {
@@ -99,6 +101,17 @@ module.exports = React.createClass({
 	gotRouterRef: function (routerRef) {
 
 		this.setState({routerRef: routerRef}, () => this.state.routerRef.navigate('/'))
+	},
+	restartSession: function () {
+		
+		this.toggleDrawer()
+		this.state.routerRef.navigate('/')
+
+		localStorage.removeItem('Jwt')
+		window[env.namespace] = {}
+		
+		//clever way to reload page
+		// location = location
 	}
 })
 

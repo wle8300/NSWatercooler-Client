@@ -99,8 +99,8 @@ module.exports = React.createClass({
 	readOutfitBookmarks: function () {
 
 		Request
-		.get(env.backend+ '/user/' +utils.jwtPayload.id+ '/outfit-bookmarks')
-		.set({Authorization: 'Bearer ' +utils.jwt})
+		.get(env.backend+ '/user/' +utils.parseJwtPayload().id+ '/outfit-bookmarks')
+		.set({Authorization: 'Bearer ' +utils.parseJwt()})
 		.end((err, response) => {
 
 			this.setState(Shema.call(this, {outfitBookmarks: response.body}, true))

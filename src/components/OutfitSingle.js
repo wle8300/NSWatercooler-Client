@@ -170,8 +170,8 @@ module.exports = React.createClass({
 	readOutfitBookmarks: function () {
 
 		Request
-		.get(env.backend+ '/user/' +utils.jwtPayload.id+ '/outfit-bookmarks')
-		.set({Authorization: 'Bearer ' +utils.jwt})
+		.get(env.backend+ '/user/' +utils.parseJwtPayload().id+ '/outfit-bookmarks')
+		.set({Authorization: 'Bearer ' +utils.parseJwt()})
 		.end((err, response) => this.setState(Shema.call(this, {outfitBookmarks: response.body}, true)))
 	},
 	readOutfitLoginMetrics: function () {
@@ -186,7 +186,7 @@ module.exports = React.createClass({
 
 			Request
 			.post(env.backend+ '/outfit-bookmark')
-			.set({Authorization: 'Bearer ' +utils.jwt})
+			.set({Authorization: 'Bearer ' +utils.parseJwt()})
 			.send({
 				_Outfit_: outfit.outfit_id,
 				outfitAlias: outfit.alias
@@ -198,7 +198,7 @@ module.exports = React.createClass({
 
 			Request
 			.delete(env.backend+ '/outfit-bookmark/' +bookmark.id)
-			.set({Authorization: 'Bearer ' +utils.jwt})
+			.set({Authorization: 'Bearer ' +utils.parseJwt()})
 			.end((err, response) => this.readOutfitBookmarks())
 		}
 	}

@@ -101,9 +101,10 @@ module.exports = React.createClass({
 	},
 	readCharacterSubscriptions: function () {
 
+		console.log(1,);
 		Request
-		.get(env.backend+ '/user/' +(utils.jwtPayload.id)+ '/character-subscriptions')
-		.set({Authorization: 'Bearer ' +utils.jwt})
+		.get(env.backend+ '/user/' +(utils.parseJwtPayload().id)+ '/character-subscriptions')
+		.set({Authorization: 'Bearer ' +utils.parseJwt()})
 		.end((err, response) => {
 
 			this.setState(Shema.call(this, {characterSubscriptions: response.body}, true))

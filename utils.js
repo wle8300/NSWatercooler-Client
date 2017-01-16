@@ -1,8 +1,11 @@
 const DeciferJwtPayload = require('jwt-decode')
 
-const jwt = localStorage.Jwt ? JSON.parse(localStorage.Jwt).jwt : null
 
 module.exports = {
-	jwt: jwt,
-	jwtPayload: jwt ? DeciferJwtPayload(jwt) : null
+	parseJwt: function () {
+		return JSON.parse(localStorage.Jwt).jwt
+	},
+	parseJwtPayload: function () {
+		return localStorage.Jwt ? DeciferJwtPayload(JSON.parse(localStorage.Jwt).jwt) : null
+	}
 }

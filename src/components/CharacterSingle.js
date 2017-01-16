@@ -103,7 +103,7 @@ module.exports = React.createClass({
 		Request
 		.get(env.backend+ '/character/' +this.props._Character_+ '?server=genudine')
 		.end((err, response) => {
-			console.log(1, 'https://census.daybreakgames.com/' +response.body.faction.image_path);
+
 			this.props.changeMarquee(response.body.name.first)
 			this.setState(Shema.call(this, {character: response.body}, true))
 		})
@@ -117,8 +117,8 @@ module.exports = React.createClass({
 	readCharacterSubscriptions: function () {
 
 		Request
-		.get(env.backend+ '/user/' +utils.jwtPayload.id+ '/character-subscriptions')
-		.set({Authorization: 'Bearer ' +utils.jwt})
+		.get(env.backend+ '/user/' +utils.parseJwtPayload().id+ '/character-subscriptions')
+		.set({Authorization: 'Bearer ' +utils.parseJwt()})
 		.end((err, response) => this.setState(Shema.call(this, {characterSubscriptions: response.body}, true)))
 	},
 	toggleCharacterSubscription: function (subscription, character) {
@@ -127,9 +127,9 @@ module.exports = React.createClass({
 
 			Request
 			.post(env.backend+ '/character-subscription')
-			.set({Authorization: 'Bearer ' +utils.jwt})
+			.set({Authorization: 'Bearer ' +utils.parseJwt()})
 			.send({
-				_User_: utils.jwtPayload.id,
+				_User_: utils.parseJwtPayload().id,
 				_Character_: character.character_id,
 				characterName: character.name.first
 			})
@@ -140,7 +140,7 @@ module.exports = React.createClass({
 
 			Request
 			.delete(env.backend+ '/character-subscription/' +subscription.id)
-			.set({Authorization: 'Bearer ' +utils.jwt})
+			.set({Authorization: 'Bearer ' +utils.parseJwt()})
 			.end((err, response) => this.readCharacterSubscriptions())
 		}
 	}

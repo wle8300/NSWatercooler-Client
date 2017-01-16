@@ -12,7 +12,8 @@ module.exports = React.createClass({
 	propTypes: {
 		routerRef: React.PropTypes.oneOfType([React.PropTypes.element, React.PropTypes.any]),
 		isDrawerOpen: React.PropTypes.bool.isRequired,
-		toggleDrawer: React.PropTypes.func.isRequired
+		toggleDrawer: React.PropTypes.func.isRequired,
+		restartSession: React.PropTypes.func.isRequired
 	},
 	getInitialState: function () {
 		return Shema.call(this, {facilityTransfers: []})
@@ -26,10 +27,16 @@ module.exports = React.createClass({
 				{
 					localStorage.Jwt
 					? (
-			      <MUIMenuItem
-							onTouchTap={this.goToAccount}>
-							Account
-						</MUIMenuItem>
+						<div>
+				      <MUIMenuItem
+								onTouchTap={this.goToAccount}>
+								Account
+							</MUIMenuItem>
+				      <MUIMenuItem
+								onTouchTap={this.handleLogout}>
+								Logout
+							</MUIMenuItem>
+						</div>
 					)
 					: (
 			      <MUIMenuItem
@@ -38,10 +45,6 @@ module.exports = React.createClass({
 						</MUIMenuItem>
 					)
 				}
-	      <MUIMenuItem
-					onTouchTap={this.handleLogout}>
-					Logout
-				</MUIMenuItem>
 				{this.DominantOutfit()}
 	    </MUIDrawer>
 		)
@@ -78,9 +81,6 @@ module.exports = React.createClass({
 		this.props.routerRef.navigate('/your-account')
 	},
 	handleLogout: function () {
-		
-		this.props.toggleDrawer()
-		localStorage.removeItem('Jwt')
-		this.props.routerRef.navigate('/')
+		this.props.restartSession()
 	}
 })

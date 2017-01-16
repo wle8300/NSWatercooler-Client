@@ -9,6 +9,9 @@ import Request from 'superagent'
 
 module.exports = React.createClass({
 	displayName: 'SignupForm',
+	propTypes: {
+		routerRef: React.PropTypes.oneOfType([React.PropTypes.element, React.PropTypes.any])
+	},
 	getInitialState: function () {
 		return Shema.call(this, {email: '', password: ''})
 	},
@@ -68,6 +71,7 @@ module.exports = React.createClass({
 				if (err) throw err
 					
 				localStorage.Jwt = JSON.stringify(response.body)
+				this.props.routerRef.navigate('/')
 			})
 		})
 	}
