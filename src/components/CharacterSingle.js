@@ -103,7 +103,7 @@ module.exports = React.createClass({
 		Request
 		.get(env.backend+ '/character/' +this.props._Character_+ '?server=genudine')
 		.end((err, response) => {
-			
+			console.log(1, 'https://census.daybreakgames.com/' +response.body.faction.image_path);
 			this.props.changeMarquee(response.body.name.first)
 			this.setState(Shema.call(this, {character: response.body}, true))
 		})
@@ -207,10 +207,13 @@ function style7() {
 function style8(props, state) {
 	return {
 		height: '100%',
-		// backgroundImage: Object.keys(state.character).length ? 'url(https://census.daybreakgames.com' + state.character.faction.image_path + ')' : 'none',
-		// backgroundRepeat: 'no-repeat',
-    // backgroundPosition: '50% 0',
-		// backgroundSize: 'cover'
+		backgroundImage: Object.keys(state.character).length ? 'url("https://census.daybreakgames.com/' +state.character.faction.image_path+ '")' : 'none',
+		backgroundRepeat: 'no-repeat',
+    backgroundPosition: '50% 0',
+		backgroundSize: 'cover',
+		backgroundColor: 'hsla(0,0%,100%,0.9)',
+		//iOS compat: http://caniuse.com/#feat=css-backgroundblendmode
+    backgroundBlendMode: 'overlay'
 	}
 }
 

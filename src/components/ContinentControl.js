@@ -176,13 +176,7 @@ module.exports = React.createClass({
 	},
 	_isLocked: function (continentTerritoryControl) {
 		  
-			/*
-			two or more have
-			zero territory
-			
-			equates to territory
-			being locked
-			*/	
+			// 2 or more means locked
 			
 			const markNone = continentTerritoryControl.none > 0 ? 1 : 0
 			const markVS = continentTerritoryControl.vs > 0 ? 1 : 0
@@ -205,13 +199,10 @@ module.exports = React.createClass({
 		Request
 		.get(env.backend+ '/alert?server=genudine&limit=1')
 		.end((err, response) => {
-			console.log(1, response.body);
-			
 			this.setState(Shema.call(this, {alerts: response.body}, true))
 		})		
 	},
 	handleTabIdx: function (idx) {
-
 		this.setState(Shema.call(this, {tabIdx: idx}, true))
 	},
 })
