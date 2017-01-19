@@ -9,7 +9,6 @@ import VisibilitySensor from 'react-visibility-sensor'
 import MUIPaper from 'material-ui/Paper'
 // import MUIDivider from 'material-ui/Divider'
 import MUIArrowRight from 'material-ui/svg-icons/hardware/keyboard-arrow-right'
-// import MUIFlatButton from 'material-ui/FlatButton';
 import MUIList from 'material-ui/List/List'
 import MUIListItem from 'material-ui/List/ListItem'
 import MUITextField from 'material-ui/TextField'
