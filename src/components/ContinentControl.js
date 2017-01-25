@@ -33,10 +33,10 @@ module.exports = React.createClass({
 			<div>
 				<MUITabs onChange={this.handleTabIdx}
 				  value={this.state.tabIdx}>
-				  <MUITab label="Indar" icon={this._deriveIcon('Indar', this.state.alerts, indarTerritoryControl)} value={0}/>
-				  <MUITab label="Hossin" icon={this._deriveIcon('Hossin', this.state.alerts, hossinTerritoryControl)} value={1}/>
-				  <MUITab label="Amerish" icon={this._deriveIcon('Amerish', this.state.alerts, amerishTerritoryControl)} value={2}/>
-				  <MUITab label="Esamir" icon={this._deriveIcon('Esamir', this.state.alerts, esamirTerritoryControl)} value={3}/>
+				  <MUITab label="Indar" icon={this._deriveIcon('Indar', this.state.alert, indarTerritoryControl)} value={0}/>
+				  <MUITab label="Hossin" icon={this._deriveIcon('Hossin', this.state.alert, hossinTerritoryControl)} value={1}/>
+				  <MUITab label="Amerish" icon={this._deriveIcon('Amerish', this.state.alert, amerishTerritoryControl)} value={2}/>
+				  <MUITab label="Esamir" icon={this._deriveIcon('Esamir', this.state.alert, esamirTerritoryControl)} value={3}/>
 				</MUITabs>
 				<SwipeableViews index={this.state.tabIdx}
 				  onChangeIndex={this.handleTabIdx}>
@@ -166,11 +166,16 @@ module.exports = React.createClass({
 				}
 		}
 	},
-	_deriveIcon: function (continent, alerts, continentTerritoryControl) {
+	_deriveIcon: function (continent, alert, continentTerritoryControl) {
 		
-		if (!alerts.length) return null
+		if (alert && alert.metagame_event_state_name === 'started') {
 			
-		if (alerts[0].isActive && continent === alerts[0].continent) return <MUIAlert/>
+			if (continent === 'Indar' && alert.metagame_event_id === "1") return <MUIAlert/>
+			if (continent === 'Esamir' && alert.metagame_event_id === "2") return <MUIAlert/>
+			if (continent === 'Amerish' && alert.metagame_event_id === "3") return <MUIAlert/>
+			if (continent === 'Hossin' && alert.metagame_event_id === "4") return <MUIAlert/>
+		}
+			
 		if (!this._isLocked(continentTerritoryControl)) return <MUIUnlocked/>
 		if (this._isLocked(continentTerritoryControl)) return <MUILocked/>
 	},
@@ -199,7 +204,7 @@ module.exports = React.createClass({
 		Request
 		.get(env.backend+ '/alert?server=genudine&limit=1')
 		.end((err, response) => {
-			this.setState(Shema.call(this, {alerts: response.body}, true))
+			this.setState(Shema.call(this, {alert: response.body[0]}, true))
 		})		
 	},
 	handleTabIdx: function (idx) {
