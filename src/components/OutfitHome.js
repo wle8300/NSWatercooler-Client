@@ -118,7 +118,7 @@ module.exports = React.createClass({
 				
 					if (err) return reject(err)
 					
-						return resolve(this.setState(Shema.call(this, {outfitBookmarks: response.body}, true)))
+					return resolve(this.setState(Shema.call(this, {outfitBookmarks: response.body}, true)))
 				})
 				
 			}, 2000);
