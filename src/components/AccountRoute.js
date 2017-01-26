@@ -16,7 +16,7 @@ module.exports = React.createClass({
 	getInitialState: function () {
 		return Shema.call(this, {
 			email: utils.parseJwtPayload().email,
-			password: '•••••••••'
+			password: utils.parseJwtPayload().id
 		})
 	},
 	render: function () {
@@ -27,6 +27,7 @@ module.exports = React.createClass({
 					value={this.state.email}
 					onChange={this.changeEmail}
 					hintText="Email"
+					underlineShow={false}
 					fullWidth/>
 				<MUIRaisedButton
 					label="Update Email"
@@ -36,6 +37,7 @@ module.exports = React.createClass({
 					value={this.state.password}
 					onChange={this.changePassword}
 					hintText="Password"
+					underlineShow={false}
 					fullWidth/>
 				<MUIRaisedButton
 					label="Update Password"
@@ -60,16 +62,36 @@ module.exports = React.createClass({
 		
 		Request
 		.put(env.backend+ '/user/' +utils.parseJwtPayload().id+ '/email')
+		.set({Authorization: 'Bearer ' +utils.parseJwt()})
 		.send({email: this.state.email})
 		.end((err, response) => {
 			
 			if (err) throw err
 			
-			// use resopnse.body to mutate l.s.jwt
-			localStorage.Jwt = JSON.stringify(response.body)
+			console.log(0, response.body);
+			
+			/*
+				logout user
+				make them login again
+			*/
 		})
 	},
 	submitNewPassword: function () {
 		
+		Request
+		.put(env.backend+ '/user/' +utils.parseJwtPayload().id+ '/password')
+		.set({Authorization: 'Bearer ' +utils.parseJwt()})
+		.send({password: this.state.password})
+		.end((err, response) => {
+			
+			if (err) throw err
+			
+			console.log(1, response.body);
+			
+			/*
+				logout user
+				make them login again
+			*/
+		})
 	}
 })
