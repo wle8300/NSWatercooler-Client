@@ -85,6 +85,8 @@ module.exports = React.createClass({
 		this.props.routerRef.navigate('/your-account')
 	},
 	handleLogout: function () {
+
 		this.props.restartSession()
+		this.props.routerRef.navigate('/login-signup')
 	}
 })

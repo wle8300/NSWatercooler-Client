@@ -10,6 +10,7 @@ import MUIRaisedButton from 'material-ui/RaisedButton';
 
 module.exports = React.createClass({
 	propTypes: {
+		routerRef: React.PropTypes.oneOfType([React.PropTypes.element, React.PropTypes.any]),
 		changeMarquee: React.PropTypes.func.isRequired,
 		changeFooter: React.PropTypes.func.isRequired
 	},
@@ -67,13 +68,9 @@ module.exports = React.createClass({
 		.end((err, response) => {
 			
 			if (err) throw err
-			
-			console.log(0, response.body);
-			
-			/*
-				logout user
-				make them login again
-			*/
+
+			this.props.routerRef.navigate('/login-signup')
+			this.props.restartSession()
 		})
 	},
 	submitNewPassword: function () {
@@ -85,13 +82,9 @@ module.exports = React.createClass({
 		.end((err, response) => {
 			
 			if (err) throw err
-			
-			console.log(1, response.body);
-			
-			/*
-				logout user
-				make them login again
-			*/
+						
+			this.props.routerRef.navigate('/login-signup')
+			this.props.restartSession()
 		})
 	}
 })

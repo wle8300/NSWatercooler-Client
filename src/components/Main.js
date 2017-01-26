@@ -17,7 +17,8 @@ module.exports = React.createClass({
 	propTypes: {
 		routerRef: React.PropTypes.oneOfType([React.PropTypes.element, React.PropTypes.any]),
 		changeMarquee: React.PropTypes.func.isRequired,
-		changeFooter: React.PropTypes.func.isRequired
+		changeFooter: React.PropTypes.func.isRequired,
+		restartSession: React.PropTypes.func.isRequired
 	},
 	router: null,
 	render: function () {
@@ -37,8 +38,10 @@ module.exports = React.createClass({
 				<Location
 					path="/your-account"
 					handler={AccountRoute}
+					routerRef={this.router}
 					changeMarquee={this.props.changeMarquee}
-					changeFooter={this.props.changeFooter}/>
+					changeFooter={this.props.changeFooter}
+					restartSession={this.props.restartSession}/>
 				<Location
 					path={/\/outfit\/?(.+)?/}
 					urlPatternOptions={['_Outfit_']}

@@ -41,7 +41,8 @@ module.exports = React.createClass({
 						routerRef={this.state.routerRef}
 						gotRouterRef={this.gotRouterRef}
 						changeMarquee={this.changeMarquee}
-						changeFooter={this.changeFooter}/>
+						changeFooter={this.changeFooter}
+						restartSession={this.restartSession}/>
 					<Footer routerRef={this.state.routerRef} arePageButtonsVisible={this.state.arePageButtonsVisible}/>
 				</div>
 			</MuiThemeProvider>
@@ -104,14 +105,8 @@ module.exports = React.createClass({
 	},
 	restartSession: function () {
 		
-		this.toggleDrawer()
-		this.state.routerRef.navigate('/')
-
 		localStorage.removeItem('Jwt')
 		window[env.namespace] = {}
-		
-		//clever way to reload page
-		// location = location
 	}
 })
 
