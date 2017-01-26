@@ -5,6 +5,8 @@ import Shema from '../../shema'
 import React from 'react'
 import Request from 'superagent'
 import VisibilitySensor from 'react-visibility-sensor'
+import PullToRefresh from 'react-pull-to-refresh'
+import '../css/react-pull-to-refresh.css'
 // import MUIAvatar from 'material-ui/Avatar';
 import MUIPaper from 'material-ui/Paper'
 // import MUIDivider from 'material-ui/Divider'
@@ -27,7 +29,9 @@ module.exports = React.createClass({
 	},
 	render : function () {
 		return (
-			<div>
+			<PullToRefresh
+			  onRefresh={this.handleRefresh}
+				icon={<div className="genericon"><MUIArrowRight/></div>}>
 				<MUIPaper style={{margin: '1rem', padding: '0 1rem'}}>
 					<MUITextField
 						value={this.state.outfitsSearchTerm}
@@ -74,7 +78,7 @@ module.exports = React.createClass({
 						)
 					})}
 				</MUIList>
-			</div>
+			</PullToRefresh>
 		)
 	},
 	componentWillMount: function () {
@@ -83,6 +87,12 @@ module.exports = React.createClass({
 	componentDidMount: function () {
 		
 		this.readOutfitBookmarks()
+	},
+	handleRefresh: function (resolve, reject) {
+		
+		this.readOutfitBookmarks()
+		.then(resolve)
+		.catch(reject)
 	},
 	submitOutfitSearch: function () {
 		
@@ -96,13 +106,22 @@ module.exports = React.createClass({
 		})
 	},
 	readOutfitBookmarks: function () {
-
-		Request
-		.get(env.backend+ '/user/' +utils.parseJwtPayload().id+ '/outfit-bookmarks')
-		.set({Authorization: 'Bearer ' +utils.parseJwt()})
-		.end((err, response) => {
-
-			this.setState(Shema.call(this, {outfitBookmarks: response.body}, true))
+				
+		return new Promise ((resolve, reject) => {
+			
+			setTimeout(() => {
+				
+				Request
+				.get(env.backend+ '/user/' +utils.parseJwtPayload().id+ '/outfit-bookmarks')
+				.set({Authorization: 'Bearer ' +utils.parseJwt()})
+				.end((err, response) => {
+				
+					if (err) return reject(err)
+					
+						return resolve(this.setState(Shema.call(this, {outfitBookmarks: response.body}, true)))
+				})
+				
+			}, 2000);
 		})
 	},
 	readOutfit: function (_Outfit_, isVisible) {
