@@ -45,6 +45,10 @@ module.exports = React.createClass({
 						</MUIMenuItem>
 					)
 				}
+	      <MUIMenuItem
+					onTouchTap={() => {window.location.href = 'mailto:' +env.supportEmail}}>
+					Send us feedback
+				</MUIMenuItem>
 				{this.DominantOutfit()}
 	    </MUIDrawer>
 		)
@@ -63,9 +67,7 @@ module.exports = React.createClass({
 		transfersByOutfit.forEach(function(facilityTransfer) {
 	    tally[facilityTransfer._Outfit_] = (tally[facilityTransfer._Outfit_] || 0) + 1
 		})
-		
-		console.log(1, this.state.facilityTransfers);
-		
+				
 		return <p>{Object.keys(tally).sort((a,b) => tally[b] - tally[a])[0]}</p>
 	},
 	readFacilityTransfers: function () {
