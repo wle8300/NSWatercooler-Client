@@ -23,7 +23,13 @@ module.exports = React.createClass({
 		changeMarquee: React.PropTypes.func.isRequired
 	},
 	getInitialState: function () {
-		return Shema.call(this, {outfitsSearchTerm: '', outfitsSearchResults: [], outfitBookmarks: [], outfits: [], outfitsOnlineCount: []})
+		return Shema.call(this, {
+			outfitsSearchTerm: '',
+			outfitsSearchResults: [],
+			outfitBookmarks: [],
+			outfits: [],
+			outfitsOnlineCount: []
+		})
 	},
 	render : function () {
 		return (
