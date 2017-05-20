@@ -1,7 +1,8 @@
 {
-  "name": "pub.center-desktop",
+  "name": "NSWatercooler",
   "version": "0.0.1",
   "private": true,
+	"homepage": "./",
   "devDependencies": {
     "react-scripts": "0.4.1"
   },
@@ -28,8 +29,9 @@
     "validator": "^6.0.0"
   },
   "scripts": {
-    "start": "react-scripts start",
-    "build": "react-scripts build",
+    "dev-browser": "react-scripts start",
+    "dev-mobile": "rm -rf www; react-scripts build; mv build www; phonegap serve -p 3002",
+		"package": "phonegap platform add ios; phonegap platform add android;",
     "test": "react-scripts test --env=jsdom",
     "eject": "react-scripts eject",
     "deploy": "git pull; npm install; npm run build; forever stop server.js; ADDRESS=10.128.40.215 forever start server.js"
