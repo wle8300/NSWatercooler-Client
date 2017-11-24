@@ -44,6 +44,14 @@
     </array>
     <key>UIRequiresFullScreen</key>
     <true/>
+    <key>UIBackgroundModes</key>
+    <array>
+      <string>remote-notification</string>
+    </array>
+    <key>GCM_SENDER_ID</key>
+    <string>XXXXXXX</string>
+    <key>IS_GCM_ENABLED</key>
+    <true/>
     <key>NSAppTransportSecurity</key>
     <dict>
       <key>NSAllowsArbitraryLoads</key>
@@ -53,13 +61,5 @@
     <array>
       <string>UIInterfaceOrientationPortrait</string>
     </array>
-    <key>UIBackgroundModes</key>
-    <array>
-      <string>remote-notification</string>
-    </array>
-    <key>GCM_SENDER_ID</key>
-    <string>XXXXXXX</string>
-    <key>IS_GCM_ENABLED</key>
-    <true/>
   </dict>
 </plist>

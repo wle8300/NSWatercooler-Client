@@ -7,20 +7,20 @@
         "files": {}
     },
     "installed_plugins": {
-        "cordova-plugin-statusbar": {
-            "PACKAGE_NAME": "William-Le.NSWatercooler"
-        },
-        "phonegap-plugin-push": {
-            "SENDER_ID": "XXXXXXX",
-            "PACKAGE_NAME": "William-Le.NSWatercooler"
-        },
         "cordova-plugin-console": {
             "PACKAGE_NAME": "William-Le.NSWatercooler"
         },
         "cordova-plugin-dialogs": {
             "PACKAGE_NAME": "William-Le.NSWatercooler"
         },
+        "cordova-plugin-statusbar": {
+            "PACKAGE_NAME": "William-Le.NSWatercooler"
+        },
         "cordova-plugin-whitelist": {
+            "PACKAGE_NAME": "William-Le.NSWatercooler"
+        },
+        "phonegap-plugin-push": {
+            "SENDER_ID": "XXXXXXX",
             "PACKAGE_NAME": "William-Le.NSWatercooler"
         }
     },
