@@ -86,7 +86,7 @@ typedef NS_ENUM(NSUInteger, GCMServiceErrorCode) {
    */
 
   // Topic already subscribed to.
-  kGCMServiceErrorCodePubSubAlreadySubscribed = 3001,
+  kGCMServiceErrorCodePubSubAlreadySubscribed = 3003,
 
   // Topic already unsubscribed from.
   kGCMServiceErrorCodePubSubAlreadyUnsubscribed = 3002,

@@ -67,7 +67,7 @@
                         options:nil
                         handler:^void(NSError *error) {
                             if (error) {
-                                if (error.code == 3001) {
+                                if (error.code == 3003) {
                                     NSLog(@"Already subscribed to %@", topic);
                                 } else {
                                     NSLog(@"Failed to subscribe to topic %@: %@", topic, error);
@@ -160,7 +160,7 @@
             options:nil
             handler:^void(NSError *error) {
                 if (error) {
-                    if (error.code == 3001) {
+                    if (error.code == 3003) {
                         NSLog(@"Already subscribed to %@", topic);
                         [self successWithMessage:command.callbackId withMsg:[NSString stringWithFormat:@"Already subscribed to %@", topic]];
                     } else {
