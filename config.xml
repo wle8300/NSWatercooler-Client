@@ -1,8 +1,8 @@
 <?xml version='1.0' encoding='utf-8'?>
-<widget id="William-Le.NSWatercooler" version="1.0.0" xmlns="http://www.w3.org/ns/widgets" xmlns:gap="http://phonegap.com/ns/1.0">
-    <name>NSWatercooler</name>
+<widget id="William-Le.NSWatercooler-Client" version="1.0.0" xmlns="http://www.w3.org/ns/widgets" xmlns:gap="http://phonegap.com/ns/1.0">
+    <name>NSWatercooler-Client</name>
     <description>
-        NSWatercooler.
+        NSWatercooler-Client.
     </description>
     <author email="support@phonegap.com" href="http://phonegap.com">
         PhoneGap Team
