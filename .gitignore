@@ -10,6 +10,7 @@ coverage
 build
 www
 platforms
+plugins
 
 # misc
 .DS_Store
