@@ -17,6 +17,7 @@ import MUILinearProgress from 'material-ui/LinearProgress';
 // import MUIArrowRight from 'material-ui/svg-icons/hardware/keyboard-arrow-right'
 import MUIAddIcon from 'material-ui/svg-icons/av/playlist-add-check'
 import MUIAddBorderIcon from 'material-ui/svg-icons/av/playlist-add'
+import PullToRefresh from './PullToRefresh'
 
 
 module.exports = React.createClass({
@@ -28,12 +29,12 @@ module.exports = React.createClass({
 		return Shema.call(this, {character: {}, characterSubscriptions: [], characterLogins: []})
 	},
   render: function () {
-		
+
 		const subscription = this.state.characterSubscriptions.filter((characterSubscription) => characterSubscription._Character_ === this.props._Character_)[0]
 		const classPlayTimes = this.state.character.stats ? this.state.character.stats.stat.filter((x) => x.stat_name === 'play_time') : []
 		const totalPlayTime = classPlayTimes.length ? classPlayTimes.reduce((sum, classPlayTime) => sum + parseInt(classPlayTime.value_forever, 10), 0) : 0
 		const calcClassPlaytimePercentage = function (classPlayTimes, infantryClass) {
-			
+
 			if (infantryClass === 'infiltrator') return classPlayTimes.length ? classPlayTimes.filter((x) => x.profile_id === "1")[0].value_forever / totalPlayTime : 0
 			if (infantryClass === 'light-assualt') return classPlayTimes.length ? classPlayTimes.filter((x) => x.profile_id === "3")[0].value_forever / totalPlayTime : 0
 			if (infantryClass === 'medic') return classPlayTimes.length ? classPlayTimes.filter((x) => x.profile_id === "4")[0].value_forever / totalPlayTime : 0
@@ -41,55 +42,57 @@ module.exports = React.createClass({
 			if (infantryClass === 'heavy') return classPlayTimes.length ? classPlayTimes.filter((x) => x.profile_id === "6")[0].value_forever / totalPlayTime : 0
 			if (infantryClass === 'MAX') return classPlayTimes.length ? classPlayTimes.filter((x) => x.profile_id === "7")[0].value_forever / totalPlayTime : 0
 		}
-		
-		
+
+
     return (
-			<div style={style8(this.props, this.state)}>
-				<MUIPaper zDepth={0} style={style3(this.props, this.state)}>
-					<span style={style2()}>{this.state.character.battle_rank ? 'BR' +this.state.character.battle_rank.value : null}</span>
-					<MUIFAB secondary onTouchTap={this.toggleCharacterSubscription.bind(this, subscription, this.state.character)} style={style1()}>
-						{subscription ? <MUIAddIcon/> : <MUIAddBorderIcon/>}
-					</MUIFAB>
-					{
-						!this.state.character.outfit_member
-						? null 
-						: (
-						  <MUIPaper zDepth={0} style={{float: 'right', width: '33.33%', textAlign: 'center', background: 'transparent'}}>
-								<span style={{textTransform: 'uppercase'}}>{this.state.character.outfit_member.member_rank}</span>
-								<MUIDivider/>
-								<span style={{fontSize: '0.75rem'}}>[{this.state.character.outfit_member.alias}]</span>
-							</MUIPaper>	
-						)
-					}
-					<MUIChip><MUIAvatar style={{background: this.state.character.online_status === '1000' ? 'green' : 'gray'}}/>{this.state.characterLogins.length ? Moment(this.state.characterLogins[0].time).fromNow() : null}</MUIChip>
-				</MUIPaper>
-				<MUIPaper key={new Date()} zDepth={0} style={style9()}>
-				  <div style={style6()}>
-						<div style={style4()}>Infiltrator</div>
-						<div style={style5()}><MUILinearProgress mode={classPlayTimes.length ? 'determinate' : 'indeterminate'} value={100 * (calcClassPlaytimePercentage(classPlayTimes, 'infiltrator'))} style={style7()}/></div>
-					</div>
-				  <div style={style6()}>
-						<div style={style4()}>Light Assault</div>
-						<div style={style5()}><MUILinearProgress mode={classPlayTimes.length ? 'determinate' : 'indeterminate'} value={100 * (calcClassPlaytimePercentage(classPlayTimes, 'light-assualt'))} style={style7()}/></div>
-					</div>
-				  <div style={style6()}>
-						<div style={style4()}>Medic</div>
-						<div style={style5()}><MUILinearProgress mode={classPlayTimes.length ? 'determinate' : 'indeterminate'} value={100 * (calcClassPlaytimePercentage(classPlayTimes, 'medic'))} style={style7()}/></div>
-					</div>
-				  <div style={style6()}>
-						<div style={style4()}>Engineer</div>
-						<div style={style5()}><MUILinearProgress mode={classPlayTimes.length ? 'determinate' : 'indeterminate'} value={100 * (calcClassPlaytimePercentage(classPlayTimes, 'engineer'))} style={style7()}/></div>
-					</div>
-				  <div style={style6()}>
-						<div style={style4()}>Heavy</div>
-						<div style={style5()}><MUILinearProgress mode={classPlayTimes.length ? 'determinate' : 'indeterminate'} value={100 * (calcClassPlaytimePercentage(classPlayTimes, 'heavy'))} style={style7()}/></div>
-					</div>
-				  <div style={style6()}>
-						<div style={style4()}>MAX</div>
-						<div style={style5()}><MUILinearProgress mode={classPlayTimes.length ? 'determinate' : 'indeterminate'} value={100 * (calcClassPlaytimePercentage(classPlayTimes, 'MAX'))} style={style7()}/></div>
-					</div>
-				</MUIPaper>
-			</div>
+			<PullToRefresh refreshHandler={this.refreshHandler}>
+				<div style={style8(this.props, this.state)}>
+					<MUIPaper zDepth={0} style={style3(this.props, this.state)}>
+						<span style={style2()}>{this.state.character.battle_rank ? 'BR' +this.state.character.battle_rank.value : null}</span>
+						<MUIFAB secondary onTouchTap={this.toggleCharacterSubscription.bind(this, subscription, this.state.character)} style={style1()}>
+							{subscription ? <MUIAddIcon/> : <MUIAddBorderIcon/>}
+						</MUIFAB>
+						{
+							!this.state.character.outfit_member
+								? null
+								: (
+									<MUIPaper zDepth={0} style={{float: 'right', width: '33.33%', textAlign: 'center', background: 'transparent'}}>
+										<span style={{textTransform: 'uppercase'}}>{this.state.character.outfit_member.member_rank}</span>
+										<MUIDivider/>
+										<span style={{fontSize: '0.75rem'}}>[{this.state.character.outfit_member.alias}]</span>
+									</MUIPaper>
+								)
+						}
+						<MUIChip><MUIAvatar style={{background: this.state.character.online_status === '1000' ? 'green' : 'gray'}}/>{this.state.characterLogins.length ? Moment(this.state.characterLogins[0].time).fromNow() : null}</MUIChip>
+					</MUIPaper>
+					<MUIPaper key={new Date()} zDepth={0} style={style9()}>
+					  <div style={style6()}>
+							<div style={style4()}>Infiltrator</div>
+							<div style={style5()}><MUILinearProgress mode={classPlayTimes.length ? 'determinate' : 'indeterminate'} value={100 * (calcClassPlaytimePercentage(classPlayTimes, 'infiltrator'))} style={style7()}/></div>
+						</div>
+					  <div style={style6()}>
+							<div style={style4()}>Light Assault</div>
+							<div style={style5()}><MUILinearProgress mode={classPlayTimes.length ? 'determinate' : 'indeterminate'} value={100 * (calcClassPlaytimePercentage(classPlayTimes, 'light-assualt'))} style={style7()}/></div>
+						</div>
+					  <div style={style6()}>
+							<div style={style4()}>Medic</div>
+							<div style={style5()}><MUILinearProgress mode={classPlayTimes.length ? 'determinate' : 'indeterminate'} value={100 * (calcClassPlaytimePercentage(classPlayTimes, 'medic'))} style={style7()}/></div>
+						</div>
+					  <div style={style6()}>
+							<div style={style4()}>Engineer</div>
+							<div style={style5()}><MUILinearProgress mode={classPlayTimes.length ? 'determinate' : 'indeterminate'} value={100 * (calcClassPlaytimePercentage(classPlayTimes, 'engineer'))} style={style7()}/></div>
+						</div>
+					  <div style={style6()}>
+							<div style={style4()}>Heavy</div>
+							<div style={style5()}><MUILinearProgress mode={classPlayTimes.length ? 'determinate' : 'indeterminate'} value={100 * (calcClassPlaytimePercentage(classPlayTimes, 'heavy'))} style={style7()}/></div>
+						</div>
+					  <div style={style6()}>
+							<div style={style4()}>MAX</div>
+							<div style={style5()}><MUILinearProgress mode={classPlayTimes.length ? 'determinate' : 'indeterminate'} value={100 * (calcClassPlaytimePercentage(classPlayTimes, 'MAX'))} style={style7()}/></div>
+						</div>
+					</MUIPaper>
+				</div>
+			</PullToRefresh>
     )
   },
 	componentDidMount: function () {
@@ -98,31 +101,52 @@ module.exports = React.createClass({
 		this.readCharacterLogins()
 		this.readCharacterSubscriptions()
 	},
-	readCharacter: function () {
-		
-		Request
-		.get(env.backend+ '/character/' +this.props._Character_+ '?server=genudine')
-		.end((err, response) => {
+	refreshHandler: function () {
 
-			this.props.changeMarquee(response.body.name.first)
-			this.setState(Shema.call(this, {character: response.body}, true))
+		return new Promise((resolve, reject) => {
+
+			Promise.all([
+				this.readCharacter(),
+				this.readCharacterLogins(),
+				this.readCharacterSubscriptions(),
+			])
+			.then(resolve)
+		})
+	},
+	readCharacter: function () {
+
+		return new Promise((resolve, reject) => {
+
+			Request
+			.get(env.backend+ '/character/' +this.props._Character_+ '?server=genudine')
+			.end((err, response) => {
+
+				this.props.changeMarquee(response.body.name.first)
+				this.setState(Shema.call(this, {character: response.body}, true), resolve)
+			})
 		})
 	},
 	readCharacterLogins: function () {
-		
-		Request
-		.get(env.backend+ '/character/' +this.props._Character_+ '/logins')
-		.end((err, response) => this.setState(Shema.call(this, {characterLogins: response.body}, true)))
+
+		return new Promise((resolve, reject) => {
+
+			Request
+			.get(env.backend+ '/character/' +this.props._Character_+ '/logins')
+			.end((err, response) => this.setState(Shema.call(this, {characterLogins: response.body}, true), resolve))
+		})
 	},
 	readCharacterSubscriptions: function () {
 
-		Request
-		.get(env.backend+ '/user/' +utils.parseJwtPayload().id+ '/character-subscriptions')
-		.set({Authorization: 'Bearer ' +utils.parseJwt()})
-		.end((err, response) => this.setState(Shema.call(this, {characterSubscriptions: response.body}, true)))
+		return new Promise((resolve, reject) => {
+
+			Request
+			.get(env.backend+ '/user/' +utils.parseJwtPayload().id+ '/character-subscriptions')
+			.set({Authorization: 'Bearer ' +utils.parseJwt()})
+			.end((err, response) => this.setState(Shema.call(this, {characterSubscriptions: response.body}, true), resolve))
+		})
 	},
 	toggleCharacterSubscription: function (subscription, character) {
-		
+
 		if (!subscription) {
 
 			Request
@@ -135,7 +159,7 @@ module.exports = React.createClass({
 			})
 			.end((err, response) => this.readCharacterSubscriptions())
 		}
-		
+
 		if (subscription) {
 
 			Request

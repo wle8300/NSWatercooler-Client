@@ -13,10 +13,11 @@
     "material-ui": "^0.16.5",
     "moment": "^2.17.1",
     "npm": "^4.0.5",
+    "prop-types": "^15.6.0",
     "pushstate-https-server": "^0.1.1",
     "react": "^15.3.2",
     "react-dom": "^15.3.1",
-    "react-draggable": "^2.2.3",
+    "react-draggable": "^2.2.6",
     "react-infinite": "^0.10.0",
     "react-motion": "^0.4.7",
     "react-router-component": "^0.36.0",
@@ -36,7 +37,8 @@
     "dev-browser": "react-scripts start",
     "dev-mobile": "rm -rf www; react-scripts build; mv build www; phonegap serve -p 3002",
     "package": "phonegap platform add ios; phonegap platform add android;",
-    "deploy": "git pull; npm install; npm run build; pm2 stop 'NSWatercooler-Client'; ADDRESS=10.132.27.73 PORT=3001 pm2 start server.js --name='NSWatercooler-Client'"
+    "shove": "npm run build; git add .; git commit -am 'asdf'; git push;",
+    "deploy": "git pull; pm2 stop 'NSWatercooler-Client'; ADDRESS=10.132.27.73 PORT=3001 pm2 start server.js --name='NSWatercooler-Client';"
   },
   "eslintConfig": {
     "extends": "./node_modules/react-scripts/config/eslint.js"
