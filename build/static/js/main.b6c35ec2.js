@@ -85850,7 +85850,7 @@
 		},
 		componentDidMount: function componentDidMount() {
 	
-			this.readFacilityTransfers();
+			// this.readFacilityTransfers()
 		},
 		DominantOutfit: function DominantOutfit() {
 	
@@ -91616,4 +91616,4 @@
 
 /***/ }
 /******/ ])));
-//# sourceMappingURL=main.d2e30c3e.js.map
+//# sourceMappingURL=main.b6c35ec2.js.map

@@ -56,7 +56,7 @@ module.exports = React.createClass({
 	},
 	componentDidMount: function () {
 
-		this.readFacilityTransfers()
+		// this.readFacilityTransfers()
 	},
 	DominantOutfit: function () {
 
