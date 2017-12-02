@@ -10,11 +10,12 @@ import MUIPaper from 'material-ui/Paper'
 // import MUIDivider from 'material-ui/Divider'
 import MUIArrowRight from 'material-ui/svg-icons/hardware/keyboard-arrow-right'
 import MUIList from 'material-ui/List/List'
-import MUIListItem from 'material-ui/List/ListItem'
+// import MUIListItem from 'material-ui/List/ListItem'
 import MUITextField from 'material-ui/TextField'
 import MUIRaisedButton from 'material-ui/RaisedButton'
 // import MUISubheader from 'material-ui/Subheader'
 import PullToRefresh from './PullToRefresh'
+import ListItemOutfit from './ListItemOutfit'
 
 
 module.exports = React.createClass({
@@ -34,33 +35,33 @@ module.exports = React.createClass({
 	},
 	render: function () {
 		return (
-			<PullToRefresh refreshHandler={this.refreshHandler}>
-				<div>
-					<MUIPaper style={{padding: '0 1rem'}}>
-						<MUITextField
-							value={this.state.outfitsSearchTerm}
-							onChange={(e) => this.setState(Shema.call(this, {outfitsSearchTerm: e.target.value}, true))}
-							hintText="Lowercase minimum 3 characters"
-							fullWidth
-							underlineShow={false}/>
-						<MUIRaisedButton
-							label="Search"
-							disabled={this.state.outfitsSearchTerm.length < 3 ? true : false}
-							onTouchTap={this.submitOutfitSearch}
-							secondary
-						fullWidth/>
-						<MUIList>
-							{this.state.outfitsSearchResults.map((outfit) => {
-								return (
-									<MUIListItem
-										key={outfit.outfit_id}
-										primaryText={outfit.alias}
-										rightIcon={<MUIArrowRight/>}
-										onTouchTap={() => this.props.routerRef.navigate('/outfit/' +outfit.outfit_id)}/>
-								)
-							})}
-						</MUIList>
-					</MUIPaper>
+			<div>
+				<MUIPaper style={{padding: '0 1rem'}}>
+					<MUITextField
+						value={this.state.outfitsSearchTerm}
+						onChange={(e) => this.setState(Shema.call(this, {outfitsSearchTerm: e.target.value}, true))}
+						hintText="Lowercase minimum 3 characters"
+						fullWidth
+						underlineShow={false}/>
+					<MUIRaisedButton
+						label="Search"
+						disabled={this.state.outfitsSearchTerm.length < 3 ? true : false}
+						onTouchTap={this.submitOutfitSearch}
+						secondary
+					fullWidth/>
+					<MUIList>
+						{this.state.outfitsSearchResults.map((outfit) => {
+							return (
+								<MUIListItem
+									key={outfit.outfit_id}
+									primaryText={outfit.alias}
+									rightIcon={<MUIArrowRight/>}
+									onTouchTap={() => this.props.routerRef.navigate('/outfit/' +outfit.outfit_id)}/>
+							)
+						})}
+					</MUIList>
+				</MUIPaper>
+				<PullToRefresh refreshHandler={this.refreshHandler}>
 					<MUIList>
 						{this.state.outfitBookmarks.map((outfitBookmark) => {
 
@@ -78,18 +79,17 @@ module.exports = React.createClass({
 										this.readOutfit(outfitBookmark._Outfit_, isVisible)
 										this.readOutfitOnlineMembers(outfitBookmark._Outfit_, isVisible)
 									}}>
-									<MUIListItem
-										primaryText={outfitBookmark.outfitAlias}
-										secondaryText={outfitOnlineCount ? outfitOnlineCount.onlineCount+ ' online' : 'Loading...'}
-										rightIcon={<MUIArrowRight/>}
-										onTouchTap={() => this.props.routerRef.navigate('/outfit/' +outfitBookmark._Outfit_)}/>
+									<ListItemOutfit
+										onTouchTap={() => this.props.routerRef.navigate('/outfit/' +outfitBookmark._Outfit_)}
+										outfitAlias={outfitBookmark.outfitAlias}
+										outfitOnlineCount={outfitOnlineCount}
+									/>
 								</VisibilitySensor>
 							)
 						})}
 					</MUIList>
-
-				</div>
-			</PullToRefresh>
+				</PullToRefresh>
+			</div>
 		)
 	},
 	componentWillMount: function () {
@@ -114,14 +114,18 @@ module.exports = React.createClass({
 
 		return new Promise((resolve, reject) => {
 
-			this.setState({
-				outfitBookmarks: [],
-				outfits: [],
-				outfitsOnlineCount: []
-			})
+			this.setState(
+				{
+					outfitBookmarks: [],
+					outfits: [],
+					outfitsOnlineCount: []
+				},
+				() => {
 
-			this.readOutfitBookmarks()
-			.then(resolve)
+					this.readOutfitBookmarks()
+					.then(resolve)
+				}
+			)
 		})
 	},
 	readOutfitBookmarks: function () {

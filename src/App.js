@@ -53,24 +53,24 @@ module.exports = React.createClass({
 		this.establishSession()
 	},
 	componentDidUpdate: function () {
-		
+
 		if (this.state.refRouter && !localStorage.Jwt && location.pathname !== '/') this.state.refRouter.navigate('/')
 		if (this.state.refRouter && localStorage.Jwt) this.state.refRouter.navigate('/outfit')
 	},
 	establishSession: function () {
-		
+
 		var expirationMs
 		var expirationDate
-		
+
 		if (!localStorage.Jwt) return
 
 		//jwt uses seconds, not milliseconds
 		expirationMs = utils.parseJwtPayload().exp * 1000
 		expirationDate = new Date(expirationMs)
-		
+
 		//exp passed?
-		if (expirationDate < new Date()) return localStorage.removeItem('jwt')		
-			
+		if (expirationDate < new Date()) return localStorage.removeItem('jwt')
+
 		Request
 		.put(env.backend+ '/jwt')
 		.send({jwt: utils.parseJwt()})
@@ -85,18 +85,18 @@ module.exports = React.createClass({
 		})
 	},
 	changeMarquee: function (message, size) {
-		
+
 		this.setState({marquee: {
 			message: message,
 			size: size
 		}})
 	},
 	changeFooter: function (isVisible) {
-		
+
 		this.setState({arePageButtonsVisible: isVisible})
 	},
 	toggleDrawer: function () {
-		
+
 		this.setState({isDrawerOpen: !this.state.isDrawerOpen})
 	},
 	gotRouterRef: function (routerRef) {
@@ -104,7 +104,7 @@ module.exports = React.createClass({
 		this.setState({routerRef: routerRef}, () => this.state.routerRef.navigate('/'))
 	},
 	restartSession: function () {
-		
+
 		localStorage.removeItem('Jwt')
 		window[env.namespace] = {}
 	}

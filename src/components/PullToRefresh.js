@@ -9,17 +9,17 @@ class PullToRefresh extends React.Component {
     super(props)
 
     this.state = {
-      isLocked: false,
-      isRefreshing: false,
       yPosition: 0,
+      isRefreshing: false,
+      isLocked: false,
     }
   }
   render() {
 
     return (
       <div style={{
-        height: '100%',
-        // overflow: 'hidden',
+        height: '100vh',
+        overflow: 'hidden',
       }}>
 
 
@@ -33,13 +33,13 @@ class PullToRefresh extends React.Component {
           overflow: 'hidden',
           // backgroundColor: 'gray',
         }}>
-          {/* {this.state.yPosition} | {!this.state.isRefreshing ? "😗" : "😘"} */}
           {this.getLoadingImg()}
         </div>
 
 
         <Draggable
           axis="y"
+          bounds={{top: 0}}
           position={{
             x: 0,
             y: this.calcYAnchor(),

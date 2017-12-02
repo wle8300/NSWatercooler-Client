@@ -21,6 +21,7 @@ module.exports = React.createClass({
 	render: function () {
 		return (
 			<MUIDrawer
+				swipeAreaWidth={100}
 				open={this.props.isDrawerOpen}
 				docked={false}
 				onRequestChange={this.props.toggleDrawer}>
@@ -60,18 +61,18 @@ module.exports = React.createClass({
 	DominantOutfit: function () {
 
 		//impure
-		
+
 		const transfersByOutfit = this.state.facilityTransfers.filter((facilityTransfer) => facilityTransfer._Outfit_ !== "0")
 		const tally = {}
 
 		transfersByOutfit.forEach(function(facilityTransfer) {
 	    tally[facilityTransfer._Outfit_] = (tally[facilityTransfer._Outfit_] || 0) + 1
 		})
-				
+
 		return <p>{Object.keys(tally).sort((a,b) => tally[b] - tally[a])[0]}</p>
 	},
 	readFacilityTransfers: function () {
-		
+
 		Request
 		.get(env.backend+ '/facility-transfer?server=genudine&timeframe=week')
 		.end((err, response) => {
@@ -80,7 +81,7 @@ module.exports = React.createClass({
 		})
 	},
 	goToAccount: function () {
-		
+
 		this.props.toggleDrawer()
 		this.props.routerRef.navigate('/your-account')
 	},

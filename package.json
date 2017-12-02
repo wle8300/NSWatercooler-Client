@@ -16,6 +16,7 @@
     "prop-types": "^15.6.0",
     "pushstate-https-server": "^0.1.1",
     "react": "^15.3.2",
+    "react-bloom": "^1.0.15",
     "react-dom": "^15.3.1",
     "react-draggable": "^2.2.6",
     "react-infinite": "^0.10.0",

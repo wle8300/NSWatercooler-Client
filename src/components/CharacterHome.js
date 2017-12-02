@@ -16,6 +16,7 @@ import MUIRaisedButton from 'material-ui/RaisedButton'
 import MUIPaper from 'material-ui/Paper'
 import MUIArrowRight from 'material-ui/svg-icons/hardware/keyboard-arrow-right'
 import PullToRefresh from './PullToRefresh'
+import ListItemCharacter from './ListItemCharacter'
 
 
 module.exports = React.createClass({
@@ -35,60 +36,59 @@ module.exports = React.createClass({
 	},
   render: function () {
     return (
-			<PullToRefresh refreshHandler={this.refreshHandler}>
-				<div>
-					<MUIPaper style={{padding: '0 1rem'}}>
-						<MUITextField
-							value={this.state.charactersSearchTerm}
-							onChange={(e) => this.setState(Shema.call(this, {charactersSearchTerm: e.target.value}, true))}
-							hintText="Lowercase minimum 3 characters"
-							fullWidth
-							underlineShow={false}/>
-						<MUIRaisedButton
-							label="Search"
-							disabled={this.state.charactersSearchTerm.length < 3 ? true : false}
-							onTouchTap={this.submitCharacterSearch}
-							secondary
-						fullWidth/>
-						<MUIList>
-							{this.state.charactersSearchResults.map((character) => {
-								return (
-									<MUIListItem
-									  key={character.character_id}
-									  primaryText={character.name.first}
-									  rightIcon={<MUIArrowRight/>}
-										onTouchTap={() => this.props.routerRef.navigate('/character/' +character.character_id)}/>
-								)
-							})}
-						</MUIList>
-					</MUIPaper>
+			<div>
+				<MUIPaper style={{padding: '0 1rem'}}>
+					<MUITextField
+						value={this.state.charactersSearchTerm}
+						onChange={(e) => this.setState(Shema.call(this, {charactersSearchTerm: e.target.value}, true))}
+						hintText="Lowercase minimum 3 characters"
+						fullWidth
+						underlineShow={false}/>
+					<MUIRaisedButton
+						label="Search"
+						disabled={this.state.charactersSearchTerm.length < 3 ? true : false}
+						onTouchTap={this.submitCharacterSearch}
+						secondary
+					fullWidth/>
 					<MUIList>
-						<InfiniteScroll useWindowAsScrollContainer elementHeight={48}>
-							{
-								this.state.characterSubscriptions.map((characterSubscription) => {
-
-									const characterOnlineStatus = this.state.VIZCOLLECTIONCharcterSubscriptionsOnlineStatus.filter((characterOnlineStatus) => characterOnlineStatus._Character_ === characterSubscription._Character_)[0]
-									const characterLastLogin = this.state.VIZCOLLECTIONcharacterSubscriptionsLogins.filter((characterSubscriptionsLogin) => characterSubscriptionsLogin._Character_ === characterSubscription._Character_)[0]
-
-
-									return (
-										<VisibilitySensor key={characterSubscription.id} onChange={(isVisible) => {this.readCharacterOnlineStatus(characterSubscription._Character_, isVisible); this.readCharacterLogins(characterSubscription._Character_, isVisible)}}>
-											<MUIListItem
-											  key={characterSubscription.id}
-											  primaryText={characterSubscription.characterName}
-												secondaryText={characterLastLogin ? Moment(characterLastLogin.login.time).fromNow() : null}
-												leftIcon={<OnlineStatus isOnline={characterOnlineStatus ? characterOnlineStatus.isOnline : false} isLoading={!characterOnlineStatus ? true : false}/>}
-											  rightIcon={<MUIArrowRight/>}
-												onTouchTap={() => this.props.routerRef.navigate('/character/' +characterSubscription._Character_)}/>
-										</VisibilitySensor>
-									)
-								})
-							}
-						</InfiniteScroll>
+						{this.state.charactersSearchResults.map((character) => {
+							return (
+								<MUIListItem
+								  key={character.character_id}
+								  primaryText={character.name.first}
+								  rightIcon={<MUIArrowRight/>}
+									onTouchTap={() => this.props.routerRef.navigate('/character/' +character.character_id)}/>
+							)
+						})}
 					</MUIList>
-				</div>
-			</PullToRefresh>
-    )
+				</MUIPaper>
+				<PullToRefresh refreshHandler={this.refreshHandler}>
+					<MUIList>
+						{/* <InfiniteScroll useWindowAsScrollContainer elementHeight={48}> */}
+						{
+							this.state.characterSubscriptions.map((characterSubscription) => {
+
+								const characterOnlineStatus = this.state.VIZCOLLECTIONCharcterSubscriptionsOnlineStatus.filter((characterOnlineStatus) => characterOnlineStatus._Character_ === characterSubscription._Character_)[0]
+								const characterLastLogin = this.state.VIZCOLLECTIONcharacterSubscriptionsLogins.filter((characterSubscriptionsLogin) => characterSubscriptionsLogin._Character_ === characterSubscription._Character_)[0]
+
+
+								return (
+									<VisibilitySensor key={characterSubscription.id} onChange={(isVisible) => {this.readCharacterOnlineStatus(characterSubscription._Character_, isVisible); this.readCharacterLogins(characterSubscription._Character_, isVisible)}}>
+										<ListItemCharacter
+											onTouchTap={() => this.props.routerRef.navigate('/character/' +characterSubscription._Character_)}
+											characterName={characterSubscription.characterName}
+											characterLastLogin={characterLastLogin ? Moment(characterLastLogin.login.time).fromNow() : null}
+											characterOnlineStatus={characterOnlineStatus}
+										/>
+									</VisibilitySensor>
+								)
+							})
+						}
+						{/* </InfiniteScroll> */}
+					</MUIList>
+				</PullToRefresh>
+			</div>
+		)
   },
 	componentDidMount: function () {
 
@@ -112,15 +112,20 @@ module.exports = React.createClass({
 
 		return new Promise((resolve, reject) => {
 
-			this.setState({
-				charactersSearchResults: [],
-			  characterSubscriptions: [],
-			  VIZCOLLECTIONCharcterSubscriptionsOnlineStatus: [],
-			  VIZCOLLECTIONcharacterSubscriptionsLogins: [],
-			})
+			this.setState(
+				{
+					charactersSearchResults: [],
+				  characterSubscriptions: [],
+				  VIZCOLLECTIONCharcterSubscriptionsOnlineStatus: [],
+				  VIZCOLLECTIONcharacterSubscriptionsLogins: [],
+				},
+				() => {
 
-			this.readCharacterSubscriptions()
-			.then(resolve)
+					this.readCharacterSubscriptions()
+					.then(resolve)
+				}
+			)
+
 		})
 	},
 	readCharacterSubscriptions: function () {
