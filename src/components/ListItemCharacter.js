@@ -5,7 +5,6 @@ import Bloom from 'react-bloom'
 
 import React from 'react'
 // import PropTypes from 'prop-types'
-import Moment from 'moment'
 
 class ListItemCharacter extends React.Component {
   render() {

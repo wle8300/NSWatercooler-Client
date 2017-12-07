@@ -3,11 +3,11 @@ import utils from '../../utils'
 import Shema from '../../shema'
 import size from '../size'
 
-import OnlineStatus from './OnlineStatus'
+// import OnlineStatus from './OnlineStatus'
 
 import React from 'react'
 import Moment from 'moment'
-import InfiniteScroll from 'react-infinite'
+// import InfiniteScroll from 'react-infinite'
 import Request from 'superagent'
 import VisibilitySensor from 'react-visibility-sensor'
 import MUIList from 'material-ui/List/List'
@@ -16,7 +16,7 @@ import MUITextField from 'material-ui/TextField'
 import MUIRaisedButton from 'material-ui/RaisedButton'
 import MUIPaper from 'material-ui/Paper'
 import MUIArrowRight from 'material-ui/svg-icons/hardware/keyboard-arrow-right'
-import PullToRefresh from './PullToRefresh'
+// import PullToRefresh from './PullToRefresh'
 import ListItemCharacter from './ListItemCharacter'
 
 

@@ -1,6 +1,7 @@
 import env from '../../env'
 import utils from '../../utils'
 import Shema from '../../shema'
+import size from '../size'
 
 import React from 'react'
 import Request from 'superagent'
@@ -45,55 +46,62 @@ module.exports = React.createClass({
 
 
     return (
-			<PullToRefresh refreshHandler={this.refreshHandler}>
-				<div style={style8(this.props, this.state)}>
-					<MUIPaper zDepth={0} style={style3(this.props, this.state)}>
-						<span style={style2()}>{this.state.character.battle_rank ? 'BR' +this.state.character.battle_rank.value : null}</span>
-						<MUIFAB secondary onTouchTap={this.toggleCharacterSubscription.bind(this, subscription, this.state.character)} style={style1()}>
-							{subscription ? <MUIAddIcon/> : <MUIAddBorderIcon/>}
-						</MUIFAB>
-						{
-							!this.state.character.outfit_member
-								? null
-								: (
-									<MUIPaper zDepth={0} style={{float: 'right', width: '33.33%', textAlign: 'center', background: 'transparent'}}>
-										<span style={{textTransform: 'uppercase'}}>{this.state.character.outfit_member.member_rank}</span>
-										<MUIDivider/>
-										<span style={{fontSize: '0.75rem'}}>[{this.state.character.outfit_member.alias}]</span>
-									</MUIPaper>
-								)
-						}
-						<MUIChip><MUIAvatar style={{background: this.state.character.online_status === '1000' ? 'green' : 'gray'}}/>{this.state.characterLogins.length ? Moment(this.state.characterLogins[0].time).fromNow() : null}</MUIChip>
-					</MUIPaper>
-					<MUIPaper key={new Date()} zDepth={0} style={style9()}>
-					  <div style={style6()}>
-							<div style={style4()}>Infiltrator</div>
-							<div style={style5()}><MUILinearProgress mode={classPlayTimes.length ? 'determinate' : 'indeterminate'} value={100 * (calcClassPlaytimePercentage(classPlayTimes, 'infiltrator'))} style={style7()}/></div>
-						</div>
-					  <div style={style6()}>
-							<div style={style4()}>Light Assault</div>
-							<div style={style5()}><MUILinearProgress mode={classPlayTimes.length ? 'determinate' : 'indeterminate'} value={100 * (calcClassPlaytimePercentage(classPlayTimes, 'light-assualt'))} style={style7()}/></div>
-						</div>
-					  <div style={style6()}>
-							<div style={style4()}>Medic</div>
-							<div style={style5()}><MUILinearProgress mode={classPlayTimes.length ? 'determinate' : 'indeterminate'} value={100 * (calcClassPlaytimePercentage(classPlayTimes, 'medic'))} style={style7()}/></div>
-						</div>
-					  <div style={style6()}>
-							<div style={style4()}>Engineer</div>
-							<div style={style5()}><MUILinearProgress mode={classPlayTimes.length ? 'determinate' : 'indeterminate'} value={100 * (calcClassPlaytimePercentage(classPlayTimes, 'engineer'))} style={style7()}/></div>
-						</div>
-					  <div style={style6()}>
-							<div style={style4()}>Heavy</div>
-							<div style={style5()}><MUILinearProgress mode={classPlayTimes.length ? 'determinate' : 'indeterminate'} value={100 * (calcClassPlaytimePercentage(classPlayTimes, 'heavy'))} style={style7()}/></div>
-						</div>
-					  <div style={style6()}>
-							<div style={style4()}>MAX</div>
-							<div style={style5()}><MUILinearProgress mode={classPlayTimes.length ? 'determinate' : 'indeterminate'} value={100 * (calcClassPlaytimePercentage(classPlayTimes, 'MAX'))} style={style7()}/></div>
-						</div>
-					</MUIPaper>
-				</div>
-			</PullToRefresh>
-    )
+			<div style={{
+				marginTop: `${size.headerHeight}rem`,
+				height: '100%',
+				backgroundImage: Object.keys(this.state.character).length ? 'linear-gradient(rgba(255, 255, 255, 1) 0%, rgba(255, 255, 255, 0.8) 0%), url("https://census.daybreakgames.com/' +this.state.character.faction.image_path+ '")' : 'none',
+				backgroundRepeat: 'no-repeat',
+				backgroundPosition: '50% 0',
+				backgroundSize: 'cover',
+				overflow: 'scroll',
+				WebkitOverflowScrolling: 'touch',
+			}}>
+				<MUIPaper zDepth={0} style={style3(this.props, this.state)}>
+					<span style={style2()}>{this.state.character.battle_rank ? 'BR' +this.state.character.battle_rank.value : null}</span>
+					<MUIFAB secondary onTouchTap={this.toggleCharacterSubscription.bind(this, subscription, this.state.character)} style={style1()}>
+						{subscription ? <MUIAddIcon/> : <MUIAddBorderIcon/>}
+					</MUIFAB>
+					{
+						!this.state.character.outfit_member
+							? null
+							: (
+								<MUIPaper zDepth={0} style={{float: 'right', width: '33.33%', textAlign: 'center', background: 'transparent'}}>
+									<span style={{textTransform: 'uppercase'}}>{this.state.character.outfit_member.member_rank}</span>
+									<MUIDivider/>
+									<span style={{fontSize: '0.75rem'}}>[{this.state.character.outfit_member.alias}]</span>
+								</MUIPaper>
+							)
+					}
+					<MUIChip><MUIAvatar style={{background: this.state.character.online_status === '1000' ? 'green' : 'gray'}}/>{this.state.characterLogins.length ? Moment(this.state.characterLogins[0].time).fromNow() : null}</MUIChip>
+				</MUIPaper>
+				<MUIPaper key={new Date()} zDepth={0} style={style9()}>
+				  <div style={style6()}>
+						<div style={style4()}>Infiltrator</div>
+						<div style={style5()}><MUILinearProgress mode={classPlayTimes.length ? 'determinate' : 'indeterminate'} value={100 * (calcClassPlaytimePercentage(classPlayTimes, 'infiltrator'))} style={style7()}/></div>
+					</div>
+				  <div style={style6()}>
+						<div style={style4()}>Light Assault</div>
+						<div style={style5()}><MUILinearProgress mode={classPlayTimes.length ? 'determinate' : 'indeterminate'} value={100 * (calcClassPlaytimePercentage(classPlayTimes, 'light-assualt'))} style={style7()}/></div>
+					</div>
+				  <div style={style6()}>
+						<div style={style4()}>Medic</div>
+						<div style={style5()}><MUILinearProgress mode={classPlayTimes.length ? 'determinate' : 'indeterminate'} value={100 * (calcClassPlaytimePercentage(classPlayTimes, 'medic'))} style={style7()}/></div>
+					</div>
+				  <div style={style6()}>
+						<div style={style4()}>Engineer</div>
+						<div style={style5()}><MUILinearProgress mode={classPlayTimes.length ? 'determinate' : 'indeterminate'} value={100 * (calcClassPlaytimePercentage(classPlayTimes, 'engineer'))} style={style7()}/></div>
+					</div>
+				  <div style={style6()}>
+						<div style={style4()}>Heavy</div>
+						<div style={style5()}><MUILinearProgress mode={classPlayTimes.length ? 'determinate' : 'indeterminate'} value={100 * (calcClassPlaytimePercentage(classPlayTimes, 'heavy'))} style={style7()}/></div>
+					</div>
+				  <div style={style6()}>
+						<div style={style4()}>MAX</div>
+						<div style={style5()}><MUILinearProgress mode={classPlayTimes.length ? 'determinate' : 'indeterminate'} value={100 * (calcClassPlaytimePercentage(classPlayTimes, 'MAX'))} style={style7()}/></div>
+					</div>
+				</MUIPaper>
+			</div>
+		)
   },
 	componentDidMount: function () {
 
@@ -225,16 +233,6 @@ function style7() {
 		height: '100%',
 		backgroundColor: 'transparent',
 		borderRadius: 0
-	}
-}
-
-function style8(props, state) {
-	return {
-		height: '100%',
-		backgroundImage: Object.keys(state.character).length ? 'linear-gradient(rgba(255, 255, 255, 1) 0%, rgba(255, 255, 255, 0.8) 0%), url("https://census.daybreakgames.com/' +state.character.faction.image_path+ '")' : 'none',
-		backgroundRepeat: 'no-repeat',
-    backgroundPosition: '50% 0',
-		backgroundSize: 'cover'
 	}
 }
 

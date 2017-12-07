@@ -72,87 +72,86 @@ module.exports = React.createClass({
 		}
 
 		return (
-			<div>
-				<div style={{
-					marginTop: `${size.headerHeight}rem`,
-					height: `calc(100vh - ${size.headerHeight + size.footerHeight}rem)`,
-					overflow: 'scroll',
-				}}>
-					<MUIFAB secondary onTouchTap={this.toggleOutfitBookmark.bind(this, bookmark, this.state.outfit)} style={style1()}>
-						{bookmark ? <MUIBookmarkIcon/> : <MUIBookmarkBorderIcon/>}
-					</MUIFAB>
-					<MUIList>
-						<MUIListItem
-							leftIcon={<MUIOutfitCharactersCountIcon/>}
-							primaryText={this.state.outfit.member_count ? this.state.outfit.member_count+ ' Members' : 'Crunching...'}
-						disabled/>
-						<MUIListItem
-							leftIcon={<MUIAverageBRIcon/>}
-							primaryText={this.state.outfitCharacters.length ? this._calculateAvgBR(this.state.outfitCharacters)+ ' Average BattleRank' : 'Crunching...'}
-						disabled/>
-					</MUIList>
-					<MUIList>
-						<MUIListItem
-							primaryText="Information"
-							initiallyOpen={false}
-							primaryTogglesNestedList={true}
-							nestedItems={[
-								<MUIListItem
-									key={Uuid()}
-									disabled
-									children={[
-										<NestedListHeader>Established</NestedListHeader>,
-										<div>{this.state.outfit.time_created_date ? Moment(this.state.outfit.time_created_date).fromNow() : 'Loading...'}</div>
-									]}/>,
-								<MUIListItem
-									key={Uuid()}
-									disabled
-									children={[
-										<NestedListHeader>Composition</NestedListHeader>,
-										<div style={{display: 'flex', flexWrap: 'wrap'}}>
-											<MUIChip style={style2()}><MUIAvatar>{outfitLeaders.length}</MUIAvatar>Leaders</MUIChip>
-											<MUIChip style={style2()}><MUIAvatar>{outfitOfficers.length}</MUIAvatar>Officers</MUIChip>
-											<MUIChip style={style2()}><MUIAvatar>{outfitMembers.length}</MUIAvatar>Members</MUIChip>
-											<MUIChip style={style2()}><MUIAvatar>{outfitPrivates.length}</MUIAvatar>Privates</MUIChip>
-										</div>
-									]}/>,
-								<MUIListItem
-									key={Uuid()}
-									disabled
-									children={[
-										<NestedListHeader>Login Activity</NestedListHeader>,
-										<MUIList>
-											<MUIListItem
-												primaryText="Past Month"
-												rightAvatar={<MUIAvatar>{calcPercentageOutfitParticipation('month')}</MUIAvatar>}
-											disabled/>
-											<MUIListItem
-												primaryText="Week"
-												rightAvatar={<MUIAvatar>{calcPercentageOutfitParticipation('week')}</MUIAvatar>}
-											disabled/>
-											<MUIListItem
-												primaryText="Day"
-												rightAvatar={<MUIAvatar>{calcPercentageOutfitParticipation('day')}</MUIAvatar>}
-											disabled/>
-										</MUIList>
-									]}/>
-							]}/>
-					</MUIList>
-					<MUIDivider/>
-					<MUIList>
-						<MUIListItem
-							primaryText={'Online (' +onlineCharacters.length+ ')'}
-							initiallyOpen={true}
-							primaryTogglesNestedList={true}
-							nestedItems={onlineCharacters.map((character) =>
-								<MUIListItem
-									key={character.character_id}
-									primaryText={character.character.name.first}
-									secondaryText={character.rank}
-									rightIcon={<MUIArrowRight/>}
-									onTouchTap={() => this.props.routerRef.navigate('/character/' +character.character_id)}/>)}/>
-					</MUIList>
-				</div>
+			<div style={{
+				marginTop: `${size.headerHeight}rem`,
+				height: `calc(100vh - ${size.headerHeight + size.footerHeight}rem)`,
+				overflow: 'scroll',
+				WebkitOverflowScrolling: 'touch',
+			}}>
+				<MUIFAB secondary onTouchTap={this.toggleOutfitBookmark.bind(this, bookmark, this.state.outfit)} style={style1()}>
+					{bookmark ? <MUIBookmarkIcon/> : <MUIBookmarkBorderIcon/>}
+				</MUIFAB>
+				<MUIList>
+					<MUIListItem
+						leftIcon={<MUIOutfitCharactersCountIcon/>}
+						primaryText={this.state.outfit.member_count ? this.state.outfit.member_count+ ' Members' : 'Crunching...'}
+					disabled/>
+					<MUIListItem
+						leftIcon={<MUIAverageBRIcon/>}
+						primaryText={this.state.outfitCharacters.length ? this._calculateAvgBR(this.state.outfitCharacters)+ ' Average BattleRank' : 'Crunching...'}
+					disabled/>
+				</MUIList>
+				<MUIList>
+					<MUIListItem
+						primaryText="Information"
+						initiallyOpen={false}
+						primaryTogglesNestedList={true}
+						nestedItems={[
+							<MUIListItem
+								key={Uuid()}
+								disabled
+								children={[
+									<NestedListHeader>Established</NestedListHeader>,
+									<div>{this.state.outfit.time_created_date ? Moment(this.state.outfit.time_created_date).fromNow() : 'Loading...'}</div>
+								]}/>,
+							<MUIListItem
+								key={Uuid()}
+								disabled
+								children={[
+									<NestedListHeader>Composition</NestedListHeader>,
+									<div style={{display: 'flex', flexWrap: 'wrap'}}>
+										<MUIChip style={style2()}><MUIAvatar>{outfitLeaders.length}</MUIAvatar>Leaders</MUIChip>
+										<MUIChip style={style2()}><MUIAvatar>{outfitOfficers.length}</MUIAvatar>Officers</MUIChip>
+										<MUIChip style={style2()}><MUIAvatar>{outfitMembers.length}</MUIAvatar>Members</MUIChip>
+										<MUIChip style={style2()}><MUIAvatar>{outfitPrivates.length}</MUIAvatar>Privates</MUIChip>
+									</div>
+								]}/>,
+							<MUIListItem
+								key={Uuid()}
+								disabled
+								children={[
+									<NestedListHeader>Login Activity</NestedListHeader>,
+									<MUIList>
+										<MUIListItem
+											primaryText="Past Month"
+											rightAvatar={<MUIAvatar>{calcPercentageOutfitParticipation('month')}</MUIAvatar>}
+										disabled/>
+										<MUIListItem
+											primaryText="Week"
+											rightAvatar={<MUIAvatar>{calcPercentageOutfitParticipation('week')}</MUIAvatar>}
+										disabled/>
+										<MUIListItem
+											primaryText="Day"
+											rightAvatar={<MUIAvatar>{calcPercentageOutfitParticipation('day')}</MUIAvatar>}
+										disabled/>
+									</MUIList>
+								]}/>
+						]}/>
+				</MUIList>
+				<MUIDivider/>
+				<MUIList>
+					<MUIListItem
+						primaryText={'Online (' +onlineCharacters.length+ ')'}
+						initiallyOpen={true}
+						primaryTogglesNestedList={true}
+						nestedItems={onlineCharacters.map((character) =>
+							<MUIListItem
+								key={character.character_id}
+								primaryText={character.character.name.first}
+								secondaryText={character.rank}
+								rightIcon={<MUIArrowRight/>}
+								onTouchTap={() => this.props.routerRef.navigate('/character/' +character.character_id)}/>)}/>
+				</MUIList>
 			</div>
 		)
 	},
@@ -171,6 +170,8 @@ module.exports = React.createClass({
 			.get(env.backend+ '/outfit/' +this.props._Outfit_+ '?server=genudine')
 			.end((err, response) => {
 
+				if (err) throw err
+
 				this.props.changeMarquee('[' +response.body.alias+ ']')
 				this.setState(Shema.call(this, {outfit: response.body}, true), resolve)
 			})
@@ -182,7 +183,12 @@ module.exports = React.createClass({
 
 			Request
 			.get(env.backend+ '/outfit/' +this.props._Outfit_+ '/characters?server=genudine')
-			.end((err, response) => this.setState(Shema.call(this, {outfitCharacters: response.body}, true), resolve))
+			.end((err, response) => {
+
+				if (err) throw err
+
+				this.setState(Shema.call(this, {outfitCharacters: response.body}, true), resolve)
+			})
 		})
 	},
 	readOutfitBookmarks: function () {
@@ -192,7 +198,12 @@ module.exports = React.createClass({
 			Request
 			.get(env.backend+ '/user/' +utils.parseJwtPayload().id+ '/outfit-bookmarks')
 			.set({Authorization: 'Bearer ' +utils.parseJwt()})
-			.end((err, response) => this.setState(Shema.call(this, {outfitBookmarks: response.body}, true), resolve))
+			.end((err, response) => {
+
+				if (err) throw err
+
+				this.setState(Shema.call(this, {outfitBookmarks: response.body}, true), resolve)
+			})
 		})
 	},
 	readOutfitLoginMetrics: function () {
@@ -201,7 +212,12 @@ module.exports = React.createClass({
 
 			Request
 			.get(env.backend+ '/login?_Outfit_=' +this.props._Outfit_+ '&timeframe=month')
-			.end((err, response) => this.setState(Shema.call(this, {outfitLogins: response.body}, true), resolve))
+			.end((err, response) => {
+
+				if (err) throw err
+
+				this.setState(Shema.call(this, {outfitLogins: response.body}, true), resolve)
+			})
 		})
 	},
 	toggleOutfitBookmark: function (bookmark, outfit) {
@@ -215,7 +231,12 @@ module.exports = React.createClass({
 				_Outfit_: outfit.outfit_id,
 				outfitAlias: outfit.alias
 			})
-			.end((err, response) => this.readOutfitBookmarks())
+			.end((err, response) => {
+
+				if (err) throw err
+
+				this.readOutfitBookmarks()
+			})
 		}
 
 		if (bookmark) {
@@ -223,7 +244,12 @@ module.exports = React.createClass({
 			Request
 			.delete(env.backend+ '/outfit-bookmark/' +bookmark.id)
 			.set({Authorization: 'Bearer ' +utils.parseJwt()})
-			.end((err, response) => this.readOutfitBookmarks())
+			.end((err, response) => {
+
+				if (err) throw err
+
+				this.readOutfitBookmarks()
+			})
 		}
 	}
 })

@@ -24,24 +24,24 @@ module.exports = React.createClass({
 					onChange={this.changeEmail}
 					hintText="Email"
 					underlineShow={false}
-					fullWidth/>
+				fullWidth/>
 		    <MUITextField
 					type="password"
 					value={this.state.password}
 					onChange={this.changePassword}
 					hintText="Password"
 					underlineShow={false}
-					fullWidth/>
+				fullWidth/>
 				<MUIRaisedButton
 					label="Login"
 					onTouchTap={this.submitLogin}
 					secondary
-					fullWidth/>
+				fullWidth/>
 		  </div>
 		)
 	},
 	changeEmail: function (e) {
-		
+
 		this.setState(Shema.call(this, {email: e.target.value}, true))
 	},
 	changePassword: function (e) {
@@ -49,7 +49,7 @@ module.exports = React.createClass({
 		this.setState(Shema.call(this, {password: e.target.value}, true))
 	},
 	submitLogin: function () {
-		
+
 		Request
 		.post(env.backend+ '/jwt')
 		.send({
@@ -57,9 +57,9 @@ module.exports = React.createClass({
 			password: this.state.password
 		})
 		.end((err, response) => {
-			
+
 			if (err) throw err
-				
+
 			localStorage.Jwt = JSON.stringify(response.body)
 			this.props.routerRef.navigate('/')
 		})
