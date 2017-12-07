@@ -1,6 +1,7 @@
 import env from '../../env'
 import utils from '../../utils'
 import Shema from '../../shema'
+import size from '../size'
 
 import NestedListHeader from './NestedListHeader'
 
@@ -21,7 +22,6 @@ import MUIOutfitCharactersCountIcon from 'material-ui/svg-icons/action/assignmen
 import MUIAverageBRIcon from 'material-ui/svg-icons/social/poll'
 import MUIBookmarkIcon from 'material-ui/svg-icons/action/bookmark'
 import MUIBookmarkBorderIcon from 'material-ui/svg-icons/action/bookmark-border'
-import PullToRefresh from './PullToRefresh'
 
 
 module.exports = React.createClass({
@@ -72,9 +72,10 @@ module.exports = React.createClass({
 		}
 
 		return (
-			<PullToRefresh refreshHandler={this.refreshHandler}>
+			<div>
 				<div style={{
-					height: '100%',
+					marginTop: `${size.headerHeight}rem`,
+					height: `calc(100vh - ${size.headerHeight + size.footerHeight}rem)`,
 					overflow: 'scroll',
 				}}>
 					<MUIFAB secondary onTouchTap={this.toggleOutfitBookmark.bind(this, bookmark, this.state.outfit)} style={style1()}>
@@ -152,7 +153,7 @@ module.exports = React.createClass({
 									onTouchTap={() => this.props.routerRef.navigate('/character/' +character.character_id)}/>)}/>
 					</MUIList>
 				</div>
-			</PullToRefresh>
+			</div>
 		)
 	},
 	componentDidMount: function () {
@@ -161,19 +162,6 @@ module.exports = React.createClass({
 		this.readOutfitCharacters()
 		this.readOutfitBookmarks()
 		this.readOutfitLoginMetrics()
-	},
-	refreshHandler: function () {
-
-		return new Promise((resolve, reject) => {
-
-			Promise.all([
-				this.readOutfit(),
-				this.readOutfitCharacters(),
-				this.readOutfitBookmarks(),
-				this.readOutfitLoginMetrics(),
-			])
-			.then(resolve)
-		})
 	},
 	readOutfit: function () {
 

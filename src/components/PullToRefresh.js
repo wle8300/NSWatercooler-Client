@@ -18,8 +18,8 @@ class PullToRefresh extends React.Component {
 
     return (
       <div style={{
-        height: '100vh',
-        overflow: 'hidden',
+        // height: '100vh',
+        // overflow: 'hidden',
       }}>
 
 
@@ -39,6 +39,7 @@ class PullToRefresh extends React.Component {
 
         <Draggable
           axis="y"
+          disabled={!this.props.isEnabled}
           bounds={{top: 0}}
           position={{
             x: 0,
@@ -71,11 +72,17 @@ class PullToRefresh extends React.Component {
 
   handleDrag = (e, ui) => {
 
+    console.log('ui', ui);
+
+    // if direction is down && top of list then enable
+
     this.setState((prevState) => {
 
       const yPosition = prevState.yPosition + ui.deltaY
 
-      if (!prevState.isLocked) return { yPosition: yPosition, }
+      if (!prevState.isLocked) return {
+        yPosition: yPosition,
+      }
     })
   }
 
@@ -85,9 +92,9 @@ class PullToRefresh extends React.Component {
     const yPosition = isRefreshHandlerEngaged ? this.props.threshold : 0
 
     this.setState({
+      yPosition: yPosition,
       isLocked: isRefreshHandlerEngaged,
       isRefreshing: isRefreshHandlerEngaged,
-      yPosition: yPosition,
     }, () => {
 
       if (isRefreshHandlerEngaged) {
@@ -115,6 +122,7 @@ PullToRefresh.propTypes = {
 }
 
 PullToRefresh.defaultProps = {
+  isEnabled: true,
   threshold: 100,
 }
 

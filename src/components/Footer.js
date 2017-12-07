@@ -1,3 +1,5 @@
+import size from '../size'
+
 // import Router from 'react-router-component'
 import React from 'react'
 import MUIBottomNavigation from 'material-ui/BottomNavigation/BottomNavigation'
@@ -8,7 +10,6 @@ import MUIOutfitIcon from 'material-ui/svg-icons/action/group-work'
 import MUICharacterIcon from 'material-ui/svg-icons/social/person'
 import MUINavBackArrow from 'material-ui/svg-icons/hardware/keyboard-arrow-left'
 import MUINavForwardArrow from 'material-ui/svg-icons/hardware/keyboard-arrow-right'
-
 
 
 module.exports = React.createClass({
@@ -23,28 +24,33 @@ module.exports = React.createClass({
 	},
   render: function () {
     return (
-			<MUIPaper style={{position: 'fixed', bottom: 0, width: '100%'}}>
-       <MUIBottomNavigation selectedIndex={this.state.selectedIndex} style={{textAlign: 'center'}}>
-		     <MUIBottomNavigationItem
-				  icon={<MUINavBackArrow/>}
-				  onTouchTap={() => {window.history.back()}}/>
-		     <MUIBottomNavigationItem
-				  icon={<MUIHomeIcon/>}
-				  onTouchTap={() => {this.props.routerRef.navigate('/'); this.select(1)}}
-					style={style1(this.props)}/>
-         <MUIBottomNavigationItem
-					 icon={<MUIOutfitIcon/>}
-					 onTouchTap={() => {this.props.routerRef.navigate('/outfit'); this.select(2)}}
- 					 style={style1(this.props)}/>
-         <MUIBottomNavigationItem
-					 icon={<MUICharacterIcon/>}
-					 onTouchTap={() => {this.props.routerRef.navigate('/character'); this.select(3)}}
-					 style={style1(this.props)}/>
- 		     <MUIBottomNavigationItem
- 				  icon={<MUINavForwardArrow/>}
- 				  onTouchTap={() => {window.history.forward()}}/>
-       </MUIBottomNavigation>
-     </MUIPaper>
+			<MUIPaper style={{
+				position: 'fixed',
+				bottom: 0,
+				width: '100%',
+				height: `${size.footerHeight}rem`,
+			}}>
+				<MUIBottomNavigation selectedIndex={this.state.selectedIndex} style={{textAlign: 'center'}}>
+					<MUIBottomNavigationItem
+						icon={<span style={{position: 'relative', top: '0.15rem', left: '1.15rem',}}><MUINavBackArrow style={{color: '#aaa',}}/></span>}
+						onTouchTap={() => {window.history.back()}}/>
+					<MUIBottomNavigationItem
+						icon={<MUIHomeIcon/>}
+						onTouchTap={() => {this.props.routerRef.navigate('/'); this.select(1)}}
+						style={style1(this.props)}/>
+					<MUIBottomNavigationItem
+						icon={<MUIOutfitIcon/>}
+						onTouchTap={() => {this.props.routerRef.navigate('/outfit'); this.select(2)}}
+						style={style1(this.props)}/>
+					<MUIBottomNavigationItem
+						icon={<MUICharacterIcon/>}
+						onTouchTap={() => {this.props.routerRef.navigate('/character'); this.select(3)}}
+						style={style1(this.props)}/>
+					<MUIBottomNavigationItem
+						icon={<span style={{position: 'relative', top: '0.15rem', right: '1.15rem',}}><MUINavForwardArrow style={{color: '#aaa',}}/></span>}
+						onTouchTap={() => {window.history.forward()}}/>
+				</MUIBottomNavigation>
+			</MUIPaper>
     )
   },
 	componentDidUpdate: function (prevProps, prevState) {

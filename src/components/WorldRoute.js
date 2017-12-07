@@ -1,5 +1,6 @@
 import env from '../../env'
 import Shema from '../../shema'
+import size from '../size'
 
 import ContinentControl from './ContinentControl'
 
@@ -20,9 +21,9 @@ module.exports = React.createClass({
   render: function () {
 
 		const PopulationNow = (() => {
-			
+
 			if (!Object.keys(this.state.census).length) return null
-			
+
 			const totalCount = this.state.census.vs + this.state.census.nc + this.state.census.tr
 			const vsCount = this.state.census.vs
 			const ncCount = this.state.census.nc
@@ -40,7 +41,7 @@ module.exports = React.createClass({
 					fontSize: '0.9rem'
 				}
 			}
-			
+
 			return (
 				<div style={{padding: '0.25rem 1.5rem 1rem', backgroundColor: '#00bcd4'}}>
 					<div style={{display: 'flex', width: '100%', color: 'white'}}>
@@ -54,9 +55,12 @@ module.exports = React.createClass({
 				</div>
 			)
 		})()
-		
+
     return (
-			<div>
+			<div style={{
+				marginTop: `${size.headerHeight}rem`,
+				height: `calc(100vh - ${size.headerHeight + size.footerHeight}rem)`,
+			}}>
 				{PopulationNow}
 				<ContinentControl/>
 			</div>
@@ -67,15 +71,15 @@ module.exports = React.createClass({
 		this.props.changeFooter(true)
 	},
 	componentDidMount: function () {
-		
+
 		this.readCensus()
 	},
 	readCensus: function () {
-		
+
 		Request
 		.get(env.backend+ '/census?server=genudine&timeframe=now')
 		.end((err, response) => {
-			
+
 			this.setState(Shema.call(this, {census: response.body}, true))
 		})
 	}

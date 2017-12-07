@@ -16,6 +16,8 @@ import MUITabs from 'material-ui/Tabs/Tabs'
 import MUIAlert from 'material-ui/svg-icons/social/notifications'
 import MUIUnlocked from 'material-ui/svg-icons/action/lock-open'
 import MUILocked from 'material-ui/svg-icons/action/lock'
+import Box from './Box'
+
 
 module.exports = React.createClass({
 	displayName: 'ContinentControl',
@@ -23,12 +25,12 @@ module.exports = React.createClass({
 		return Shema.call(this, {continentControlMetadata: {}, alerts: [], tabIdx: 0})
 	},
 	render: function () {
-		
+
 		const indarTerritoryControl = this._calculateFactionControl('indar') || {}
 		const hossinTerritoryControl = this._calculateFactionControl('hossin') || {}
 		const amerishTerritoryControl = this._calculateFactionControl('amerish') || {}
 		const esamirTerritoryControl = this._calculateFactionControl('esamir') || {}
-		
+
 		return (
 			<div>
 				<MUITabs onChange={this.handleTabIdx}
@@ -38,101 +40,134 @@ module.exports = React.createClass({
 				  <MUITab label="Amerish" icon={this._deriveIcon('Amerish', this.state.alert, amerishTerritoryControl)} value={2}/>
 				  <MUITab label="Esamir" icon={this._deriveIcon('Esamir', this.state.alert, esamirTerritoryControl)} value={3}/>
 				</MUITabs>
-				<SwipeableViews index={this.state.tabIdx}
-				  onChangeIndex={this.handleTabIdx}>
-					<p style={style1()}>
-						<PieChart slices={[
-							{
-								color: 'gray',
-								value: indarTerritoryControl.none || 0
-							},
-							{
-								color: 'purple',
-								value: indarTerritoryControl.vs || 0
-							},
-							{
-								color: 'blue',
-								value: indarTerritoryControl.nc || 0
-							},
-							{
-								color: 'red',
-								value: indarTerritoryControl.tr || 0
-							},
-						]}/>
-					</p>
-					<p style={style1()}>
-						<PieChart slices={[
-							{
-								color: 'gray',
-								value: hossinTerritoryControl.none || 0
-							},
-							{
-								color: 'purple',
-								value: hossinTerritoryControl.vs || 0
-							},
-							{
-								color: 'blue',
-								value: hossinTerritoryControl.nc || 0
-							},
-							{
-								color: 'red',
-								value: hossinTerritoryControl.tr || 0
-							},
-						]}/>
-					</p>
-					<p style={style1()}>
-						<PieChart slices={[
-							{
-								color: 'gray',
-								value: amerishTerritoryControl.none || 0
-							},
-							{
-								color: 'purple',
-								value: amerishTerritoryControl.vs || 0
-							},
-							{
-								color: 'blue',
-								value: amerishTerritoryControl.nc || 0
-							},
-							{
-								color: 'red',
-								value: amerishTerritoryControl.tr || 0
-							},
-						]}/>
-					</p>
-					<p style={style1()}>
-						<PieChart slices={[
-							{
-								color: 'gray',
-								value: esamirTerritoryControl.none || 0
-							},
-							{
-								color: 'purple',
-								value: esamirTerritoryControl.vs || 0
-							},
-							{
-								color: 'blue',
-								value: esamirTerritoryControl.nc || 0
-							},
-							{
-								color: 'red',
-								value: esamirTerritoryControl.tr || 0
-							},
-						]}/>
-					</p>
+				<SwipeableViews
+					index={this.state.tabIdx}
+				  onChangeIndex={this.handleTabIdx}
+					style={{marginTop: '7.5vw'}}>
+					<Box style={{
+						justifyContent: 'center',
+						alignItems: 'center',
+					}}>
+						<div style={{
+							width: '85%',
+						}}>
+
+							<PieChart slices={[
+								{
+									color: 'gray',
+									value: indarTerritoryControl.none || 0
+								},
+								{
+									color: 'purple',
+									value: indarTerritoryControl.vs || 0
+								},
+								{
+									color: 'blue',
+									value: indarTerritoryControl.nc || 0
+								},
+								{
+									color: 'red',
+									value: indarTerritoryControl.tr || 0
+								},
+							]}/>
+						</div>
+					</Box>
+					<Box style={{
+						justifyContent: 'center',
+						alignItems: 'center',
+					}}>
+						<div style={{
+							width: '85%',
+						}}>
+
+							<PieChart slices={[
+								{
+									color: 'gray',
+									value: hossinTerritoryControl.none || 0
+								},
+								{
+									color: 'purple',
+									value: hossinTerritoryControl.vs || 0
+								},
+								{
+									color: 'blue',
+									value: hossinTerritoryControl.nc || 0
+								},
+								{
+									color: 'red',
+									value: hossinTerritoryControl.tr || 0
+								},
+							]}/>
+						</div>
+					</Box>
+					<Box style={{
+						justifyContent: 'center',
+						alignItems: 'center',
+					}}>
+						<div style={{
+							width: '85%',
+						}}>
+							<PieChart slices={[
+								{
+									color: 'gray',
+									value: amerishTerritoryControl.none || 0
+								},
+								{
+									color: 'purple',
+									value: amerishTerritoryControl.vs || 0
+								},
+								{
+									color: 'blue',
+									value: amerishTerritoryControl.nc || 0
+								},
+								{
+									color: 'red',
+									value: amerishTerritoryControl.tr || 0
+								},
+							]}/>
+						</div>
+					</Box>
+					<Box style={{
+						justifyContent: 'center',
+						alignItems: 'center',
+					}}>
+						<div style={{
+							width: '85%',
+						}}>
+
+							<PieChart slices={[
+								{
+									color: 'gray',
+									value: esamirTerritoryControl.none || 0
+								},
+								{
+									color: 'purple',
+									value: esamirTerritoryControl.vs || 0
+								},
+								{
+									color: 'blue',
+									value: esamirTerritoryControl.nc || 0
+								},
+								{
+									color: 'red',
+									value: esamirTerritoryControl.tr || 0
+								},
+							]}/>
+						</div>
+					</Box>
 				</SwipeableViews>
 			</div>
 		)
 	},
 	componentDidMount: function () {
-		
+
 		this.readContinentControlMetadata()
 		this.readAlerts()
 	},
 	_calculateFactionControl: function (continent) {
-	  
+
 		if (!this.state.continentControlMetadata.continents) return null
-		
+
 		if (continent === 'indar') {
 				return {
 					none: this.state.continentControlMetadata.continents[0].control[0],
@@ -167,32 +202,32 @@ module.exports = React.createClass({
 		}
 	},
 	_deriveIcon: function (continent, alert, continentTerritoryControl) {
-		
+
 		if (alert && alert.metagame_event_state_name === 'started') {
-			
+
 			if (continent === 'Indar' && alert.metagame_event_id === "1") return <MUIAlert/>
 			if (continent === 'Esamir' && alert.metagame_event_id === "2") return <MUIAlert/>
 			if (continent === 'Amerish' && alert.metagame_event_id === "3") return <MUIAlert/>
 			if (continent === 'Hossin' && alert.metagame_event_id === "4") return <MUIAlert/>
 		}
-			
+
 		if (!this._isLocked(continentTerritoryControl)) return <MUIUnlocked/>
 		if (this._isLocked(continentTerritoryControl)) return <MUILocked/>
 	},
 	_isLocked: function (continentTerritoryControl) {
-		  
+
 			// 2 or more means locked
-			
+
 			const markNone = continentTerritoryControl.none > 0 ? 1 : 0
 			const markVS = continentTerritoryControl.vs > 0 ? 1 : 0
 			const markNC = continentTerritoryControl.nc > 0 ? 1 : 0
 			const markTR = continentTerritoryControl.tr > 0 ? 1 : 0
-			
+
 			return markNone + markVS + markNC + markTR <= 2 ? true : false
-			
+
 	},
 	readContinentControlMetadata: function () {
-		
+
 		Request
 		.get(env.backend+ '/continent-control-metadata?server=genudine&timeframe=now')
 		.end((err, response) => {
@@ -200,18 +235,14 @@ module.exports = React.createClass({
 		})
 	},
 	readAlerts: function () {
-		
+
 		Request
 		.get(env.backend+ '/alert?server=genudine&limit=1')
 		.end((err, response) => {
 			this.setState(Shema.call(this, {alert: response.body[0]}, true))
-		})		
+		})
 	},
 	handleTabIdx: function (idx) {
 		this.setState(Shema.call(this, {tabIdx: idx}, true))
 	},
 })
-
-function style1() {
-	return {padding: '2.5rem'}
-}

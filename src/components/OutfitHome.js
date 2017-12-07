@@ -10,13 +10,13 @@ import MUIPaper from 'material-ui/Paper'
 // import MUIDivider from 'material-ui/Divider'
 import MUIArrowRight from 'material-ui/svg-icons/hardware/keyboard-arrow-right'
 import MUIList from 'material-ui/List/List'
-// import MUIListItem from 'material-ui/List/ListItem'
+import MUIListItem from 'material-ui/List/ListItem'
 import MUITextField from 'material-ui/TextField'
 import MUIRaisedButton from 'material-ui/RaisedButton'
 // import MUISubheader from 'material-ui/Subheader'
-import PullToRefresh from './PullToRefresh'
+// import PullToRefresh from './PullToRefresh'
 import ListItemOutfit from './ListItemOutfit'
-
+import size from '../size'
 
 module.exports = React.createClass({
 	displayName: 'OutfitHome',
@@ -24,8 +24,11 @@ module.exports = React.createClass({
 		routerRef: React.PropTypes.oneOfType([React.PropTypes.element, React.PropTypes.any]),
 		changeMarquee: React.PropTypes.func.isRequired
 	},
+	_list: null,
 	getInitialState: function () {
 		return Shema.call(this, {
+			scrollPosition: 0,
+			scrollDirection: null,
 			outfitsSearchTerm: '',
 			outfitsSearchResults: [],
 			outfitBookmarks: [],
@@ -35,8 +38,18 @@ module.exports = React.createClass({
 	},
 	render: function () {
 		return (
-			<div>
-				<MUIPaper style={{padding: '0 1rem'}}>
+			<div style={{
+				marginTop: `${size.headerHeight}rem`,
+				height: `calc(100vh - ${size.headerHeight + size.footerHeight}rem)`,
+				overflow: 'scroll',
+			}}>
+				<MUIPaper style={{
+					zIndex: 1,
+					position: 'fixed',
+					padding: '0 1rem',
+					width: '100%',
+					height: `${size.formHeight}rem`,
+				}}>
 					<MUITextField
 						value={this.state.outfitsSearchTerm}
 						onChange={(e) => this.setState(Shema.call(this, {outfitsSearchTerm: e.target.value}, true))}
@@ -61,34 +74,46 @@ module.exports = React.createClass({
 						})}
 					</MUIList>
 				</MUIPaper>
-				<PullToRefresh refreshHandler={this.refreshHandler}>
-					<MUIList>
-						{this.state.outfitBookmarks.map((outfitBookmark) => {
+				{/* <PullToRefresh
+					isEnabled={this.state.scrollPosition < 0 && this.state.scrollDirection === 'up'}
+					refreshHandler={this.refreshHandler}
+				> */}
+				<MUIList
+					style={{
+						marginTop: `${size.formHeight}rem`,
+						padding: 0,
+						height: `calc(100vh - ${size.headerHeight + size.footerHeight + size.formHeight}rem)`,
+						overflow: 'scroll',
+						WebkitOverflowScrolling: 'touch',
+					}}
+				>
+					{this.state.outfitBookmarks.map((outfitBookmark) => {
 
 							// const outfit = this.state.outfits.filter((outfit) => outfit.id === outfitBookmark._Outfit_)[0]
-							const outfitOnlineCount = this.state.outfitsOnlineCount.filter((outfitOnlineCount) => outfitOnlineCount._Outfit_ === outfitBookmark._Outfit_)[0]
-							// {
-							//   _Outfit_: [String object],
-							//   onlineCount: [Number object]
-							// }
+						const outfitOnlineCount = this.state.outfitsOnlineCount.filter((outfitOnlineCount) => outfitOnlineCount._Outfit_ === outfitBookmark._Outfit_)[0]
+						// {
+						//   _Outfit_: [String object],
+						//   onlineCount: [Number object]
+						// }
 
-							return (
-								<VisibilitySensor
-									key={outfitBookmark.id}
-									onChange={(isVisible) => {
-										this.readOutfit(outfitBookmark._Outfit_, isVisible)
-										this.readOutfitOnlineMembers(outfitBookmark._Outfit_, isVisible)
-									}}>
-									<ListItemOutfit
-										onTouchTap={() => this.props.routerRef.navigate('/outfit/' +outfitBookmark._Outfit_)}
-										outfitAlias={outfitBookmark.outfitAlias}
-										outfitOnlineCount={outfitOnlineCount}
+
+						return (
+							<VisibilitySensor
+								key={outfitBookmark.id}
+								onChange={(isVisible) => {
+									this.readOutfit(outfitBookmark._Outfit_, isVisible)
+									this.readOutfitOnlineMembers(outfitBookmark._Outfit_, isVisible)
+								}}>
+								<ListItemOutfit
+									onTouchTap={() => this.props.routerRef.navigate('/outfit/' +outfitBookmark._Outfit_)}
+									outfitAlias={outfitBookmark.outfitAlias}
+									outfitOnlineCount={outfitOnlineCount}
 									/>
 								</VisibilitySensor>
 							)
 						})}
 					</MUIList>
-				</PullToRefresh>
+					{/* </PullToRefresh> */}
 			</div>
 		)
 	},
@@ -110,24 +135,6 @@ module.exports = React.createClass({
 			this.setState(Shema.call(this, {outfitsSearchResults: response.body}, true))
 		})
 	},
-	refreshHandler: function () {
-
-		return new Promise((resolve, reject) => {
-
-			this.setState(
-				{
-					outfitBookmarks: [],
-					outfits: [],
-					outfitsOnlineCount: []
-				},
-				() => {
-
-					this.readOutfitBookmarks()
-					.then(resolve)
-				}
-			)
-		})
-	},
 	readOutfitBookmarks: function () {
 
 		return new Promise((resolve, reject) => {
@@ -145,9 +152,10 @@ module.exports = React.createClass({
 	},
 	readOutfit: function (_Outfit_, isVisible) {
 
-		const isOutfitLoaded = !!this.state.outfits.filter((outfit) => outfit.outfit_id === _Outfit_).length
+		// const isOutfitLoaded = !!this.state.outfits.filter((outfit) => outfit.outfit_id === _Outfit_).length
 
-		if (isVisible && !isOutfitLoaded) {
+		// if (isVisible && !isOutfitLoaded) {
+		if (isVisible) {
 
 			Request
 			.get(env.backend+ '/outfit/' +_Outfit_+ '?server=genudine')
@@ -156,9 +164,10 @@ module.exports = React.createClass({
 	},
 	readOutfitOnlineMembers: function (_Outfit_, isVisible) {
 
-		const isOutfitOnlineCountLoaded = !!this.state.outfitsOnlineCount.filter((outfitOnlineCount) => outfitOnlineCount._Outfit_ === _Outfit_).length
+		// const isOutfitOnlineCountLoaded = !!this.state.outfitsOnlineCount.filter((outfitOnlineCount) => outfitOnlineCount._Outfit_ === _Outfit_).length
 
-		if (isVisible && !isOutfitOnlineCountLoaded) {
+		// if (isVisible && !isOutfitOnlineCountLoaded) {
+		if (isVisible) {
 
 			Request
 			.get(env.backend+ '/outfit/' +_Outfit_+ '/characters?server=genudine&filterOnline=true')

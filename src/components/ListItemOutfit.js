@@ -51,7 +51,7 @@ class ListItemOutfit extends React.Component {
             <div><MUIArrowRight/></div>
           </Box>
         </Box>
-        <Bloom bloomSize={200} backgroundColor="black"/>
+        <Bloom bloomSize={200} backgroundColor="rgba(0, 0, 0, 0.1)"/>
       </div>
     )
   }
