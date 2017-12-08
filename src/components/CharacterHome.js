@@ -31,8 +31,8 @@ module.exports = React.createClass({
 		  charactersSearchTerm: '',
 		  charactersSearchResults: [],
 		  characterSubscriptions: [],
-		  VIZCOLLECTIONCharcterSubscriptionsOnlineStatus: [],
-		  VIZCOLLECTIONcharacterSubscriptionsLogins: [],
+		  charcterSubscriptionsOnlineStatus: [],
+		  characterSubscriptionsLogins: [],
 		})
 	},
   render: function () {
@@ -84,8 +84,8 @@ module.exports = React.createClass({
 					{
 						this.state.characterSubscriptions.map((characterSubscription) => {
 
-							const characterOnlineStatus = this.state.VIZCOLLECTIONCharcterSubscriptionsOnlineStatus.filter((characterOnlineStatus) => characterOnlineStatus._Character_ === characterSubscription._Character_)[0]
-							const characterLastLogin = this.state.VIZCOLLECTIONcharacterSubscriptionsLogins.filter((characterSubscriptionsLogin) => characterSubscriptionsLogin._Character_ === characterSubscription._Character_)[0]
+							const characterOnlineStatus = this.state.charcterSubscriptionsOnlineStatus.filter((characterOnlineStatus) => characterOnlineStatus._Character_ === characterSubscription._Character_)[0]
+							const characterLastLogin = this.state.characterSubscriptionsLogins.filter((characterSubscriptionsLogin) => characterSubscriptionsLogin._Character_ === characterSubscription._Character_)[0]
 
 
 							return (
@@ -140,29 +140,53 @@ module.exports = React.createClass({
 	},
 	readCharacterOnlineStatus: function (_Character_, isVisible) {
 
-		const alreadyLoaded = !!this.state.VIZCOLLECTIONCharcterSubscriptionsOnlineStatus.filter((characterOnlineStatus) => characterOnlineStatus._Character_ === _Character_).length
-
-		if (isVisible && !alreadyLoaded) {
+		// const alreadyLoaded = !!this.state.charcterSubscriptionsOnlineStatus.filter((characterOnlineStatus) => characterOnlineStatus._Character_ === _Character_).length
+		//
+		// if (isVisible && !alreadyLoaded) {
 
 			Request
 			.get(env.backend+ '/character/' +_Character_+ '?server=genudine')
-			.end((err, response) => this.setState(Shema.call(this, {VIZCOLLECTIONCharcterSubscriptionsOnlineStatus: this.state.VIZCOLLECTIONCharcterSubscriptionsOnlineStatus.concat({_Character_: _Character_, isOnline: response.body.online_status !== "0" ? true : false})}, true)))
-		}
+			.end((err, response) => {
+
+				const charcterSubscriptionsOnlineStatusUpdated = this.state.charcterSubscriptionsOnlineStatus.filter((el) => el._Character_ !== _Character_)
+				.concat({_Character_: _Character_, isOnline: response.body.online_status !== "0" ? true : false})
+
+				this.setState(
+					Shema.call(
+						this,
+						{
+							charcterSubscriptionsOnlineStatus: charcterSubscriptionsOnlineStatusUpdated
+						},
+						true
+					)
+				)
+			})
+		// }
 	},
 	readCharacterLogins: function (_Character_, isVisible) {
 
-		const alreadyLoaded = !!this.state.VIZCOLLECTIONcharacterSubscriptionsLogins.filter((characterLogin) => characterLogin._Character_ === _Character_).length
+		// const alreadyLoaded = !!this.state.characterSubscriptionsLogins.filter((characterLogin) => characterLogin._Character_ === _Character_).length
 
-		if (isVisible && !alreadyLoaded) {
-
+		// if (isVisible && !alreadyLoaded) {
+		//
 			Request
 			.get(env.backend+ '/character/' +_Character_+ '/logins')
 			.end((err, response) => {
 
 				if (!response.body.length) return
 
-				this.setState(Shema.call(this, {VIZCOLLECTIONcharacterSubscriptionsLogins: this.state.VIZCOLLECTIONcharacterSubscriptionsLogins.concat({_Character_: _Character_, login: response.body[0]})}, true))
+
+				const characterSubscriptionsLoginsUpdated = this.state.characterSubscriptionsLogins.filter((el) => el._Character_ !== _Character_).concat({_Character_: _Character_, login: response.body[0]})
+
+
+				this.setState(
+					Shema.call(
+						this,
+						{characterSubscriptionsLogins: characterSubscriptionsLoginsUpdated},
+						true
+					)
+				)
 			})
-		}
+		// }
 	}
 })

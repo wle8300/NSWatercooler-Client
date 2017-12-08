@@ -159,7 +159,15 @@ module.exports = React.createClass({
 
 			Request
 			.get(env.backend+ '/outfit/' +_Outfit_+ '?server=genudine')
-			.end((err, response) => this.setState(Shema.call(this, {outfits: this.state.outfits.concat(response.body)}, true)))
+			.end((err, response) => {
+
+				const outfitsUpdated = this.state.outfits.filter((outfit) => {
+					return outfit.outfit_id !== _Outfit_
+				}).concat(response.body)
+
+
+				this.setState(Shema.call(this, {outfits: outfitsUpdated}, true))
+			})
 		}
 	},
 	readOutfitOnlineMembers: function (_Outfit_, isVisible) {
@@ -167,11 +175,26 @@ module.exports = React.createClass({
 		// const isOutfitOnlineCountLoaded = !!this.state.outfitsOnlineCount.filter((outfitOnlineCount) => outfitOnlineCount._Outfit_ === _Outfit_).length
 
 		// if (isVisible && !isOutfitOnlineCountLoaded) {
+
 		if (isVisible) {
 
 			Request
 			.get(env.backend+ '/outfit/' +_Outfit_+ '/characters?server=genudine&filterOnline=true')
-			.end((err, response) => this.setState(Shema.call(this, {outfitsOnlineCount: this.state.outfitsOnlineCount.concat({_Outfit_: _Outfit_, onlineCount: response.body.length})}, true)))
+			.end((err, response) => {
+
+				const outfitsOnlineCountUpdated = this.state.outfitsOnlineCount.filter((el) => el._Outfit_ !== _Outfit_).concat({_Outfit_: _Outfit_, onlineCount: response.body.length})
+
+
+				return this.setState(
+					Shema.call(
+						this,
+						{
+							outfitsOnlineCount: outfitsOnlineCountUpdated
+						},
+						true
+					)
+				)
+			})
 		}
 	}
 })
