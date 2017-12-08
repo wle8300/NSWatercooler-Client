@@ -85995,6 +85995,22 @@
 				_react2.default.createElement(
 					'div',
 					{
+						style: {
+							position: 'fixed',
+							top: _size2.default.headerHeight + 'rem',
+							left: 0,
+							fontSize: '12rem',
+							fontStyle: 'italic',
+							color: '#f5f5f5',
+							fontWeight: 'bold',
+							fontFamily: 'Helvetica'
+						}
+					},
+					this.state.outfit.alias
+				),
+				_react2.default.createElement(
+					'div',
+					{
 						onTouchTap: this.toggleOutfitBookmark.bind(this, bookmark, this.state.outfit),
 						style: {
 							zIndex: 1,
@@ -86015,28 +86031,11 @@
 				_react2.default.createElement(
 					'div',
 					{ style: {
-							position: 'relative',
 							marginTop: _size2.default.headerHeight + 'rem',
 							height: 'calc(100vh - ' + (_size2.default.headerHeight + _size2.default.footerHeight) + 'rem)',
 							overflow: 'scroll',
 							WebkitOverflowScrolling: 'touch'
 						} },
-					_react2.default.createElement(
-						'div',
-						{
-							style: {
-								position: 'fixed',
-								top: _size2.default.headerHeight + 'rem',
-								left: 0,
-								fontSize: '12rem',
-								fontStyle: 'italic',
-								color: '#f5f5f5',
-								fontWeight: 'bold',
-								fontFamily: 'Helvetica'
-							}
-						},
-						this.state.outfit.alias
-					),
 					_react2.default.createElement(
 						'div',
 						{ style: { marginLeft: '1rem' } },
@@ -90814,4 +90813,4 @@
 
 /***/ }
 /******/ ])));
-//# sourceMappingURL=main.3ef2decf.js.map
+//# sourceMappingURL=main.b3c61734.js.map

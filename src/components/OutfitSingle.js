@@ -83,6 +83,20 @@ module.exports = React.createClass({
 		return (
 			<div>
 				<div
+					style={{
+						position: 'fixed',
+						top: `${size.headerHeight}rem`,
+						left: 0,
+						fontSize: '12rem',
+						fontStyle: 'italic',
+						color: '#f5f5f5',
+						fontWeight: 'bold',
+						fontFamily: 'Helvetica',
+					}}
+				>
+					{this.state.outfit.alias}
+				</div>
+				<div
 					onTouchTap={this.toggleOutfitBookmark.bind(this, bookmark, this.state.outfit)}
 					style={{
 						zIndex: 1,
@@ -101,26 +115,11 @@ module.exports = React.createClass({
 					{bookmark ? <MUIBookmarkIcon color="white"/> : <MUIBookmarkBorderIcon color="white"/>}
 				</div>
 				<div style={{
-					position: 'relative',
 					marginTop: `${size.headerHeight}rem`,
 					height: `calc(100vh - ${size.headerHeight + size.footerHeight}rem)`,
 					overflow: 'scroll',
 					WebkitOverflowScrolling: 'touch',
 				}}>
-					<div
-						style={{
-							position: 'fixed',
-							top: `${size.headerHeight}rem`,
-							left: 0,
-							fontSize: '12rem',
-							fontStyle: 'italic',
-							color: '#f5f5f5',
-							fontWeight: 'bold',
-							fontFamily: 'Helvetica',
-						}}
-					>
-						{this.state.outfit.alias}
-					</div>
 					{/* <MUIFAB secondary onTouchTap={this.toggleOutfitBookmark.bind(this, bookmark, this.state.outfit)} style={style1()}>
 							{bookmark ? <MUIBookmarkIcon/> : <MUIBookmarkBorderIcon/>}
 					</MUIFAB> */}
