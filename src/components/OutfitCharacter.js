@@ -23,7 +23,6 @@ class OutfitCharacter extends React.Component {
         onTouchEnd={() => this.setState({isPressed: false})}
 
         style={{
-          position: 'relative',
           display: 'flex',
           justifyContent: 'center',
           alignItems: 'center',
@@ -35,9 +34,6 @@ class OutfitCharacter extends React.Component {
       >
         <Box
           style={{
-            position: 'absolute',
-            top: 0,
-            left: 0,
             alignItems: 'center',
             width: '100%',
             height: '100%',
@@ -52,11 +48,10 @@ class OutfitCharacter extends React.Component {
               height: '100%',
             }}
           >
-            <Box>
-              {this.props.characterName}
-              <br/>
-              {this.props.characterLastLogin}
-            </Box>
+            <div>
+              <div>{this.props.characterName}</div>
+              <div style={{fontSize: '0.8rem', color: 'gray',}}>{this.props.characterLastLogin}</div>
+            </div>
             <div><MUIArrowRight/></div>
           </Box>
         </Box>

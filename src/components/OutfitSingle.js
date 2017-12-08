@@ -82,25 +82,58 @@ module.exports = React.createClass({
 
 		return (
 			<div style={{
+				position: 'relative',
 				marginTop: `${size.headerHeight}rem`,
 				height: `calc(100vh - ${size.headerHeight + size.footerHeight}rem)`,
 				overflow: 'scroll',
 				WebkitOverflowScrolling: 'touch',
 			}}>
-				<MUIFAB secondary onTouchTap={this.toggleOutfitBookmark.bind(this, bookmark, this.state.outfit)} style={style1()}>
-					{bookmark ? <MUIBookmarkIcon/> : <MUIBookmarkBorderIcon/>}
-				</MUIFAB>
-				<MUIList>
+				<div
+					style={{
+						position: 'fixed',
+						top: `${size.headerHeight}rem`,
+						left: 0,
+						fontSize: '12rem',
+						fontStyle: 'italic',
+						color: '#f5f5f5',
+						fontWeight: 'bold',
+						fontFamily: 'Helvetica',
+					}}
+				>
+					{this.state.outfit.alias}
+				</div>
+				<div
+					onTouchTap={this.toggleOutfitBookmark.bind(this, bookmark, this.state.outfit)}
+					style={{
+						zIndex: 1,
+						position: 'fixed',
+						right: '1.5rem',
+						bottom: '5rem',
+						display: 'flex',
+						justifyContent: 'center',
+						alignItems:  'center',
+						width: '3.5rem',
+						height: '3.5rem',
+						backgroundColor: 'gray',
+						borderRadius: '3.5rem',
+					}}
+				>
+					{bookmark ? <MUIBookmarkIcon color="white"/> : <MUIBookmarkBorderIcon color="white"/>}
+				</div>
+				{/* <MUIFAB secondary onTouchTap={this.toggleOutfitBookmark.bind(this, bookmark, this.state.outfit)} style={style1()}>
+						{bookmark ? <MUIBookmarkIcon/> : <MUIBookmarkBorderIcon/>}
+				</MUIFAB> */}
+				{/*<MUIList>
 					<MUIListItem
-						leftIcon={<MUIOutfitCharactersCountIcon/>}
-						primaryText={this.state.outfit.member_count ? this.state.outfit.member_count+ ' Members' : 'Crunching...'}
+					leftIcon={<MUIOutfitCharactersCountIcon/>}
+					primaryText={this.state.outfit.member_count ? this.state.outfit.member_count+ ' Members' : 'Crunching...'}
 					disabled/>
 					<MUIListItem
-						leftIcon={<MUIAverageBRIcon/>}
-						primaryText={this.state.outfitCharacters.length ? this._calculateAvgBR(this.state.outfitCharacters)+ ' Average BattleRank' : 'Crunching...'}
+					leftIcon={<MUIAverageBRIcon/>}
+					primaryText={this.state.outfitCharacters.length ? this._calculateAvgBR(this.state.outfitCharacters)+ ' Average BattleRank' : 'Crunching...'}
 					disabled/>
-				</MUIList>
-				{/* <MUIList>
+					</MUIList>
+					<MUIList>
 					<MUIListItem
 						primaryText="Information"
 						initiallyOpen={false}

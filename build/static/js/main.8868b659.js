@@ -85455,7 +85455,6 @@
 	          },
 	
 	          style: {
-	            position: 'relative',
 	            display: 'flex',
 	            justifyContent: 'center',
 	            alignItems: 'center',
@@ -85469,9 +85468,6 @@
 	          _Box2.default,
 	          {
 	            style: {
-	              position: 'absolute',
-	              top: 0,
-	              left: 0,
 	              alignItems: 'center',
 	              width: '100%',
 	              height: '100%'
@@ -85489,11 +85485,18 @@
 	              }
 	            },
 	            _react2.default.createElement(
-	              _Box2.default,
+	              'div',
 	              null,
-	              this.props.characterName,
-	              _react2.default.createElement('br', null),
-	              this.props.characterLastLogin
+	              _react2.default.createElement(
+	                'div',
+	                null,
+	                this.props.characterName
+	              ),
+	              _react2.default.createElement(
+	                'div',
+	                { style: { fontSize: '0.8rem', color: 'gray' } },
+	                this.props.characterLastLogin
+	              )
 	            ),
 	            _react2.default.createElement(
 	              'div',
@@ -85989,27 +85992,47 @@
 			return _react2.default.createElement(
 				'div',
 				{ style: {
+						position: 'relative',
 						marginTop: _size2.default.headerHeight + 'rem',
 						height: 'calc(100vh - ' + (_size2.default.headerHeight + _size2.default.footerHeight) + 'rem)',
 						overflow: 'scroll',
 						WebkitOverflowScrolling: 'touch'
 					} },
 				_react2.default.createElement(
-					_FloatingActionButton2.default,
-					{ secondary: true, onTouchTap: this.toggleOutfitBookmark.bind(this, bookmark, this.state.outfit), style: style1() },
-					bookmark ? _react2.default.createElement(_bookmark2.default, null) : _react2.default.createElement(_bookmarkBorder2.default, null)
+					'div',
+					{
+						style: {
+							position: 'fixed',
+							top: _size2.default.headerHeight + 'rem',
+							left: 0,
+							fontSize: '12rem',
+							fontStyle: 'italic',
+							color: '#f5f5f5',
+							fontWeight: 'bold',
+							fontFamily: 'Helvetica'
+						}
+					},
+					this.state.outfit.alias
 				),
 				_react2.default.createElement(
-					_List2.default,
-					null,
-					_react2.default.createElement(_ListItem2.default, {
-						leftIcon: _react2.default.createElement(_assignmentInd2.default, null),
-						primaryText: this.state.outfit.member_count ? this.state.outfit.member_count + ' Members' : 'Crunching...',
-						disabled: true }),
-					_react2.default.createElement(_ListItem2.default, {
-						leftIcon: _react2.default.createElement(_poll2.default, null),
-						primaryText: this.state.outfitCharacters.length ? this._calculateAvgBR(this.state.outfitCharacters) + ' Average BattleRank' : 'Crunching...',
-						disabled: true })
+					'div',
+					{
+						onTouchTap: this.toggleOutfitBookmark.bind(this, bookmark, this.state.outfit),
+						style: {
+							zIndex: 1,
+							position: 'fixed',
+							right: '1.5rem',
+							bottom: '5rem',
+							display: 'flex',
+							justifyContent: 'center',
+							alignItems: 'center',
+							width: '3.5rem',
+							height: '3.5rem',
+							backgroundColor: 'gray',
+							borderRadius: '3.5rem'
+						}
+					},
+					bookmark ? _react2.default.createElement(_bookmark2.default, { color: 'white' }) : _react2.default.createElement(_bookmarkBorder2.default, { color: 'white' })
 				),
 				_react2.default.createElement(
 					'div',
@@ -90787,4 +90810,4 @@
 
 /***/ }
 /******/ ])));
-//# sourceMappingURL=main.093e0f60.js.map
+//# sourceMappingURL=main.8868b659.js.map
