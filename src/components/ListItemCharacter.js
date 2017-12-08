@@ -32,28 +32,29 @@ class ListItemCharacter extends React.Component {
         >
           <Box
             style={{
+              justifyContent: 'space-between',
               alignItems: 'center',
               padding: '1rem',
               width: '100%',
               height: '100%',
             }}
           >
-            <Box style={{
-              justifyContent: 'center',
-              alignItems: 'center',
-              marginRight: '1rem',
-            }}>
-              <OnlineStatus isOnline={this.props.characterOnlineStatus ? this.props.characterOnlineStatus.isOnline : false} isLoading={!this.props.characterOnlineStatus ? true : false}/>
-            </Box>
-            <div>
+            <Box>
+              <Box style={{
+                justifyContent: 'center',
+                alignItems: 'center',
+                marginRight: '1rem',
+              }}>
+                <OnlineStatus isOnline={this.props.characterOnlineStatus ? this.props.characterOnlineStatus.isOnline : false} isLoading={!this.props.characterOnlineStatus ? true : false}/>
+              </Box>
               {this.props.characterName}
               <br/>
               {this.props.characterLastLogin}
-            </div>
-            <div style={{position: 'absolute', right: '1rem'}}><MUIArrowRight/></div>
+            </Box>
+            <div><MUIArrowRight/></div>
           </Box>
         </Box>
-        <Bloom bloomSize={200} backgroundColor="black"/>
+        <Bloom bloomSize={200} backgroundColor="black" opacity={0.25}/>
       </div>
     )
   }

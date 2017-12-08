@@ -2,7 +2,7 @@ import env from '../../env'
 import utils from '../../utils'
 import Shema from '../../shema'
 import size from '../size'
-
+import Box from './Box'
 import NestedListHeader from './NestedListHeader'
 
 import Uuid from 'uuid/v4'
@@ -23,6 +23,8 @@ import MUIAverageBRIcon from 'material-ui/svg-icons/social/poll'
 import MUIBookmarkIcon from 'material-ui/svg-icons/action/bookmark'
 import MUIBookmarkBorderIcon from 'material-ui/svg-icons/action/bookmark-border'
 import VisibilitySensor from 'react-visibility-sensor'
+import Bloom from 'react-bloom'
+
 
 module.exports = React.createClass({
 	displayName: 'OutfitSingle',
@@ -75,6 +77,51 @@ module.exports = React.createClass({
 			.filter((_Character_, idx, array) => array.indexOf(_Character_) === idx).length
 
 			return parseInt(100 *  uniqueCount / this.state.outfitCharacters.length, 10)+ '%'
+		}
+
+		const Character = (props) => {
+			return (
+				<div
+					onTouchTap={props.onTouchTap}
+					style={{
+						position: 'relative',
+						display: 'flex',
+						justifyContent: 'center',
+						alignItems: 'center',
+						height: '4.3rem',
+						overflow: 'hidden',
+					}}
+				>
+					<Box
+						style={{
+							position: 'absolute',
+							top: 0,
+							left: 0,
+							alignItems: 'center',
+							width: '100%',
+							height: '100%',
+						}}
+					>
+						<Box
+							style={{
+								justifyContent: 'space-between',
+								alignItems: 'center',
+								padding: '1rem',
+								width: '100%',
+								height: '100%',
+							}}
+						>
+							<div>
+								{props.characterName}
+								<br/>
+								{props.characterLastLogin}
+							</div>
+							<div style={{}}><MUIArrowRight/></div>
+						</Box>
+					</Box>
+					<Bloom bloomSize={200} backgroundColor="black" opacity={0.25}/>
+				</div>
+			)
 		}
 
 		return (
@@ -162,11 +209,11 @@ module.exports = React.createClass({
 
 								return (
 									<VisibilitySensor key={character.character_id} onChange={(isVisible) => {this.readOutfitCharacterLogins(character.character_id)}}>
-										<MUIListItem
-											primaryText={character.character.name.first}
-											secondaryText={characterLastLogin ? Moment(characterLastLogin.login.time).fromNow() : null}
-											rightIcon={<MUIArrowRight/>}
-											onTouchTap={() => this.props.routerRef.navigate('/character/' +character.character_id)}/>
+										<Character
+											onTouchTap={() => this.props.routerRef.navigate('/character/' +character.character_id)}
+											characterName={character.character.name.first}
+											characterLastLogin={characterLastLogin ? Moment(characterLastLogin.login.time).fromNow() : null}
+										/>
 									</VisibilitySensor>
 								)
 							})
@@ -187,11 +234,11 @@ module.exports = React.createClass({
 
 								return (
 									<VisibilitySensor key={character.character_id} onChange={(isVisible) => {this.readOutfitCharacterLogins(character.character_id)}}>
-										<MUIListItem
-											primaryText={character.character.name.first}
-											secondaryText={characterLastLogin ? Moment(characterLastLogin.login.time).fromNow() : null}
-											rightIcon={<MUIArrowRight/>}
-											onTouchTap={() => this.props.routerRef.navigate('/character/' +character.character_id)}/>
+										<Character
+											onTouchTap={() => this.props.routerRef.navigate('/character/' +character.character_id)}
+											characterName={character.character.name.first}
+											characterLastLogin={characterLastLogin ? Moment(characterLastLogin.login.time).fromNow() : null}
+										/>
 									</VisibilitySensor>
 								)
 							})
@@ -212,11 +259,11 @@ module.exports = React.createClass({
 
 								return (
 									<VisibilitySensor key={character.character_id} onChange={(isVisible) => {this.readOutfitCharacterLogins(character.character_id)}}>
-										<MUIListItem
-											primaryText={character.character.name.first}
-											secondaryText={characterLastLogin ? Moment(characterLastLogin.login.time).fromNow() : null}
-											rightIcon={<MUIArrowRight/>}
-											onTouchTap={() => this.props.routerRef.navigate('/character/' +character.character_id)}/>
+										<Character
+											onTouchTap={() => this.props.routerRef.navigate('/character/' +character.character_id)}
+											characterName={character.character.name.first}
+											characterLastLogin={characterLastLogin ? Moment(characterLastLogin.login.time).fromNow() : null}
+										/>
 									</VisibilitySensor>
 								)
 							})
@@ -237,11 +284,11 @@ module.exports = React.createClass({
 
 								return (
 									<VisibilitySensor key={character.character_id} onChange={(isVisible) => {this.readOutfitCharacterLogins(character.character_id)}}>
-										<MUIListItem
-											primaryText={character.character.name.first}
-											secondaryText={characterLastLogin ? Moment(characterLastLogin.login.time).fromNow() : null}
-											rightIcon={<MUIArrowRight/>}
-											onTouchTap={() => this.props.routerRef.navigate('/character/' +character.character_id)}/>
+										<Character
+											onTouchTap={() => this.props.routerRef.navigate('/character/' +character.character_id)}
+											characterName={character.character.name.first}
+											characterLastLogin={characterLastLogin ? Moment(characterLastLogin.login.time).fromNow() : null}
+										/>
 									</VisibilitySensor>
 								)
 							})
