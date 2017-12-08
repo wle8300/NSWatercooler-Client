@@ -81,27 +81,7 @@ module.exports = React.createClass({
 		}
 
 		return (
-			<div style={{
-				position: 'relative',
-				marginTop: `${size.headerHeight}rem`,
-				height: `calc(100vh - ${size.headerHeight + size.footerHeight}rem)`,
-				overflow: 'scroll',
-				WebkitOverflowScrolling: 'touch',
-			}}>
-				<div
-					style={{
-						position: 'fixed',
-						top: `${size.headerHeight}rem`,
-						left: 0,
-						fontSize: '12rem',
-						fontStyle: 'italic',
-						color: '#f5f5f5',
-						fontWeight: 'bold',
-						fontFamily: 'Helvetica',
-					}}
-				>
-					{this.state.outfit.alias}
-				</div>
+			<div>
 				<div
 					onTouchTap={this.toggleOutfitBookmark.bind(this, bookmark, this.state.outfit)}
 					style={{
@@ -120,171 +100,193 @@ module.exports = React.createClass({
 				>
 					{bookmark ? <MUIBookmarkIcon color="white"/> : <MUIBookmarkBorderIcon color="white"/>}
 				</div>
-				{/* <MUIFAB secondary onTouchTap={this.toggleOutfitBookmark.bind(this, bookmark, this.state.outfit)} style={style1()}>
-						{bookmark ? <MUIBookmarkIcon/> : <MUIBookmarkBorderIcon/>}
-				</MUIFAB> */}
-				{/*<MUIList>
-					<MUIListItem
-					leftIcon={<MUIOutfitCharactersCountIcon/>}
-					primaryText={this.state.outfit.member_count ? this.state.outfit.member_count+ ' Members' : 'Crunching...'}
-					disabled/>
-					<MUIListItem
-					leftIcon={<MUIAverageBRIcon/>}
-					primaryText={this.state.outfitCharacters.length ? this._calculateAvgBR(this.state.outfitCharacters)+ ' Average BattleRank' : 'Crunching...'}
-					disabled/>
-					</MUIList>
-					<MUIList>
-					<MUIListItem
-						primaryText="Information"
-						initiallyOpen={false}
-						primaryTogglesNestedList={true}
-						nestedItems={[
-					<MUIListItem
-					key={Uuid()}
-					disabled
-					children={[
-					<NestedListHeader>Established</NestedListHeader>,
-					<div>{this.state.outfit.time_created_date ? Moment(this.state.outfit.time_created_date).fromNow() : 'Loading...'}</div>
-					]}/>,
-					<MUIListItem
-					key={Uuid()}
-					disabled
-					children={[
-					<NestedListHeader>Composition</NestedListHeader>,
-					<div style={{display: 'flex', flexWrap: 'wrap'}}>
-					<MUIChip style={style2()}><MUIAvatar>{outfitLeaders.length}</MUIAvatar>Leaders</MUIChip>
-					<MUIChip style={style2()}><MUIAvatar>{outfitOfficers.length}</MUIAvatar>Officers</MUIChip>
-					<MUIChip style={style2()}><MUIAvatar>{outfitMembers.length}</MUIAvatar>Members</MUIChip>
-					<MUIChip style={style2()}><MUIAvatar>{outfitPrivates.length}</MUIAvatar>Privates</MUIChip>
+				<div style={{
+					position: 'relative',
+					marginTop: `${size.headerHeight}rem`,
+					height: `calc(100vh - ${size.headerHeight + size.footerHeight}rem)`,
+					overflow: 'scroll',
+					WebkitOverflowScrolling: 'touch',
+				}}>
+					<div
+						style={{
+							position: 'fixed',
+							top: `${size.headerHeight}rem`,
+							left: 0,
+							fontSize: '12rem',
+							fontStyle: 'italic',
+							color: '#f5f5f5',
+							fontWeight: 'bold',
+							fontFamily: 'Helvetica',
+						}}
+					>
+						{this.state.outfit.alias}
 					</div>
-					]}/>,
-					<MUIListItem
-					key={Uuid()}
-					disabled
-					children={[
-					<NestedListHeader>Login Activity</NestedListHeader>,
-					<MUIList>
-					<MUIListItem
-					primaryText="Past Month"
-					rightAvatar={<MUIAvatar>{calcPercentageOutfitParticipation('month')}</MUIAvatar>}
-					disabled/>
-					<MUIListItem
-					primaryText="Week"
-					rightAvatar={<MUIAvatar>{calcPercentageOutfitParticipation('week')}</MUIAvatar>}
-					disabled/>
-					<MUIListItem
-					primaryText="Day"
-					rightAvatar={<MUIAvatar>{calcPercentageOutfitParticipation('day')}</MUIAvatar>}
-					disabled/>
-					</MUIList>
-					]}/>
+					{/* <MUIFAB secondary onTouchTap={this.toggleOutfitBookmark.bind(this, bookmark, this.state.outfit)} style={style1()}>
+							{bookmark ? <MUIBookmarkIcon/> : <MUIBookmarkBorderIcon/>}
+					</MUIFAB> */}
+					{/*<MUIList>
+						<MUIListItem
+						leftIcon={<MUIOutfitCharactersCountIcon/>}
+						primaryText={this.state.outfit.member_count ? this.state.outfit.member_count+ ' Members' : 'Crunching...'}
+						disabled/>
+						<MUIListItem
+						leftIcon={<MUIAverageBRIcon/>}
+						primaryText={this.state.outfitCharacters.length ? this._calculateAvgBR(this.state.outfitCharacters)+ ' Average BattleRank' : 'Crunching...'}
+						disabled/>
+						</MUIList>
+						<MUIList>
+						<MUIListItem
+							primaryText="Information"
+							initiallyOpen={false}
+							primaryTogglesNestedList={true}
+							nestedItems={[
+						<MUIListItem
+						key={Uuid()}
+						disabled
+						children={[
+						<NestedListHeader>Established</NestedListHeader>,
+						<div>{this.state.outfit.time_created_date ? Moment(this.state.outfit.time_created_date).fromNow() : 'Loading...'}</div>
+						]}/>,
+						<MUIListItem
+						key={Uuid()}
+						disabled
+						children={[
+						<NestedListHeader>Composition</NestedListHeader>,
+						<div style={{display: 'flex', flexWrap: 'wrap'}}>
+						<MUIChip style={style2()}><MUIAvatar>{outfitLeaders.length}</MUIAvatar>Leaders</MUIChip>
+						<MUIChip style={style2()}><MUIAvatar>{outfitOfficers.length}</MUIAvatar>Officers</MUIChip>
+						<MUIChip style={style2()}><MUIAvatar>{outfitMembers.length}</MUIAvatar>Members</MUIChip>
+						<MUIChip style={style2()}><MUIAvatar>{outfitPrivates.length}</MUIAvatar>Privates</MUIChip>
+						</div>
+						]}/>,
+						<MUIListItem
+						key={Uuid()}
+						disabled
+						children={[
+						<NestedListHeader>Login Activity</NestedListHeader>,
+						<MUIList>
+						<MUIListItem
+						primaryText="Past Month"
+						rightAvatar={<MUIAvatar>{calcPercentageOutfitParticipation('month')}</MUIAvatar>}
+						disabled/>
+						<MUIListItem
+						primaryText="Week"
+						rightAvatar={<MUIAvatar>{calcPercentageOutfitParticipation('week')}</MUIAvatar>}
+						disabled/>
+						<MUIListItem
+						primaryText="Day"
+						rightAvatar={<MUIAvatar>{calcPercentageOutfitParticipation('day')}</MUIAvatar>}
+						disabled/>
+						</MUIList>
 						]}/>
-				</MUIList> */}
-				<div style={{marginLeft: '1rem'}}>
-					Online ({onlineCharacters.length})
+							]}/>
+					</MUIList> */}
+					<div style={{marginLeft: '1rem'}}>
+						Online ({onlineCharacters.length})
+					</div>
+					<MUIList>
+						<div style={{
+							position: 'relative',
+							margin: '0 1rem 1rem 1rem',
+							border: '0.25rem solid black',
+							borderRadius: 'calc(1rem / 4)',
+						}}>
+							{
+								onlineLeaders.map((character) => {
+
+									const characterLastLogin = this.state.outfitCharacterLogins.filter(($) => $._Character_ === character.character_id)[0]
+
+
+									return (
+										<VisibilitySensor key={character.character_id} onChange={(isVisible) => {this.readOutfitCharacterLogins(character.character_id)}}>
+											<OutfitCharacter
+												onTouchTap={() => this.props.routerRef.navigate('/character/' +character.character_id)}
+												characterName={character.character.name.first}
+												characterLastLogin={characterLastLogin ? Moment(characterLastLogin.login.time).fromNow() : null}
+											/>
+										</VisibilitySensor>
+									)
+								})
+							}
+							<span style={{position: 'absolute', right: '1rem', bottom: '-0.75rem', padding: '0 0.5rem', backgroundColor: 'white', color: 'black',}}>LEADERS</span>
+						</div>
+						<div style={{
+								position: 'relative',
+								margin: '0 1rem 1rem 1rem',
+								border: '0.25rem solid black',
+								borderRadius: 'calc(1rem / 4)',
+						}}>
+							{
+								onlineOfficers.map((character) => {
+
+									const characterLastLogin = this.state.outfitCharacterLogins.filter(($) => $._Character_ === character.character_id)[0]
+
+
+									return (
+										<VisibilitySensor key={character.character_id} onChange={(isVisible) => {this.readOutfitCharacterLogins(character.character_id)}}>
+											<OutfitCharacter
+												onTouchTap={() => this.props.routerRef.navigate('/character/' +character.character_id)}
+												characterName={character.character.name.first}
+												characterLastLogin={characterLastLogin ? Moment(characterLastLogin.login.time).fromNow() : null}
+											/>
+										</VisibilitySensor>
+									)
+								})
+							}
+							<span style={{position: 'absolute', right: '1rem', bottom: '-0.75rem', padding: '0 0.5rem', backgroundColor: 'white', color: 'black',}}>OFFICERS</span>
+						</div>
+						<div style={{
+							position: 'relative',
+							margin: '0 1rem 1rem 1rem',
+							border: '0.25rem solid black',
+							borderRadius: 'calc(1rem / 4)',
+						}}>
+							{
+								onlineMembers.map((character) => {
+
+									const characterLastLogin = this.state.outfitCharacterLogins.filter(($) => $._Character_ === character.character_id)[0]
+
+
+									return (
+										<VisibilitySensor key={character.character_id} onChange={(isVisible) => {this.readOutfitCharacterLogins(character.character_id)}}>
+											<OutfitCharacter
+												onTouchTap={() => this.props.routerRef.navigate('/character/' +character.character_id)}
+												characterName={character.character.name.first}
+												characterLastLogin={characterLastLogin ? Moment(characterLastLogin.login.time).fromNow() : null}
+											/>
+										</VisibilitySensor>
+									)
+								})
+							}
+							<span style={{position: 'absolute', right: '1rem', bottom: '-0.75rem', padding: '0 0.5rem', backgroundColor: 'white', color: 'black',}}>MEMBERS</span>
+						</div>
+						<div style={{
+								position: 'relative',
+								margin: '0 1rem 1rem 1rem',
+								border: '0.25rem solid black',
+								borderRadius: 'calc(1rem / 4)',
+						}}>
+							{
+								onlinePrivates.map((character) => {
+
+									const characterLastLogin = this.state.outfitCharacterLogins.filter(($) => $._Character_ === character.character_id)[0]
+
+
+									return (
+										<VisibilitySensor key={character.character_id} onChange={(isVisible) => {this.readOutfitCharacterLogins(character.character_id)}}>
+											<OutfitCharacter
+												onTouchTap={() => this.props.routerRef.navigate('/character/' +character.character_id)}
+												characterName={character.character.name.first}
+												characterLastLogin={characterLastLogin ? Moment(characterLastLogin.login.time).fromNow() : null}
+											/>
+										</VisibilitySensor>
+									)
+								})
+							}
+							<span style={{position: 'absolute', right: '1rem', bottom: '-0.75rem', padding: '0 0.5rem', backgroundColor: 'white', color: 'black',}}>PRIVATES</span>
+						</div>
+					</MUIList>
 				</div>
-				<MUIList>
-					<div style={{
-						position: 'relative',
-						margin: '0 1rem 1rem 1rem',
-						border: '0.25rem solid black',
-						borderRadius: 'calc(1rem / 4)',
-					}}>
-						{
-							onlineLeaders.map((character) => {
-
-								const characterLastLogin = this.state.outfitCharacterLogins.filter(($) => $._Character_ === character.character_id)[0]
-
-
-								return (
-									<VisibilitySensor key={character.character_id} onChange={(isVisible) => {this.readOutfitCharacterLogins(character.character_id)}}>
-										<OutfitCharacter
-											onTouchTap={() => this.props.routerRef.navigate('/character/' +character.character_id)}
-											characterName={character.character.name.first}
-											characterLastLogin={characterLastLogin ? Moment(characterLastLogin.login.time).fromNow() : null}
-										/>
-									</VisibilitySensor>
-								)
-							})
-						}
-						<span style={{position: 'absolute', right: '1rem', bottom: '-0.75rem', padding: '0 0.5rem', backgroundColor: 'white', color: 'black',}}>LEADERS</span>
-					</div>
-					<div style={{
-							position: 'relative',
-							margin: '0 1rem 1rem 1rem',
-							border: '0.25rem solid black',
-							borderRadius: 'calc(1rem / 4)',
-					}}>
-						{
-							onlineOfficers.map((character) => {
-
-								const characterLastLogin = this.state.outfitCharacterLogins.filter(($) => $._Character_ === character.character_id)[0]
-
-
-								return (
-									<VisibilitySensor key={character.character_id} onChange={(isVisible) => {this.readOutfitCharacterLogins(character.character_id)}}>
-										<OutfitCharacter
-											onTouchTap={() => this.props.routerRef.navigate('/character/' +character.character_id)}
-											characterName={character.character.name.first}
-											characterLastLogin={characterLastLogin ? Moment(characterLastLogin.login.time).fromNow() : null}
-										/>
-									</VisibilitySensor>
-								)
-							})
-						}
-						<span style={{position: 'absolute', right: '1rem', bottom: '-0.75rem', padding: '0 0.5rem', backgroundColor: 'white', color: 'black',}}>OFFICERS</span>
-					</div>
-					<div style={{
-						position: 'relative',
-						margin: '0 1rem 1rem 1rem',
-						border: '0.25rem solid black',
-						borderRadius: 'calc(1rem / 4)',
-					}}>
-						{
-							onlineMembers.map((character) => {
-
-								const characterLastLogin = this.state.outfitCharacterLogins.filter(($) => $._Character_ === character.character_id)[0]
-
-
-								return (
-									<VisibilitySensor key={character.character_id} onChange={(isVisible) => {this.readOutfitCharacterLogins(character.character_id)}}>
-										<OutfitCharacter
-											onTouchTap={() => this.props.routerRef.navigate('/character/' +character.character_id)}
-											characterName={character.character.name.first}
-											characterLastLogin={characterLastLogin ? Moment(characterLastLogin.login.time).fromNow() : null}
-										/>
-									</VisibilitySensor>
-								)
-							})
-						}
-						<span style={{position: 'absolute', right: '1rem', bottom: '-0.75rem', padding: '0 0.5rem', backgroundColor: 'white', color: 'black',}}>MEMBERS</span>
-					</div>
-					<div style={{
-							position: 'relative',
-							margin: '0 1rem 1rem 1rem',
-							border: '0.25rem solid black',
-							borderRadius: 'calc(1rem / 4)',
-					}}>
-						{
-							onlinePrivates.map((character) => {
-
-								const characterLastLogin = this.state.outfitCharacterLogins.filter(($) => $._Character_ === character.character_id)[0]
-
-
-								return (
-									<VisibilitySensor key={character.character_id} onChange={(isVisible) => {this.readOutfitCharacterLogins(character.character_id)}}>
-										<OutfitCharacter
-											onTouchTap={() => this.props.routerRef.navigate('/character/' +character.character_id)}
-											characterName={character.character.name.first}
-											characterLastLogin={characterLastLogin ? Moment(characterLastLogin.login.time).fromNow() : null}
-										/>
-									</VisibilitySensor>
-								)
-							})
-						}
-						<span style={{position: 'absolute', right: '1rem', bottom: '-0.75rem', padding: '0 0.5rem', backgroundColor: 'white', color: 'black',}}>PRIVATES</span>
-					</div>
-				</MUIList>
 			</div>
 		)
 	},

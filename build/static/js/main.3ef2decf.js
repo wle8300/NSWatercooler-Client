@@ -85991,29 +85991,7 @@
 	
 			return _react2.default.createElement(
 				'div',
-				{ style: {
-						position: 'relative',
-						marginTop: _size2.default.headerHeight + 'rem',
-						height: 'calc(100vh - ' + (_size2.default.headerHeight + _size2.default.footerHeight) + 'rem)',
-						overflow: 'scroll',
-						WebkitOverflowScrolling: 'touch'
-					} },
-				_react2.default.createElement(
-					'div',
-					{
-						style: {
-							position: 'fixed',
-							top: _size2.default.headerHeight + 'rem',
-							left: 0,
-							fontSize: '12rem',
-							fontStyle: 'italic',
-							color: '#f5f5f5',
-							fontWeight: 'bold',
-							fontFamily: 'Helvetica'
-						}
-					},
-					this.state.outfit.alias
-				),
+				null,
 				_react2.default.createElement(
 					'div',
 					{
@@ -86036,148 +86014,174 @@
 				),
 				_react2.default.createElement(
 					'div',
-					{ style: { marginLeft: '1rem' } },
-					'Online (',
-					onlineCharacters.length,
-					')'
-				),
-				_react2.default.createElement(
-					_List2.default,
-					null,
+					{ style: {
+							position: 'relative',
+							marginTop: _size2.default.headerHeight + 'rem',
+							height: 'calc(100vh - ' + (_size2.default.headerHeight + _size2.default.footerHeight) + 'rem)',
+							overflow: 'scroll',
+							WebkitOverflowScrolling: 'touch'
+						} },
 					_react2.default.createElement(
 						'div',
-						{ style: {
-								position: 'relative',
-								margin: '0 1rem 1rem 1rem',
-								border: '0.25rem solid black',
-								borderRadius: 'calc(1rem / 4)'
-							} },
-						onlineLeaders.map(function (character) {
-	
-							var characterLastLogin = _this.state.outfitCharacterLogins.filter(function ($) {
-								return $._Character_ === character.character_id;
-							})[0];
-	
-							return _react2.default.createElement(
-								_reactVisibilitySensor2.default,
-								{ key: character.character_id, onChange: function onChange(isVisible) {
-										_this.readOutfitCharacterLogins(character.character_id);
-									} },
-								_react2.default.createElement(_OutfitCharacter2.default, {
-									onTouchTap: function onTouchTap() {
-										return _this.props.routerRef.navigate('/character/' + character.character_id);
-									},
-									characterName: character.character.name.first,
-									characterLastLogin: characterLastLogin ? (0, _moment2.default)(characterLastLogin.login.time).fromNow() : null
-								})
-							);
-						}),
-						_react2.default.createElement(
-							'span',
-							{ style: { position: 'absolute', right: '1rem', bottom: '-0.75rem', padding: '0 0.5rem', backgroundColor: 'white', color: 'black' } },
-							'LEADERS'
-						)
+						{
+							style: {
+								position: 'fixed',
+								top: _size2.default.headerHeight + 'rem',
+								left: 0,
+								fontSize: '12rem',
+								fontStyle: 'italic',
+								color: '#f5f5f5',
+								fontWeight: 'bold',
+								fontFamily: 'Helvetica'
+							}
+						},
+						this.state.outfit.alias
 					),
 					_react2.default.createElement(
 						'div',
-						{ style: {
-								position: 'relative',
-								margin: '0 1rem 1rem 1rem',
-								border: '0.25rem solid black',
-								borderRadius: 'calc(1rem / 4)'
-							} },
-						onlineOfficers.map(function (character) {
-	
-							var characterLastLogin = _this.state.outfitCharacterLogins.filter(function ($) {
-								return $._Character_ === character.character_id;
-							})[0];
-	
-							return _react2.default.createElement(
-								_reactVisibilitySensor2.default,
-								{ key: character.character_id, onChange: function onChange(isVisible) {
-										_this.readOutfitCharacterLogins(character.character_id);
-									} },
-								_react2.default.createElement(_OutfitCharacter2.default, {
-									onTouchTap: function onTouchTap() {
-										return _this.props.routerRef.navigate('/character/' + character.character_id);
-									},
-									characterName: character.character.name.first,
-									characterLastLogin: characterLastLogin ? (0, _moment2.default)(characterLastLogin.login.time).fromNow() : null
-								})
-							);
-						}),
-						_react2.default.createElement(
-							'span',
-							{ style: { position: 'absolute', right: '1rem', bottom: '-0.75rem', padding: '0 0.5rem', backgroundColor: 'white', color: 'black' } },
-							'OFFICERS'
-						)
+						{ style: { marginLeft: '1rem' } },
+						'Online (',
+						onlineCharacters.length,
+						')'
 					),
 					_react2.default.createElement(
-						'div',
-						{ style: {
-								position: 'relative',
-								margin: '0 1rem 1rem 1rem',
-								border: '0.25rem solid black',
-								borderRadius: 'calc(1rem / 4)'
-							} },
-						onlineMembers.map(function (character) {
-	
-							var characterLastLogin = _this.state.outfitCharacterLogins.filter(function ($) {
-								return $._Character_ === character.character_id;
-							})[0];
-	
-							return _react2.default.createElement(
-								_reactVisibilitySensor2.default,
-								{ key: character.character_id, onChange: function onChange(isVisible) {
-										_this.readOutfitCharacterLogins(character.character_id);
-									} },
-								_react2.default.createElement(_OutfitCharacter2.default, {
-									onTouchTap: function onTouchTap() {
-										return _this.props.routerRef.navigate('/character/' + character.character_id);
-									},
-									characterName: character.character.name.first,
-									characterLastLogin: characterLastLogin ? (0, _moment2.default)(characterLastLogin.login.time).fromNow() : null
-								})
-							);
-						}),
+						_List2.default,
+						null,
 						_react2.default.createElement(
-							'span',
-							{ style: { position: 'absolute', right: '1rem', bottom: '-0.75rem', padding: '0 0.5rem', backgroundColor: 'white', color: 'black' } },
-							'MEMBERS'
-						)
-					),
-					_react2.default.createElement(
-						'div',
-						{ style: {
-								position: 'relative',
-								margin: '0 1rem 1rem 1rem',
-								border: '0.25rem solid black',
-								borderRadius: 'calc(1rem / 4)'
-							} },
-						onlinePrivates.map(function (character) {
+							'div',
+							{ style: {
+									position: 'relative',
+									margin: '0 1rem 1rem 1rem',
+									border: '0.25rem solid black',
+									borderRadius: 'calc(1rem / 4)'
+								} },
+							onlineLeaders.map(function (character) {
 	
-							var characterLastLogin = _this.state.outfitCharacterLogins.filter(function ($) {
-								return $._Character_ === character.character_id;
-							})[0];
+								var characterLastLogin = _this.state.outfitCharacterLogins.filter(function ($) {
+									return $._Character_ === character.character_id;
+								})[0];
 	
-							return _react2.default.createElement(
-								_reactVisibilitySensor2.default,
-								{ key: character.character_id, onChange: function onChange(isVisible) {
-										_this.readOutfitCharacterLogins(character.character_id);
-									} },
-								_react2.default.createElement(_OutfitCharacter2.default, {
-									onTouchTap: function onTouchTap() {
-										return _this.props.routerRef.navigate('/character/' + character.character_id);
-									},
-									characterName: character.character.name.first,
-									characterLastLogin: characterLastLogin ? (0, _moment2.default)(characterLastLogin.login.time).fromNow() : null
-								})
-							);
-						}),
+								return _react2.default.createElement(
+									_reactVisibilitySensor2.default,
+									{ key: character.character_id, onChange: function onChange(isVisible) {
+											_this.readOutfitCharacterLogins(character.character_id);
+										} },
+									_react2.default.createElement(_OutfitCharacter2.default, {
+										onTouchTap: function onTouchTap() {
+											return _this.props.routerRef.navigate('/character/' + character.character_id);
+										},
+										characterName: character.character.name.first,
+										characterLastLogin: characterLastLogin ? (0, _moment2.default)(characterLastLogin.login.time).fromNow() : null
+									})
+								);
+							}),
+							_react2.default.createElement(
+								'span',
+								{ style: { position: 'absolute', right: '1rem', bottom: '-0.75rem', padding: '0 0.5rem', backgroundColor: 'white', color: 'black' } },
+								'LEADERS'
+							)
+						),
 						_react2.default.createElement(
-							'span',
-							{ style: { position: 'absolute', right: '1rem', bottom: '-0.75rem', padding: '0 0.5rem', backgroundColor: 'white', color: 'black' } },
-							'PRIVATES'
+							'div',
+							{ style: {
+									position: 'relative',
+									margin: '0 1rem 1rem 1rem',
+									border: '0.25rem solid black',
+									borderRadius: 'calc(1rem / 4)'
+								} },
+							onlineOfficers.map(function (character) {
+	
+								var characterLastLogin = _this.state.outfitCharacterLogins.filter(function ($) {
+									return $._Character_ === character.character_id;
+								})[0];
+	
+								return _react2.default.createElement(
+									_reactVisibilitySensor2.default,
+									{ key: character.character_id, onChange: function onChange(isVisible) {
+											_this.readOutfitCharacterLogins(character.character_id);
+										} },
+									_react2.default.createElement(_OutfitCharacter2.default, {
+										onTouchTap: function onTouchTap() {
+											return _this.props.routerRef.navigate('/character/' + character.character_id);
+										},
+										characterName: character.character.name.first,
+										characterLastLogin: characterLastLogin ? (0, _moment2.default)(characterLastLogin.login.time).fromNow() : null
+									})
+								);
+							}),
+							_react2.default.createElement(
+								'span',
+								{ style: { position: 'absolute', right: '1rem', bottom: '-0.75rem', padding: '0 0.5rem', backgroundColor: 'white', color: 'black' } },
+								'OFFICERS'
+							)
+						),
+						_react2.default.createElement(
+							'div',
+							{ style: {
+									position: 'relative',
+									margin: '0 1rem 1rem 1rem',
+									border: '0.25rem solid black',
+									borderRadius: 'calc(1rem / 4)'
+								} },
+							onlineMembers.map(function (character) {
+	
+								var characterLastLogin = _this.state.outfitCharacterLogins.filter(function ($) {
+									return $._Character_ === character.character_id;
+								})[0];
+	
+								return _react2.default.createElement(
+									_reactVisibilitySensor2.default,
+									{ key: character.character_id, onChange: function onChange(isVisible) {
+											_this.readOutfitCharacterLogins(character.character_id);
+										} },
+									_react2.default.createElement(_OutfitCharacter2.default, {
+										onTouchTap: function onTouchTap() {
+											return _this.props.routerRef.navigate('/character/' + character.character_id);
+										},
+										characterName: character.character.name.first,
+										characterLastLogin: characterLastLogin ? (0, _moment2.default)(characterLastLogin.login.time).fromNow() : null
+									})
+								);
+							}),
+							_react2.default.createElement(
+								'span',
+								{ style: { position: 'absolute', right: '1rem', bottom: '-0.75rem', padding: '0 0.5rem', backgroundColor: 'white', color: 'black' } },
+								'MEMBERS'
+							)
+						),
+						_react2.default.createElement(
+							'div',
+							{ style: {
+									position: 'relative',
+									margin: '0 1rem 1rem 1rem',
+									border: '0.25rem solid black',
+									borderRadius: 'calc(1rem / 4)'
+								} },
+							onlinePrivates.map(function (character) {
+	
+								var characterLastLogin = _this.state.outfitCharacterLogins.filter(function ($) {
+									return $._Character_ === character.character_id;
+								})[0];
+	
+								return _react2.default.createElement(
+									_reactVisibilitySensor2.default,
+									{ key: character.character_id, onChange: function onChange(isVisible) {
+											_this.readOutfitCharacterLogins(character.character_id);
+										} },
+									_react2.default.createElement(_OutfitCharacter2.default, {
+										onTouchTap: function onTouchTap() {
+											return _this.props.routerRef.navigate('/character/' + character.character_id);
+										},
+										characterName: character.character.name.first,
+										characterLastLogin: characterLastLogin ? (0, _moment2.default)(characterLastLogin.login.time).fromNow() : null
+									})
+								);
+							}),
+							_react2.default.createElement(
+								'span',
+								{ style: { position: 'absolute', right: '1rem', bottom: '-0.75rem', padding: '0 0.5rem', backgroundColor: 'white', color: 'black' } },
+								'PRIVATES'
+							)
 						)
 					)
 				)
@@ -90810,4 +90814,4 @@
 
 /***/ }
 /******/ ])));
-//# sourceMappingURL=main.8868b659.js.map
+//# sourceMappingURL=main.3ef2decf.js.map
