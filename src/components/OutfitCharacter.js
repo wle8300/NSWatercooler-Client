@@ -1,11 +1,10 @@
-import OnlineStatus from './OnlineStatus'
 import MUIArrowRight from 'material-ui/svg-icons/hardware/keyboard-arrow-right'
 import Box from './Box'
 
 import React from 'react'
 // import PropTypes from 'prop-types'
 
-class ListItemCharacter extends React.Component {
+class OutfitCharacter extends React.Component {
   constructor (props) {
 
     super(props)
@@ -54,13 +53,6 @@ class ListItemCharacter extends React.Component {
             }}
           >
             <Box>
-              <Box style={{
-                justifyContent: 'center',
-                alignItems: 'center',
-                marginRight: '1rem',
-              }}>
-                <OnlineStatus isOnline={this.props.characterOnlineStatus ? this.props.characterOnlineStatus.isOnline : false} isLoading={!this.props.characterOnlineStatus ? true : false}/>
-              </Box>
               {this.props.characterName}
               <br/>
               {this.props.characterLastLogin}
@@ -73,4 +65,4 @@ class ListItemCharacter extends React.Component {
   }
 }
 
-export default ListItemCharacter
+export default OutfitCharacter
