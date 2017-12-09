@@ -83,8 +83,6 @@ module.exports = React.createClass({
 						// marginTop: `${size.formHeight}rem`,
 						padding: 0,
 						height: `calc(100vh - ${size.headerHeight + size.footerHeight}rem)`,
-						overflow: 'scroll',
-						WebkitOverflowScrolling: 'touch',
 					}}
 				>
 					{this.state.outfitBookmarks.map((outfitBookmark) => {

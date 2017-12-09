@@ -64,13 +64,16 @@ module.exports = React.createClass({
 				<div
 					style={{
 						position: 'fixed',
-						top: `${size.headerHeight}rem`,
-						left: 0,
-						fontSize: '50vw',
+						// top: `${size.headerHeight}rem`,
+						// left: 0,
+						width: '100vw',
+						fontSize: '59vw',
 						fontStyle: 'italic',
 						color: '#f5f5f5',
 						fontWeight: 'bold',
 						fontFamily: 'Helvetica',
+						transform: 'rotateZ(90deg) translateY(-29vw) translateX(34vw)',
+						lineHeight: 0,
 					}}
 				>
 					{this.state.outfit.alias}

@@ -83647,9 +83647,7 @@
 					{ style: {
 							// marginTop: `${size.formHeight}rem`,
 							padding: 0,
-							height: 'calc(100vh - ' + (_size2.default.headerHeight + _size2.default.footerHeight) + 'rem)',
-							overflow: 'scroll',
-							WebkitOverflowScrolling: 'touch'
+							height: 'calc(100vh - ' + (_size2.default.headerHeight + _size2.default.footerHeight) + 'rem)'
 						} },
 					this.state.characterSubscriptions.map(function (characterSubscription) {
 	
@@ -85649,9 +85647,7 @@
 						style: {
 							// marginTop: `${size.formHeight}rem`,
 							padding: 0,
-							height: 'calc(100vh - ' + (_size2.default.headerHeight + _size2.default.footerHeight) + 'rem)',
-							overflow: 'scroll',
-							WebkitOverflowScrolling: 'touch'
+							height: 'calc(100vh - ' + (_size2.default.headerHeight + _size2.default.footerHeight) + 'rem)'
 						}
 					},
 					this.state.outfitBookmarks.map(function (outfitBookmark) {
@@ -85940,13 +85936,16 @@
 					{
 						style: {
 							position: 'fixed',
-							top: _size2.default.headerHeight + 'rem',
-							left: 0,
-							fontSize: '50vw',
+							// top: `${size.headerHeight}rem`,
+							// left: 0,
+							width: '100vw',
+							fontSize: '59vw',
 							fontStyle: 'italic',
 							color: '#f5f5f5',
 							fontWeight: 'bold',
-							fontFamily: 'Helvetica'
+							fontFamily: 'Helvetica',
+							transform: 'rotateZ(90deg) translateY(-29vw) translateX(34vw)',
+							lineHeight: 0
 						}
 					},
 					this.state.outfit.alias
@@ -91130,4 +91129,4 @@
 
 /***/ }
 /******/ ])));
-//# sourceMappingURL=main.eaae23ff.js.map
+//# sourceMappingURL=main.90ec85db.js.map

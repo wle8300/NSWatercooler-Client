@@ -77,8 +77,6 @@ module.exports = React.createClass({
 					// marginTop: `${size.formHeight}rem`,
 					padding: 0,
 					height: `calc(100vh - ${size.headerHeight + size.footerHeight}rem)`,
-					overflow: 'scroll',
-					WebkitOverflowScrolling: 'touch',
 				}}>
 					{/* <InfiniteScroll useWindowAsScrollContainer elementHeight={48}> */}
 					{
