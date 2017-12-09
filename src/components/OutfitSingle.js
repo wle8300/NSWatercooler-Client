@@ -4,27 +4,22 @@ import Shema from '../../shema'
 import size from '../size'
 import Box from './Box'
 import OutfitCharacter from './OutfitCharacter'
-import NestedListHeader from './NestedListHeader'
+import OutfitStatsDropdown from './OutfitStatsDropdown'
 
-import Uuid from 'uuid/v4'
 import Moment from 'moment'
 import React from 'react'
 import Request from 'superagent'
 // import Draggable from 'react-draggable'
-import MUIAvatar from 'material-ui/Avatar'
 // import MUISubheader from 'material-ui/Subheader'
 import MUIFAB from 'material-ui/FloatingActionButton'
 import MUIList from 'material-ui/List/List'
 import MUIListItem from 'material-ui/List/ListItem'
-import MUIChip from 'material-ui/Chip'
 import MUIDivider from 'material-ui/Divider'
 import MUIArrowRight from 'material-ui/svg-icons/hardware/keyboard-arrow-right'
-import MUIOutfitCharactersCountIcon from 'material-ui/svg-icons/action/assignment-ind'
-import MUIAverageBRIcon from 'material-ui/svg-icons/social/poll'
 import MUIBookmarkIcon from 'material-ui/svg-icons/action/bookmark'
 import MUIBookmarkBorderIcon from 'material-ui/svg-icons/action/bookmark-border'
 import VisibilitySensor from 'react-visibility-sensor'
-import Bloom from 'react-bloom'
+import MUIStatsIcon from 'material-ui/svg-icons/social/poll'
 
 
 module.exports = React.createClass({
@@ -40,15 +35,9 @@ module.exports = React.createClass({
 		  outfitCharacters: [],
 		  outfitBookmarks: [],
 		  outfitLogins: [],
-			outfitCharacterLogins: []
+			outfitCharacterLogins: [],
+			isStatsDropdownExpanded: false,
 		})
-	},
-	_calculateAvgBR: function (outfitCharacters) {
-
-		const total = outfitCharacters.reduce((sum, character) => sum + parseInt(character.character.battle_rank.value, 10), 0)
-		const length = outfitCharacters.length
-
-		return parseInt(total/length, 10)
 	},
 	render: function () {
 
@@ -59,10 +48,6 @@ module.exports = React.createClass({
 			  if (characterA.rank_ordinal < characterB.rank_ordinal) return -1
 			  else return 0
 			})
-		const outfitLeaders = rankSortedCharacters.filter((character) => character.rank === 'Leader')
-		const outfitOfficers = rankSortedCharacters.filter((character) => character.rank === 'Officer')
-		const outfitMembers = rankSortedCharacters.filter((character) => character.rank === 'Member')
-		const outfitPrivates = rankSortedCharacters.filter((character) => character.rank === 'Private')
 
 		const onlineCharacters = rankSortedCharacters.filter((character) => character.online_status !== "0")
 		const onlineLeaders = onlineCharacters.filter((character) => character.rank === 'Leader')
@@ -70,24 +55,18 @@ module.exports = React.createClass({
 		const onlineMembers = onlineCharacters.filter((character) => character.rank === 'Member')
 		const onlinePrivates = onlineCharacters.filter((character) => character.rank === 'Private')
 
-		const calcPercentageOutfitParticipation = (timeframe) => {
-
-			const calcDataset = this.state.outfitLogins.filter((login) => new Date(login.time) > new Date(Moment().subtract(1, timeframe)))
-			const uniqueCount = calcDataset
-			.map((login) => login._Character_)
-			.filter((_Character_, idx, array) => array.indexOf(_Character_) === idx).length
-
-			return parseInt(100 *  uniqueCount / this.state.outfitCharacters.length, 10)+ '%'
-		}
 
 		return (
 			<div>
+
+				{/* outfit alias
+				emblazoned */}
 				<div
 					style={{
 						position: 'fixed',
 						top: `${size.headerHeight}rem`,
 						left: 0,
-						fontSize: '12rem',
+						fontSize: '50vw',
 						fontStyle: 'italic',
 						color: '#f5f5f5',
 						fontWeight: 'bold',
@@ -96,10 +75,12 @@ module.exports = React.createClass({
 				>
 					{this.state.outfit.alias}
 				</div>
+
+				{/* fab */}
 				<div
 					onTouchTap={this.toggleOutfitBookmark.bind(this, bookmark, this.state.outfit)}
 					style={{
-						zIndex: 1,
+						zIndex: 2,
 						position: 'fixed',
 						right: '1.5rem',
 						bottom: '5rem',
@@ -114,81 +95,68 @@ module.exports = React.createClass({
 				>
 					{bookmark ? <MUIBookmarkIcon color="white"/> : <MUIBookmarkBorderIcon color="white"/>}
 				</div>
+
+
+
+				{/* "main" section */}
+
 				<div style={{
 					marginTop: `${size.headerHeight}rem`,
+					paddingTop: '1rem',
 					height: `calc(100vh - ${size.headerHeight + size.footerHeight}rem)`,
 					overflow: 'scroll',
 					WebkitOverflowScrolling: 'touch',
 				}}>
-					{/* <MUIFAB secondary onTouchTap={this.toggleOutfitBookmark.bind(this, bookmark, this.state.outfit)} style={style1()}>
-							{bookmark ? <MUIBookmarkIcon/> : <MUIBookmarkBorderIcon/>}
-					</MUIFAB> */}
-					{/*<MUIList>
-						<MUIListItem
-						leftIcon={<MUIOutfitCharactersCountIcon/>}
-						primaryText={this.state.outfit.member_count ? this.state.outfit.member_count+ ' Members' : 'Crunching...'}
-						disabled/>
-						<MUIListItem
-						leftIcon={<MUIAverageBRIcon/>}
-						primaryText={this.state.outfitCharacters.length ? this._calculateAvgBR(this.state.outfitCharacters)+ ' Average BattleRank' : 'Crunching...'}
-						disabled/>
-						</MUIList>
-						<MUIList>
-						<MUIListItem
-							primaryText="Information"
-							initiallyOpen={false}
-							primaryTogglesNestedList={true}
-							nestedItems={[
-						<MUIListItem
-						key={Uuid()}
-						disabled
-						children={[
-						<NestedListHeader>Established</NestedListHeader>,
-						<div>{this.state.outfit.time_created_date ? Moment(this.state.outfit.time_created_date).fromNow() : 'Loading...'}</div>
-						]}/>,
-						<MUIListItem
-						key={Uuid()}
-						disabled
-						children={[
-						<NestedListHeader>Composition</NestedListHeader>,
-						<div style={{display: 'flex', flexWrap: 'wrap'}}>
-						<MUIChip style={style2()}><MUIAvatar>{outfitLeaders.length}</MUIAvatar>Leaders</MUIChip>
-						<MUIChip style={style2()}><MUIAvatar>{outfitOfficers.length}</MUIAvatar>Officers</MUIChip>
-						<MUIChip style={style2()}><MUIAvatar>{outfitMembers.length}</MUIAvatar>Members</MUIChip>
-						<MUIChip style={style2()}><MUIAvatar>{outfitPrivates.length}</MUIAvatar>Privates</MUIChip>
+
+
+					{/* header */}
+
+					<Box style={{
+						zIndex: 1,
+						position : 'relative',
+						justifyContent: 'space-between',
+						margin : '0 1rem'
+					}}>
+
+						<div style={{
+							padding: '0.75rem 0',
+							fontSize: '1.5rem',
+						}}>
+							Online ({onlineCharacters.length})
 						</div>
-						]}/>,
-						<MUIListItem
-						key={Uuid()}
-						disabled
-						children={[
-						<NestedListHeader>Login Activity</NestedListHeader>,
-						<MUIList>
-						<MUIListItem
-						primaryText="Past Month"
-						rightAvatar={<MUIAvatar>{calcPercentageOutfitParticipation('month')}</MUIAvatar>}
-						disabled/>
-						<MUIListItem
-						primaryText="Week"
-						rightAvatar={<MUIAvatar>{calcPercentageOutfitParticipation('week')}</MUIAvatar>}
-						disabled/>
-						<MUIListItem
-						primaryText="Day"
-						rightAvatar={<MUIAvatar>{calcPercentageOutfitParticipation('day')}</MUIAvatar>}
-						disabled/>
-						</MUIList>
-						]}/>
-							]}/>
-					</MUIList> */}
-					<div style={{marginLeft: '1rem'}}>
-						Online ({onlineCharacters.length})
-					</div>
+
+						<div
+							onTouchTap={() => this.setState(Shema.call(this, {isStatsDropdownExpanded: !this.state.isStatsDropdownExpanded}, true))}
+							style={{
+								display: 'flex',
+								justifyContent: 'center',
+								alignItems: 'center',
+								padding: '0.5rem',
+								width: '2rem',
+								height: '2rem',
+								border: '0.1rem solid black',
+								borderRadius: '100%',
+								backgroundColor: '#f3f3f3'
+							}}
+						>
+							<MUIStatsIcon/>
+						</div>
+
+					</Box>
+					<OutfitStatsDropdown
+						isExpanded={this.state.isStatsDropdownExpanded}
+						memberCount={this.state.outfit.member_count}
+						outfitCharacters={this.state.outfitCharacters}
+						establishDate={this.state.outfit.time_created_date}
+						outfitLogins={this.state.outfitLogins}
+						closeHandler={() => this.setState(Shema.call(this, {isStatsDropdownExpanded: false}, true))}
+					/>
 					<MUIList>
 						<div style={{
 							position: 'relative',
 							margin: '0 1rem 1rem 1rem',
 							border: '0.25rem solid black',
-							borderRadius: 'calc(1rem / 4)',
+							borderRadius: '0.25rem',
 						}}>
 							{
 								onlineLeaders.map((character) => {
@@ -207,13 +175,26 @@ module.exports = React.createClass({
 									)
 								})
 							}
-							<span style={{position: 'absolute', right: '1rem', bottom: '-0.75rem', padding: '0 0.5rem', backgroundColor: 'white', color: 'black',}}>LEADERS</span>
+							<span style={{
+								position : 'absolute',
+								bottom: '-1.45rem',
+								right : '1rem',
+								padding : '0 0.25rem',
+								borderTop : '0.5rem solid white',
+							}}>
+								<span style={{
+									position: 'relative',
+									top: '-0.75rem',
+								}}>
+									LEADERS
+								</span>
+							</span>
 						</div>
 						<div style={{
 								position: 'relative',
 								margin: '0 1rem 1rem 1rem',
 								border: '0.25rem solid black',
-								borderRadius: 'calc(1rem / 4)',
+								borderRadius: '0.25rem',
 						}}>
 							{
 								onlineOfficers.map((character) => {
@@ -232,13 +213,26 @@ module.exports = React.createClass({
 									)
 								})
 							}
-							<span style={{position: 'absolute', right: '1rem', bottom: '-0.75rem', padding: '0 0.5rem', backgroundColor: 'white', color: 'black',}}>OFFICERS</span>
+							<span style={{
+								position : 'absolute',
+								bottom: '-1.45rem',
+								right : '1rem',
+								padding : '0 0.25rem',
+								borderTop : '0.5rem solid white',
+							}}>
+								<span style={{
+									position: 'relative',
+									top: '-0.75rem',
+								}}>
+									OFFICERS
+								</span>
+							</span>
 						</div>
 						<div style={{
 							position: 'relative',
 							margin: '0 1rem 1rem 1rem',
 							border: '0.25rem solid black',
-							borderRadius: 'calc(1rem / 4)',
+							borderRadius: '0.25rem',
 						}}>
 							{
 								onlineMembers.map((character) => {
@@ -257,13 +251,26 @@ module.exports = React.createClass({
 									)
 								})
 							}
-							<span style={{position: 'absolute', right: '1rem', bottom: '-0.75rem', padding: '0 0.5rem', backgroundColor: 'white', color: 'black',}}>MEMBERS</span>
+							<span style={{
+								position : 'absolute',
+								bottom: '-1.45rem',
+								right : '1rem',
+								padding : '0 0.25rem',
+								borderTop : '0.5rem solid white',
+							}}>
+								<span style={{
+									position: 'relative',
+									top: '-0.75rem',
+								}}>
+									MEMBERS
+								</span>
+							</span>
 						</div>
 						<div style={{
 								position: 'relative',
 								margin: '0 1rem 1rem 1rem',
 								border: '0.25rem solid black',
-								borderRadius: 'calc(1rem / 4)',
+								borderRadius: '0.25rem',
 						}}>
 							{
 								onlinePrivates.map((character) => {
@@ -282,7 +289,20 @@ module.exports = React.createClass({
 									)
 								})
 							}
-							<span style={{position: 'absolute', right: '1rem', bottom: '-0.75rem', padding: '0 0.5rem', backgroundColor: 'white', color: 'black',}}>PRIVATES</span>
+							<span style={{
+								position : 'absolute',
+								bottom: '-1.45rem',
+								right : '1rem',
+								padding : '0 0.25rem',
+								borderTop : '0.5rem solid white',
+							}}>
+								<span style={{
+									position: 'relative',
+									top: '-0.75rem',
+								}}>
+									PRIVATES
+								</span>
+							</span>
 						</div>
 					</MUIList>
 				</div>
@@ -414,11 +434,5 @@ function style1() {
 		zIndex: 1,
 		bottom: '5rem',
 		right: '1rem'
-	}
-}
-
-function style2() {
-	return {
-		margin: '0.25rem'
 	}
 }

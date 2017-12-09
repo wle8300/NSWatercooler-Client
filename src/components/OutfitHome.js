@@ -44,11 +44,11 @@ module.exports = React.createClass({
 				overflow: 'scroll',
 			}}>
 				<MUIPaper style={{
-					zIndex: 1,
-					position: 'fixed',
 					padding: '0 1rem',
 					width: '100%',
-					height: `${size.formHeight}rem`,
+					// zIndex: 1,
+					// position: 'fixed',
+					// height: `${size.formHeight}rem`,
 				}}>
 					<MUITextField
 						value={this.state.outfitsSearchTerm}
@@ -80,9 +80,9 @@ module.exports = React.createClass({
 				> */}
 				<MUIList
 					style={{
-						marginTop: `${size.formHeight}rem`,
+						// marginTop: `${size.formHeight}rem`,
 						padding: 0,
-						height: `calc(100vh - ${size.headerHeight + size.footerHeight + size.formHeight}rem)`,
+						height: `calc(100vh - ${size.headerHeight + size.footerHeight}rem)`,
 						overflow: 'scroll',
 						WebkitOverflowScrolling: 'touch',
 					}}
@@ -126,8 +126,10 @@ module.exports = React.createClass({
 	},
 	submitOutfitSearch: function () {
 
+		const searchTermLowerCased = this.state.outfitsSearchTerm.toLowerCase()
+
 		Request
-		.get(env.backend+ '/outfit?server=genudine&search=' +this.state.outfitsSearchTerm)
+		.get(env.backend+ '/outfit?server=genudine&search=' +searchTermLowerCased)
 		.end((err, response) => {
 
 			if (err) throw err
