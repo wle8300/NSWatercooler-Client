@@ -2,6 +2,18 @@ import env from '../../env'
 import utils from '../../utils'
 import Shema from '../../shema'
 import size from '../size'
+import Fab from './Fab'
+import OnlineStatus from './OnlineStatus'
+import Box from './Box'
+import EmblazonedText from './EmblazonedText'
+import IconInfiltrator from '../icons/icon-infiltrator.png'
+import IconLightAssault from '../icons/icon-light-assault.png'
+import IconCombatMedic from '../icons/icon-combat-medic.png'
+import IconEngineer from '../icons/icon-engineer.png'
+import IconHeavyAssault from '../icons/icon-heavy-assault.png'
+import IconMax from '../icons/icon-max.png'
+import ProgressBar from './ProgressBar'
+
 
 import React from 'react'
 import Request from 'superagent'
@@ -16,9 +28,8 @@ import MUILinearProgress from 'material-ui/LinearProgress';
 // import MUIList from 'material-ui/List/List'
 // import MUIListItem from 'material-ui/List/ListItem'
 // import MUIArrowRight from 'material-ui/svg-icons/hardware/keyboard-arrow-right'
-import MUIAddIcon from 'material-ui/svg-icons/av/playlist-add-check'
-import MUIAddBorderIcon from 'material-ui/svg-icons/av/playlist-add'
-import PullToRefresh from './PullToRefresh'
+import MUIBookmarkIcon from 'material-ui/svg-icons/action/bookmark'
+import MUIBookmarkBorderIcon from 'material-ui/svg-icons/action/bookmark-border'
 
 
 module.exports = React.createClass({
@@ -29,6 +40,8 @@ module.exports = React.createClass({
 	getInitialState: function () {
 		return Shema.call(this, {character: {}, characterSubscriptions: [], characterLogins: []})
 	},
+	_fontSize: '1.56rem',
+	_color: '#d9edef',
   render: function () {
 
 		const subscription = this.state.characterSubscriptions.filter((characterSubscription) => characterSubscription._Character_ === this.props._Character_)[0]
@@ -38,68 +51,227 @@ module.exports = React.createClass({
 
 			if (infantryClass === 'infiltrator') return classPlayTimes.length ? classPlayTimes.filter((x) => x.profile_id === "1")[0].value_forever / totalPlayTime : 0
 			if (infantryClass === 'light-assualt') return classPlayTimes.length ? classPlayTimes.filter((x) => x.profile_id === "3")[0].value_forever / totalPlayTime : 0
-			if (infantryClass === 'medic') return classPlayTimes.length ? classPlayTimes.filter((x) => x.profile_id === "4")[0].value_forever / totalPlayTime : 0
+			if (infantryClass === 'combat-medic') return classPlayTimes.length ? classPlayTimes.filter((x) => x.profile_id === "4")[0].value_forever / totalPlayTime : 0
 			if (infantryClass === 'engineer') return classPlayTimes.length ? classPlayTimes.filter((x) => x.profile_id === "5")[0].value_forever / totalPlayTime : 0
-			if (infantryClass === 'heavy') return classPlayTimes.length ? classPlayTimes.filter((x) => x.profile_id === "6")[0].value_forever / totalPlayTime : 0
-			if (infantryClass === 'MAX') return classPlayTimes.length ? classPlayTimes.filter((x) => x.profile_id === "7")[0].value_forever / totalPlayTime : 0
+			if (infantryClass === 'heavy-assault') return classPlayTimes.length ? classPlayTimes.filter((x) => x.profile_id === "6")[0].value_forever / totalPlayTime : 0
+			if (infantryClass === 'max') return classPlayTimes.length ? classPlayTimes.filter((x) => x.profile_id === "7")[0].value_forever / totalPlayTime : 0
 		}
 
 
     return (
 			<div style={{
-				marginTop: `${size.headerHeight}rem`,
-				height: '100%',
-				backgroundImage: Object.keys(this.state.character).length ? 'linear-gradient(rgba(255, 255, 255, 1) 0%, rgba(255, 255, 255, 0.8) 0%), url("https://census.daybreakgames.com/' +this.state.character.faction.image_path+ '")' : 'none',
-				backgroundRepeat: 'no-repeat',
-				backgroundPosition: '50% 0',
-				backgroundSize: 'cover',
-				overflow: 'scroll',
-				WebkitOverflowScrolling: 'touch',
+				// backgroundImage: Object.keys(this.state.character).length ? 'linear-gradient(rgba(255, 255, 255, 1) 0%, rgba(255, 255, 255, 0.8) 0%), url("https://census.daybreakgames.com/' +this.state.character.faction.image_path+ '")' : 'none',
+				// backgroundRepeat: 'no-repeat',
+				// backgroundPosition: '50% 0',
+				// backgroundSize: 'cover',
 			}}>
-				<MUIPaper zDepth={0} style={style3(this.props, this.state)}>
-					<span style={style2()}>{this.state.character.battle_rank ? 'BR' +this.state.character.battle_rank.value : null}</span>
-					<MUIFAB secondary onTouchTap={this.toggleCharacterSubscription.bind(this, subscription, this.state.character)} style={style1()}>
-						{subscription ? <MUIAddIcon/> : <MUIAddBorderIcon/>}
-					</MUIFAB>
+
+
+
+				{/* EmblazonedText */}
+				{
+					!this.state.character.outfit_member
+						? null
+						: (
+							<EmblazonedText>
+								{this.state.character.outfit_member.member_rank}
+							</EmblazonedText>
+						)
+				}
+
+
+				<Fab onTouchTap={this.toggleCharacterSubscription.bind(this, subscription, this.state.character)}>
+					{
+						subscription
+							? <MUIBookmarkIcon color="white"/>
+							: <MUIBookmarkBorderIcon color="white"/>
+					}
+				</Fab>
+
+
+
+				<div style={{
+					position: 'relative',
+					marginTop: `${size.headerHeight}rem`,
+					padding: '1rem',
+					height: `calc(100vh - ${size.headerHeight + size.footerHeight}rem)`,
+					overflow: 'scroll',
+					WebkitOverflowScrolling: 'touch',
+				}}>
+
+
+
+
+					{/* OUTFIT */}
 					{
 						!this.state.character.outfit_member
 							? null
 							: (
-								<MUIPaper zDepth={0} style={{float: 'right', width: '33.33%', textAlign: 'center', background: 'transparent'}}>
-									<span style={{textTransform: 'uppercase'}}>{this.state.character.outfit_member.member_rank}</span>
-									<MUIDivider/>
-									<span style={{fontSize: '0.75rem'}}>[{this.state.character.outfit_member.alias}]</span>
-								</MUIPaper>
+								<Box style={{
+									flexDirection: 'column',
+									justifyContent : 'center',
+									alignItems : 'center',
+									margin: '0 0 3%',
+									padding : '1.5rem',
+									fontSize: this._fontSize,
+									opacity : 0.65,
+									backgroundColor : this._color
+								}}>
+									<div style={{
+										fontSize: '0.75rem',
+										fontWeight: 'bold',
+										letterSpacing: '0.06rem',
+									}}>
+										OUTFIT
+									</div>
+									[{this.state.character.outfit_member.alias}]
+								</Box>
 							)
 					}
-					<MUIChip><MUIAvatar style={{background: this.state.character.online_status === '1000' ? 'green' : 'gray'}}/>{this.state.characterLogins.length ? Moment(this.state.characterLogins[0].time).fromNow() : null}</MUIChip>
-				</MUIPaper>
-				<MUIPaper key={new Date()} zDepth={0} style={style9()}>
-				  <div style={style6()}>
-						<div style={style4()}>Infiltrator</div>
-						<div style={style5()}><MUILinearProgress mode={classPlayTimes.length ? 'determinate' : 'indeterminate'} value={100 * (calcClassPlaytimePercentage(classPlayTimes, 'infiltrator'))} style={style7()}/></div>
+
+
+
+
+
+					{/* ONLINE STATUS & BATTLERANK */}
+					<Box style={{justifyContent: 'space-between', opacity: 0.65,}}>
+						<Box style={{marginRight: '2%', width: '100%', backgroundColor: this._color,}}>
+							<Box style={{padding: '0.25rem', width: '100%',}}>
+								<Box style={{
+									justifyContent: 'center',
+									alignItems: 'center',
+									padding: '0 11%',
+									height: '100%',
+								}}>
+									<OnlineStatus
+										isOnline={
+											this.getOnlineStatusVerbiage() === "ONLINE"
+												? true
+												: false
+										}
+										isLoading={
+											Object.keys(this.state.character).length
+												? false
+												: true
+										}
+									/>
+								</Box>
+								<div style={{
+									padding: '8% 0',
+								}}>
+									<div style={{
+										fontSize: '0.75rem',
+										fontWeight: 'bold',
+										letterSpacing: '0.06rem',
+									}}>
+										STATUS
+									</div>
+									<div style={{
+										fontSize: this._fontSize,
+									}}>
+										{this.getOnlineStatusVerbiage()}
+									</div>
+									<div style={{
+										fontSize: '0.8rem',
+									}}>
+										{
+											this.state.characterLogins.length
+												? Moment(this.state.characterLogins[0].time).fromNow()
+												: '0 seconds ago'
+										}
+									</div>
+								</div>
+							</Box>
+						</Box>
+						<Box style={{
+							flexDirection: 'column',
+							justifyContent: 'center',
+							alignItems: 'center',
+							marginLeft : '2%',
+							width : '100%',
+							backgroundColor : this._color,
+						}}>
+							<Box style={{
+								justifyContent: 'center',
+								alignItems: 'center',
+								fontSize: '0.75rem',
+								fontWeight: 'bold',
+								letterSpacing: '0.06rem',
+							}}>
+								BATTLERANK
+							</Box>
+							<Box style={{
+								justifyContent: 'center',
+								alignItems: 'center',
+								fontSize: '2rem',
+								fontWeight: 'bold',
+							}}>
+								{this.state.character.battle_rank ? this.state.character.battle_rank.value : 0}
+							</Box>
+						</Box>
+					</Box>
+
+
+
+
+					{/* CLASS PLAYTIMES */}
+					<div style={{marginTop: '1rem', padding: '0 0 3rem', opacity: 0.65}}>
+						<Box>
+							<div style={style4()}><img src={IconInfiltrator}/></div>
+							<ProgressBar
+								isLoading={classPlayTimes.length ? 'determinate' : 'indeterminate'}
+								percent={100 * (calcClassPlaytimePercentage(classPlayTimes, 'infiltrator'))}
+								color={this._color}
+								shouldDisplayPercent={false}
+							/>
+						</Box>
+						<Box>
+							<div style={style4()}><img src={IconLightAssault}/></div>
+							<ProgressBar
+								isLoading={classPlayTimes.length ? 'determinate' : 'indeterminate'}
+								percent={100 * (calcClassPlaytimePercentage(classPlayTimes, 'light-assualt'))}
+								color={this._color}
+								shouldDisplayPercent={false}
+							/>
+						</Box>
+						<Box>
+							<div style={style4()}><img src={IconCombatMedic}/></div>
+							<ProgressBar
+								isLoading={classPlayTimes.length ? 'determinate' : 'indeterminate'}
+								percent={100 * (calcClassPlaytimePercentage(classPlayTimes, 'combat-medic'))}
+								color={this._color}
+								shouldDisplayPercent={false}
+							/>
+						</Box>
+						<Box>
+							<div style={style4()}><img src={IconEngineer}/></div>
+							<ProgressBar
+								isLoading={!!classPlayTimes.length}
+								percent={100 * (calcClassPlaytimePercentage(classPlayTimes, 'engineer'))}
+								color={this._color}
+								shouldDisplayPercent={false}
+							/>
+						</Box>
+						<Box>
+							<div style={style4()}><img src={IconHeavyAssault}/></div>
+							<ProgressBar
+								isLoading={classPlayTimes.length ? 'determinate' : 'indeterminate'}
+								percent={100 * (calcClassPlaytimePercentage(classPlayTimes, 'heavy-assault'))}
+								color={this._color}
+								shouldDisplayPercent={false}
+							/>
+						</Box>
+						<Box>
+							<div style={style4()}><img src={IconMax}/></div>
+							<ProgressBar
+								isLoading={classPlayTimes.length ? 'determinate' : 'indeterminate'}
+								percent={100 * (calcClassPlaytimePercentage(classPlayTimes, 'max'))}
+								color={this._color}
+								shouldDisplayPercent={false}
+							/>
+						</Box>
 					</div>
-				  <div style={style6()}>
-						<div style={style4()}>Light Assault</div>
-						<div style={style5()}><MUILinearProgress mode={classPlayTimes.length ? 'determinate' : 'indeterminate'} value={100 * (calcClassPlaytimePercentage(classPlayTimes, 'light-assualt'))} style={style7()}/></div>
-					</div>
-				  <div style={style6()}>
-						<div style={style4()}>Medic</div>
-						<div style={style5()}><MUILinearProgress mode={classPlayTimes.length ? 'determinate' : 'indeterminate'} value={100 * (calcClassPlaytimePercentage(classPlayTimes, 'medic'))} style={style7()}/></div>
-					</div>
-				  <div style={style6()}>
-						<div style={style4()}>Engineer</div>
-						<div style={style5()}><MUILinearProgress mode={classPlayTimes.length ? 'determinate' : 'indeterminate'} value={100 * (calcClassPlaytimePercentage(classPlayTimes, 'engineer'))} style={style7()}/></div>
-					</div>
-				  <div style={style6()}>
-						<div style={style4()}>Heavy</div>
-						<div style={style5()}><MUILinearProgress mode={classPlayTimes.length ? 'determinate' : 'indeterminate'} value={100 * (calcClassPlaytimePercentage(classPlayTimes, 'heavy'))} style={style7()}/></div>
-					</div>
-				  <div style={style6()}>
-						<div style={style4()}>MAX</div>
-						<div style={style5()}><MUILinearProgress mode={classPlayTimes.length ? 'determinate' : 'indeterminate'} value={100 * (calcClassPlaytimePercentage(classPlayTimes, 'MAX'))} style={style7()}/></div>
-					</div>
-				</MUIPaper>
+				</div>
 			</div>
 		)
   },
@@ -108,6 +280,18 @@ module.exports = React.createClass({
 		this.readCharacter()
 		this.readCharacterLogins()
 		this.readCharacterSubscriptions()
+	},
+	getOnlineStatusVerbiage: function () {
+
+		switch (this.state.character.online_status) {
+
+			case "1000":
+				return "ONLINE"
+			case "0":
+				return "OFFLINE"
+			default:
+				return "LOADING"
+		}
 	},
 	refreshHandler: function () {
 
@@ -178,47 +362,17 @@ module.exports = React.createClass({
 	}
 })
 
-function style1() {
-	return {
-		position: 'fixed',
-		zIndex: 1,
-		bottom: '5rem',
-		right: '1rem'
-	}
-}
-
-function style2() {
-	return {
-		position: 'absolute',
-    top: '0.25rem',
-    right: '0.5rem',
-    zIndex: 10000,
-    padding: '0.125rem',
-    fontWeight: 'bold',
-    fontSize: '0.75rem',
-    color: '#00bcd4',
-    backgroundColor: 'white',
-    borderRadius: '2px'
-	}
-}
-
-function style3(props, state) {
-	return {
-		margin: '1.5rem',
-		background: 'transparent'
-	}
-}
-
 function style4() {
 	return {
-		width: '33.5%',
-		padding: '1rem 0'
+		// width: '33.5%',
+		padding: '1rem',
+		filter: 'invert(100%)',
 	}
 }
 
 function style5() {
 	return {
-		width: '66.5%'
+		width: '100%',
 	}
 }
 

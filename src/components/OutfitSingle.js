@@ -3,8 +3,10 @@ import utils from '../../utils'
 import Shema from '../../shema'
 import size from '../size'
 import Box from './Box'
+import Fab from './Fab'
 import OutfitCharacter from './OutfitCharacter'
 import OutfitStatsDropdown from './OutfitStatsDropdown'
+import EmblazonedText from './EmblazonedText'
 
 import Moment from 'moment'
 import React from 'react'
@@ -32,8 +34,8 @@ module.exports = React.createClass({
 	getInitialState: function () {
 		return Shema.call(this, {
 		  outfit: {},
+			bookmark: {},
 		  outfitCharacters: [],
-		  outfitBookmarks: [],
 		  outfitLogins: [],
 			outfitCharacterLogins: [],
 			isStatsDropdownExpanded: false,
@@ -41,7 +43,6 @@ module.exports = React.createClass({
 	},
 	render: function () {
 
-		const bookmark = this.state.outfitBookmarks.filter((outfitBookmark) => outfitBookmark._Outfit_ === this.props._Outfit_)[0]
 		const rankSortedCharacters = this.state.outfitCharacters
 			.sort((characterA, characterB) => {
 			  if (characterA.rank_ordinal > characterB.rank_ordinal) return 1
@@ -61,44 +62,21 @@ module.exports = React.createClass({
 
 				{/* outfit alias
 				emblazoned */}
-				<div
-					style={{
-						position: 'fixed',
-						// top: `${size.headerHeight}rem`,
-						// left: 0,
-						width: '100vw',
-						fontSize: '59vw',
-						fontStyle: 'italic',
-						color: '#f5f5f5',
-						fontWeight: 'bold',
-						fontFamily: 'Helvetica',
-						transform: 'rotateZ(90deg) translateY(-29vw) translateX(34vw)',
-						lineHeight: 0,
-					}}
-				>
+				<EmblazonedText>
 					{this.state.outfit.alias}
-				</div>
+				</EmblazonedText>
 
-				{/* fab */}
-				<div
-					onTouchTap={this.toggleOutfitBookmark.bind(this, bookmark, this.state.outfit)}
-					style={{
-						zIndex: 2,
-						position: 'fixed',
-						right: '1.5rem',
-						bottom: '5rem',
-						display: 'flex',
-						justifyContent: 'center',
-						alignItems:  'center',
-						width: '3.5rem',
-						height: '3.5rem',
-						backgroundColor: 'gray',
-						borderRadius: '3.5rem',
-					}}
+
+
+				<Fab
+					onTouchTap={this.toggleOutfitBookmark}
 				>
-					{bookmark ? <MUIBookmarkIcon color="white"/> : <MUIBookmarkBorderIcon color="white"/>}
-				</div>
-
+					{
+						Object.keys(this.state.bookmark).length
+							? <MUIBookmarkIcon color="white"/>
+							: <MUIBookmarkBorderIcon color="white"/>
+					}
+				</Fab>
 
 
 				{/* "main" section */}
@@ -357,9 +335,15 @@ module.exports = React.createClass({
 			.set({Authorization: 'Bearer ' +utils.parseJwt()})
 			.end((err, response) => {
 
+				const findBookmark = () => response.body.filter((outfitBookmark) => outfitBookmark._Outfit_ === this.props._Outfit_)[0]
+				const bookmark = findBookmark() ? findBookmark() : {}
+
+
 				if (err) throw err
 
-				this.setState(Shema.call(this, {outfitBookmarks: response.body}, true), resolve)
+				this.setState(Shema.call(this, {
+					bookmark: bookmark,
+				}, true), resolve)
 			})
 		})
 	},
@@ -385,28 +369,24 @@ module.exports = React.createClass({
 
 			if (!response.body.length) return
 
-
 			const outfitCharacterLoginsUpdated = this.state.outfitCharacterLogins.filter((el) => el._Character_ !== _Character_).concat({_Character_: _Character_, login: response.body[0]})
 
-			this.setState(
-				Shema.call(
-					this,
-					{outfitCharacterLogins: outfitCharacterLoginsUpdated},
-					true
-				)
-			)
+
+			this.setState(Shema.call(this, {
+			  outfitCharacterLogins: outfitCharacterLoginsUpdated
+			}, true))
 		})
 	},
-	toggleOutfitBookmark: function (bookmark, outfit) {
+	toggleOutfitBookmark: function () {
 
-		if (!bookmark) {
+		if (!Object.keys(this.state.bookmark).length) {
 
 			Request
 			.post(env.backend+ '/outfit-bookmark')
 			.set({Authorization: 'Bearer ' +utils.parseJwt()})
 			.send({
-				_Outfit_: outfit.outfit_id,
-				outfitAlias: outfit.alias
+				_Outfit_: this.state.outfit.outfit_id,
+				outfitAlias: this.state.outfit.alias
 			})
 			.end((err, response) => {
 
@@ -416,10 +396,10 @@ module.exports = React.createClass({
 			})
 		}
 
-		if (bookmark) {
+		else {
 
 			Request
-			.delete(env.backend+ '/outfit-bookmark/' +bookmark.id)
+			.delete(env.backend+ '/outfit-bookmark/' +this.state.bookmark.id)
 			.set({Authorization: 'Bearer ' +utils.parseJwt()})
 			.end((err, response) => {
 

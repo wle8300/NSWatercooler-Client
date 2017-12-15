@@ -8,6 +8,8 @@ The only global mixin is inject-touch-tap-event
 	exp: [Date object]
 	iap: [Date object]
 }
+- anonhash. [string]
+
 
 ---
 

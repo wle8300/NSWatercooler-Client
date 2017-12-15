@@ -7,18 +7,19 @@ module.exports = React.createClass({
 		isLoading: React.PropTypes.bool.isRequired
 	},
 	render: function () {
-		return <div style={style1(this.props)}></div>
+		return <div style={this.style()}></div>
+	},
+	style: function () {
+		return Object.assign({}, {
+			width: '1rem',
+			height: '1rem',
+			background: this.props.isOnline
+				? 'green'
+				: 'orange',
+			opacity: this.props.isLoading
+				? 0.1
+				: 1,
+			borderRadius: '10rem'
+		}, this.props.style)
 	}
 })
-
-function style1(props, state) {
-	return {
-		// position: 'absolute',
-		// left: '2rem',
-		width: '1rem',
-		height: '1rem',
-		background: props.isOnline ? 'green' : 'orange',
-		opacity: props.isLoading ? 0.1 : 1,
-		borderRadius: '10rem',
-	}
-}

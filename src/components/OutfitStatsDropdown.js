@@ -61,8 +61,10 @@ class OutfitStatsDropdown extends Component {
       <div style={{
         zIndex: 1,
         position: this.props.isExpanded ? 'relative' : 'absolute',
+        display: 'flex',
+        flexDirection: 'column',
+        justifyContent: 'space-between',
         margin: '1rem',
-        padding: '1rem',
         maxHeight: this.props.isExpanded ? '100%' : 0,
         transition: 'position 250ms linear, max-height 250ms linear, transform 250ms linear',
         overflow: 'hidden',
@@ -70,18 +72,20 @@ class OutfitStatsDropdown extends Component {
         borderRadius: 4,
         transform: this.props.isExpanded ? 'scale(1)' : 'scale(0)'
       }}>
-        <MUIOutfitCharactersCountIcon/> {this.props.memberCount ? this.props.memberCount+ ' Members' : 'Crunching...'}
-        <MUIAverageBRIcon/> {this.props.outfitCharacters.length ? calculateAvgBR(this.props.outfitCharacters)+ ' Average BattleRank' : 'Crunching...'}
-        <NestedListHeader>Established</NestedListHeader> <div>{this.props.establishDate ? Moment(this.props.establishDate).fromNow() : 'Loading...'}</div>
-        <NestedListHeader>Composition</NestedListHeader>
-        <div style={{display: 'flex', flexWrap: 'wrap'}}>
-          <MUIChip style={{margin: '0.25rem'}}><MUIAvatar>{outfitLeaders.length}</MUIAvatar>Leaders</MUIChip>
-          <MUIChip style={{margin: '0.25rem'}}><MUIAvatar>{outfitOfficers.length}</MUIAvatar>Officers</MUIChip>
-          <MUIChip style={{margin: '0.25rem'}}><MUIAvatar>{outfitMembers.length}</MUIAvatar>Members</MUIChip>
-          <MUIChip style={{margin: '0.25rem'}}><MUIAvatar>{outfitPrivates.length}</MUIAvatar>Privates</MUIChip>
+        <div>
+          <MUIOutfitCharactersCountIcon/> {this.props.memberCount ? this.props.memberCount+ ' Members' : 'Crunching...'}
+          <MUIAverageBRIcon/> {this.props.outfitCharacters.length ? calculateAvgBR(this.props.outfitCharacters)+ ' Average BattleRank' : 'Crunching...'}
+          <NestedListHeader>Established</NestedListHeader> <div>{this.props.establishDate ? Moment(this.props.establishDate).fromNow() : 'Loading...'}</div>
+          <NestedListHeader>Composition</NestedListHeader>
+          <div style={{display: 'flex', flexWrap: 'wrap'}}>
+            <MUIChip style={{margin: '0.25rem'}}><MUIAvatar>{outfitLeaders.length}</MUIAvatar>Leaders</MUIChip>
+            <MUIChip style={{margin: '0.25rem'}}><MUIAvatar>{outfitOfficers.length}</MUIAvatar>Officers</MUIChip>
+            <MUIChip style={{margin: '0.25rem'}}><MUIAvatar>{outfitMembers.length}</MUIAvatar>Members</MUIChip>
+            <MUIChip style={{margin: '0.25rem'}}><MUIAvatar>{outfitPrivates.length}</MUIAvatar>Privates</MUIChip>
+          </div>
         </div>
         <NestedListHeader>Login Activity</NestedListHeader>
-        <MUIList>
+        <div>
           <MUIListItem
             primaryText="Past Month"
             rightAvatar={<MUIAvatar>{calcPercentageOutfitParticipation('month')}</MUIAvatar>}
@@ -94,13 +98,10 @@ class OutfitStatsDropdown extends Component {
             primaryText="Day"
             rightAvatar={<MUIAvatar>{calcPercentageOutfitParticipation('day')}</MUIAvatar>}
           disabled/>
-        </MUIList>
+        </div>
         <div
           onTouchTap={this.props.closeHandler}
           style={{
-            position: 'relative',
-            left: '-1rem',
-            top: '1rem',
             display: 'flex',
             justifyContent: 'center',
             alignItems: 'center',
