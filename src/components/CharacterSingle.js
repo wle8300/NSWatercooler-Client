@@ -41,7 +41,7 @@ module.exports = React.createClass({
 		return Shema.call(this, {character: {}, characterSubscriptions: [], characterLogins: []})
 	},
 	_fontSize: '1.56rem',
-	_color: '#d9edef',
+	_color: '#bee8ec',
   render: function () {
 
 		const subscription = this.state.characterSubscriptions.filter((characterSubscription) => characterSubscription._Character_ === this.props._Character_)[0]
@@ -74,7 +74,7 @@ module.exports = React.createClass({
 						? null
 						: (
 							<EmblazonedText>
-								{this.state.character.outfit_member.member_rank}
+								{this.state.character.outfit_member.alias}
 							</EmblazonedText>
 						)
 				}
@@ -122,7 +122,7 @@ module.exports = React.createClass({
 										fontWeight: 'bold',
 										letterSpacing: '0.06rem',
 									}}>
-										OUTFIT
+										{this.state.character.outfit_member.member_rank}
 									</div>
 									[{this.state.character.outfit_member.alias}]
 								</Box>
@@ -141,7 +141,6 @@ module.exports = React.createClass({
 									justifyContent: 'center',
 									alignItems: 'center',
 									padding: '0 11%',
-									height: '100%',
 								}}>
 									<OnlineStatus
 										isOnline={

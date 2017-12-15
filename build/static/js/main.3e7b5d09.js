@@ -81579,7 +81579,7 @@
 			return _shema2.default.call(this, { character: {}, characterSubscriptions: [], characterLogins: [] });
 		},
 		_fontSize: '1.56rem',
-		_color: '#d9edef',
+		_color: '#bee8ec',
 		render: function render() {
 			var _this = this;
 	
@@ -81625,7 +81625,7 @@
 				!this.state.character.outfit_member ? null : _react2.default.createElement(
 					_EmblazonedText2.default,
 					null,
-					this.state.character.outfit_member.member_rank
+					this.state.character.outfit_member.alias
 				),
 				_react2.default.createElement(
 					_Fab2.default,
@@ -81661,7 +81661,7 @@
 									fontWeight: 'bold',
 									letterSpacing: '0.06rem'
 								} },
-							'OUTFIT'
+							this.state.character.outfit_member.member_rank
 						),
 						'[',
 						this.state.character.outfit_member.alias,
@@ -81681,8 +81681,7 @@
 									{ style: {
 											justifyContent: 'center',
 											alignItems: 'center',
-											padding: '0 11%',
-											height: '100%'
+											padding: '0 11%'
 										} },
 									_react2.default.createElement(_OnlineStatus2.default, {
 										isOnline: this.getOnlineStatusVerbiage() === "ONLINE" ? true : false,
@@ -88814,4 +88813,4 @@
 
 /***/ }
 /******/ ])));
-//# sourceMappingURL=main.eb8f7448.js.map
+//# sourceMappingURL=main.3e7b5d09.js.map
