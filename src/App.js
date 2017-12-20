@@ -1,5 +1,6 @@
 import env from '../env'
 import utils from '../utils'
+import color from './color'
 
 import Main from './components/Main'
 import Header from './components/Header'
@@ -9,6 +10,7 @@ import Footer from './components/Footer'
 import Request from 'superagent'
 import React from 'react'
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider'
+import getMuiTheme from 'material-ui/styles/getMuiTheme';
 
 
 module.exports = React.createClass({
@@ -21,16 +23,49 @@ module.exports = React.createClass({
 				message: 'Home',
 				size: 'normal'
 			},
+			faction: 'ns',
 			isDrawerOpen: false,
 			arePageButtonsVisible: true
 		}
 	},
   render: function () {
+
+		const theme = getMuiTheme({
+			palette: {
+				primary1Color: color[this.state.faction].standard,
+		    // primary2Color: cyan700,
+		    // primary3Color: grey400,
+		    accent1Color: color[this.state.faction].alt,
+		    // accent2Color: grey100,
+		    // accent3Color: grey500,
+		    // textColor: darkBlack,
+		    // alternateTextColor: white,
+		    // canvasColor: white,
+		    // borderColor: grey300,
+		    // disabledColor: fade(darkBlack, 0.3),
+		    // pickerHeaderColor: cyan500,
+		    // clockCircleColor: fade(darkBlack, 0.07),
+		    // shadowColor: fullBlack,
+		  },
+		  appBar: {
+		    height: 50,
+		  },
+		})
+
+
     return (
-			<MuiThemeProvider>
-				<div className="App" style={style1()}>
+			<MuiThemeProvider muiTheme={theme}>
+				<div
+					className="App"
+					style={{
+						margin: '0 auto',
+						backgroundColor: color[this.state.faction].lighter,
+						transition: 'background-color 250ms linear',
+					}}
+				>
 					<Header
 						marquee={this.state.marquee}
+						faction={this.state.faction}
 						toggleDrawer={this.toggleDrawer}/>
 					<Drawer
 						isDrawerOpen={this.state.isDrawerOpen}
@@ -41,6 +76,7 @@ module.exports = React.createClass({
 						routerRef={this.state.routerRef}
 						gotRouterRef={this.gotRouterRef}
 						changeMarquee={this.changeMarquee}
+						changeFaction={this.changeFaction}
 						changeFooter={this.changeFooter}
 						restartSession={this.restartSession}/>
 					<Footer routerRef={this.state.routerRef} arePageButtonsVisible={this.state.arePageButtonsVisible}/>
@@ -91,6 +127,10 @@ module.exports = React.createClass({
 			size: size
 		}})
 	},
+	changeFaction: function (faction) {
+
+		this.setState({faction: faction})
+	},
 	changeFooter: function (isVisible) {
 
 		this.setState({arePageButtonsVisible: isVisible})
@@ -109,10 +149,3 @@ module.exports = React.createClass({
 		window[env.namespace] = {}
 	}
 })
-
-function style1() {
-	return {
-		margin: '0 auto',
-		// fontFamily: 'Helvetica'
-	}
-}

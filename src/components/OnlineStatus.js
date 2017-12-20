@@ -16,6 +16,7 @@ module.exports = React.createClass({
 			background: this.props.isOnline
 				? 'green'
 				: 'orange',
+			boxShadow: `0 0 1.5rem ${this.props.isOnline ? 'green' : 'orange'}`,
 			opacity: this.props.isLoading
 				? 0.1
 				: 1,

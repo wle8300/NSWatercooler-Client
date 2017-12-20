@@ -1,6 +1,7 @@
 import env from '../../env'
 import Shema from '../../shema'
 import size from '../size'
+import color from '../color'
 
 import ContinentControl from './ContinentControl'
 
@@ -13,7 +14,8 @@ module.exports = React.createClass({
 	displayName: 'WorldRoute',
 	propTypes: {
 		changeMarquee: React.PropTypes.func.isRequired,
-		changeFooter: React.PropTypes.func.isRequired
+		changeFaction: React.PropTypes.func.isRequired,
+		changeFooter: React.PropTypes.func.isRequired,
 	},
 	getInitialState: function () {
 		return Shema.call(this, {census: {}})
@@ -43,7 +45,10 @@ module.exports = React.createClass({
 			}
 
 			return (
-				<div style={{padding: '0.25rem 1.5rem 1rem', backgroundColor: '#00bcd4'}}>
+				<div style={{
+					padding : '0.25rem 1.5rem 1rem',
+					backgroundColor : color.ns.standard,
+				}}>
 					<div style={{display: 'flex', width: '100%', color: 'white'}}>
 						<div style={_.assign(style1(), {width: vsPercentage, backgroundColor: 'purple'})}>{vsCount}</div>
 						<div style={_.assign(style1(), {width: ncPercentage, backgroundColor: 'blue'})}>{ncCount}</div>
@@ -68,6 +73,7 @@ module.exports = React.createClass({
   },
 	componentWillMount: function () {
 		this.props.changeMarquee('World')
+		this.props.changeFaction('ns')
 		this.props.changeFooter(true)
 	},
 	componentDidMount: function () {

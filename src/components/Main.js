@@ -17,6 +17,7 @@ module.exports = React.createClass({
 	propTypes: {
 		routerRef: React.PropTypes.oneOfType([React.PropTypes.element, React.PropTypes.any]),
 		changeMarquee: React.PropTypes.func.isRequired,
+		changeFaction: React.PropTypes.func.isRequired,
 		changeFooter: React.PropTypes.func.isRequired,
 		restartSession: React.PropTypes.func.isRequired
 	},
@@ -28,18 +29,21 @@ module.exports = React.createClass({
 					path="/"
 					handler={WorldRoute}
 					changeMarquee={this.props.changeMarquee}
+					changeFaction={this.props.changeFaction}
 					changeFooter={this.props.changeFooter}/>
 				<Location
 					path="/login-signup"
 					handler={LoginSignupRoute}
 					routerRef={this.props.routerRef}
 					changeMarquee={this.props.changeMarquee}
+					changeFaction={this.props.changeFaction}
 					changeFooter={this.props.changeFooter}/>
 				<Location
 					path="/your-account"
 					handler={AccountRoute}
 					routerRef={this.router}
 					changeMarquee={this.props.changeMarquee}
+					changeFaction={this.props.changeFaction}
 					changeFooter={this.props.changeFooter}
 					restartSession={this.props.restartSession}/>
 				<Location
@@ -48,6 +52,7 @@ module.exports = React.createClass({
 					handler={OutfitRoute}
 					routerRef={this.router}
 					changeMarquee={this.props.changeMarquee}
+					changeFaction={this.props.changeFaction}
 					changeFooter={this.props.changeFooter}/>
 				<Location
 					path={/\/character\/?(.+)?/}
@@ -55,6 +60,7 @@ module.exports = React.createClass({
 					handler={CharacterRoute}
 					routerRef={this.router}
 					changeMarquee={this.props.changeMarquee}
+					changeFaction={this.props.changeFaction}
 					changeFooter={this.props.changeFooter}/>
 				<NotFound handler={Http404}/>
 			</Locations>

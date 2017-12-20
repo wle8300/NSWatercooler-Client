@@ -2,6 +2,7 @@ import env from '../../env'
 import utils from '../../utils'
 import Shema from '../../shema'
 import size from '../size'
+import color from '../color'
 import Box from './Box'
 import Fab from './Fab'
 import OutfitCharacter from './OutfitCharacter'
@@ -29,6 +30,7 @@ module.exports = React.createClass({
 	propTypes: {
 		routerRef: React.PropTypes.oneOfType([React.PropTypes.element, React.PropTypes.any]),
 		changeMarquee: React.PropTypes.func.isRequired,
+		changeFaction: React.PropTypes.func.isRequired,
 		_Outfit_: React.PropTypes.string.isRequired
 	},
 	getInitialState: function () {
@@ -58,7 +60,7 @@ module.exports = React.createClass({
 
 
 		return (
-			<div>
+			<div style={{}}>
 
 				{/* outfit alias
 				emblazoned */}
@@ -292,12 +294,12 @@ module.exports = React.createClass({
 	},
 	componentDidMount: function () {
 
-		this.readOutfit()
+		this.readOutfitAndFaction()
 		this.readOutfitCharacters()
 		this.readOutfitBookmarks()
 		this.readOutfitLoginMetrics()
 	},
-	readOutfit: function () {
+	readOutfitAndFaction: function () {
 
 		return new Promise((resolve, reject) => {
 
@@ -309,6 +311,17 @@ module.exports = React.createClass({
 
 				this.props.changeMarquee('[' +response.body.alias+ ']')
 				this.setState(Shema.call(this, {outfit: response.body}, true), resolve)
+
+				this.setState((prevState) => {
+
+					Request
+					.get(env.backend+ '/character/' +this.state.outfit.leader_character_id+ '?server=genudine')
+					.end((err, response) => {
+
+						//ns, vs, nc, tr
+						this.props.changeFaction(response.body.faction.code_tag.toLowerCase())
+					})
+				})
 			})
 		})
 	},

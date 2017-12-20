@@ -120,7 +120,7 @@ class OutfitStatsDropdown extends Component {
 
 OutfitStatsDropdown.propTypes = {
   isExpanded: PropTypes.bool.isRequired,
-  memberCount: PropTypes.number,
+  memberCount: PropTypes.string,
   outfitCharacters: PropTypes.array,
   establishDate: PropTypes.string,
   outfitLogins: PropTypes.array,

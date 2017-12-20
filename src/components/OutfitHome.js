@@ -22,7 +22,8 @@ module.exports = React.createClass({
 	displayName: 'OutfitHome',
 	propTypes: {
 		routerRef: React.PropTypes.oneOfType([React.PropTypes.element, React.PropTypes.any]),
-		changeMarquee: React.PropTypes.func.isRequired
+		changeMarquee: React.PropTypes.func.isRequired,
+		changeFaction: React.PropTypes.func.isRequired,
 	},
 	_list: null,
 	getInitialState: function () {
@@ -116,7 +117,9 @@ module.exports = React.createClass({
 		)
 	},
 	componentWillMount: function () {
+
 		this.props.changeMarquee('Outfit')
+		this.props.changeFaction('ns')
 	},
 	componentDidMount: function () {
 

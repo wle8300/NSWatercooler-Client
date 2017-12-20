@@ -24,7 +24,8 @@ module.exports = React.createClass({
 	displayName: 'CharacterHome',
 	propTypes: {
 		routerRef: React.PropTypes.oneOfType([React.PropTypes.element, React.PropTypes.any]),
-		changeMarquee: React.PropTypes.func.isRequired
+		changeMarquee: React.PropTypes.func.isRequired,
+		changeFaction: React.PropTypes.func.isRequired,
 	},
 	getInitialState: function () {
 		return Shema.call(this, {
@@ -106,6 +107,7 @@ module.exports = React.createClass({
 	componentDidMount: function () {
 
 		this.props.changeMarquee('Character')
+		this.props.changeFaction('ns')
 		this.readCharacterSubscriptions()
 	},
 	submitCharacterSearch: function (e) {
@@ -116,7 +118,7 @@ module.exports = React.createClass({
 		e.preventDefault()
 
 		Request
-		.get(env.backend+ '/character?server=genudine&search=' +searchTermLowerCased+ '&limit=10')
+		.get(env.backend+ '/character?server=genudine&search=' +searchTermLowerCased+ '&limit=100')
 		.end((err, response) => {
 
 			if (err) throw err

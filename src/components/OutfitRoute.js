@@ -10,6 +10,7 @@ module.exports = React.createClass({
 		_Outfit_: React.PropTypes.string,
 		routerRef: React.PropTypes.oneOfType([React.PropTypes.element, React.PropTypes.any]),
 		changeMarquee: React.PropTypes.func.isRequired,
+		changeFaction: React.PropTypes.func.isRequired,
 		changeFooter: React.PropTypes.func.isRequired
 	},
   render: function () {
@@ -17,8 +18,17 @@ module.exports = React.createClass({
 			<div>
 				{
 					!this.props._Outfit_
-					? <OutfitHome routerRef={this.props.routerRef} changeMarquee={this.props.changeMarquee}/>
-					: <OutfitSingle routerRef={this.props.routerRef} changeMarquee={this.props.changeMarquee} _Outfit_={this.props._Outfit_}/>
+						? <OutfitHome
+							routerRef={this.props.routerRef}
+							changeMarquee={this.props.changeMarquee}
+							changeFaction={this.props.changeFaction}
+							/>
+						: <OutfitSingle
+							routerRef={this.props.routerRef}
+							changeFaction={this.props.changeFaction}
+							changeMarquee={this.props.changeMarquee}
+							_Outfit_={this.props._Outfit_}
+							/>
 				}
 			</div>
     )

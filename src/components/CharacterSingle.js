@@ -2,6 +2,7 @@ import env from '../../env'
 import utils from '../../utils'
 import Shema from '../../shema'
 import size from '../size'
+import color from '../color'
 import Fab from './Fab'
 import OnlineStatus from './OnlineStatus'
 import Box from './Box'
@@ -35,13 +36,19 @@ import MUIBookmarkBorderIcon from 'material-ui/svg-icons/action/bookmark-border'
 module.exports = React.createClass({
 	propTypes: {
 		_Character_: React.PropTypes.string.isRequired,
-		changeMarquee: React.PropTypes.func.isRequired
+		changeMarquee: React.PropTypes.func.isRequired,
+		changeFaction: React.PropTypes.func.isRequired
 	},
 	getInitialState: function () {
-		return Shema.call(this, {character: {}, characterSubscriptions: [], characterLogins: []})
+		return Shema.call(this, {
+		  character: {},
+		  characterSubscriptions: [],
+		  characterLogins: [],
+			faction: 'ns',
+		})
 	},
-	_fontSize: '1.56rem',
-	_color: '#bee8ec',
+	_fontSize: '1.25rem',
+	_color: '#42bdd5',
   render: function () {
 
 		const subscription = this.state.characterSubscriptions.filter((characterSubscription) => characterSubscription._Character_ === this.props._Character_)[0]
@@ -73,8 +80,15 @@ module.exports = React.createClass({
 					!this.state.character.outfit_member
 						? null
 						: (
-							<EmblazonedText>
-								{this.state.character.outfit_member.alias}
+							<EmblazonedText
+								style={{
+									// fontSize: '43vw',
+									// transform: 'rotateZ(90deg) translateY(-36vw) translateX(43vw)',
+								}}
+							>
+								<div>
+									{this.state.character.outfit_member.alias.toUpperCase()}
+								</div>
 							</EmblazonedText>
 						)
 				}
@@ -102,45 +116,22 @@ module.exports = React.createClass({
 
 
 
-					{/* OUTFIT */}
-					{
-						!this.state.character.outfit_member
-							? null
-							: (
-								<Box style={{
-									flexDirection: 'column',
-									justifyContent : 'center',
-									alignItems : 'center',
-									margin: '0 0 3%',
-									padding : '1.5rem',
-									fontSize: this._fontSize,
-									opacity : 0.65,
-									backgroundColor : this._color
-								}}>
-									<div style={{
-										fontSize: '0.75rem',
-										fontWeight: 'bold',
-										letterSpacing: '0.06rem',
-									}}>
-										{this.state.character.outfit_member.member_rank}
-									</div>
-									[{this.state.character.outfit_member.alias}]
-								</Box>
-							)
-					}
-
-
 
 
 
 					{/* ONLINE STATUS & BATTLERANK */}
 					<Box style={{justifyContent: 'space-between', opacity: 0.65,}}>
-						<Box style={{marginRight: '2%', width: '100%', backgroundColor: this._color,}}>
+						<Box style={{
+							marginRight : '2%',
+							width : '100%',
+							// backgroundColor : this._color,
+						}}>
 							<Box style={{padding: '0.25rem', width: '100%',}}>
 								<Box style={{
 									justifyContent: 'center',
 									alignItems: 'center',
-									padding: '0 11%',
+									padding: '0 11% 0 0',
+									// width: '11%',
 								}}>
 									<OnlineStatus
 										isOnline={
@@ -159,7 +150,7 @@ module.exports = React.createClass({
 									padding: '8% 0',
 								}}>
 									<div style={{
-										fontSize: '0.75rem',
+										fontSize: '0.6rem',
 										fontWeight: 'bold',
 										letterSpacing: '0.06rem',
 									}}>
@@ -171,7 +162,7 @@ module.exports = React.createClass({
 										{this.getOnlineStatusVerbiage()}
 									</div>
 									<div style={{
-										fontSize: '0.8rem',
+										fontSize: '0.7rem',
 									}}>
 										{
 											this.state.characterLogins.length
@@ -188,19 +179,19 @@ module.exports = React.createClass({
 							alignItems: 'center',
 							marginLeft : '2%',
 							width : '100%',
-							backgroundColor : this._color,
+							// backgroundColor : this._color,
 						}}>
 							<Box style={{
-								justifyContent: 'center',
+								// justifyContent: 'center',
 								alignItems: 'center',
-								fontSize: '0.75rem',
+								fontSize: '0.6rem',
 								fontWeight: 'bold',
 								letterSpacing: '0.06rem',
 							}}>
 								BATTLERANK
 							</Box>
 							<Box style={{
-								justifyContent: 'center',
+								// justifyContent: 'center',
 								alignItems: 'center',
 								fontSize: '2rem',
 								fontWeight: 'bold',
@@ -208,67 +199,123 @@ module.exports = React.createClass({
 								{this.state.character.battle_rank ? this.state.character.battle_rank.value : 0}
 							</Box>
 						</Box>
+
+						{/* OUTFIT */}
+						<Box style={{
+							flexDirection: 'column',
+							justifyContent : 'center',
+							// alignItems : 'center',
+							// margin: '0 0 3%',
+							// padding : '1.5rem',
+							width: '100%',
+							// opacity : 0.65,
+							// backgroundColor : this._color
+						}}>
+							{
+								!this.state.character.outfit_member
+									? null
+									: (
+										<Box
+											style={{
+												flexDirection: 'column',
+												justifyContent : 'center',
+											}}
+										>
+											<Box style={{
+												justifyContent: 'center',
+												alignItems: 'center',
+												fontSize: '0.6rem',
+												fontWeight: 'bold',
+												letterSpacing: '0.06rem',
+												textTransform: 'uppercase',
+											}}>
+												{this.state.character.outfit_member.member_rank.toUpperCase()}
+											</Box>
+											<Box
+												style={{
+													justifyContent: 'center',
+													alignItems: 'center',
+													fontSize: '2rem',
+												}}
+											>
+												{this.state.character.outfit_member.alias}
+											</Box>
+										</Box>
+									)
+							}
+						</Box>
 					</Box>
 
 
 
 
 					{/* CLASS PLAYTIMES */}
-					<div style={{marginTop: '1rem', padding: '0 0 3rem', opacity: 0.65}}>
-						<Box>
-							<div style={style4()}><img src={IconInfiltrator}/></div>
-							<ProgressBar
-								isLoading={classPlayTimes.length ? 'determinate' : 'indeterminate'}
-								percent={100 * (calcClassPlaytimePercentage(classPlayTimes, 'infiltrator'))}
-								color={this._color}
-								shouldDisplayPercent={false}
-							/>
-						</Box>
-						<Box>
-							<div style={style4()}><img src={IconLightAssault}/></div>
-							<ProgressBar
-								isLoading={classPlayTimes.length ? 'determinate' : 'indeterminate'}
-								percent={100 * (calcClassPlaytimePercentage(classPlayTimes, 'light-assualt'))}
-								color={this._color}
-								shouldDisplayPercent={false}
-							/>
-						</Box>
-						<Box>
-							<div style={style4()}><img src={IconCombatMedic}/></div>
-							<ProgressBar
-								isLoading={classPlayTimes.length ? 'determinate' : 'indeterminate'}
-								percent={100 * (calcClassPlaytimePercentage(classPlayTimes, 'combat-medic'))}
-								color={this._color}
-								shouldDisplayPercent={false}
-							/>
-						</Box>
-						<Box>
-							<div style={style4()}><img src={IconEngineer}/></div>
-							<ProgressBar
-								isLoading={!!classPlayTimes.length}
-								percent={100 * (calcClassPlaytimePercentage(classPlayTimes, 'engineer'))}
-								color={this._color}
-								shouldDisplayPercent={false}
-							/>
-						</Box>
-						<Box>
-							<div style={style4()}><img src={IconHeavyAssault}/></div>
-							<ProgressBar
-								isLoading={classPlayTimes.length ? 'determinate' : 'indeterminate'}
-								percent={100 * (calcClassPlaytimePercentage(classPlayTimes, 'heavy-assault'))}
-								color={this._color}
-								shouldDisplayPercent={false}
-							/>
-						</Box>
-						<Box>
-							<div style={style4()}><img src={IconMax}/></div>
-							<ProgressBar
-								isLoading={classPlayTimes.length ? 'determinate' : 'indeterminate'}
-								percent={100 * (calcClassPlaytimePercentage(classPlayTimes, 'max'))}
-								color={this._color}
-								shouldDisplayPercent={false}
-							/>
-						</Box>
+					<div style={{marginTop: '3%', padding: '0 0 3rem', opacity: 0.65}}>
+						<div style={{
+							padding: '1rem 0',
+							// backgroundColor: this._color,
+						}}>
+							<Box>
+								<div style={style4()}><img src={IconInfiltrator}/></div>
+								<ProgressBar
+									isLoading={classPlayTimes.length ? 'determinate' : 'indeterminate'}
+									percent={100 * (calcClassPlaytimePercentage(classPlayTimes, 'infiltrator'))}
+									color="black"
+									shouldDisplayPercent={false}
+									style={{margin: '0'}}
+								/>
+							</Box>
+							<Box>
+								<div style={style4()}><img src={IconLightAssault}/></div>
+								<ProgressBar
+									isLoading={classPlayTimes.length ? 'determinate' : 'indeterminate'}
+									percent={100 * (calcClassPlaytimePercentage(classPlayTimes, 'light-assualt'))}
+									color="black"
+									shouldDisplayPercent={false}
+									style={{margin: '0'}}
+								/>
+							</Box>
+							<Box>
+								<div style={style4()}><img src={IconCombatMedic}/></div>
+								<ProgressBar
+									isLoading={classPlayTimes.length ? 'determinate' : 'indeterminate'}
+									percent={100 * (calcClassPlaytimePercentage(classPlayTimes, 'combat-medic'))}
+									color="black"
+									shouldDisplayPercent={false}
+									style={{margin: '0'}}
+								/>
+							</Box>
+							<Box>
+								<div style={style4()}><img src={IconEngineer}/></div>
+								<ProgressBar
+									isLoading={!!classPlayTimes.length}
+									percent={100 * (calcClassPlaytimePercentage(classPlayTimes, 'engineer'))}
+									color="black"
+									shouldDisplayPercent={false}
+									style={{margin: '0'}}
+									/>
+									</Box>
+									<Box>
+									<div style={style4()}><img src={IconHeavyAssault}/></div>
+									<ProgressBar
+									isLoading={classPlayTimes.length ? 'determinate' : 'indeterminate'}
+									percent={100 * (calcClassPlaytimePercentage(classPlayTimes, 'heavy-assault'))}
+									color="black"
+									shouldDisplayPercent={false}
+									style={{margin: '0'}}
+								/>
+							</Box>
+							<Box>
+								<div style={style4()}><img src={IconMax}/></div>
+								<ProgressBar
+									isLoading={classPlayTimes.length ? 'determinate' : 'indeterminate'}
+									percent={100 * (calcClassPlaytimePercentage(classPlayTimes, 'max'))}
+									color="black"
+									shouldDisplayPercent={false}
+									style={{margin: '0'}}
+								/>
+							</Box>
+						</div>
 					</div>
 				</div>
 			</div>
@@ -313,7 +360,11 @@ module.exports = React.createClass({
 			.end((err, response) => {
 
 				this.props.changeMarquee(response.body.name.first)
-				this.setState(Shema.call(this, {character: response.body}, true), resolve)
+				this.props.changeFaction(response.body.faction.code_tag.toLowerCase())
+
+				this.setState(Shema.call(this, {
+				  character: response.body,
+				}, true), resolve)
 			})
 		})
 	},
