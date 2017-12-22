@@ -30,8 +30,8 @@ class ListItemCharacter extends React.Component {
           alignItems: 'center',
           height: '4.3rem',
           overflow: 'hidden',
-          backgroundColor: this.state.isPressed ? 'rgba(0, 0, 0, 0.25)' : 'transparent',
-          transition: 'background-color 250ms linear',
+          backgroundColor: this.state.isPressed ? 'rgba(0, 0, 0, 0.1)' : 'transparent',
+          transition: 'background-color 350ms linear',
         }}
       >
         <Box

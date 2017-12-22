@@ -26,6 +26,7 @@ module.exports = React.createClass({
 		routerRef: React.PropTypes.oneOfType([React.PropTypes.element, React.PropTypes.any]),
 		changeMarquee: React.PropTypes.func.isRequired,
 		changeFaction: React.PropTypes.func.isRequired,
+		changeLoadingState: React.PropTypes.func.isRequired,
 	},
 	getInitialState: function () {
 		return Shema.call(this, {
@@ -106,9 +107,12 @@ module.exports = React.createClass({
   },
 	componentDidMount: function () {
 
+		this.props.changeLoadingState(true)
 		this.props.changeMarquee('Character')
 		this.props.changeFaction('ns')
+
 		this.readCharacterSubscriptions()
+		.then(() => this.props.changeLoadingState(false))
 	},
 	submitCharacterSearch: function (e) {
 

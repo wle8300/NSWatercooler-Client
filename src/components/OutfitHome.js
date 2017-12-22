@@ -24,6 +24,7 @@ module.exports = React.createClass({
 		routerRef: React.PropTypes.oneOfType([React.PropTypes.element, React.PropTypes.any]),
 		changeMarquee: React.PropTypes.func.isRequired,
 		changeFaction: React.PropTypes.func.isRequired,
+		changeLoadingState: React.PropTypes.func.isRequired,
 	},
 	_list: null,
 	getInitialState: function () {
@@ -123,7 +124,10 @@ module.exports = React.createClass({
 	},
 	componentDidMount: function () {
 
+		this.props.changeLoadingState(true)
+
 		this.readOutfitBookmarks()
+		.then(() => this.props.changeLoadingState(false))
 	},
 	submitOutfitSearch: function () {
 

@@ -6,6 +6,7 @@
 
 import env from '../../env'
 import Shema from '../../shema'
+import color from '../color'
 
 import React from 'react'
 import Request from 'superagent'
@@ -31,14 +32,17 @@ module.exports = React.createClass({
 		const amerishTerritoryControl = this._calculateFactionControl('amerish') || {}
 		const esamirTerritoryControl = this._calculateFactionControl('esamir') || {}
 
+
 		return (
 			<div>
-				<MUITabs onChange={this.handleTabIdx}
-				  value={this.state.tabIdx}>
-				  <MUITab label="Indar" icon={this._deriveIcon('Indar', this.state.alert, indarTerritoryControl)} value={0}/>
-				  <MUITab label="Hossin" icon={this._deriveIcon('Hossin', this.state.alert, hossinTerritoryControl)} value={1}/>
-				  <MUITab label="Amerish" icon={this._deriveIcon('Amerish', this.state.alert, amerishTerritoryControl)} value={2}/>
-				  <MUITab label="Esamir" icon={this._deriveIcon('Esamir', this.state.alert, esamirTerritoryControl)} value={3}/>
+				<MUITabs
+					onChange={this.handleTabIdx}
+				  value={this.state.tabIdx}
+					inkBarStyle={{marginTop: -5, height: 5}}>
+				  <MUITab label="Indar" icon={this._getIcon('Indar', this.state.alert, indarTerritoryControl)} value={0}/>
+				  <MUITab label="Hossin" icon={this._getIcon('Hossin', this.state.alert, hossinTerritoryControl)} value={1}/>
+				  <MUITab label="Amerish" icon={this._getIcon('Amerish', this.state.alert, amerishTerritoryControl)} value={2}/>
+				  <MUITab label="Esamir" icon={this._getIcon('Esamir', this.state.alert, esamirTerritoryControl)} value={3}/>
 				</MUITabs>
 				<SwipeableViews
 					index={this.state.tabIdx}
@@ -58,15 +62,15 @@ module.exports = React.createClass({
 									value: indarTerritoryControl.none || 0
 								},
 								{
-									color: 'purple',
+									color: color.vs.standard,
 									value: indarTerritoryControl.vs || 0
 								},
 								{
-									color: 'blue',
+									color: color.nc.standard,
 									value: indarTerritoryControl.nc || 0
 								},
 								{
-									color: 'red',
+									color: color.tr.standard,
 									value: indarTerritoryControl.tr || 0
 								},
 							]}/>
@@ -86,15 +90,15 @@ module.exports = React.createClass({
 									value: hossinTerritoryControl.none || 0
 								},
 								{
-									color: 'purple',
+									color: color.vs.standard,
 									value: hossinTerritoryControl.vs || 0
 								},
 								{
-									color: 'blue',
+									color: color.nc.standard,
 									value: hossinTerritoryControl.nc || 0
 								},
 								{
-									color: 'red',
+									color: color.tr.standard,
 									value: hossinTerritoryControl.tr || 0
 								},
 							]}/>
@@ -113,15 +117,15 @@ module.exports = React.createClass({
 									value: amerishTerritoryControl.none || 0
 								},
 								{
-									color: 'purple',
+									color: color.vs.standard,
 									value: amerishTerritoryControl.vs || 0
 								},
 								{
-									color: 'blue',
+									color: color.nc.standard,
 									value: amerishTerritoryControl.nc || 0
 								},
 								{
-									color: 'red',
+									color: color.tr.standard,
 									value: amerishTerritoryControl.tr || 0
 								},
 							]}/>
@@ -141,15 +145,15 @@ module.exports = React.createClass({
 									value: esamirTerritoryControl.none || 0
 								},
 								{
-									color: 'purple',
+									color: color.vs.standard,
 									value: esamirTerritoryControl.vs || 0
 								},
 								{
-									color: 'blue',
+									color: color.nc.standard,
 									value: esamirTerritoryControl.nc || 0
 								},
 								{
-									color: 'red',
+									color: color.tr.standard,
 									value: esamirTerritoryControl.tr || 0
 								},
 							]}/>
@@ -201,7 +205,7 @@ module.exports = React.createClass({
 				}
 		}
 	},
-	_deriveIcon: function (continent, alert, continentTerritoryControl) {
+	_getIcon: function (continent, alert, continentTerritoryControl) {
 
 		if (alert && alert.metagame_event_state_name === 'started') {
 

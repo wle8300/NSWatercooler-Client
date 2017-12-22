@@ -4599,7 +4599,7 @@
 
 	'use strict';
 	
-	module.exports = __webpack_require__(59);
+	module.exports = __webpack_require__(60);
 
 
 /***/ },
@@ -7813,7 +7813,7 @@
 	
 	exports.__esModule = true;
 	
-	var _shallowEqual = __webpack_require__(68);
+	var _shallowEqual = __webpack_require__(69);
 	
 	var _shallowEqual2 = _interopRequireDefault(_shallowEqual);
 	
@@ -7825,7 +7825,7 @@
 /* 46 */
 /***/ function(module, exports, __webpack_require__) {
 
-	var isObject = __webpack_require__(62);
+	var isObject = __webpack_require__(63);
 	module.exports = function (it) {
 	  if (!isObject(it)) throw TypeError(it + ' is not an object!');
 	  return it;
@@ -7850,7 +7850,7 @@
 /***/ function(module, exports, __webpack_require__) {
 
 	var dP = __webpack_require__(36);
-	var createDesc = __webpack_require__(65);
+	var createDesc = __webpack_require__(66);
 	module.exports = __webpack_require__(39) ? function (object, key, value) {
 	  return dP.f(object, key, createDesc(1, value));
 	} : function (object, key, value) {
@@ -9191,6 +9191,46 @@
 
 /***/ },
 /* 58 */
+/***/ function(module, exports) {
+
+	'use strict';
+	
+	module.exports = {
+	  black: 'rgba(0, 0, 0, 1)',
+	  white: 'rgba(255, 255, 255, 1)',
+	  pressColor: 'rgba(0, 0, 0, 0.15)',
+	  ns: {
+	    standard: '#a7a7a7',
+	    light: '#c3c3c3',
+	    lighter: '#f7f7f7',
+	    saturated: '#faf2f2',
+	    alt: '#eff93e'
+	  },
+	  vs: {
+	    standard: '#7c3c90',
+	    light: '#ad89b7',
+	    lighter: '#f4ebf4',
+	    saturated: '#f7daf7',
+	    alt: '#49e3c5'
+	  },
+	  nc: {
+	    standard: '#342b7e',
+	    light: '#aea9d2',
+	    lighter: '#eaeaf1',
+	    saturated: '#e1defb',
+	    alt: '#ebc168'
+	  },
+	  tr: {
+	    standard: '#9d2626',
+	    light: '#c39090',
+	    lighter: '#f5e7e7',
+	    saturated: '#f9c6c6',
+	    alt: '#5d5d5d'
+	  }
+	};
+
+/***/ },
+/* 59 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -9254,7 +9294,7 @@
 	exports.default = Box;
 
 /***/ },
-/* 59 */
+/* 60 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/**
@@ -9272,7 +9312,7 @@
 	var ReactBaseClasses = __webpack_require__(322);
 	var ReactChildren = __webpack_require__(644);
 	var ReactDOMFactories = __webpack_require__(645);
-	var ReactElement = __webpack_require__(60);
+	var ReactElement = __webpack_require__(61);
 	var ReactPropTypes = __webpack_require__(646);
 	var ReactVersion = __webpack_require__(647);
 	
@@ -9388,7 +9428,7 @@
 	module.exports = React;
 
 /***/ },
-/* 60 */
+/* 61 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/**
@@ -9731,7 +9771,7 @@
 	module.exports = ReactElement;
 
 /***/ },
-/* 61 */
+/* 62 */
 /***/ function(module, exports, __webpack_require__) {
 
 	const DeciferJwtPayload = __webpack_require__(426)
@@ -9747,7 +9787,7 @@
 	}
 
 /***/ },
-/* 62 */
+/* 63 */
 /***/ function(module, exports) {
 
 	module.exports = function (it) {
@@ -9756,14 +9796,14 @@
 
 
 /***/ },
-/* 63 */
+/* 64 */
 /***/ function(module, exports) {
 
 	module.exports = {};
 
 
 /***/ },
-/* 64 */
+/* 65 */
 /***/ function(module, exports, __webpack_require__) {
 
 	// 19.1.2.14 / 15.2.3.14 Object.keys(O)
@@ -9776,7 +9816,7 @@
 
 
 /***/ },
-/* 65 */
+/* 66 */
 /***/ function(module, exports) {
 
 	module.exports = function (bitmap, value) {
@@ -9790,7 +9830,7 @@
 
 
 /***/ },
-/* 66 */
+/* 67 */
 /***/ function(module, exports, __webpack_require__) {
 
 	// 7.1.13 ToObject(argument)
@@ -9801,7 +9841,7 @@
 
 
 /***/ },
-/* 67 */
+/* 68 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/**
@@ -9823,7 +9863,7 @@
 	module.exports = emptyObject;
 
 /***/ },
-/* 68 */
+/* 69 */
 /***/ function(module, exports) {
 
 	/**
@@ -9893,7 +9933,7 @@
 	module.exports = shallowEqual;
 
 /***/ },
-/* 69 */
+/* 70 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -10609,7 +10649,7 @@
 	exports.default = ListItem;
 
 /***/ },
-/* 70 */
+/* 71 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -10628,7 +10668,7 @@
 	exports.default = _RaisedButton2.default;
 
 /***/ },
-/* 71 */
+/* 72 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -10647,7 +10687,7 @@
 	exports.default = _TextField2.default;
 
 /***/ },
-/* 72 */
+/* 73 */
 /***/ function(module, exports) {
 
 	/**
@@ -10695,7 +10735,7 @@
 	module.exports = ReactInstanceMap;
 
 /***/ },
-/* 73 */
+/* 74 */
 /***/ function(module, exports, __webpack_require__) {
 
 	"use strict";
@@ -10767,42 +10807,6 @@
 	  Mixin: Mixin
 	};
 
-
-/***/ },
-/* 74 */
-/***/ function(module, exports) {
-
-	'use strict';
-	
-	module.exports = {
-	  black: 'rgba(0, 0, 0, 1)',
-	  white: 'rgba(255, 255, 255, 1)',
-	  pressColor: 'rgba(0, 0, 0, 0.25)',
-	  ns: {
-	    standard: '#8b8b8b',
-	    light: '#c3c3c3',
-	    lighter: '#f5f5f5',
-	    alt: '#dee832'
-	  },
-	  vs: {
-	    standard: '#7c3c90',
-	    light: '#e5d2ea',
-	    lighter: '#f1e5f1',
-	    alt: '#00d1a8'
-	  },
-	  nc: {
-	    standard: '#342b7e',
-	    light: '#766fb1',
-	    lighter: '#e4e3f0',
-	    alt: '#bf8200'
-	  },
-	  tr: {
-	    standard: '#872b2b',
-	    light: '#c39090',
-	    lighter: '#f2dede',
-	    alt: '#3e3e3e'
-	  }
-	};
 
 /***/ },
 /* 75 */
@@ -12698,7 +12702,7 @@
 /***/ function(module, exports, __webpack_require__) {
 
 	// 7.1.1 ToPrimitive(input [, PreferredType])
-	var isObject = __webpack_require__(62);
+	var isObject = __webpack_require__(63);
 	// instead of the ES6 spec version, we didn't implement @@toPrimitive case
 	// and the second argument - flag - preferred type is a string
 	module.exports = function (it, S) {
@@ -13648,7 +13652,7 @@
 	var ReactPropTypesSecret = __webpack_require__(544);
 	var propTypesFactory = __webpack_require__(286);
 	
-	var React = __webpack_require__(59);
+	var React = __webpack_require__(60);
 	var PropTypes = propTypesFactory(React.isValidElement);
 	
 	var invariant = __webpack_require__(3);
@@ -13912,7 +13916,7 @@
 	var _prodInvariant = __webpack_require__(14);
 	
 	var ReactCurrentOwner = __webpack_require__(33);
-	var ReactInstanceMap = __webpack_require__(72);
+	var ReactInstanceMap = __webpack_require__(73);
 	var ReactInstrumentation = __webpack_require__(24);
 	var ReactUpdates = __webpack_require__(28);
 	
@@ -14861,7 +14865,7 @@
 	
 	var _propTypes2 = _interopRequireDefault(_propTypes);
 	
-	var _shallowEqual = __webpack_require__(68);
+	var _shallowEqual = __webpack_require__(69);
 	
 	var _shallowEqual2 = _interopRequireDefault(_shallowEqual);
 	
@@ -15440,7 +15444,7 @@
 /* 134 */
 /***/ function(module, exports, __webpack_require__) {
 
-	var isObject = __webpack_require__(62);
+	var isObject = __webpack_require__(63);
 	var document = __webpack_require__(35).document;
 	// typeof document.createElement is 'object' in old IE
 	var is = isObject(document) && isObject(document.createElement);
@@ -15480,7 +15484,7 @@
 	var redefine = __webpack_require__(143);
 	var hide = __webpack_require__(48);
 	var has = __webpack_require__(40);
-	var Iterators = __webpack_require__(63);
+	var Iterators = __webpack_require__(64);
 	var $iterCreate = __webpack_require__(356);
 	var setToStringTag = __webpack_require__(101);
 	var getPrototypeOf = __webpack_require__(140);
@@ -15551,7 +15555,7 @@
 /***/ function(module, exports, __webpack_require__) {
 
 	var pIE = __webpack_require__(77);
-	var createDesc = __webpack_require__(65);
+	var createDesc = __webpack_require__(66);
 	var toIObject = __webpack_require__(49);
 	var toPrimitive = __webpack_require__(105);
 	var has = __webpack_require__(40);
@@ -15587,7 +15591,7 @@
 
 	// 19.1.2.9 / 15.2.3.2 Object.getPrototypeOf(O)
 	var has = __webpack_require__(40);
-	var toObject = __webpack_require__(66);
+	var toObject = __webpack_require__(67);
 	var IE_PROTO = __webpack_require__(102)('IE_PROTO');
 	var ObjectProto = Object.prototype;
 	
@@ -15697,7 +15701,7 @@
 	
 	var _assign = __webpack_require__(13);
 	
-	var emptyObject = __webpack_require__(67);
+	var emptyObject = __webpack_require__(68);
 	var _invariant = __webpack_require__(3);
 	
 	if (false) {
@@ -30732,21 +30736,21 @@
 	
 	var DOMLazyTree = __webpack_require__(52);
 	var DOMProperty = __webpack_require__(53);
-	var React = __webpack_require__(59);
+	var React = __webpack_require__(60);
 	var ReactBrowserEventEmitter = __webpack_require__(85);
 	var ReactCurrentOwner = __webpack_require__(33);
 	var ReactDOMComponentTree = __webpack_require__(15);
 	var ReactDOMContainerInfo = __webpack_require__(525);
 	var ReactDOMFeatureFlags = __webpack_require__(527);
 	var ReactFeatureFlags = __webpack_require__(297);
-	var ReactInstanceMap = __webpack_require__(72);
+	var ReactInstanceMap = __webpack_require__(73);
 	var ReactInstrumentation = __webpack_require__(24);
 	var ReactMarkupChecksum = __webpack_require__(541);
 	var ReactReconciler = __webpack_require__(56);
 	var ReactUpdateQueue = __webpack_require__(118);
 	var ReactUpdates = __webpack_require__(28);
 	
-	var emptyObject = __webpack_require__(67);
+	var emptyObject = __webpack_require__(68);
 	var instantiateReactComponent = __webpack_require__(307);
 	var invariant = __webpack_require__(3);
 	var setInnerHTML = __webpack_require__(89);
@@ -31271,7 +31275,7 @@
 	
 	var _prodInvariant = __webpack_require__(14);
 	
-	var React = __webpack_require__(59);
+	var React = __webpack_require__(60);
 	
 	var invariant = __webpack_require__(3);
 	
@@ -32004,7 +32008,7 @@
 	"use strict";
 	
 	var React       = __webpack_require__(2);
-	var Environment = __webpack_require__(73);
+	var Environment = __webpack_require__(74);
 	
 	
 	/**
@@ -32109,7 +32113,7 @@
 	var invariant     = __webpack_require__(315);
 	var assign        = Object.assign || __webpack_require__(13);
 	var matchRoutes   = __webpack_require__(589);
-	var Environment   = __webpack_require__(73);
+	var Environment   = __webpack_require__(74);
 	var shallowEqual  = __webpack_require__(421);
 	
 	var RouterMixin = {
@@ -32632,7 +32636,8 @@
 				background: this.props.isOnline ? 'green' : 'orange',
 				boxShadow: '0 0 1.5rem ' + (this.props.isOnline ? 'green' : 'orange'),
 				opacity: this.props.isLoading ? 0.1 : 1,
-				borderRadius: '10rem'
+				borderRadius: '10rem',
+				transition: 'all 250ms linear'
 			}, this.props.style);
 		}
 	});
@@ -32911,7 +32916,7 @@
 	var ReactNoopUpdateQueue = __webpack_require__(325);
 	
 	var canDefineProperty = __webpack_require__(326);
-	var emptyObject = __webpack_require__(67);
+	var emptyObject = __webpack_require__(68);
 	var invariant = __webpack_require__(3);
 	var lowPriorityWarning = __webpack_require__(651);
 	
@@ -35079,7 +35084,7 @@
 
 	'use strict';
 	var $defineProperty = __webpack_require__(36);
-	var createDesc = __webpack_require__(65);
+	var createDesc = __webpack_require__(66);
 	
 	module.exports = function (object, index, value) {
 	  if (index in object) $defineProperty.f(object, index, createDesc(0, value));
@@ -35092,7 +35097,7 @@
 /***/ function(module, exports, __webpack_require__) {
 
 	// all enumerable object keys, includes symbols
-	var getKeys = __webpack_require__(64);
+	var getKeys = __webpack_require__(65);
 	var gOPS = __webpack_require__(100);
 	var pIE = __webpack_require__(77);
 	module.exports = function (it) {
@@ -35121,7 +35126,7 @@
 /***/ function(module, exports, __webpack_require__) {
 
 	// check on default Array iterator
-	var Iterators = __webpack_require__(63);
+	var Iterators = __webpack_require__(64);
 	var ITERATOR = __webpack_require__(26)('iterator');
 	var ArrayProto = Array.prototype;
 	
@@ -35165,7 +35170,7 @@
 
 	'use strict';
 	var create = __webpack_require__(99);
-	var descriptor = __webpack_require__(65);
+	var descriptor = __webpack_require__(66);
 	var setToStringTag = __webpack_require__(101);
 	var IteratorPrototype = {};
 	
@@ -35220,7 +35225,7 @@
 /***/ function(module, exports, __webpack_require__) {
 
 	var META = __webpack_require__(78)('meta');
-	var isObject = __webpack_require__(62);
+	var isObject = __webpack_require__(63);
 	var has = __webpack_require__(40);
 	var setDesc = __webpack_require__(36).f;
 	var id = 0;
@@ -35280,10 +35285,10 @@
 
 	'use strict';
 	// 19.1.2.1 Object.assign(target, source, ...)
-	var getKeys = __webpack_require__(64);
+	var getKeys = __webpack_require__(65);
 	var gOPS = __webpack_require__(100);
 	var pIE = __webpack_require__(77);
-	var toObject = __webpack_require__(66);
+	var toObject = __webpack_require__(67);
 	var IObject = __webpack_require__(136);
 	var $assign = Object.assign;
 	
@@ -35320,7 +35325,7 @@
 
 	var dP = __webpack_require__(36);
 	var anObject = __webpack_require__(46);
-	var getKeys = __webpack_require__(64);
+	var getKeys = __webpack_require__(65);
 	
 	module.exports = __webpack_require__(39) ? Object.defineProperties : function defineProperties(O, Properties) {
 	  anObject(O);
@@ -35364,7 +35369,7 @@
 
 	// Works with __proto__ only. Old v8 can't work with null proto objects.
 	/* eslint-disable no-proto */
-	var isObject = __webpack_require__(62);
+	var isObject = __webpack_require__(63);
 	var anObject = __webpack_require__(46);
 	var check = function (O, proto) {
 	  anObject(O);
@@ -35431,7 +35436,7 @@
 
 	var classof = __webpack_require__(349);
 	var ITERATOR = __webpack_require__(26)('iterator');
-	var Iterators = __webpack_require__(63);
+	var Iterators = __webpack_require__(64);
 	module.exports = __webpack_require__(23).getIteratorMethod = function (it) {
 	  if (it != undefined) return it[ITERATOR]
 	    || it['@@iterator']
@@ -35446,7 +35451,7 @@
 	'use strict';
 	var ctx = __webpack_require__(95);
 	var $export = __webpack_require__(34);
-	var toObject = __webpack_require__(66);
+	var toObject = __webpack_require__(67);
 	var call = __webpack_require__(355);
 	var isArrayIter = __webpack_require__(353);
 	var toLength = __webpack_require__(144);
@@ -35489,7 +35494,7 @@
 	'use strict';
 	var addToUnscopables = __webpack_require__(347);
 	var step = __webpack_require__(358);
-	var Iterators = __webpack_require__(63);
+	var Iterators = __webpack_require__(64);
 	var toIObject = __webpack_require__(49);
 	
 	// 22.1.3.4 Array.prototype.entries()
@@ -35555,7 +35560,7 @@
 /***/ function(module, exports, __webpack_require__) {
 
 	// 19.1.2.9 Object.getPrototypeOf(O)
-	var toObject = __webpack_require__(66);
+	var toObject = __webpack_require__(67);
 	var $getPrototypeOf = __webpack_require__(140);
 	
 	__webpack_require__(142)('getPrototypeOf', function () {
@@ -35570,8 +35575,8 @@
 /***/ function(module, exports, __webpack_require__) {
 
 	// 19.1.2.14 Object.keys(O)
-	var toObject = __webpack_require__(66);
-	var $keys = __webpack_require__(64);
+	var toObject = __webpack_require__(67);
+	var $keys = __webpack_require__(65);
 	
 	__webpack_require__(142)('keys', function () {
 	  return function keys(it) {
@@ -35619,12 +35624,12 @@
 	var anObject = __webpack_require__(46);
 	var toIObject = __webpack_require__(49);
 	var toPrimitive = __webpack_require__(105);
-	var createDesc = __webpack_require__(65);
+	var createDesc = __webpack_require__(66);
 	var _create = __webpack_require__(99);
 	var gOPNExt = __webpack_require__(362);
 	var $GOPD = __webpack_require__(138);
 	var $DP = __webpack_require__(36);
-	var $keys = __webpack_require__(64);
+	var $keys = __webpack_require__(65);
 	var gOPD = $GOPD.f;
 	var dP = $DP.f;
 	var gOPN = gOPNExt.f;
@@ -35856,7 +35861,7 @@
 	__webpack_require__(368);
 	var global = __webpack_require__(35);
 	var hide = __webpack_require__(48);
-	var Iterators = __webpack_require__(63);
+	var Iterators = __webpack_require__(64);
 	var TO_STRING_TAG = __webpack_require__(26)('toStringTag');
 	
 	var DOMIterables = ('CSSRuleList,CSSStyleDeclaration,CSSValueList,ClientRectList,DOMRectList,DOMStringList,' +
@@ -61561,7 +61566,7 @@
 	
 	var _check2 = _interopRequireDefault(_check);
 	
-	var _ListItem = __webpack_require__(69);
+	var _ListItem = __webpack_require__(70);
 	
 	var _ListItem2 = _interopRequireDefault(_ListItem);
 	
@@ -70972,7 +70977,7 @@
 	 * LICENSE file in the root directory of this source tree.
 	 */
 	
-	'use strict';var m=__webpack_require__(13),n=__webpack_require__(67),p=__webpack_require__(21),q="function"===typeof Symbol&&Symbol["for"],r=q?Symbol["for"]("react.element"):60103,t=q?Symbol["for"]("react.call"):60104,u=q?Symbol["for"]("react.return"):60105,v=q?Symbol["for"]("react.portal"):60106,w=q?Symbol["for"]("react.fragment"):60107,x="function"===typeof Symbol&&Symbol.iterator;
+	'use strict';var m=__webpack_require__(13),n=__webpack_require__(68),p=__webpack_require__(21),q="function"===typeof Symbol&&Symbol["for"],r=q?Symbol["for"]("react.element"):60103,t=q?Symbol["for"]("react.call"):60104,u=q?Symbol["for"]("react.return"):60105,v=q?Symbol["for"]("react.portal"):60106,w=q?Symbol["for"]("react.fragment"):60107,x="function"===typeof Symbol&&Symbol.iterator;
 	function y(a){for(var b=arguments.length-1,e="Minified React error #"+a+"; visit http://facebook.github.io/react/docs/error-decoder.html?invariant\x3d"+a,c=0;c<b;c++)e+="\x26args[]\x3d"+encodeURIComponent(arguments[c+1]);b=Error(e+" for the full message or use the non-minified dev environment for full errors and additional helpful warnings.");b.name="Invariant Violation";b.framesToPop=1;throw b;}
 	var z={isMounted:function(){return!1},enqueueForceUpdate:function(){},enqueueReplaceState:function(){},enqueueSetState:function(){}};function A(a,b,e){this.props=a;this.context=b;this.refs=n;this.updater=e||z}A.prototype.isReactComponent={};A.prototype.setState=function(a,b){"object"!==typeof a&&"function"!==typeof a&&null!=a?y("85"):void 0;this.updater.enqueueSetState(this,a,b,"setState")};A.prototype.forceUpdate=function(a){this.updater.enqueueForceUpdate(this,a,"forceUpdate")};
 	function B(a,b,e){this.props=a;this.context=b;this.refs=n;this.updater=e||z}function C(){}C.prototype=A.prototype;var D=B.prototype=new C;D.constructor=B;m(D,A.prototype);D.isPureReactComponent=!0;function E(a,b,e){this.props=a;this.context=b;this.refs=n;this.updater=e||z}var F=E.prototype=new C;F.constructor=E;m(F,A.prototype);F.unstable_isAsyncReactComponent=!0;F.render=function(){return this.props.children};var G={current:null},H=Object.prototype.hasOwnProperty,I={key:!0,ref:!0,__self:!0,__source:!0};
@@ -72827,11 +72832,11 @@
 	var _prodInvariant = __webpack_require__(14),
 	    _assign = __webpack_require__(13);
 	
-	var React = __webpack_require__(59);
+	var React = __webpack_require__(60);
 	var ReactComponentEnvironment = __webpack_require__(116);
 	var ReactCurrentOwner = __webpack_require__(33);
 	var ReactErrorUtils = __webpack_require__(117);
-	var ReactInstanceMap = __webpack_require__(72);
+	var ReactInstanceMap = __webpack_require__(73);
 	var ReactInstrumentation = __webpack_require__(24);
 	var ReactNodeTypes = __webpack_require__(301);
 	var ReactReconciler = __webpack_require__(56);
@@ -72840,9 +72845,9 @@
 	  var checkReactTypeSpec = require('./checkReactTypeSpec');
 	}
 	
-	var emptyObject = __webpack_require__(67);
+	var emptyObject = __webpack_require__(68);
 	var invariant = __webpack_require__(3);
-	var shallowEqual = __webpack_require__(68);
+	var shallowEqual = __webpack_require__(69);
 	var shouldUpdateReactComponent = __webpack_require__(125);
 	var warning = __webpack_require__(12);
 	
@@ -73867,7 +73872,7 @@
 	var escapeTextContentForBrowser = __webpack_require__(88);
 	var invariant = __webpack_require__(3);
 	var isEventSupported = __webpack_require__(124);
-	var shallowEqual = __webpack_require__(68);
+	var shallowEqual = __webpack_require__(69);
 	var inputValueTracking = __webpack_require__(306);
 	var validateDOMNesting = __webpack_require__(126);
 	var warning = __webpack_require__(12);
@@ -75299,7 +75304,7 @@
 	
 	var _assign = __webpack_require__(13);
 	
-	var React = __webpack_require__(59);
+	var React = __webpack_require__(60);
 	var ReactDOMComponentTree = __webpack_require__(15);
 	var ReactDOMSelect = __webpack_require__(295);
 	
@@ -76541,7 +76546,7 @@
 	var _prodInvariant = __webpack_require__(14);
 	
 	var ReactComponentEnvironment = __webpack_require__(116);
-	var ReactInstanceMap = __webpack_require__(72);
+	var ReactInstanceMap = __webpack_require__(73);
 	var ReactInstrumentation = __webpack_require__(24);
 	
 	var ReactCurrentOwner = __webpack_require__(33);
@@ -77932,7 +77937,7 @@
 	
 	var getActiveElement = __webpack_require__(150);
 	var isTextInputElement = __webpack_require__(308);
-	var shallowEqual = __webpack_require__(68);
+	var shallowEqual = __webpack_require__(69);
 	
 	var skipSelectionChangeEvent = ExecutionEnvironment.canUseDOM && 'documentMode' in document && document.documentMode <= 11;
 	
@@ -78934,7 +78939,7 @@
 	
 	var ReactCurrentOwner = __webpack_require__(33);
 	var ReactDOMComponentTree = __webpack_require__(15);
-	var ReactInstanceMap = __webpack_require__(72);
+	var ReactInstanceMap = __webpack_require__(73);
 	
 	var getHostComponentFromComposite = __webpack_require__(304);
 	var invariant = __webpack_require__(3);
@@ -79960,7 +79965,7 @@
 	
 	var NavigatableMixin          = __webpack_require__(311);
 	
-	var environment               = __webpack_require__(73);
+	var environment               = __webpack_require__(74);
 	
 	var CaptureClicks             = __webpack_require__(583);
 	
@@ -79996,7 +80001,7 @@
 	
 	var React       = __webpack_require__(2);
 	var urllite     = __webpack_require__(662);
-	var Environment = __webpack_require__(73);
+	var Environment = __webpack_require__(74);
 	var HashEnvironment = __webpack_require__(314);
 	var assign      = Object.assign || __webpack_require__(13);
 	var omit        = __webpack_require__(83);
@@ -80141,7 +80146,7 @@
 	
 	var React             = __webpack_require__(2);
 	var NavigatableMixin  = __webpack_require__(311);
-	var Environment       = __webpack_require__(73);
+	var Environment       = __webpack_require__(74);
 	var assign            = Object.assign || __webpack_require__(13);
 	var omit              = __webpack_require__(83);
 	
@@ -80947,11 +80952,11 @@
 	
 	var _env2 = _interopRequireDefault(_env);
 	
-	var _utils = __webpack_require__(61);
+	var _utils = __webpack_require__(62);
 	
 	var _utils2 = _interopRequireDefault(_utils);
 	
-	var _color = __webpack_require__(74);
+	var _color = __webpack_require__(58);
 	
 	var _color2 = _interopRequireDefault(_color);
 	
@@ -81002,6 +81007,7 @@
 					size: 'normal'
 				},
 				faction: 'ns',
+				isLoading: false,
 				isDrawerOpen: false,
 				arePageButtonsVisible: true
 			};
@@ -81013,7 +81019,10 @@
 					primary1Color: _color2.default[this.state.faction].standard,
 					// primary2Color: cyan700,
 					// primary3Color: grey400,
-					accent1Color: _color2.default[this.state.faction].alt
+					accent1Color: _color2.default[this.state.faction].alt,
+					// accent2Color: grey100,
+					// accent3Color: grey500,
+					textColor: _color2.default[this.state.faction].standard
 				},
 				appBar: {
 					height: 50
@@ -81030,12 +81039,13 @@
 						style: {
 							margin: '0 auto',
 							backgroundColor: _color2.default[this.state.faction].lighter,
-							transition: 'background-color 250ms linear'
+							transition: 'background-color 350ms linear'
 						}
 					},
 					_react2.default.createElement(_Header2.default, {
 						marquee: this.state.marquee,
 						faction: this.state.faction,
+						isLoading: this.state.isLoading,
 						toggleDrawer: this.toggleDrawer }),
 					_react2.default.createElement(_Drawer2.default, {
 						isDrawerOpen: this.state.isDrawerOpen,
@@ -81047,6 +81057,7 @@
 						gotRouterRef: this.gotRouterRef,
 						changeMarquee: this.changeMarquee,
 						changeFaction: this.changeFaction,
+						changeLoadingState: this.changeLoadingState,
 						changeFooter: this.changeFooter,
 						restartSession: this.restartSession }),
 					_react2.default.createElement(_Footer2.default, { routerRef: this.state.routerRef, arePageButtonsVisible: this.state.arePageButtonsVisible })
@@ -81097,6 +81108,10 @@
 	
 			this.setState({ faction: faction });
 		},
+		changeLoadingState: function changeLoadingState(isLoading) {
+	
+			this.setState({ isLoading: isLoading });
+		},
 		changeFooter: function changeFooter(isVisible) {
 	
 			this.setState({ arePageButtonsVisible: isVisible });
@@ -81129,7 +81144,7 @@
 	
 	var _env2 = _interopRequireDefault(_env);
 	
-	var _utils = __webpack_require__(61);
+	var _utils = __webpack_require__(62);
 	
 	var _utils2 = _interopRequireDefault(_utils);
 	
@@ -81145,11 +81160,11 @@
 	
 	var _superagent2 = _interopRequireDefault(_superagent);
 	
-	var _TextField = __webpack_require__(71);
+	var _TextField = __webpack_require__(72);
 	
 	var _TextField2 = _interopRequireDefault(_TextField);
 	
-	var _RaisedButton = __webpack_require__(70);
+	var _RaisedButton = __webpack_require__(71);
 	
 	var _RaisedButton2 = _interopRequireDefault(_RaisedButton);
 	
@@ -81242,7 +81257,7 @@
 	
 	var _env2 = _interopRequireDefault(_env);
 	
-	var _utils = __webpack_require__(61);
+	var _utils = __webpack_require__(62);
 	
 	var _utils2 = _interopRequireDefault(_utils);
 	
@@ -81274,15 +81289,15 @@
 	
 	var _List2 = _interopRequireDefault(_List);
 	
-	var _ListItem = __webpack_require__(69);
+	var _ListItem = __webpack_require__(70);
 	
 	var _ListItem2 = _interopRequireDefault(_ListItem);
 	
-	var _TextField = __webpack_require__(71);
+	var _TextField = __webpack_require__(72);
 	
 	var _TextField2 = _interopRequireDefault(_TextField);
 	
-	var _RaisedButton = __webpack_require__(70);
+	var _RaisedButton = __webpack_require__(71);
 	
 	var _RaisedButton2 = _interopRequireDefault(_RaisedButton);
 	
@@ -81305,7 +81320,8 @@
 		propTypes: {
 			routerRef: _react2.default.PropTypes.oneOfType([_react2.default.PropTypes.element, _react2.default.PropTypes.any]),
 			changeMarquee: _react2.default.PropTypes.func.isRequired,
-			changeFaction: _react2.default.PropTypes.func.isRequired
+			changeFaction: _react2.default.PropTypes.func.isRequired,
+			changeLoadingState: _react2.default.PropTypes.func.isRequired
 		},
 		getInitialState: function getInitialState() {
 			return _shema2.default.call(this, {
@@ -81395,13 +81411,18 @@
 			);
 		},
 		componentDidMount: function componentDidMount() {
+			var _this2 = this;
 	
+			this.props.changeLoadingState(true);
 			this.props.changeMarquee('Character');
 			this.props.changeFaction('ns');
-			this.readCharacterSubscriptions();
+	
+			this.readCharacterSubscriptions().then(function () {
+				return _this2.props.changeLoadingState(false);
+			});
 		},
 		submitCharacterSearch: function submitCharacterSearch(e) {
-			var _this2 = this;
+			var _this3 = this;
 	
 			var searchTermLowerCased = this.state.charactersSearchTerm.toLowerCase();
 	
@@ -81411,24 +81432,24 @@
 	
 				if (err) throw err;
 	
-				_this2.setState(_shema2.default.call(_this2, { charactersSearchResults: response.body }, true));
+				_this3.setState(_shema2.default.call(_this3, { charactersSearchResults: response.body }, true));
 			});
 		},
 		readCharacterSubscriptions: function readCharacterSubscriptions() {
-			var _this3 = this;
+			var _this4 = this;
 	
 			return new Promise(function (resolve, reject) {
 	
 				_superagent2.default.get(_env2.default.backend + '/user/' + _utils2.default.parseJwtPayload().id + '/character-subscriptions').set({ Authorization: 'Bearer ' + _utils2.default.parseJwt() }).end(function (err, response) {
 	
-					_this3.setState(_shema2.default.call(_this3, {
+					_this4.setState(_shema2.default.call(_this4, {
 						characterSubscriptions: response.body
 					}, true), resolve);
 				});
 			});
 		},
 		readCharacterOnlineStatus: function readCharacterOnlineStatus(_Character_, isVisible) {
-			var _this4 = this;
+			var _this5 = this;
 	
 			// const alreadyLoaded = !!this.state.charcterSubscriptionsOnlineStatus.filter((characterOnlineStatus) => characterOnlineStatus._Character_ === _Character_).length
 			//
@@ -81436,18 +81457,18 @@
 	
 			_superagent2.default.get(_env2.default.backend + '/character/' + _Character_ + '?server=genudine').end(function (err, response) {
 	
-				var charcterSubscriptionsOnlineStatusUpdated = _this4.state.charcterSubscriptionsOnlineStatus.filter(function (el) {
+				var charcterSubscriptionsOnlineStatusUpdated = _this5.state.charcterSubscriptionsOnlineStatus.filter(function (el) {
 					return el._Character_ !== _Character_;
 				}).concat({ _Character_: _Character_, isOnline: response.body.online_status !== "0" ? true : false });
 	
-				_this4.setState(_shema2.default.call(_this4, {
+				_this5.setState(_shema2.default.call(_this5, {
 					charcterSubscriptionsOnlineStatus: charcterSubscriptionsOnlineStatusUpdated
 				}, true));
 			});
 			// }
 		},
 		readCharacterLogins: function readCharacterLogins(_Character_, isVisible) {
-			var _this5 = this;
+			var _this6 = this;
 	
 			// const alreadyLoaded = !!this.state.characterSubscriptionsLogins.filter((characterLogin) => characterLogin._Character_ === _Character_).length
 	
@@ -81457,11 +81478,11 @@
 	
 				if (!response.body.length) return;
 	
-				var characterSubscriptionsLoginsUpdated = _this5.state.characterSubscriptionsLogins.filter(function (el) {
+				var characterSubscriptionsLoginsUpdated = _this6.state.characterSubscriptionsLogins.filter(function (el) {
 					return el._Character_ !== _Character_;
 				}).concat({ _Character_: _Character_, login: response.body[0] });
 	
-				_this5.setState(_shema2.default.call(_this5, { characterSubscriptionsLogins: characterSubscriptionsLoginsUpdated }, true));
+				_this6.setState(_shema2.default.call(_this6, { characterSubscriptionsLogins: characterSubscriptionsLoginsUpdated }, true));
 			});
 			// }
 		}
@@ -81513,11 +81534,13 @@
 				!this.props._Character_ ? _react2.default.createElement(_CharacterHome2.default, {
 					routerRef: this.props.routerRef,
 					changeMarquee: this.props.changeMarquee,
-					changeFaction: this.props.changeFaction
+					changeFaction: this.props.changeFaction,
+					changeLoadingState: this.props.changeLoadingState
 				}) : _react2.default.createElement(_CharacterSingle2.default, {
 					_Character_: this.props._Character_,
 					changeMarquee: this.props.changeMarquee,
-					changeFaction: this.props.changeFaction
+					changeFaction: this.props.changeFaction,
+					changeLoadingState: this.props.changeLoadingState
 				})
 			);
 		},
@@ -81537,7 +81560,7 @@
 	
 	var _env2 = _interopRequireDefault(_env);
 	
-	var _utils = __webpack_require__(61);
+	var _utils = __webpack_require__(62);
 	
 	var _utils2 = _interopRequireDefault(_utils);
 	
@@ -81549,7 +81572,7 @@
 	
 	var _size2 = _interopRequireDefault(_size);
 	
-	var _color = __webpack_require__(74);
+	var _color = __webpack_require__(58);
 	
 	var _color2 = _interopRequireDefault(_color);
 	
@@ -81561,7 +81584,7 @@
 	
 	var _OnlineStatus2 = _interopRequireDefault(_OnlineStatus);
 	
-	var _Box = __webpack_require__(58);
+	var _Box = __webpack_require__(59);
 	
 	var _Box2 = _interopRequireDefault(_Box);
 	
@@ -81653,7 +81676,8 @@
 		propTypes: {
 			_Character_: _react2.default.PropTypes.string.isRequired,
 			changeMarquee: _react2.default.PropTypes.func.isRequired,
-			changeFaction: _react2.default.PropTypes.func.isRequired
+			changeFaction: _react2.default.PropTypes.func.isRequired,
+			changeLoadingState: _react2.default.PropTypes.func.isRequired
 		},
 		getInitialState: function getInitialState() {
 			return _shema2.default.call(this, {
@@ -81723,7 +81747,12 @@
 				),
 				_react2.default.createElement(
 					_Fab2.default,
-					{ onTouchTap: this.toggleCharacterSubscription.bind(this, subscription, this.state.character) },
+					{
+						onTouchTap: this.toggleCharacterSubscription.bind(this, subscription, this.state.character),
+						style: {
+							backgroundColor: _color2.default[this.state.faction].alt
+						}
+					},
 					subscription ? _react2.default.createElement(_bookmark2.default, { color: 'white' }) : _react2.default.createElement(_bookmarkBorder2.default, { color: 'white' })
 				),
 				_react2.default.createElement(
@@ -81738,7 +81767,7 @@
 						} },
 					_react2.default.createElement(
 						_Box2.default,
-						{ style: { justifyContent: 'space-between', opacity: 0.65 } },
+						{ style: { justifyContent: 'space-between' } },
 						_react2.default.createElement(
 							_Box2.default,
 							{ style: {
@@ -81770,21 +81799,24 @@
 										{ style: {
 												fontSize: '0.6rem',
 												fontWeight: 'bold',
-												letterSpacing: '0.06rem'
+												letterSpacing: '0.06rem',
+												color: _color2.default[this.state.faction].standard
 											} },
 										'STATUS'
 									),
 									_react2.default.createElement(
 										'div',
 										{ style: {
-												fontSize: this._fontSize
+												fontSize: this._fontSize,
+												color: _color2.default[this.state.faction].standard
 											} },
 										this.getOnlineStatusVerbiage()
 									),
 									_react2.default.createElement(
 										'div',
 										{ style: {
-												fontSize: '0.7rem'
+												fontSize: '0.7rem',
+												color: _color2.default[this.state.faction].standard
 											} },
 										this.state.characterLogins.length ? (0, _moment2.default)(this.state.characterLogins[0].time).fromNow() : '0 seconds ago'
 									)
@@ -81807,7 +81839,8 @@
 										alignItems: 'center',
 										fontSize: '0.6rem',
 										fontWeight: 'bold',
-										letterSpacing: '0.06rem'
+										letterSpacing: '0.06rem',
+										color: _color2.default[this.state.faction].standard
 									} },
 								'BATTLERANK'
 							),
@@ -81817,7 +81850,8 @@
 										// justifyContent: 'center',
 										alignItems: 'center',
 										fontSize: '2rem',
-										fontWeight: 'bold'
+										fontWeight: 'bold',
+										color: _color2.default[this.state.faction].standard
 									} },
 								this.state.character.battle_rank ? this.state.character.battle_rank.value : 0
 							)
@@ -81827,9 +81861,6 @@
 							{ style: {
 									flexDirection: 'column',
 									justifyContent: 'center',
-									// alignItems : 'center',
-									// margin: '0 0 3%',
-									// padding : '1.5rem',
 									width: '100%'
 								} },
 							!this.state.character.outfit_member ? null : _react2.default.createElement(
@@ -81848,7 +81879,8 @@
 											fontSize: '0.6rem',
 											fontWeight: 'bold',
 											letterSpacing: '0.06rem',
-											textTransform: 'uppercase'
+											textTransform: 'uppercase',
+											color: _color2.default[this.state.faction].standard
 										} },
 									this.state.character.outfit_member.member_rank.toUpperCase()
 								),
@@ -81858,7 +81890,8 @@
 										style: {
 											justifyContent: 'center',
 											alignItems: 'center',
-											fontSize: '2rem'
+											fontSize: '2rem',
+											color: _color2.default[this.state.faction].standard
 										}
 									},
 									this.state.character.outfit_member.alias
@@ -81868,106 +81901,117 @@
 					),
 					_react2.default.createElement(
 						'div',
-						{ style: { marginTop: '3%', padding: '0 0 3rem', opacity: 0.65 } },
+						{ style: { marginTop: '3%', padding: '0 0 3rem' } },
 						_react2.default.createElement(
 							'div',
 							{ style: {
-									padding: '1rem 0'
+									margin: '1rem 0'
 								} },
 							_react2.default.createElement(
 								_Box2.default,
-								null,
+								{
+									style: {}
+								},
 								_react2.default.createElement(
 									'div',
-									{ style: style4() },
+									{ style: this.style4() },
 									_react2.default.createElement('img', { src: _iconInfiltrator2.default })
 								),
 								_react2.default.createElement(_ProgressBar2.default, {
-									isLoading: classPlayTimes.length ? 'determinate' : 'indeterminate',
+									isLoading: !classPlayTimes.length,
 									percent: 100 * calcClassPlaytimePercentage(classPlayTimes, 'infiltrator'),
-									color: 'black',
+									color: _color2.default[this.state.faction].standard,
 									shouldDisplayPercent: false,
-									style: { margin: '0' }
+									style: { margin: '0', opacity: 0.65 }
 								})
 							),
 							_react2.default.createElement(
 								_Box2.default,
-								null,
+								{
+									style: {}
+								},
 								_react2.default.createElement(
 									'div',
-									{ style: style4() },
+									{ style: this.style4() },
 									_react2.default.createElement('img', { src: _iconLightAssault2.default })
 								),
 								_react2.default.createElement(_ProgressBar2.default, {
-									isLoading: classPlayTimes.length ? 'determinate' : 'indeterminate',
+									isLoading: !classPlayTimes.length,
 									percent: 100 * calcClassPlaytimePercentage(classPlayTimes, 'light-assualt'),
-									color: 'black',
+									color: _color2.default[this.state.faction].standard,
 									shouldDisplayPercent: false,
-									style: { margin: '0' }
+									style: { margin: '0', opacity: 0.65 }
 								})
 							),
 							_react2.default.createElement(
 								_Box2.default,
-								null,
+								{
+									style: {}
+								},
 								_react2.default.createElement(
 									'div',
-									{ style: style4() },
+									{ style: this.style4() },
 									_react2.default.createElement('img', { src: _iconCombatMedic2.default })
 								),
 								_react2.default.createElement(_ProgressBar2.default, {
-									isLoading: classPlayTimes.length ? 'determinate' : 'indeterminate',
+									isLoading: !classPlayTimes.length,
 									percent: 100 * calcClassPlaytimePercentage(classPlayTimes, 'combat-medic'),
-									color: 'black',
+									color: _color2.default[this.state.faction].standard,
 									shouldDisplayPercent: false,
-									style: { margin: '0' }
+									style: { margin: '0', opacity: 0.65 }
 								})
 							),
 							_react2.default.createElement(
 								_Box2.default,
-								null,
+								{
+									style: {} },
 								_react2.default.createElement(
 									'div',
-									{ style: style4() },
+									{ style: this.style4() },
 									_react2.default.createElement('img', { src: _iconEngineer2.default })
 								),
 								_react2.default.createElement(_ProgressBar2.default, {
-									isLoading: !!classPlayTimes.length,
+									isLoading: !classPlayTimes.length,
 									percent: 100 * calcClassPlaytimePercentage(classPlayTimes, 'engineer'),
-									color: 'black',
+									color: _color2.default[this.state.faction].standard,
 									shouldDisplayPercent: false,
-									style: { margin: '0' }
+									style: { margin: '0', opacity: 0.65 }
 								})
 							),
 							_react2.default.createElement(
 								_Box2.default,
-								null,
+								{
+									style: {}
+								},
 								_react2.default.createElement(
 									'div',
-									{ style: style4() },
+									{ style: this.style4() },
 									_react2.default.createElement('img', { src: _iconHeavyAssault2.default })
 								),
 								_react2.default.createElement(_ProgressBar2.default, {
-									isLoading: classPlayTimes.length ? 'determinate' : 'indeterminate',
+									isLoading: !classPlayTimes.length,
 									percent: 100 * calcClassPlaytimePercentage(classPlayTimes, 'heavy-assault'),
-									color: 'black',
+									color: _color2.default[this.state.faction].standard,
 									shouldDisplayPercent: false,
-									style: { margin: '0' }
+									style: { margin: '0', opacity: 0.65 }
 								})
 							),
 							_react2.default.createElement(
 								_Box2.default,
-								null,
+								{
+									style: {}
+								},
 								_react2.default.createElement(
 									'div',
-									{ style: style4() },
+									{ style: this.style4() },
 									_react2.default.createElement('img', { src: _iconMax2.default })
 								),
 								_react2.default.createElement(_ProgressBar2.default, {
-									isLoading: classPlayTimes.length ? 'determinate' : 'indeterminate',
+									isLoading: !classPlayTimes.length,
 									percent: 100 * calcClassPlaytimePercentage(classPlayTimes, 'max'),
-									color: 'black',
+									color: _color2.default[this.state.faction].standard,
 									shouldDisplayPercent: false,
-									style: { margin: '0' }
+									style: { margin: '0', opacity: 0.65 }
 								})
 							)
 						)
@@ -81976,10 +82020,15 @@
 			);
 		},
 		componentDidMount: function componentDidMount() {
+			var _this2 = this;
 	
-			this.readCharacter();
-			this.readCharacterLogins();
-			this.readCharacterSubscriptions();
+			this.props.changeMarquee(this.state.character.name && this.state.character.name.first || 'Character');
+			this.props.changeFaction(this.state.faction);
+			this.props.changeLoadingState(true);
+	
+			this.readCharacter().then(this.readCharacterLogins).then(this.readCharacterSubscriptions).then(function () {
+				return _this2.props.changeLoadingState(false);
+			});
 		},
 		getOnlineStatusVerbiage: function getOnlineStatusVerbiage() {
 	
@@ -81994,51 +82043,54 @@
 			}
 		},
 		refreshHandler: function refreshHandler() {
-			var _this2 = this;
-	
-			return new Promise(function (resolve, reject) {
-	
-				Promise.all([_this2.readCharacter(), _this2.readCharacterLogins(), _this2.readCharacterSubscriptions()]).then(resolve);
-			});
-		},
-		readCharacter: function readCharacter() {
 			var _this3 = this;
 	
 			return new Promise(function (resolve, reject) {
 	
-				_superagent2.default.get(_env2.default.backend + '/character/' + _this3.props._Character_ + '?server=genudine').end(function (err, response) {
+				Promise.all([_this3.readCharacter(), _this3.readCharacterLogins(), _this3.readCharacterSubscriptions()]).then(resolve);
+			});
+		},
+		readCharacter: function readCharacter() {
+			var _this4 = this;
 	
-					_this3.props.changeMarquee(response.body.name.first);
-					_this3.props.changeFaction(response.body.faction.code_tag.toLowerCase());
+			return new Promise(function (resolve, reject) {
 	
-					_this3.setState(_shema2.default.call(_this3, {
-						character: response.body
+				_superagent2.default.get(_env2.default.backend + '/character/' + _this4.props._Character_ + '?server=genudine').end(function (err, response) {
+	
+					var faction = response.body.faction.code_tag.toLowerCase();
+	
+					_this4.props.changeMarquee(response.body.name.first);
+					_this4.props.changeFaction(faction);
+	
+					_this4.setState(_shema2.default.call(_this4, {
+						character: response.body,
+						faction: faction
 					}, true), resolve);
 				});
 			});
 		},
 		readCharacterLogins: function readCharacterLogins() {
-			var _this4 = this;
-	
-			return new Promise(function (resolve, reject) {
-	
-				_superagent2.default.get(_env2.default.backend + '/character/' + _this4.props._Character_ + '/logins').end(function (err, response) {
-					return _this4.setState(_shema2.default.call(_this4, { characterLogins: response.body }, true), resolve);
-				});
-			});
-		},
-		readCharacterSubscriptions: function readCharacterSubscriptions() {
 			var _this5 = this;
 	
 			return new Promise(function (resolve, reject) {
 	
+				_superagent2.default.get(_env2.default.backend + '/character/' + _this5.props._Character_ + '/logins').end(function (err, response) {
+					return _this5.setState(_shema2.default.call(_this5, { characterLogins: response.body }, true), resolve);
+				});
+			});
+		},
+		readCharacterSubscriptions: function readCharacterSubscriptions() {
+			var _this6 = this;
+	
+			return new Promise(function (resolve, reject) {
+	
 				_superagent2.default.get(_env2.default.backend + '/user/' + _utils2.default.parseJwtPayload().id + '/character-subscriptions').set({ Authorization: 'Bearer ' + _utils2.default.parseJwt() }).end(function (err, response) {
-					return _this5.setState(_shema2.default.call(_this5, { characterSubscriptions: response.body }, true), resolve);
+					return _this6.setState(_shema2.default.call(_this6, { characterSubscriptions: response.body }, true), resolve);
 				});
 			});
 		},
 		toggleCharacterSubscription: function toggleCharacterSubscription(subscription, character) {
-			var _this6 = this;
+			var _this7 = this;
 	
 			if (!subscription) {
 	
@@ -82047,53 +82099,50 @@
 					_Character_: character.character_id,
 					characterName: character.name.first
 				}).end(function (err, response) {
-					return _this6.readCharacterSubscriptions();
+					return _this7.readCharacterSubscriptions();
 				});
 			}
 	
 			if (subscription) {
 	
 				_superagent2.default.delete(_env2.default.backend + '/character-subscription/' + subscription.id).set({ Authorization: 'Bearer ' + _utils2.default.parseJwt() }).end(function (err, response) {
-					return _this6.readCharacterSubscriptions();
+					return _this7.readCharacterSubscriptions();
 				});
 			}
+		},
+		style4: function style4() {
+			return {
+				// width: '33.5%',
+				padding: '1rem',
+				// filter: 'invert(100%)',
+				backgroundColor: _color2.default[this.state.faction].standard,
+				opacity: 0.75
+			};
+		},
+		style5: function style5() {
+			return {
+				width: '100%'
+			};
+		},
+		style6: function style6() {
+			return {
+				display: 'flex'
+			};
+		},
+		style7: function style7() {
+			return {
+				height: '100%',
+				backgroundColor: 'transparent',
+				borderRadius: 0
+			};
+		},
+		style9: function style9() {
+			return {
+				margin: '1.5rem',
+				backgroundColor: 'transparent'
+			};
 		}
 	});
-	
-	function style4() {
-		return {
-			// width: '33.5%',
-			padding: '1rem',
-			filter: 'invert(100%)'
-		};
-	}
-	
-	function style5() {
-		return {
-			width: '100%'
-		};
-	}
-	
-	function style6() {
-		return {
-			display: 'flex'
-		};
-	}
-	
-	function style7() {
-		return {
-			height: '100%',
-			backgroundColor: 'transparent',
-			borderRadius: 0
-		};
-	}
-	
-	function style9() {
-		return {
-			margin: '1.5rem',
-			backgroundColor: 'transparent'
-		};
-	}
 
 /***/ },
 /* 598 */
@@ -82108,6 +82157,10 @@
 	var _shema = __webpack_require__(30);
 	
 	var _shema2 = _interopRequireDefault(_shema);
+	
+	var _color = __webpack_require__(58);
+	
+	var _color2 = _interopRequireDefault(_color);
 	
 	var _react = __webpack_require__(2);
 	
@@ -82145,17 +82198,11 @@
 	
 	var _lock2 = _interopRequireDefault(_lock);
 	
-	var _Box = __webpack_require__(58);
+	var _Box = __webpack_require__(59);
 	
 	var _Box2 = _interopRequireDefault(_Box);
 	
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-	
-	/*
-		this component is jacked up.
-	
-		can be more cogent.
-	*/
 	
 	module.exports = _react2.default.createClass({
 		displayName: 'ContinentControl',
@@ -82174,12 +82221,14 @@
 				null,
 				_react2.default.createElement(
 					_Tabs2.default,
-					{ onChange: this.handleTabIdx,
-						value: this.state.tabIdx },
-					_react2.default.createElement(_Tab2.default, { label: 'Indar', icon: this._deriveIcon('Indar', this.state.alert, indarTerritoryControl), value: 0 }),
-					_react2.default.createElement(_Tab2.default, { label: 'Hossin', icon: this._deriveIcon('Hossin', this.state.alert, hossinTerritoryControl), value: 1 }),
-					_react2.default.createElement(_Tab2.default, { label: 'Amerish', icon: this._deriveIcon('Amerish', this.state.alert, amerishTerritoryControl), value: 2 }),
-					_react2.default.createElement(_Tab2.default, { label: 'Esamir', icon: this._deriveIcon('Esamir', this.state.alert, esamirTerritoryControl), value: 3 })
+					{
+						onChange: this.handleTabIdx,
+						value: this.state.tabIdx,
+						inkBarStyle: { marginTop: -5, height: 5 } },
+					_react2.default.createElement(_Tab2.default, { label: 'Indar', icon: this._getIcon('Indar', this.state.alert, indarTerritoryControl), value: 0 }),
+					_react2.default.createElement(_Tab2.default, { label: 'Hossin', icon: this._getIcon('Hossin', this.state.alert, hossinTerritoryControl), value: 1 }),
+					_react2.default.createElement(_Tab2.default, { label: 'Amerish', icon: this._getIcon('Amerish', this.state.alert, amerishTerritoryControl), value: 2 }),
+					_react2.default.createElement(_Tab2.default, { label: 'Esamir', icon: this._getIcon('Esamir', this.state.alert, esamirTerritoryControl), value: 3 })
 				),
 				_react2.default.createElement(
 					_reactSwipeableViews2.default,
@@ -82202,13 +82251,13 @@
 									color: 'gray',
 									value: indarTerritoryControl.none || 0
 								}, {
-									color: 'purple',
+									color: _color2.default.vs.standard,
 									value: indarTerritoryControl.vs || 0
 								}, {
-									color: 'blue',
+									color: _color2.default.nc.standard,
 									value: indarTerritoryControl.nc || 0
 								}, {
-									color: 'red',
+									color: _color2.default.tr.standard,
 									value: indarTerritoryControl.tr || 0
 								}] })
 						)
@@ -82228,13 +82277,13 @@
 									color: 'gray',
 									value: hossinTerritoryControl.none || 0
 								}, {
-									color: 'purple',
+									color: _color2.default.vs.standard,
 									value: hossinTerritoryControl.vs || 0
 								}, {
-									color: 'blue',
+									color: _color2.default.nc.standard,
 									value: hossinTerritoryControl.nc || 0
 								}, {
-									color: 'red',
+									color: _color2.default.tr.standard,
 									value: hossinTerritoryControl.tr || 0
 								}] })
 						)
@@ -82254,13 +82303,13 @@
 									color: 'gray',
 									value: amerishTerritoryControl.none || 0
 								}, {
-									color: 'purple',
+									color: _color2.default.vs.standard,
 									value: amerishTerritoryControl.vs || 0
 								}, {
-									color: 'blue',
+									color: _color2.default.nc.standard,
 									value: amerishTerritoryControl.nc || 0
 								}, {
-									color: 'red',
+									color: _color2.default.tr.standard,
 									value: amerishTerritoryControl.tr || 0
 								}] })
 						)
@@ -82280,13 +82329,13 @@
 									color: 'gray',
 									value: esamirTerritoryControl.none || 0
 								}, {
-									color: 'purple',
+									color: _color2.default.vs.standard,
 									value: esamirTerritoryControl.vs || 0
 								}, {
-									color: 'blue',
+									color: _color2.default.nc.standard,
 									value: esamirTerritoryControl.nc || 0
 								}, {
-									color: 'red',
+									color: _color2.default.tr.standard,
 									value: esamirTerritoryControl.tr || 0
 								}] })
 						)
@@ -82336,7 +82385,7 @@
 				};
 			}
 		},
-		_deriveIcon: function _deriveIcon(continent, alert, continentTerritoryControl) {
+		_getIcon: function _getIcon(continent, alert, continentTerritoryControl) {
 	
 			if (alert && alert.metagame_event_state_name === 'started') {
 	
@@ -82377,7 +82426,11 @@
 		handleTabIdx: function handleTabIdx(idx) {
 			this.setState(_shema2.default.call(this, { tabIdx: idx }, true));
 		}
-	});
+	}); /*
+	    	this component is jacked up.
+	    
+	    	can be more cogent.
+	    */
 
 /***/ },
 /* 599 */
@@ -82648,7 +82701,7 @@
 
 	'use strict';
 	
-	var _color = __webpack_require__(74);
+	var _color = __webpack_require__(58);
 	
 	var _color2 = _interopRequireDefault(_color);
 	
@@ -82672,9 +82725,24 @@
 		propTypes: {
 			marquee: _react2.default.PropTypes.object.isRequired,
 			faction: _react2.default.PropTypes.string.isRequired,
+			isLoading: _react2.default.PropTypes.bool.isRequired,
 			toggleDrawer: _react2.default.PropTypes.func.isRequired
 		},
+		_loaderInterval: null,
+		getInitialState: function getInitialState() {
+			return {
+				isBrighter: false
+			};
+		},
 		render: function render() {
+			var _this = this;
+	
+			if (!this.props.isLoading) this.wipeAndNullifyInterval();
+			if (this.props.isLoading && !this._loaderInterval) this._loaderInterval = setInterval(function () {
+	
+				_this.setState({ isBrighter: !_this.state.isBrighter });
+			}, 500);
+	
 			return _react2.default.createElement(
 				'div',
 				{ style: {
@@ -82687,10 +82755,10 @@
 						padding: '0 1rem',
 						display: 'flex',
 						alignItems: 'center',
-						// height: '100%',
 						fontSize: '1.56rem',
 						color: 'white',
-						transition: 'background-color 250ms linear'
+						filter: 'brightness(' + (this.state.isBrighter && this.props.isLoading ? '150%' : '100%') + ')',
+						transition: 'background-color 350ms linear, filter 500ms linear'
 					} },
 				_react2.default.createElement(
 					'div',
@@ -82707,6 +82775,11 @@
 					)
 				)
 			);
+		},
+		wipeAndNullifyInterval: function wipeAndNullifyInterval() {
+	
+			clearInterval(this._loaderInterval);
+			this._loaderInterval = null;
 		}
 	});
 
@@ -82754,7 +82827,7 @@
 	
 	var _keyboardArrowRight2 = _interopRequireDefault(_keyboardArrowRight);
 	
-	var _Box = __webpack_require__(58);
+	var _Box = __webpack_require__(59);
 	
 	var _Box2 = _interopRequireDefault(_Box);
 	
@@ -82815,8 +82888,8 @@
 	            alignItems: 'center',
 	            height: '4.3rem',
 	            overflow: 'hidden',
-	            backgroundColor: this.state.isPressed ? 'rgba(0, 0, 0, 0.25)' : 'transparent',
-	            transition: 'background-color 250ms linear'
+	            backgroundColor: this.state.isPressed ? 'rgba(0, 0, 0, 0.1)' : 'transparent',
+	            transition: 'background-color 350ms linear'
 	          }
 	        },
 	        _react2.default.createElement(
@@ -82890,7 +82963,7 @@
 	
 	var _keyboardArrowRight2 = _interopRequireDefault(_keyboardArrowRight);
 	
-	var _Box = __webpack_require__(58);
+	var _Box = __webpack_require__(59);
 	
 	var _Box2 = _interopRequireDefault(_Box);
 	
@@ -82955,8 +83028,8 @@
 	            alignItems: 'center',
 	            height: '4.3rem',
 	            overflow: 'hidden',
-	            backgroundColor: this.state.isPressed ? 'rgba(0, 0, 0, 0.25)' : 'transparent',
-	            transition: 'background-color 250ms linear'
+	            backgroundColor: this.state.isPressed ? 'rgba(0, 0, 0, 0.1)' : 'transparent',
+	            transition: 'background-color 350ms linear'
 	          }
 	        },
 	        _react2.default.createElement(
@@ -83073,11 +83146,11 @@
 	
 	var _react2 = _interopRequireDefault(_react);
 	
-	var _TextField = __webpack_require__(71);
+	var _TextField = __webpack_require__(72);
 	
 	var _TextField2 = _interopRequireDefault(_TextField);
 	
-	var _RaisedButton = __webpack_require__(70);
+	var _RaisedButton = __webpack_require__(71);
 	
 	var _RaisedButton2 = _interopRequireDefault(_RaisedButton);
 	
@@ -83251,6 +83324,7 @@
 			routerRef: _react2.default.PropTypes.oneOfType([_react2.default.PropTypes.element, _react2.default.PropTypes.any]),
 			changeMarquee: _react2.default.PropTypes.func.isRequired,
 			changeFaction: _react2.default.PropTypes.func.isRequired,
+			changeLoadingState: _react2.default.PropTypes.func.isRequired,
 			changeFooter: _react2.default.PropTypes.func.isRequired,
 			restartSession: _react2.default.PropTypes.func.isRequired
 		},
@@ -83268,6 +83342,7 @@
 					handler: WorldRoute,
 					changeMarquee: this.props.changeMarquee,
 					changeFaction: this.props.changeFaction,
+					changeLoadingState: this.props.changeLoadingState,
 					changeFooter: this.props.changeFooter }),
 				_react2.default.createElement(Location, {
 					path: '/login-signup',
@@ -83291,6 +83366,7 @@
 					routerRef: this.router,
 					changeMarquee: this.props.changeMarquee,
 					changeFaction: this.props.changeFaction,
+					changeLoadingState: this.props.changeLoadingState,
 					changeFooter: this.props.changeFooter }),
 				_react2.default.createElement(Location, {
 					path: /\/character\/?(.+)?/,
@@ -83299,6 +83375,7 @@
 					routerRef: this.router,
 					changeMarquee: this.props.changeMarquee,
 					changeFaction: this.props.changeFaction,
+					changeLoadingState: this.props.changeLoadingState,
 					changeFooter: this.props.changeFooter }),
 				_react2.default.createElement(NotFound, { handler: Http404 })
 			);
@@ -83334,7 +83411,7 @@
 	
 	function style1() {
 		return {
-			margin: '0.5rem 0 1rem 0',
+			margin: '2rem 0 0.25rem 0',
 			textTransform: 'uppercase',
 			opacity: 0.7
 		};
@@ -83356,7 +83433,7 @@
 	
 	var _keyboardArrowRight2 = _interopRequireDefault(_keyboardArrowRight);
 	
-	var _Box = __webpack_require__(58);
+	var _Box = __webpack_require__(59);
 	
 	var _Box2 = _interopRequireDefault(_Box);
 	
@@ -83410,15 +83487,7 @@
 	            return _this2.setState({ isPressed: false });
 	          },
 	
-	          style: {
-	            display: 'flex',
-	            justifyContent: 'center',
-	            alignItems: 'center',
-	            height: '4.3rem',
-	            overflow: 'hidden',
-	            backgroundColor: this.state.isPressed ? 'rgba(0, 0, 0, 0.25)' : 'transparent',
-	            transition: 'background-color 250ms linear'
-	          }
+	          style: this.style()
 	        },
 	        _react2.default.createElement(
 	          _Box2.default,
@@ -83457,11 +83526,24 @@
 	            _react2.default.createElement(
 	              'div',
 	              null,
-	              _react2.default.createElement(_keyboardArrowRight2.default, null)
+	              _react2.default.createElement(_keyboardArrowRight2.default, { color: this.props.style.color })
 	            )
 	          )
 	        )
 	      );
+	    }
+	  }, {
+	    key: 'style',
+	    value: function style() {
+	      return Object.assign({}, {
+	        display: 'flex',
+	        justifyContent: 'center',
+	        alignItems: 'center',
+	        height: '4.3rem',
+	        overflow: 'hidden',
+	        backgroundColor: this.state.isPressed ? this.props.activeColor : 'transparent',
+	        transition: 'background-color 350ms linear'
+	      }, this.props.style);
 	    }
 	  }]);
 	
@@ -83480,7 +83562,7 @@
 	
 	var _env2 = _interopRequireDefault(_env);
 	
-	var _utils = __webpack_require__(61);
+	var _utils = __webpack_require__(62);
 	
 	var _utils2 = _interopRequireDefault(_utils);
 	
@@ -83512,15 +83594,15 @@
 	
 	var _List2 = _interopRequireDefault(_List);
 	
-	var _ListItem = __webpack_require__(69);
+	var _ListItem = __webpack_require__(70);
 	
 	var _ListItem2 = _interopRequireDefault(_ListItem);
 	
-	var _TextField = __webpack_require__(71);
+	var _TextField = __webpack_require__(72);
 	
 	var _TextField2 = _interopRequireDefault(_TextField);
 	
-	var _RaisedButton = __webpack_require__(70);
+	var _RaisedButton = __webpack_require__(71);
 	
 	var _RaisedButton2 = _interopRequireDefault(_RaisedButton);
 	
@@ -83543,7 +83625,8 @@
 		propTypes: {
 			routerRef: _react2.default.PropTypes.oneOfType([_react2.default.PropTypes.element, _react2.default.PropTypes.any]),
 			changeMarquee: _react2.default.PropTypes.func.isRequired,
-			changeFaction: _react2.default.PropTypes.func.isRequired
+			changeFaction: _react2.default.PropTypes.func.isRequired,
+			changeLoadingState: _react2.default.PropTypes.func.isRequired
 		},
 		_list: null,
 		getInitialState: function getInitialState() {
@@ -83648,11 +83731,16 @@
 			this.props.changeFaction('ns');
 		},
 		componentDidMount: function componentDidMount() {
+			var _this2 = this;
 	
-			this.readOutfitBookmarks();
+			this.props.changeLoadingState(true);
+	
+			this.readOutfitBookmarks().then(function () {
+				return _this2.props.changeLoadingState(false);
+			});
 		},
 		submitOutfitSearch: function submitOutfitSearch() {
-			var _this2 = this;
+			var _this3 = this;
 	
 			var searchTermLowerCased = this.state.outfitsSearchTerm.toLowerCase();
 	
@@ -83660,24 +83748,24 @@
 	
 				if (err) throw err;
 	
-				_this2.setState(_shema2.default.call(_this2, { outfitsSearchResults: response.body }, true));
+				_this3.setState(_shema2.default.call(_this3, { outfitsSearchResults: response.body }, true));
 			});
 		},
 		readOutfitBookmarks: function readOutfitBookmarks() {
-			var _this3 = this;
+			var _this4 = this;
 	
 			return new Promise(function (resolve, reject) {
 	
 				_superagent2.default.get(_env2.default.backend + '/user/' + _utils2.default.parseJwtPayload().id + '/outfit-bookmarks').set({ Authorization: 'Bearer ' + _utils2.default.parseJwt() }).end(function (err, response) {
 	
-					_this3.setState(_shema2.default.call(_this3, {
+					_this4.setState(_shema2.default.call(_this4, {
 						outfitBookmarks: response.body
 					}, true), resolve);
 				});
 			});
 		},
 		readOutfit: function readOutfit(_Outfit_, isVisible) {
-			var _this4 = this;
+			var _this5 = this;
 	
 			// const isOutfitLoaded = !!this.state.outfits.filter((outfit) => outfit.outfit_id === _Outfit_).length
 	
@@ -83686,16 +83774,16 @@
 	
 				_superagent2.default.get(_env2.default.backend + '/outfit/' + _Outfit_ + '?server=genudine').end(function (err, response) {
 	
-					var outfitsUpdated = _this4.state.outfits.filter(function (outfit) {
+					var outfitsUpdated = _this5.state.outfits.filter(function (outfit) {
 						return outfit.outfit_id !== _Outfit_;
 					}).concat(response.body);
 	
-					_this4.setState(_shema2.default.call(_this4, { outfits: outfitsUpdated }, true));
+					_this5.setState(_shema2.default.call(_this5, { outfits: outfitsUpdated }, true));
 				});
 			}
 		},
 		readOutfitOnlineMembers: function readOutfitOnlineMembers(_Outfit_, isVisible) {
-			var _this5 = this;
+			var _this6 = this;
 	
 			// const isOutfitOnlineCountLoaded = !!this.state.outfitsOnlineCount.filter((outfitOnlineCount) => outfitOnlineCount._Outfit_ === _Outfit_).length
 	
@@ -83705,11 +83793,11 @@
 	
 				_superagent2.default.get(_env2.default.backend + '/outfit/' + _Outfit_ + '/characters?server=genudine&filterOnline=true').end(function (err, response) {
 	
-					var outfitsOnlineCountUpdated = _this5.state.outfitsOnlineCount.filter(function (el) {
+					var outfitsOnlineCountUpdated = _this6.state.outfitsOnlineCount.filter(function (el) {
 						return el._Outfit_ !== _Outfit_;
 					}).concat({ _Outfit_: _Outfit_, onlineCount: response.body.length });
 	
-					return _this5.setState(_shema2.default.call(_this5, {
+					return _this6.setState(_shema2.default.call(_this6, {
 						outfitsOnlineCount: outfitsOnlineCountUpdated
 					}, true));
 				});
@@ -83749,6 +83837,7 @@
 			routerRef: _react2.default.PropTypes.oneOfType([_react2.default.PropTypes.element, _react2.default.PropTypes.any]),
 			changeMarquee: _react2.default.PropTypes.func.isRequired,
 			changeFaction: _react2.default.PropTypes.func.isRequired,
+			changeLoadingState: _react2.default.PropTypes.func.isRequired,
 			changeFooter: _react2.default.PropTypes.func.isRequired
 		},
 		render: function render() {
@@ -83758,11 +83847,13 @@
 				!this.props._Outfit_ ? _react2.default.createElement(_OutfitHome2.default, {
 					routerRef: this.props.routerRef,
 					changeMarquee: this.props.changeMarquee,
-					changeFaction: this.props.changeFaction
+					changeFaction: this.props.changeFaction,
+					changeLoadingState: this.props.changeLoadingState
 				}) : _react2.default.createElement(_OutfitSingle2.default, {
 					routerRef: this.props.routerRef,
-					changeFaction: this.props.changeFaction,
 					changeMarquee: this.props.changeMarquee,
+					changeFaction: this.props.changeFaction,
+					changeLoadingState: this.props.changeLoadingState,
 					_Outfit_: this.props._Outfit_
 				})
 			);
@@ -83782,7 +83873,7 @@
 	
 	var _env2 = _interopRequireDefault(_env);
 	
-	var _utils = __webpack_require__(61);
+	var _utils = __webpack_require__(62);
 	
 	var _utils2 = _interopRequireDefault(_utils);
 	
@@ -83794,11 +83885,11 @@
 	
 	var _size2 = _interopRequireDefault(_size);
 	
-	var _color = __webpack_require__(74);
+	var _color = __webpack_require__(58);
 	
 	var _color2 = _interopRequireDefault(_color);
 	
-	var _Box = __webpack_require__(58);
+	var _Box = __webpack_require__(59);
 	
 	var _Box2 = _interopRequireDefault(_Box);
 	
@@ -83838,7 +83929,7 @@
 	
 	var _List2 = _interopRequireDefault(_List);
 	
-	var _ListItem = __webpack_require__(69);
+	var _ListItem = __webpack_require__(70);
 	
 	var _ListItem2 = _interopRequireDefault(_ListItem);
 	
@@ -83874,11 +83965,13 @@
 			routerRef: _react2.default.PropTypes.oneOfType([_react2.default.PropTypes.element, _react2.default.PropTypes.any]),
 			changeMarquee: _react2.default.PropTypes.func.isRequired,
 			changeFaction: _react2.default.PropTypes.func.isRequired,
+			changeLoadingState: _react2.default.PropTypes.func.isRequired,
 			_Outfit_: _react2.default.PropTypes.string.isRequired
 		},
 		getInitialState: function getInitialState() {
 			return _shema2.default.call(this, {
 				outfit: {},
+				faction: 'ns',
 				bookmark: {},
 				outfitCharacters: [],
 				outfitLogins: [],
@@ -83888,6 +83981,8 @@
 		},
 		render: function render() {
 			var _this = this;
+	
+			var topPadding = 1;
 	
 			var rankSortedCharacters = this.state.outfitCharacters.sort(function (characterA, characterB) {
 				if (characterA.rank_ordinal > characterB.rank_ordinal) return 1;
@@ -83921,7 +84016,10 @@
 				_react2.default.createElement(
 					_Fab2.default,
 					{
-						onTouchTap: this.toggleOutfitBookmark
+						onTouchTap: this.toggleOutfitBookmark,
+						style: {
+							backgroundColor: _color2.default[this.state.faction].alt
+						}
 					},
 					Object.keys(this.state.bookmark).length ? _react2.default.createElement(_bookmark2.default, { color: 'white' }) : _react2.default.createElement(_bookmarkBorder2.default, { color: 'white' })
 				),
@@ -83929,8 +84027,8 @@
 					'div',
 					{ style: {
 							marginTop: _size2.default.headerHeight + 'rem',
-							paddingTop: '1rem',
-							height: 'calc(100vh - ' + (_size2.default.headerHeight + _size2.default.footerHeight) + 'rem)',
+							paddingTop: topPadding + 'rem',
+							height: 'calc(100vh - ' + (_size2.default.headerHeight + _size2.default.footerHeight + topPadding) + 'rem)',
 							overflow: 'scroll',
 							WebkitOverflowScrolling: 'touch'
 						} },
@@ -83940,13 +84038,15 @@
 								zIndex: 1,
 								position: 'relative',
 								justifyContent: 'space-between',
-								margin: '0 1rem'
+								alignItems: 'center',
+								margin: '0 1rem 1rem'
 							} },
 						_react2.default.createElement(
 							'div',
 							{ style: {
 									padding: '0.75rem 0',
-									fontSize: '1.5rem'
+									fontSize: '1.5rem',
+									color: _color2.default[this.state.faction].standard
 								} },
 							'Online (',
 							onlineCharacters.length,
@@ -83962,15 +84062,17 @@
 									display: 'flex',
 									justifyContent: 'center',
 									alignItems: 'center',
-									padding: '0.5rem',
-									width: '2rem',
-									height: '2rem',
-									border: '0.1rem solid black',
+									marginRight: '0.5rem',
+									width: '3.5rem',
+									height: '3.5rem',
+									border: '0.15rem solid ' + _color2.default[this.state.faction].standard,
 									borderRadius: '100%',
-									backgroundColor: '#f3f3f3'
+									backgroundColor: this.state.isStatsDropdownExpanded ? 'transparent' : _color2.default[this.state.faction].standard
 								}
 							},
-							_react2.default.createElement(_poll2.default, null)
+							_react2.default.createElement(_poll2.default, {
+								color: this.state.isStatsDropdownExpanded ? _color2.default[this.state.faction].standard : _color2.default[this.state.faction].lighter
+							})
 						)
 					),
 					_react2.default.createElement(_OutfitStatsDropdown2.default, {
@@ -83979,6 +84081,7 @@
 						outfitCharacters: this.state.outfitCharacters,
 						establishDate: this.state.outfit.time_created_date,
 						outfitLogins: this.state.outfitLogins,
+						factionColors: _color2.default[this.state.faction],
 						closeHandler: function closeHandler() {
 							return _this.setState(_shema2.default.call(_this, { isStatsDropdownExpanded: false }, true));
 						}
@@ -83991,8 +84094,9 @@
 							{ style: {
 									position: 'relative',
 									margin: '0 1rem 1rem 1rem',
-									border: '0.25rem solid black',
-									borderRadius: '0.25rem'
+									borderRadius: '0.25rem',
+									border: '0.25rem solid ' + _color2.default[this.state.faction].saturated,
+									transition: 'border 350ms linear'
 								} },
 							onlineLeaders.map(function (character) {
 	
@@ -84009,8 +84113,12 @@
 										onTouchTap: function onTouchTap() {
 											return _this.props.routerRef.navigate('/character/' + character.character_id);
 										},
+										activeColor: _color2.default[_this.state.faction].light,
 										characterName: character.character.name.first,
-										characterLastLogin: characterLastLogin ? (0, _moment2.default)(characterLastLogin.login.time).fromNow() : null
+										characterLastLogin: characterLastLogin ? (0, _moment2.default)(characterLastLogin.login.time).fromNow() : null,
+										style: {
+											color: _color2.default[_this.state.faction].standard
+										}
 									})
 								);
 							}),
@@ -84021,13 +84129,15 @@
 										bottom: '-1.45rem',
 										right: '1rem',
 										padding: '0 0.25rem',
-										borderTop: '0.5rem solid white'
+										borderTop: '0.5rem solid ' + _color2.default[this.state.faction].lighter
 									} },
 								_react2.default.createElement(
 									'span',
 									{ style: {
 											position: 'relative',
-											top: '-0.75rem'
+											top: '-0.75rem',
+											fontWeight: 'bolder',
+											color: _color2.default[this.state.faction].light
 										} },
 									'LEADERS'
 								)
@@ -84038,8 +84148,9 @@
 							{ style: {
 									position: 'relative',
 									margin: '0 1rem 1rem 1rem',
-									border: '0.25rem solid black',
-									borderRadius: '0.25rem'
+									borderRadius: '0.25rem',
+									border: '0.25rem solid ' + _color2.default[this.state.faction].saturated,
+									transition: 'border 350ms linear'
 								} },
 							onlineOfficers.map(function (character) {
 	
@@ -84057,7 +84168,11 @@
 											return _this.props.routerRef.navigate('/character/' + character.character_id);
 										},
 										characterName: character.character.name.first,
-										characterLastLogin: characterLastLogin ? (0, _moment2.default)(characterLastLogin.login.time).fromNow() : null
+										activeColor: _color2.default[_this.state.faction].light,
+										characterLastLogin: characterLastLogin ? (0, _moment2.default)(characterLastLogin.login.time).fromNow() : null,
+										style: {
+											color: _color2.default[_this.state.faction].standard
+										}
 									})
 								);
 							}),
@@ -84068,13 +84183,15 @@
 										bottom: '-1.45rem',
 										right: '1rem',
 										padding: '0 0.25rem',
-										borderTop: '0.5rem solid white'
+										borderTop: '0.5rem solid ' + _color2.default[this.state.faction].lighter
 									} },
 								_react2.default.createElement(
 									'span',
 									{ style: {
 											position: 'relative',
-											top: '-0.75rem'
+											top: '-0.75rem',
+											fontWeight: 'bolder',
+											color: _color2.default[this.state.faction].light
 										} },
 									'OFFICERS'
 								)
@@ -84085,8 +84202,9 @@
 							{ style: {
 									position: 'relative',
 									margin: '0 1rem 1rem 1rem',
-									border: '0.25rem solid black',
-									borderRadius: '0.25rem'
+									borderRadius: '0.25rem',
+									border: '0.25rem solid ' + _color2.default[this.state.faction].saturated,
+									transition: 'border 350ms linear'
 								} },
 							onlineMembers.map(function (character) {
 	
@@ -84104,7 +84222,11 @@
 											return _this.props.routerRef.navigate('/character/' + character.character_id);
 										},
 										characterName: character.character.name.first,
-										characterLastLogin: characterLastLogin ? (0, _moment2.default)(characterLastLogin.login.time).fromNow() : null
+										activeColor: _color2.default[_this.state.faction].light,
+										characterLastLogin: characterLastLogin ? (0, _moment2.default)(characterLastLogin.login.time).fromNow() : null,
+										style: {
+											color: _color2.default[_this.state.faction].standard
+										}
 									})
 								);
 							}),
@@ -84115,13 +84237,15 @@
 										bottom: '-1.45rem',
 										right: '1rem',
 										padding: '0 0.25rem',
-										borderTop: '0.5rem solid white'
+										borderTop: '0.5rem solid ' + _color2.default[this.state.faction].lighter
 									} },
 								_react2.default.createElement(
 									'span',
 									{ style: {
 											position: 'relative',
-											top: '-0.75rem'
+											top: '-0.75rem',
+											fontWeight: 'bolder',
+											color: _color2.default[this.state.faction].light
 										} },
 									'MEMBERS'
 								)
@@ -84132,8 +84256,9 @@
 							{ style: {
 									position: 'relative',
 									margin: '0 1rem 1rem 1rem',
-									border: '0.25rem solid black',
-									borderRadius: '0.25rem'
+									borderRadius: '0.25rem',
+									border: '0.25rem solid ' + _color2.default[this.state.faction].saturated,
+									transition: 'border 350ms linear'
 								} },
 							onlinePrivates.map(function (character) {
 	
@@ -84151,7 +84276,11 @@
 											return _this.props.routerRef.navigate('/character/' + character.character_id);
 										},
 										characterName: character.character.name.first,
-										characterLastLogin: characterLastLogin ? (0, _moment2.default)(characterLastLogin.login.time).fromNow() : null
+										activeColor: _color2.default[_this.state.faction].light,
+										characterLastLogin: characterLastLogin ? (0, _moment2.default)(characterLastLogin.login.time).fromNow() : null,
+										style: {
+											color: _color2.default[_this.state.faction].standard
+										}
 									})
 								);
 							}),
@@ -84162,13 +84291,15 @@
 										bottom: '-1.45rem',
 										right: '1rem',
 										padding: '0 0.25rem',
-										borderTop: '0.5rem solid white'
+										borderTop: '0.5rem solid ' + _color2.default[this.state.faction].lighter
 									} },
 								_react2.default.createElement(
 									'span',
 									{ style: {
 											position: 'relative',
-											top: '-0.75rem'
+											top: '-0.75rem',
+											fontWeight: 'bolder',
+											color: _color2.default[this.state.faction].light
 										} },
 									'PRIVATES'
 								)
@@ -84179,50 +84310,45 @@
 			);
 		},
 		componentDidMount: function componentDidMount() {
-	
-			this.readOutfitAndFaction();
-			this.readOutfitCharacters();
-			this.readOutfitBookmarks();
-			this.readOutfitLoginMetrics();
-		},
-		readOutfitAndFaction: function readOutfitAndFaction() {
 			var _this2 = this;
 	
-			return new Promise(function (resolve, reject) {
+			this.props.changeFaction(this.state.faction);
+			this.props.changeLoadingState(true);
 	
-				_superagent2.default.get(_env2.default.backend + '/outfit/' + _this2.props._Outfit_ + '?server=genudine').end(function (err, response) {
-	
-					if (err) throw err;
-	
-					_this2.props.changeMarquee('[' + response.body.alias + ']');
-					_this2.setState(_shema2.default.call(_this2, { outfit: response.body }, true), resolve);
-	
-					_this2.setState(function (prevState) {
-	
-						_superagent2.default.get(_env2.default.backend + '/character/' + _this2.state.outfit.leader_character_id + '?server=genudine').end(function (err, response) {
-	
-							//ns, vs, nc, tr
-							_this2.props.changeFaction(response.body.faction.code_tag.toLowerCase());
-						});
-					});
-				});
+			this.readOutfit().then(this.readOutfitsFaction).then(this.readOutfitCharacters).then(this.readOutfitBookmarks).then(this.readOutfitLoginMetrics).then(function () {
+				console.log('1', 1);
+				_this2.props.changeLoadingState(false);
 			});
 		},
-		readOutfitCharacters: function readOutfitCharacters() {
+		readOutfit: function readOutfit() {
 			var _this3 = this;
 	
 			return new Promise(function (resolve, reject) {
 	
-				_superagent2.default.get(_env2.default.backend + '/outfit/' + _this3.props._Outfit_ + '/characters?server=genudine').end(function (err, response) {
+				_superagent2.default.get(_env2.default.backend + '/outfit/' + _this3.props._Outfit_ + '?server=genudine').end(function (err, response) {
 	
 					if (err) throw err;
 	
-					_this3.setState(_shema2.default.call(_this3, { outfitCharacters: response.body }, true), resolve);
+					_this3.props.changeMarquee('[' + response.body.alias + ']');
+					_this3.setState(_shema2.default.call(_this3, { outfit: response.body }, true), resolve);
+				});
+			});
+		},
+		readOutfitCharacters: function readOutfitCharacters() {
+			var _this4 = this;
+	
+			return new Promise(function (resolve, reject) {
+	
+				_superagent2.default.get(_env2.default.backend + '/outfit/' + _this4.props._Outfit_ + '/characters?server=genudine').end(function (err, response) {
+	
+					if (err) throw err;
+	
+					_this4.setState(_shema2.default.call(_this4, { outfitCharacters: response.body }, true), resolve);
 				});
 			});
 		},
 		readOutfitBookmarks: function readOutfitBookmarks() {
-			var _this4 = this;
+			var _this5 = this;
 	
 			return new Promise(function (resolve, reject) {
 	
@@ -84230,50 +84356,66 @@
 	
 					var findBookmark = function findBookmark() {
 						return response.body.filter(function (outfitBookmark) {
-							return outfitBookmark._Outfit_ === _this4.props._Outfit_;
+							return outfitBookmark._Outfit_ === _this5.props._Outfit_;
 						})[0];
 					};
 					var bookmark = findBookmark() ? findBookmark() : {};
 	
 					if (err) throw err;
 	
-					_this4.setState(_shema2.default.call(_this4, {
+					_this5.setState(_shema2.default.call(_this5, {
 						bookmark: bookmark
 					}, true), resolve);
 				});
 			});
 		},
 		readOutfitLoginMetrics: function readOutfitLoginMetrics() {
-			var _this5 = this;
+			var _this6 = this;
 	
 			return new Promise(function (resolve, reject) {
 	
-				_superagent2.default.get(_env2.default.backend + '/login?_Outfit_=' + _this5.props._Outfit_ + '&timeframe=month').end(function (err, response) {
+				_superagent2.default.get(_env2.default.backend + '/login?_Outfit_=' + _this6.props._Outfit_ + '&timeframe=month').end(function (err, response) {
 	
 					if (err) throw err;
 	
-					_this5.setState(_shema2.default.call(_this5, { outfitLogins: response.body }, true), resolve);
+					_this6.setState(_shema2.default.call(_this6, { outfitLogins: response.body }, true), resolve);
 				});
 			});
 		},
 		readOutfitCharacterLogins: function readOutfitCharacterLogins(_Character_) {
-			var _this6 = this;
+			var _this7 = this;
 	
 			_superagent2.default.get(_env2.default.backend + '/character/' + _Character_ + '/logins').end(function (err, response) {
 	
 				if (!response.body.length) return;
 	
-				var outfitCharacterLoginsUpdated = _this6.state.outfitCharacterLogins.filter(function (el) {
+				var outfitCharacterLoginsUpdated = _this7.state.outfitCharacterLogins.filter(function (el) {
 					return el._Character_ !== _Character_;
 				}).concat({ _Character_: _Character_, login: response.body[0] });
 	
-				_this6.setState(_shema2.default.call(_this6, {
+				_this7.setState(_shema2.default.call(_this7, {
 					outfitCharacterLogins: outfitCharacterLoginsUpdated
 				}, true));
 			});
 		},
+		readOutfitsFaction: function readOutfitsFaction() {
+			var _this8 = this;
+	
+			return new Promise(function (resolve, reject) {
+	
+				_superagent2.default.get(_env2.default.backend + '/character/' + _this8.state.outfit.leader_character_id + '?server=genudine').end(function (err, response) {
+	
+					var faction = response.body.faction.code_tag.toLowerCase();
+	
+					//ns, vs, nc, tr
+					_this8.props.changeFaction(faction);
+	
+					_this8.setState(_shema2.default.call(_this8, { faction: faction }, true), resolve);
+				});
+			});
+		},
 		toggleOutfitBookmark: function toggleOutfitBookmark() {
-			var _this7 = this;
+			var _this9 = this;
 	
 			if (!Object.keys(this.state.bookmark).length) {
 	
@@ -84284,7 +84426,7 @@
 	
 					if (err) throw err;
 	
-					_this7.readOutfitBookmarks();
+					_this9.readOutfitBookmarks();
 				});
 			} else {
 	
@@ -84292,7 +84434,7 @@
 	
 					if (err) throw err;
 	
-					_this7.readOutfitBookmarks();
+					_this9.readOutfitBookmarks();
 				});
 			}
 		}
@@ -84346,7 +84488,7 @@
 	
 	var _List2 = _interopRequireDefault(_List);
 	
-	var _ListItem = __webpack_require__(69);
+	var _ListItem = __webpack_require__(70);
 	
 	var _ListItem2 = _interopRequireDefault(_ListItem);
 	
@@ -84441,34 +84583,60 @@
 	      return _react2.default.createElement(
 	        'div',
 	        { style: {
-	            zIndex: 1,
-	            position: this.props.isExpanded ? 'relative' : 'absolute',
+	            position: 'relative',
 	            display: 'flex',
 	            flexDirection: 'column',
 	            justifyContent: 'space-between',
 	            margin: '1rem',
-	            maxHeight: this.props.isExpanded ? '100%' : 0,
-	            transition: 'position 250ms linear, max-height 250ms linear, transform 250ms linear',
+	            height: this.props.isExpanded ? '100%' : 0,
+	            maxHeight: '100%',
+	            opacity: this.props.isExpanded ? 0.8 : 0.1,
 	            overflow: 'hidden',
-	            backgroundColor: '#f3f3f3',
+	            backgroundColor: this.props.factionColors.standard,
+	            color: 'white',
 	            borderRadius: 4,
-	            transform: this.props.isExpanded ? 'scale(1)' : 'scale(0)'
+	            transition: 'height 350ms ease-in-out, opacity 250ms ease-in'
 	          } },
 	        _react2.default.createElement(
 	          'div',
-	          null,
-	          _react2.default.createElement(_assignmentInd2.default, null),
-	          ' ',
-	          this.props.memberCount ? this.props.memberCount + ' Members' : 'Crunching...',
-	          _react2.default.createElement(_poll2.default, null),
-	          ' ',
-	          this.props.outfitCharacters.length ? calculateAvgBR(this.props.outfitCharacters) + ' Average BattleRank' : 'Crunching...',
+	          { style: {
+	              padding: '1.25rem'
+	            } },
+	          _react2.default.createElement(
+	            'div',
+	            { style: {
+	                display: 'flex',
+	                alignItems: 'center'
+	              } },
+	            _react2.default.createElement(_assignmentInd2.default, {
+	              color: 'white',
+	              style: {
+	                marginRight: '0.25rem',
+	                width: '1.8rem',
+	                opacity: 0.65
+	              } }),
+	            this.props.memberCount ? this.props.memberCount + ' Members' : 'Crunching...'
+	          ),
+	          _react2.default.createElement(
+	            'div',
+	            { style: {
+	                display: 'flex',
+	                alignItems: 'center'
+	              } },
+	            _react2.default.createElement(_poll2.default, {
+	              color: 'white',
+	              style: {
+	                marginRight: '0.25rem',
+	                width: '1.8rem',
+	                opacity: 0.65
+	              } }),
+	            this.props.outfitCharacters.length ? calculateAvgBR(this.props.outfitCharacters) + ' Average BattleRank' : 'Crunching...'
+	          ),
 	          _react2.default.createElement(
 	            _NestedListHeader2.default,
 	            null,
 	            'Established'
 	          ),
-	          ' ',
 	          _react2.default.createElement(
 	            'div',
 	            null,
@@ -84481,81 +84649,107 @@
 	          ),
 	          _react2.default.createElement(
 	            'div',
-	            { style: { display: 'flex', flexWrap: 'wrap' } },
+	            null,
 	            _react2.default.createElement(
-	              _Chip2.default,
-	              { style: { margin: '0.25rem' } },
+	              'div',
+	              null,
 	              _react2.default.createElement(
-	                _Avatar2.default,
-	                null,
-	                outfitLeaders.length
+	                _Chip2.default,
+	                { style: { display: 'inline-block', margin: '0.25rem', fontWeight: 'bolder', backgroundColor: this.props.factionColors.lighter } },
+	                _react2.default.createElement(
+	                  _Avatar2.default,
+	                  { backgroundColor: this.props.factionColors.light },
+	                  outfitLeaders.length
+	                ),
+	                'Leaders'
 	              ),
-	              'Leaders'
+	              _react2.default.createElement(
+	                _Chip2.default,
+	                { style: { display: 'inline-block', margin: '0.25rem', fontWeight: 'bolder', backgroundColor: this.props.factionColors.lighter } },
+	                _react2.default.createElement(
+	                  _Avatar2.default,
+	                  { backgroundColor: this.props.factionColors.light },
+	                  outfitOfficers.length
+	                ),
+	                'Officers'
+	              )
 	            ),
 	            _react2.default.createElement(
-	              _Chip2.default,
-	              { style: { margin: '0.25rem' } },
+	              'div',
+	              null,
 	              _react2.default.createElement(
-	                _Avatar2.default,
-	                null,
-	                outfitOfficers.length
+	                _Chip2.default,
+	                { style: { display: 'inline-block', margin: '0.25rem', fontWeight: 'bolder', backgroundColor: this.props.factionColors.lighter } },
+	                _react2.default.createElement(
+	                  _Avatar2.default,
+	                  { backgroundColor: this.props.factionColors.light },
+	                  outfitMembers.length
+	                ),
+	                'Members'
 	              ),
-	              'Officers'
+	              _react2.default.createElement(
+	                _Chip2.default,
+	                { style: { display: 'inline-block', margin: '0.25rem', fontWeight: 'bolder', backgroundColor: this.props.factionColors.lighter } },
+	                _react2.default.createElement(
+	                  _Avatar2.default,
+	                  { backgroundColor: this.props.factionColors.light },
+	                  outfitPrivates.length
+	                ),
+	                'Privates'
+	              )
+	            )
+	          ),
+	          _react2.default.createElement(
+	            _NestedListHeader2.default,
+	            null,
+	            'Login Activity'
+	          ),
+	          _react2.default.createElement(
+	            'div',
+	            null,
+	            _react2.default.createElement(
+	              'div',
+	              { style: {
+	                  display: 'flex',
+	                  margin: '0 0 0.25rem',
+	                  color: 'white'
+	                } },
+	              'Past Month',
+	              _react2.default.createElement(
+	                'span',
+	                { style: { marginLeft: '0.25rem', opacity: 0.65 } },
+	                calcPercentageOutfitParticipation('month')
+	              )
 	            ),
 	            _react2.default.createElement(
-	              _Chip2.default,
-	              { style: { margin: '0.25rem' } },
+	              'div',
+	              { style: {
+	                  display: 'flex',
+	                  margin: '0 0 0.25rem',
+	                  color: 'white'
+	                } },
+	              'Week',
 	              _react2.default.createElement(
-	                _Avatar2.default,
-	                null,
-	                outfitMembers.length
-	              ),
-	              'Members'
+	                'span',
+	                { style: { marginLeft: '0.25rem', opacity: 0.65 } },
+	                calcPercentageOutfitParticipation('week')
+	              )
 	            ),
 	            _react2.default.createElement(
-	              _Chip2.default,
-	              { style: { margin: '0.25rem' } },
+	              'div',
+	              { style: {
+	                  display: 'flex',
+	                  margin: '0 0 0.25rem',
+	                  color: 'white'
+	                } },
+	              'Day',
 	              _react2.default.createElement(
-	                _Avatar2.default,
-	                null,
-	                outfitPrivates.length
-	              ),
-	              'Privates'
+	                'span',
+	                { style: { marginLeft: '0.25rem', opacity: 0.65 } },
+	                calcPercentageOutfitParticipation('day')
+	              )
 	            )
 	          )
-	        ),
-	        _react2.default.createElement(
-	          _NestedListHeader2.default,
-	          null,
-	          'Login Activity'
-	        ),
-	        _react2.default.createElement(
-	          'div',
-	          null,
-	          _react2.default.createElement(_ListItem2.default, {
-	            primaryText: 'Past Month',
-	            rightAvatar: _react2.default.createElement(
-	              _Avatar2.default,
-	              null,
-	              calcPercentageOutfitParticipation('month')
-	            ),
-	            disabled: true }),
-	          _react2.default.createElement(_ListItem2.default, {
-	            primaryText: 'Week',
-	            rightAvatar: _react2.default.createElement(
-	              _Avatar2.default,
-	              null,
-	              calcPercentageOutfitParticipation('week')
-	            ),
-	            disabled: true }),
-	          _react2.default.createElement(_ListItem2.default, {
-	            primaryText: 'Day',
-	            rightAvatar: _react2.default.createElement(
-	              _Avatar2.default,
-	              null,
-	              calcPercentageOutfitParticipation('day')
-	            ),
-	            disabled: true })
 	        ),
 	        _react2.default.createElement(
 	          'div',
@@ -84565,9 +84759,9 @@
 	              display: 'flex',
 	              justifyContent: 'center',
 	              alignItems: 'center',
-	              padding: '1rem',
+	              padding: '1.5rem 0',
 	              width: '100%',
-	              backgroundColor: 'lightgray'
+	              backgroundColor: this.props.factionColors.light
 	            }
 	          },
 	          'CLOSE'
@@ -84644,8 +84838,9 @@
 	        display: 'flex',
 	        justifyContent: 'center',
 	        alignItems: 'center',
-	        width: _this.props.percent + '%',
-	        backgroundColor: _this.props.color || 'black'
+	        width: _this.props.isLoading ? '100%' : _this.props.percent + '%',
+	        backgroundColor: _this.props.color || 'black',
+	        transition: 'width 500ms ease-out'
 	      }, _this.props.style);
 	    }, _temp), _possibleConstructorReturn(_this, _ret);
 	  }
@@ -84659,11 +84854,7 @@
 	            width: '100%',
 	            display: 'flex'
 	          } },
-	        _react2.default.createElement(
-	          'div',
-	          { style: this.style() },
-	          this.props.shouldDisplayPercent ? this.props.percent + '%' : null
-	        )
+	        _react2.default.createElement('div', { style: this.style() })
 	      );
 	    }
 	  }]);
@@ -84697,11 +84888,11 @@
 	
 	var _react2 = _interopRequireDefault(_react);
 	
-	var _TextField = __webpack_require__(71);
+	var _TextField = __webpack_require__(72);
 	
 	var _TextField2 = _interopRequireDefault(_TextField);
 	
-	var _RaisedButton = __webpack_require__(70);
+	var _RaisedButton = __webpack_require__(71);
 	
 	var _RaisedButton2 = _interopRequireDefault(_RaisedButton);
 	
@@ -84794,7 +84985,7 @@
 	
 	var _size2 = _interopRequireDefault(_size);
 	
-	var _color = __webpack_require__(74);
+	var _color = __webpack_require__(58);
 	
 	var _color2 = _interopRequireDefault(_color);
 	
@@ -84821,6 +85012,7 @@
 		propTypes: {
 			changeMarquee: _react2.default.PropTypes.func.isRequired,
 			changeFaction: _react2.default.PropTypes.func.isRequired,
+			changeLoadingState: _react2.default.PropTypes.func.isRequired,
 			changeFooter: _react2.default.PropTypes.func.isRequired
 		},
 		getInitialState: function getInitialState() {
@@ -84862,17 +85054,17 @@
 						{ style: { display: 'flex', width: '100%', color: 'white' } },
 						_react2.default.createElement(
 							'div',
-							{ style: _lodash2.default.assign(style1(), { width: vsPercentage, backgroundColor: 'purple' }) },
+							{ style: _lodash2.default.assign(style1(), { width: vsPercentage, backgroundColor: _color2.default.vs.standard }) },
 							vsCount
 						),
 						_react2.default.createElement(
 							'div',
-							{ style: _lodash2.default.assign(style1(), { width: ncPercentage, backgroundColor: 'blue' }) },
+							{ style: _lodash2.default.assign(style1(), { width: ncPercentage, backgroundColor: _color2.default.nc.standard }) },
 							ncCount
 						),
 						_react2.default.createElement(
 							'div',
-							{ style: _lodash2.default.assign(style1(), { width: trPercentage, backgroundColor: 'red' }) },
+							{ style: _lodash2.default.assign(style1(), { width: trPercentage, backgroundColor: _color2.default.tr.standard }) },
 							trCount
 						)
 					),
@@ -84900,15 +85092,22 @@
 			this.props.changeFooter(true);
 		},
 		componentDidMount: function componentDidMount() {
-	
-			this.readCensus();
-		},
-		readCensus: function readCensus() {
 			var _this2 = this;
 	
-			_superagent2.default.get(_env2.default.backend + '/census?server=genudine&timeframe=now').end(function (err, response) {
+			this.props.changeLoadingState(true);
 	
-				_this2.setState(_shema2.default.call(_this2, { census: response.body }, true));
+			this.readCensus().then(function () {
+				return _this2.props.changeLoadingState(false);
+			});
+		},
+		readCensus: function readCensus() {
+			var _this3 = this;
+	
+			return new Promise(function (resolve, reject) {
+				_superagent2.default.get(_env2.default.backend + '/census?server=genudine&timeframe=now').end(function (err, response) {
+	
+					_this3.setState(_shema2.default.call(_this3, { census: response.body }, true), resolve);
+				});
 			});
 		}
 	});
@@ -87475,7 +87674,7 @@
 	'use strict';
 	
 	var PooledClass = __webpack_require__(643);
-	var ReactElement = __webpack_require__(60);
+	var ReactElement = __webpack_require__(61);
 	
 	var emptyFunction = __webpack_require__(21);
 	var traverseAllChildren = __webpack_require__(653);
@@ -87667,7 +87866,7 @@
 	
 	'use strict';
 	
-	var ReactElement = __webpack_require__(60);
+	var ReactElement = __webpack_require__(61);
 	
 	/**
 	 * Create a factory that creates HTML tag elements.
@@ -87838,7 +88037,7 @@
 	
 	'use strict';
 	
-	var _require = __webpack_require__(60),
+	var _require = __webpack_require__(61),
 	    isValidElement = _require.isValidElement;
 	
 	var factory = __webpack_require__(286);
@@ -87864,7 +88063,7 @@
 	var _require = __webpack_require__(322),
 	    Component = _require.Component;
 	
-	var _require2 = __webpack_require__(60),
+	var _require2 = __webpack_require__(61),
 	    isValidElement = _require2.isValidElement;
 	
 	var ReactNoopUpdateQueue = __webpack_require__(325);
@@ -87979,7 +88178,7 @@
 	
 	var _prodInvariant = __webpack_require__(75);
 	
-	var ReactElement = __webpack_require__(60);
+	var ReactElement = __webpack_require__(61);
 	
 	var invariant = __webpack_require__(3);
 	
@@ -89071,4 +89270,4 @@
 
 /***/ }
 /******/ ])));
-//# sourceMappingURL=main.3fe1870d.js.map
+//# sourceMappingURL=main.00a2efd8.js.map

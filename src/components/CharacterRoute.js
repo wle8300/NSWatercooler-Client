@@ -22,11 +22,13 @@ module.exports = React.createClass({
 							routerRef={this.props.routerRef}
 							changeMarquee={this.props.changeMarquee}
 							changeFaction={this.props.changeFaction}
+							changeLoadingState={this.props.changeLoadingState}
 							/>
 						: <CharacterSingle
 							_Character_={this.props._Character_}
 							changeMarquee={this.props.changeMarquee}
 							changeFaction={this.props.changeFaction}
+							changeLoadingState={this.props.changeLoadingState}
 							/>
 				}
 			</div>

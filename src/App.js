@@ -24,6 +24,7 @@ module.exports = React.createClass({
 				size: 'normal'
 			},
 			faction: 'ns',
+			isLoading: false,
 			isDrawerOpen: false,
 			arePageButtonsVisible: true
 		}
@@ -38,7 +39,7 @@ module.exports = React.createClass({
 		    accent1Color: color[this.state.faction].alt,
 		    // accent2Color: grey100,
 		    // accent3Color: grey500,
-		    // textColor: darkBlack,
+		    textColor: color[this.state.faction].standard,
 		    // alternateTextColor: white,
 		    // canvasColor: white,
 		    // borderColor: grey300,
@@ -60,12 +61,13 @@ module.exports = React.createClass({
 					style={{
 						margin: '0 auto',
 						backgroundColor: color[this.state.faction].lighter,
-						transition: 'background-color 250ms linear',
+						transition: 'background-color 350ms linear',
 					}}
 				>
 					<Header
 						marquee={this.state.marquee}
 						faction={this.state.faction}
+						isLoading={this.state.isLoading}
 						toggleDrawer={this.toggleDrawer}/>
 					<Drawer
 						isDrawerOpen={this.state.isDrawerOpen}
@@ -77,6 +79,7 @@ module.exports = React.createClass({
 						gotRouterRef={this.gotRouterRef}
 						changeMarquee={this.changeMarquee}
 						changeFaction={this.changeFaction}
+						changeLoadingState={this.changeLoadingState}
 						changeFooter={this.changeFooter}
 						restartSession={this.restartSession}/>
 					<Footer routerRef={this.state.routerRef} arePageButtonsVisible={this.state.arePageButtonsVisible}/>
@@ -130,6 +133,10 @@ module.exports = React.createClass({
 	changeFaction: function (faction) {
 
 		this.setState({faction: faction})
+	},
+	changeLoadingState: function (isLoading) {
+
+		this.setState({isLoading: isLoading})
 	},
 	changeFooter: function (isVisible) {
 

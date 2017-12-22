@@ -18,6 +18,7 @@ module.exports = React.createClass({
 		routerRef: React.PropTypes.oneOfType([React.PropTypes.element, React.PropTypes.any]),
 		changeMarquee: React.PropTypes.func.isRequired,
 		changeFaction: React.PropTypes.func.isRequired,
+		changeLoadingState: React.PropTypes.func.isRequired,
 		changeFooter: React.PropTypes.func.isRequired,
 		restartSession: React.PropTypes.func.isRequired
 	},
@@ -30,6 +31,7 @@ module.exports = React.createClass({
 					handler={WorldRoute}
 					changeMarquee={this.props.changeMarquee}
 					changeFaction={this.props.changeFaction}
+					changeLoadingState={this.props.changeLoadingState}
 					changeFooter={this.props.changeFooter}/>
 				<Location
 					path="/login-signup"
@@ -53,6 +55,7 @@ module.exports = React.createClass({
 					routerRef={this.router}
 					changeMarquee={this.props.changeMarquee}
 					changeFaction={this.props.changeFaction}
+					changeLoadingState={this.props.changeLoadingState}
 					changeFooter={this.props.changeFooter}/>
 				<Location
 					path={/\/character\/?(.+)?/}
@@ -61,6 +64,7 @@ module.exports = React.createClass({
 					routerRef={this.router}
 					changeMarquee={this.props.changeMarquee}
 					changeFaction={this.props.changeFaction}
+					changeLoadingState={this.props.changeLoadingState}
 					changeFooter={this.props.changeFooter}/>
 				<NotFound handler={Http404}/>
 			</Locations>

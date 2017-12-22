@@ -37,7 +37,8 @@ module.exports = React.createClass({
 	propTypes: {
 		_Character_: React.PropTypes.string.isRequired,
 		changeMarquee: React.PropTypes.func.isRequired,
-		changeFaction: React.PropTypes.func.isRequired
+		changeFaction: React.PropTypes.func.isRequired,
+		changeLoadingState: React.PropTypes.func.isRequired,
 	},
 	getInitialState: function () {
 		return Shema.call(this, {
@@ -94,7 +95,12 @@ module.exports = React.createClass({
 				}
 
 
-				<Fab onTouchTap={this.toggleCharacterSubscription.bind(this, subscription, this.state.character)}>
+				<Fab
+					onTouchTap={this.toggleCharacterSubscription.bind(this, subscription, this.state.character)}
+					style={{
+						backgroundColor: color[this.state.faction].alt
+					}}
+				>
 					{
 						subscription
 							? <MUIBookmarkIcon color="white"/>
@@ -120,7 +126,7 @@ module.exports = React.createClass({
 
 
 					{/* ONLINE STATUS & BATTLERANK */}
-					<Box style={{justifyContent: 'space-between', opacity: 0.65,}}>
+					<Box style={{justifyContent: 'space-between'}}>
 						<Box style={{
 							marginRight : '2%',
 							width : '100%',
@@ -131,7 +137,6 @@ module.exports = React.createClass({
 									justifyContent: 'center',
 									alignItems: 'center',
 									padding: '0 11% 0 0',
-									// width: '11%',
 								}}>
 									<OnlineStatus
 										isOnline={
@@ -153,16 +158,19 @@ module.exports = React.createClass({
 										fontSize: '0.6rem',
 										fontWeight: 'bold',
 										letterSpacing: '0.06rem',
+										color: color[this.state.faction].standard,
 									}}>
 										STATUS
 									</div>
 									<div style={{
 										fontSize: this._fontSize,
+										color: color[this.state.faction].standard,
 									}}>
 										{this.getOnlineStatusVerbiage()}
 									</div>
 									<div style={{
 										fontSize: '0.7rem',
+										color: color[this.state.faction].standard,
 									}}>
 										{
 											this.state.characterLogins.length
@@ -187,6 +195,7 @@ module.exports = React.createClass({
 								fontSize: '0.6rem',
 								fontWeight: 'bold',
 								letterSpacing: '0.06rem',
+								color: color[this.state.faction].standard,
 							}}>
 								BATTLERANK
 							</Box>
@@ -195,6 +204,7 @@ module.exports = React.createClass({
 								alignItems: 'center',
 								fontSize: '2rem',
 								fontWeight: 'bold',
+								color: color[this.state.faction].standard,
 							}}>
 								{this.state.character.battle_rank ? this.state.character.battle_rank.value : 0}
 							</Box>
@@ -204,12 +214,7 @@ module.exports = React.createClass({
 						<Box style={{
 							flexDirection: 'column',
 							justifyContent : 'center',
-							// alignItems : 'center',
-							// margin: '0 0 3%',
-							// padding : '1.5rem',
 							width: '100%',
-							// opacity : 0.65,
-							// backgroundColor : this._color
 						}}>
 							{
 								!this.state.character.outfit_member
@@ -228,6 +233,7 @@ module.exports = React.createClass({
 												fontWeight: 'bold',
 												letterSpacing: '0.06rem',
 												textTransform: 'uppercase',
+												color: color[this.state.faction].standard,
 											}}>
 												{this.state.character.outfit_member.member_rank.toUpperCase()}
 											</Box>
@@ -236,6 +242,7 @@ module.exports = React.createClass({
 													justifyContent: 'center',
 													alignItems: 'center',
 													fontSize: '2rem',
+													color: color[this.state.faction].standard,
 												}}
 											>
 												{this.state.character.outfit_member.alias}
@@ -250,69 +257,85 @@ module.exports = React.createClass({
 
 
 					{/* CLASS PLAYTIMES */}
-					<div style={{marginTop: '3%', padding: '0 0 3rem', opacity: 0.65}}>
+					<div style={{marginTop: '3%', padding: '0 0 3rem'}}>
 						<div style={{
-							padding: '1rem 0',
-							// backgroundColor: this._color,
+							margin: '1rem 0',
 						}}>
-							<Box>
-								<div style={style4()}><img src={IconInfiltrator}/></div>
+							<Box
+								style={{
+								}}
+							>
+								<div style={this.style4()}><img src={IconInfiltrator}/></div>
 								<ProgressBar
-									isLoading={classPlayTimes.length ? 'determinate' : 'indeterminate'}
+									isLoading={!classPlayTimes.length}
 									percent={100 * (calcClassPlaytimePercentage(classPlayTimes, 'infiltrator'))}
-									color="black"
+									color={color[this.state.faction].standard}
 									shouldDisplayPercent={false}
-									style={{margin: '0'}}
+									style={{margin: '0', opacity: 0.65}}
 								/>
 							</Box>
-							<Box>
-								<div style={style4()}><img src={IconLightAssault}/></div>
+							<Box
+								style={{
+								}}
+							>
+								<div style={this.style4()}><img src={IconLightAssault}/></div>
 								<ProgressBar
-									isLoading={classPlayTimes.length ? 'determinate' : 'indeterminate'}
+									isLoading={!classPlayTimes.length}
 									percent={100 * (calcClassPlaytimePercentage(classPlayTimes, 'light-assualt'))}
-									color="black"
+									color={color[this.state.faction].standard}
 									shouldDisplayPercent={false}
-									style={{margin: '0'}}
+									style={{margin: '0', opacity: 0.65}}
 								/>
 							</Box>
-							<Box>
-								<div style={style4()}><img src={IconCombatMedic}/></div>
+							<Box
+								style={{
+								}}
+							>
+								<div style={this.style4()}><img src={IconCombatMedic}/></div>
 								<ProgressBar
-									isLoading={classPlayTimes.length ? 'determinate' : 'indeterminate'}
+									isLoading={!classPlayTimes.length}
 									percent={100 * (calcClassPlaytimePercentage(classPlayTimes, 'combat-medic'))}
-									color="black"
+									color={color[this.state.faction].standard}
 									shouldDisplayPercent={false}
-									style={{margin: '0'}}
+									style={{margin: '0', opacity: 0.65}}
 								/>
 							</Box>
-							<Box>
-								<div style={style4()}><img src={IconEngineer}/></div>
+							<Box
+								style={{
+								}}>
+								<div style={this.style4()}><img src={IconEngineer}/></div>
 								<ProgressBar
-									isLoading={!!classPlayTimes.length}
+									isLoading={!classPlayTimes.length}
 									percent={100 * (calcClassPlaytimePercentage(classPlayTimes, 'engineer'))}
-									color="black"
+									color={color[this.state.faction].standard}
 									shouldDisplayPercent={false}
-									style={{margin: '0'}}
-									/>
-									</Box>
-									<Box>
-									<div style={style4()}><img src={IconHeavyAssault}/></div>
-									<ProgressBar
-									isLoading={classPlayTimes.length ? 'determinate' : 'indeterminate'}
-									percent={100 * (calcClassPlaytimePercentage(classPlayTimes, 'heavy-assault'))}
-									color="black"
-									shouldDisplayPercent={false}
-									style={{margin: '0'}}
+									style={{margin: '0', opacity: 0.65}}
 								/>
 							</Box>
-							<Box>
-								<div style={style4()}><img src={IconMax}/></div>
+							<Box
+								style={{
+								}}
+							>
+								<div style={this.style4()}><img src={IconHeavyAssault}/></div>
 								<ProgressBar
-									isLoading={classPlayTimes.length ? 'determinate' : 'indeterminate'}
-									percent={100 * (calcClassPlaytimePercentage(classPlayTimes, 'max'))}
-									color="black"
+									isLoading={!classPlayTimes.length}
+									percent={100 * (calcClassPlaytimePercentage(classPlayTimes, 'heavy-assault'))}
+									color={color[this.state.faction].standard}
 									shouldDisplayPercent={false}
-									style={{margin: '0'}}
+									style={{margin: '0', opacity: 0.65}}
+								/>
+							</Box>
+							<Box
+								style={{
+								}}
+							>
+								<div style={this.style4()}><img src={IconMax}/></div>
+								<ProgressBar
+									isLoading={!classPlayTimes.length}
+									percent={100 * (calcClassPlaytimePercentage(classPlayTimes, 'max'))}
+									color={color[this.state.faction].standard}
+									shouldDisplayPercent={false}
+									style={{margin: '0', opacity: 0.65}}
 								/>
 							</Box>
 						</div>
@@ -323,9 +346,14 @@ module.exports = React.createClass({
   },
 	componentDidMount: function () {
 
+		this.props.changeMarquee(this.state.character.name && this.state.character.name.first || 'Character')
+		this.props.changeFaction(this.state.faction)
+		this.props.changeLoadingState(true)
+
 		this.readCharacter()
-		this.readCharacterLogins()
-		this.readCharacterSubscriptions()
+		.then(this.readCharacterLogins)
+		.then(this.readCharacterSubscriptions)
+		.then(() => this.props.changeLoadingState(false))
 	},
 	getOnlineStatusVerbiage: function () {
 
@@ -359,11 +387,15 @@ module.exports = React.createClass({
 			.get(env.backend+ '/character/' +this.props._Character_+ '?server=genudine')
 			.end((err, response) => {
 
+				const faction = response.body.faction.code_tag.toLowerCase()
+
+
 				this.props.changeMarquee(response.body.name.first)
-				this.props.changeFaction(response.body.faction.code_tag.toLowerCase())
+				this.props.changeFaction(faction)
 
 				this.setState(Shema.call(this, {
 				  character: response.body,
+					faction: faction,
 				}, true), resolve)
 			})
 		})
@@ -409,40 +441,37 @@ module.exports = React.createClass({
 			.set({Authorization: 'Bearer ' +utils.parseJwt()})
 			.end((err, response) => this.readCharacterSubscriptions())
 		}
+	},
+	style4: function () {
+		return {
+			// width: '33.5%',
+			padding: '1rem',
+			// filter: 'invert(100%)',
+			backgroundColor: color[this.state.faction].standard,
+			opacity: 0.75,
+		}
+	},
+	style5: function () {
+		return {
+			width: '100%',
+		}
+	},
+	style6: function () {
+		return {
+			display: 'flex'
+		}
+	},
+	style7: function () {
+		return {
+			height: '100%',
+			backgroundColor: 'transparent',
+			borderRadius: 0
+		}
+	},
+	style9: function () {
+		return {
+			margin: '1.5rem',
+			backgroundColor: 'transparent'
+		}
 	}
 })
-
-function style4() {
-	return {
-		// width: '33.5%',
-		padding: '1rem',
-		filter: 'invert(100%)',
-	}
-}
-
-function style5() {
-	return {
-		width: '100%',
-	}
-}
-
-function style6() {
-	return {
-		display: 'flex'
-	}
-}
-
-function style7() {
-	return {
-		height: '100%',
-		backgroundColor: 'transparent',
-		borderRadius: 0
-	}
-}
-
-function style9() {
-	return {
-		margin: '1.5rem',
-		backgroundColor: 'transparent'
-	}
-}

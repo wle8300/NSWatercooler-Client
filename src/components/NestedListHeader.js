@@ -9,7 +9,7 @@ module.exports = React.createClass({
 
 function style1() {
 	return {
-		margin: '0.5rem 0 1rem 0',
+		margin: '2rem 0 0.25rem 0',
 		textTransform: 'uppercase',
 		opacity: 0.7
 	}

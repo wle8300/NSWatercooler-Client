@@ -31,11 +31,13 @@ module.exports = React.createClass({
 		routerRef: React.PropTypes.oneOfType([React.PropTypes.element, React.PropTypes.any]),
 		changeMarquee: React.PropTypes.func.isRequired,
 		changeFaction: React.PropTypes.func.isRequired,
+		changeLoadingState: React.PropTypes.func.isRequired,
 		_Outfit_: React.PropTypes.string.isRequired
 	},
 	getInitialState: function () {
 		return Shema.call(this, {
 		  outfit: {},
+			faction: 'ns',
 			bookmark: {},
 		  outfitCharacters: [],
 		  outfitLogins: [],
@@ -44,6 +46,8 @@ module.exports = React.createClass({
 		})
 	},
 	render: function () {
+
+		const topPadding = 1
 
 		const rankSortedCharacters = this.state.outfitCharacters
 			.sort((characterA, characterB) => {
@@ -72,6 +76,9 @@ module.exports = React.createClass({
 
 				<Fab
 					onTouchTap={this.toggleOutfitBookmark}
+					style={{
+						backgroundColor: color[this.state.faction].alt
+					}}
 				>
 					{
 						Object.keys(this.state.bookmark).length
@@ -85,8 +92,8 @@ module.exports = React.createClass({
 
 				<div style={{
 					marginTop: `${size.headerHeight}rem`,
-					paddingTop: '1rem',
-					height: `calc(100vh - ${size.headerHeight + size.footerHeight}rem)`,
+					paddingTop: `${topPadding}rem`,
+					height: `calc(100vh - ${size.headerHeight + size.footerHeight + topPadding}rem)`,
 					overflow: 'scroll',
 					WebkitOverflowScrolling: 'touch',
 				}}>
@@ -98,12 +105,14 @@ module.exports = React.createClass({
 						zIndex: 1,
 						position : 'relative',
 						justifyContent: 'space-between',
-						margin : '0 1rem'
+						alignItems: 'center',
+						margin : '0 1rem 1rem',
 					}}>
 
 						<div style={{
 							padding: '0.75rem 0',
 							fontSize: '1.5rem',
+							color: color[this.state.faction].standard,
 						}}>
 							Online ({onlineCharacters.length})
 						</div>
@@ -114,15 +123,21 @@ module.exports = React.createClass({
 								display: 'flex',
 								justifyContent: 'center',
 								alignItems: 'center',
-								padding: '0.5rem',
-								width: '2rem',
-								height: '2rem',
-								border: '0.1rem solid black',
+								marginRight: '0.5rem',
+								width: '3.5rem',
+								height: '3.5rem',
+								border: `0.15rem solid ${color[this.state.faction].standard}`,
 								borderRadius: '100%',
-								backgroundColor: '#f3f3f3'
+								backgroundColor: this.state.isStatsDropdownExpanded ? 'transparent' : color[this.state.faction].standard,
 							}}
 						>
-							<MUIStatsIcon/>
+							<MUIStatsIcon
+								color = {
+									this.state.isStatsDropdownExpanded
+										? color[this.state.faction].standard
+										: color[this.state.faction].lighter
+								}
+							/>
 						</div>
 
 					</Box>
@@ -132,14 +147,16 @@ module.exports = React.createClass({
 						outfitCharacters={this.state.outfitCharacters}
 						establishDate={this.state.outfit.time_created_date}
 						outfitLogins={this.state.outfitLogins}
+						factionColors={color[this.state.faction]}
 						closeHandler={() => this.setState(Shema.call(this, {isStatsDropdownExpanded: false}, true))}
 					/>
 					<MUIList>
 						<div style={{
 							position: 'relative',
 							margin: '0 1rem 1rem 1rem',
-							border: '0.25rem solid black',
 							borderRadius: '0.25rem',
+							border: `0.25rem solid ${color[this.state.faction].saturated}`,
+							transition: 'border 350ms linear',
 						}}>
 							{
 								onlineLeaders.map((character) => {
@@ -151,8 +168,12 @@ module.exports = React.createClass({
 										<VisibilitySensor key={character.character_id} onChange={(isVisible) => {this.readOutfitCharacterLogins(character.character_id)}}>
 											<OutfitCharacter
 												onTouchTap={() => this.props.routerRef.navigate('/character/' +character.character_id)}
+												activeColor={color[this.state.faction].light}
 												characterName={character.character.name.first}
 												characterLastLogin={characterLastLogin ? Moment(characterLastLogin.login.time).fromNow() : null}
+												style={{
+													color: color[this.state.faction].standard,
+												}}
 											/>
 										</VisibilitySensor>
 									)
@@ -163,11 +184,13 @@ module.exports = React.createClass({
 								bottom: '-1.45rem',
 								right : '1rem',
 								padding : '0 0.25rem',
-								borderTop : '0.5rem solid white',
+								borderTop: `0.5rem solid ${color[this.state.faction].lighter}`,
 							}}>
 								<span style={{
 									position: 'relative',
 									top: '-0.75rem',
+									fontWeight: 'bolder',
+									color: color[this.state.faction].light,
 								}}>
 									LEADERS
 								</span>
@@ -176,8 +199,9 @@ module.exports = React.createClass({
 						<div style={{
 								position: 'relative',
 								margin: '0 1rem 1rem 1rem',
-								border: '0.25rem solid black',
 								borderRadius: '0.25rem',
+								border: `0.25rem solid ${color[this.state.faction].saturated}`,
+								transition: 'border 350ms linear',
 						}}>
 							{
 								onlineOfficers.map((character) => {
@@ -190,7 +214,11 @@ module.exports = React.createClass({
 											<OutfitCharacter
 												onTouchTap={() => this.props.routerRef.navigate('/character/' +character.character_id)}
 												characterName={character.character.name.first}
+												activeColor={color[this.state.faction].light}
 												characterLastLogin={characterLastLogin ? Moment(characterLastLogin.login.time).fromNow() : null}
+												style={{
+													color: color[this.state.faction].standard,
+												}}
 											/>
 										</VisibilitySensor>
 									)
@@ -201,21 +229,24 @@ module.exports = React.createClass({
 								bottom: '-1.45rem',
 								right : '1rem',
 								padding : '0 0.25rem',
-								borderTop : '0.5rem solid white',
+								borderTop: `0.5rem solid ${color[this.state.faction].lighter}`,
 							}}>
 								<span style={{
 									position: 'relative',
 									top: '-0.75rem',
+									fontWeight: 'bolder',
+									color: color[this.state.faction].light,
 								}}>
 									OFFICERS
 								</span>
 							</span>
 						</div>
 						<div style={{
-							position: 'relative',
-							margin: '0 1rem 1rem 1rem',
-							border: '0.25rem solid black',
-							borderRadius: '0.25rem',
+								position: 'relative',
+								margin: '0 1rem 1rem 1rem',
+								borderRadius: '0.25rem',
+								border: `0.25rem solid ${color[this.state.faction].saturated}`,
+								transition: 'border 350ms linear',
 						}}>
 							{
 								onlineMembers.map((character) => {
@@ -228,7 +259,11 @@ module.exports = React.createClass({
 											<OutfitCharacter
 												onTouchTap={() => this.props.routerRef.navigate('/character/' +character.character_id)}
 												characterName={character.character.name.first}
+												activeColor={color[this.state.faction].light}
 												characterLastLogin={characterLastLogin ? Moment(characterLastLogin.login.time).fromNow() : null}
+												style={{
+													color: color[this.state.faction].standard,
+												}}
 											/>
 										</VisibilitySensor>
 									)
@@ -239,11 +274,13 @@ module.exports = React.createClass({
 								bottom: '-1.45rem',
 								right : '1rem',
 								padding : '0 0.25rem',
-								borderTop : '0.5rem solid white',
+								borderTop: `0.5rem solid ${color[this.state.faction].lighter}`,
 							}}>
 								<span style={{
 									position: 'relative',
 									top: '-0.75rem',
+									fontWeight: 'bolder',
+									color: color[this.state.faction].light,
 								}}>
 									MEMBERS
 								</span>
@@ -252,8 +289,9 @@ module.exports = React.createClass({
 						<div style={{
 								position: 'relative',
 								margin: '0 1rem 1rem 1rem',
-								border: '0.25rem solid black',
 								borderRadius: '0.25rem',
+								border: `0.25rem solid ${color[this.state.faction].saturated}`,
+								transition: 'border 350ms linear',
 						}}>
 							{
 								onlinePrivates.map((character) => {
@@ -266,7 +304,11 @@ module.exports = React.createClass({
 											<OutfitCharacter
 												onTouchTap={() => this.props.routerRef.navigate('/character/' +character.character_id)}
 												characterName={character.character.name.first}
+												activeColor={color[this.state.faction].light}
 												characterLastLogin={characterLastLogin ? Moment(characterLastLogin.login.time).fromNow() : null}
+												style={{
+													color: color[this.state.faction].standard,
+												}}
 											/>
 										</VisibilitySensor>
 									)
@@ -277,11 +319,13 @@ module.exports = React.createClass({
 								bottom: '-1.45rem',
 								right : '1rem',
 								padding : '0 0.25rem',
-								borderTop : '0.5rem solid white',
+								borderTop: `0.5rem solid ${color[this.state.faction].lighter}`,
 							}}>
 								<span style={{
 									position: 'relative',
 									top: '-0.75rem',
+									fontWeight: 'bolder',
+									color: color[this.state.faction].light
 								}}>
 									PRIVATES
 								</span>
@@ -294,12 +338,20 @@ module.exports = React.createClass({
 	},
 	componentDidMount: function () {
 
-		this.readOutfitAndFaction()
-		this.readOutfitCharacters()
-		this.readOutfitBookmarks()
-		this.readOutfitLoginMetrics()
+		this.props.changeFaction(this.state.faction)
+		this.props.changeLoadingState(true)
+
+		this.readOutfit()
+		.then(this.readOutfitsFaction)
+		.then(this.readOutfitCharacters)
+		.then(this.readOutfitBookmarks)
+		.then(this.readOutfitLoginMetrics)
+		.then(() => {
+			console.log('1', 1);
+			this.props.changeLoadingState(false)
+		})
 	},
-	readOutfitAndFaction: function () {
+	readOutfit: function () {
 
 		return new Promise((resolve, reject) => {
 
@@ -311,17 +363,6 @@ module.exports = React.createClass({
 
 				this.props.changeMarquee('[' +response.body.alias+ ']')
 				this.setState(Shema.call(this, {outfit: response.body}, true), resolve)
-
-				this.setState((prevState) => {
-
-					Request
-					.get(env.backend+ '/character/' +this.state.outfit.leader_character_id+ '?server=genudine')
-					.end((err, response) => {
-
-						//ns, vs, nc, tr
-						this.props.changeFaction(response.body.faction.code_tag.toLowerCase())
-					})
-				})
 			})
 		})
 	},
@@ -388,6 +429,24 @@ module.exports = React.createClass({
 			this.setState(Shema.call(this, {
 			  outfitCharacterLogins: outfitCharacterLoginsUpdated
 			}, true))
+		})
+	},
+	readOutfitsFaction: function () {
+
+		return new Promise((resolve, reject) => {
+
+			Request
+			.get(env.backend+ '/character/' +this.state.outfit.leader_character_id+ '?server=genudine')
+			.end((err, response) => {
+
+				const faction = response.body.faction.code_tag.toLowerCase()
+
+
+				//ns, vs, nc, tr
+				this.props.changeFaction(faction)
+
+				this.setState(Shema.call(this, {faction: faction}, true), resolve)
+			})
 		})
 	},
 	toggleOutfitBookmark: function () {

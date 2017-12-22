@@ -9,9 +9,7 @@ class ProgressBar extends React.Component {
         width: '100%',
         display: 'flex',
       }}>
-        <div style={this.style()}>
-          {this.props.shouldDisplayPercent ? `${this.props.percent}%` : null}
-        </div>
+        <div style={this.style()}/>
       </div>
     )
   }
@@ -22,8 +20,9 @@ class ProgressBar extends React.Component {
         display: 'flex',
         justifyContent: 'center',
         alignItems: 'center',
-        width: `${this.props.percent}%`,
+        width: this.props.isLoading ? '100%' : `${this.props.percent}%`,
         backgroundColor: this.props.color || 'black',
+        transition: 'width 500ms ease-out',
       },
       this.props.style
     )

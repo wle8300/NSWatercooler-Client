@@ -59,55 +59,104 @@ class OutfitStatsDropdown extends Component {
 
     return (
       <div style={{
-        zIndex: 1,
-        position: this.props.isExpanded ? 'relative' : 'absolute',
+        position: 'relative',
         display: 'flex',
         flexDirection: 'column',
         justifyContent: 'space-between',
         margin: '1rem',
-        maxHeight: this.props.isExpanded ? '100%' : 0,
-        transition: 'position 250ms linear, max-height 250ms linear, transform 250ms linear',
+        height: this.props.isExpanded ? '100%' : 0,
+        maxHeight: '100%',
+        opacity: this.props.isExpanded ? 0.8 : 0.1,
         overflow: 'hidden',
-        backgroundColor: '#f3f3f3',
+        backgroundColor: this.props.factionColors.standard,
+        color: 'white',
         borderRadius: 4,
-        transform: this.props.isExpanded ? 'scale(1)' : 'scale(0)'
+        transition: 'height 350ms ease-in-out, opacity 250ms ease-in',
       }}>
-        <div>
-          <MUIOutfitCharactersCountIcon/> {this.props.memberCount ? this.props.memberCount+ ' Members' : 'Crunching...'}
-          <MUIAverageBRIcon/> {this.props.outfitCharacters.length ? calculateAvgBR(this.props.outfitCharacters)+ ' Average BattleRank' : 'Crunching...'}
-          <NestedListHeader>Established</NestedListHeader> <div>{this.props.establishDate ? Moment(this.props.establishDate).fromNow() : 'Loading...'}</div>
+
+        {/* STUFFF */}
+        <div style={{
+          padding: '1.25rem',
+        }}>
+          <div style={{
+            display: 'flex',
+            alignItems: 'center',
+          }}>
+            <MUIOutfitCharactersCountIcon
+              color="white"
+              style={{
+                marginRight: '0.25rem',
+                width: '1.8rem',
+                opacity: 0.65,
+              }}/>
+            {this.props.memberCount ? this.props.memberCount+ ' Members' : 'Crunching...'}
+          </div>
+          <div style={{
+            display: 'flex',
+            alignItems: 'center',
+          }}>
+            <MUIAverageBRIcon
+              color="white"
+              style={{
+                marginRight: '0.25rem',
+                width: '1.8rem',
+                opacity: 0.65,
+              }}/>
+            {this.props.outfitCharacters.length ? calculateAvgBR(this.props.outfitCharacters)+ ' Average BattleRank' : 'Crunching...'}
+          </div>
+          <NestedListHeader>Established</NestedListHeader>
+          <div>
+            {this.props.establishDate ? Moment(this.props.establishDate).fromNow() : 'Loading...'}
+          </div>
           <NestedListHeader>Composition</NestedListHeader>
-          <div style={{display: 'flex', flexWrap: 'wrap'}}>
-            <MUIChip style={{margin: '0.25rem'}}><MUIAvatar>{outfitLeaders.length}</MUIAvatar>Leaders</MUIChip>
-            <MUIChip style={{margin: '0.25rem'}}><MUIAvatar>{outfitOfficers.length}</MUIAvatar>Officers</MUIChip>
-            <MUIChip style={{margin: '0.25rem'}}><MUIAvatar>{outfitMembers.length}</MUIAvatar>Members</MUIChip>
-            <MUIChip style={{margin: '0.25rem'}}><MUIAvatar>{outfitPrivates.length}</MUIAvatar>Privates</MUIChip>
+          <div>
+            <div>
+              <MUIChip style={{display: 'inline-block', margin: '0.25rem', fontWeight: 'bolder', backgroundColor: this.props.factionColors.lighter}}><MUIAvatar backgroundColor={this.props.factionColors.light}>{outfitLeaders.length}</MUIAvatar>Leaders</MUIChip>
+              <MUIChip style={{display: 'inline-block', margin: '0.25rem', fontWeight: 'bolder', backgroundColor: this.props.factionColors.lighter}}><MUIAvatar backgroundColor={this.props.factionColors.light}>{outfitOfficers.length}</MUIAvatar>Officers</MUIChip>
+            </div>
+            <div>
+              <MUIChip style={{display: 'inline-block', margin: '0.25rem', fontWeight: 'bolder', backgroundColor: this.props.factionColors.lighter}}><MUIAvatar backgroundColor={this.props.factionColors.light}>{outfitMembers.length}</MUIAvatar>Members</MUIChip>
+              <MUIChip style={{display: 'inline-block', margin: '0.25rem', fontWeight: 'bolder', backgroundColor: this.props.factionColors.lighter}}><MUIAvatar backgroundColor={this.props.factionColors.light}>{outfitPrivates.length}</MUIAvatar>Privates</MUIChip>
+            </div>
+          </div>
+          <NestedListHeader>Login Activity</NestedListHeader>
+          <div>
+            <div style={{
+              display: 'flex',
+              margin: '0 0 0.25rem',
+              color: 'white',
+            }}>
+              Past Month
+              <span style={{marginLeft: '0.25rem', opacity: 0.65}}>{calcPercentageOutfitParticipation('month')}</span>
+            </div>
+            <div style={{
+              display: 'flex',
+              margin: '0 0 0.25rem',
+              color: 'white',
+            }}>
+              Week
+              <span style={{marginLeft: '0.25rem', opacity: 0.65}}>{calcPercentageOutfitParticipation('week')}</span>
+            </div>
+            <div style={{
+              display: 'flex',
+              margin: '0 0 0.25rem',
+              color: 'white',
+            }}>
+              Day
+              <span style={{marginLeft: '0.25rem', opacity: 0.65}}>{calcPercentageOutfitParticipation('day')}</span>
+            </div>
           </div>
         </div>
-        <NestedListHeader>Login Activity</NestedListHeader>
-        <div>
-          <MUIListItem
-            primaryText="Past Month"
-            rightAvatar={<MUIAvatar>{calcPercentageOutfitParticipation('month')}</MUIAvatar>}
-          disabled/>
-          <MUIListItem
-            primaryText="Week"
-            rightAvatar={<MUIAvatar>{calcPercentageOutfitParticipation('week')}</MUIAvatar>}
-          disabled/>
-          <MUIListItem
-            primaryText="Day"
-            rightAvatar={<MUIAvatar>{calcPercentageOutfitParticipation('day')}</MUIAvatar>}
-          disabled/>
-        </div>
+
         <div
           onTouchTap={this.props.closeHandler}
           style={{
             display: 'flex',
             justifyContent: 'center',
             alignItems: 'center',
-            padding: '1rem',
+            padding: '1.5rem 0',
             width: '100%',
-            backgroundColor: 'lightgray',
+            backgroundColor: this.props.factionColors.light,
           }}
         >
           CLOSE

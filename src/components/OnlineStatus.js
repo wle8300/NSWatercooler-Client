@@ -20,7 +20,8 @@ module.exports = React.createClass({
 			opacity: this.props.isLoading
 				? 0.1
 				: 1,
-			borderRadius: '10rem'
+			borderRadius: '10rem',
+			transition: 'all 250ms linear',
 		}, this.props.style)
 	}
 })

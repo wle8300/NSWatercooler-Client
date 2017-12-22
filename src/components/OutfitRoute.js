@@ -11,6 +11,7 @@ module.exports = React.createClass({
 		routerRef: React.PropTypes.oneOfType([React.PropTypes.element, React.PropTypes.any]),
 		changeMarquee: React.PropTypes.func.isRequired,
 		changeFaction: React.PropTypes.func.isRequired,
+		changeLoadingState: React.PropTypes.func.isRequired,
 		changeFooter: React.PropTypes.func.isRequired
 	},
   render: function () {
@@ -22,11 +23,13 @@ module.exports = React.createClass({
 							routerRef={this.props.routerRef}
 							changeMarquee={this.props.changeMarquee}
 							changeFaction={this.props.changeFaction}
+							changeLoadingState={this.props.changeLoadingState}
 							/>
 						: <OutfitSingle
 							routerRef={this.props.routerRef}
-							changeFaction={this.props.changeFaction}
 							changeMarquee={this.props.changeMarquee}
+							changeFaction={this.props.changeFaction}
+							changeLoadingState={this.props.changeLoadingState}
 							_Outfit_={this.props._Outfit_}
 							/>
 				}

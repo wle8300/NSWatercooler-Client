@@ -15,6 +15,7 @@ module.exports = React.createClass({
 	propTypes: {
 		changeMarquee: React.PropTypes.func.isRequired,
 		changeFaction: React.PropTypes.func.isRequired,
+		changeLoadingState: React.PropTypes.func.isRequired,
 		changeFooter: React.PropTypes.func.isRequired,
 	},
 	getInitialState: function () {
@@ -50,9 +51,9 @@ module.exports = React.createClass({
 					backgroundColor : color.ns.standard,
 				}}>
 					<div style={{display: 'flex', width: '100%', color: 'white'}}>
-						<div style={_.assign(style1(), {width: vsPercentage, backgroundColor: 'purple'})}>{vsCount}</div>
-						<div style={_.assign(style1(), {width: ncPercentage, backgroundColor: 'blue'})}>{ncCount}</div>
-						<div style={_.assign(style1(), {width: trPercentage, backgroundColor: 'red'})}>{trCount}</div>
+						<div style={_.assign(style1(), {width: vsPercentage, backgroundColor: color.vs.standard})}>{vsCount}</div>
+						<div style={_.assign(style1(), {width: ncPercentage, backgroundColor: color.nc.standard})}>{ncCount}</div>
+						<div style={_.assign(style1(), {width: trPercentage, backgroundColor: color.tr.standard})}>{trCount}</div>
 					</div>
 					<div style={{padding: '1rem 0 0', width: '100%', color: 'white', textAlign: 'center', fontSize: '0.9rem'}}>
 						{totalCount+ ' Planetmans'}
@@ -78,15 +79,19 @@ module.exports = React.createClass({
 	},
 	componentDidMount: function () {
 
+		this.props.changeLoadingState(true)
+
 		this.readCensus()
+		.then(() => this.props.changeLoadingState(false))
 	},
 	readCensus: function () {
+		return new Promise((resolve, reject) => {
+			Request
+			.get(env.backend+ '/census?server=genudine&timeframe=now')
+			.end((err, response) => {
 
-		Request
-		.get(env.backend+ '/census?server=genudine&timeframe=now')
-		.end((err, response) => {
-
-			this.setState(Shema.call(this, {census: response.body}, true))
+				this.setState(Shema.call(this, {census: response.body}, true), resolve)
+			})
 		})
 	}
 })
